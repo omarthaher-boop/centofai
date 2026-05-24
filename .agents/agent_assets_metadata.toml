@@ -1,0 +1,20 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "Z0b9cpQlffet-B-Y5b0RU"
+uri = "file://output/centofai-komplett.zip"
+type = "unspecified"
+title = "Komplettpaket (Upload-Dateien + Quellcode + Anleitung)"
+
+[[outputs]]
+id = "kmIXX1iWl6RxNdskr48-V"
+uri = "file://output/centofai-infomaniak.zip"
+type = "unspecified"
+title = "Nur Upload-Dateien für Infomaniak"
+
+[[outputs]]
+id = "QUwcC7npr6NaujBXuIRLU"
+uri = "file://output/App.jsx.txt"
+type = "text"
+title = "App.jsx (Quellcode zur Vorschau)"

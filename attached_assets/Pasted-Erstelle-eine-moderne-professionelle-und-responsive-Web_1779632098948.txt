@@ -1,0 +1,383 @@
+Erstelle eine moderne, professionelle und responsive Website für die Firma „Centofai“.
+
+Centofai ist eine Plattform und ein digitales Entwicklungsstudio für Startups, Gründer, Selbstständige und kleine Unternehmen. Die Firma hilft Menschen mit Ideen dabei, diese Ideen in digitale Lösungen zu verwandeln. Centofai entwickelt professionelle Websites, mobile Apps, individuelle Softwarelösungen und KI-gestützte Funktionen.
+
+Die zentrale Botschaft der Website lautet:
+„Wir machen Ideen digital.“
+
+Die Website soll vermitteln:
+Centofai unterstützt Startups, kleine Unternehmer und Menschen mit Visionen dabei, ihre Ideen digital umzusetzen – von der ersten Idee über Design und Entwicklung bis zur fertigen Website, App oder Softwarelösung. Dabei nutzt Centofai moderne Technologien und KI-gestützte Tools, um Prozesse zu automatisieren, Daten nutzbar zu machen und digitale Produkte intelligenter zu gestalten.
+
+Zielgruppe:
+- Startups in der Anfangsphase
+- kleine Unternehmen
+- Selbstständige
+- Gründer mit wenig technischem Wissen
+- Menschen mit Ideen, aber kleinem Kapital
+- Unternehmen, die KI sinnvoll nutzen möchten
+
+Die Website soll modern, motivierend, vertrauenswürdig und technisch hochwertig wirken. Sie soll nicht zu kompliziert oder kalt wirken, sondern menschlich, zugänglich und inspirierend.
+
+Designrichtung:
+Human Tech Startup Design.
+
+Look & Feel:
+- modern
+- hochwertig
+- klar
+- innovativ
+- vertrauenswürdig
+- startup-orientiert
+- leicht futuristisch
+- KI-orientiert, aber menschlich
+
+Farben:
+- Haupt-Hintergrund dunkel: #070B14
+- Sekundärer dunkler Hintergrund: #111827
+- Hauptfarbe Blau: #2563EB
+- Akzent Cyan: #22D3EE
+- Akzent Violett: #7C3AED
+- Text hell: #F8FAFC
+- Sekundärtext: #94A3B8
+- Helle Sektionen: #F8FAFC oder #FFFFFF
+- Karten-Rahmen: dezente Linien mit Blau/Violett-Verlauf
+
+Schriftarten:
+- Headlines: Sora oder Space Grotesk
+- Fließtext: Inter oder Manrope
+
+Erstelle die Website als moderne Landingpage mit folgenden Bereichen:
+
+1. Navigation
+Die Navigation soll enthalten:
+- Startseite
+- Leistungen
+- Für Gründer
+- KI-Lösungen
+- Projekte
+- Über Centofai
+- Kontakt
+
+Rechts in der Navigation soll ein Button stehen:
+„Idee besprechen“
+
+Die Navigation soll sticky sein, modern wirken und auf Mobilgeräten als Burger-Menü funktionieren.
+
+2. Hero-Bereich
+Dunkler Premium-Hintergrund mit leichtem Gradient, abstrakten KI-Linien, Glow-Effekten oder digitalem Interface-Visual.
+
+Headline:
+„Wir machen Ideen digital.“
+
+Subheadline:
+„Centofai hilft Startups, Gründern und kleinen Unternehmen dabei, ihre Ideen in professionelle Websites, Apps, Softwarelösungen und KI-gestützte Produkte zu verwandeln.“
+
+Ergänzender Text:
+„Von der ersten Idee über das Design bis zur fertigen Anwendung begleiten wir dich Schritt für Schritt – verständlich, persönlich und zukunftsorientiert.“
+
+Call-to-Action Buttons:
+- „Idee besprechen“
+- „Leistungen ansehen“
+
+Optional im Hero:
+- kleine Trust-Elemente wie „Für Startups & kleine Unternehmen“
+- „KI-gestützte Entwicklung“
+- „Von der Idee bis zum Launch“
+
+Visual rechts:
+Ein modernes digitales Dashboard/App-Mockup mit KI-Symbol, Code-Elementen, App-Screens und leuchtenden blauen/violetten Akzenten.
+
+3. Abschnitt: Für wen ist Centofai?
+Überschrift:
+„Digitale Unterstützung für Menschen mit Ideen“
+
+Text:
+„Viele gute Ideen scheitern nicht daran, dass sie schlecht sind, sondern daran, dass der technische Weg fehlt. Genau hier setzt Centofai an. Wir helfen dir, deine Idee zu strukturieren, zu gestalten und digital umzusetzen.“
+
+Erstelle 4 Karten:
+- Gründer mit einer Idee
+- Startups in der Anfangsphase
+- Kleine Unternehmen
+- Selbstständige & lokale Anbieter
+
+Jede Karte soll ein Icon, eine kurze Beschreibung und einen modernen Hover-Effekt haben.
+
+4. Abschnitt: Unsere Leistungen
+Überschrift:
+„Unsere Leistungen“
+
+Untertitel:
+„Von der ersten digitalen Präsenz bis zur intelligenten Softwarelösung – Centofai entwickelt digitale Produkte, die zu deinem Unternehmen passen.“
+
+Leistungskarten:
+
+A. Website-Entwicklung
+Beschreibung:
+„Professionelle, schnelle und responsive Websites, die Vertrauen schaffen, deine Idee sichtbar machen und Kunden überzeugen.“
+
+Features:
+- Firmenwebsites
+- Landingpages
+- Portfolio-Websites
+- SEO-Grundstruktur
+- Performance-Optimierung
+
+B. App-Entwicklung
+Beschreibung:
+„Benutzerfreundliche mobile Apps für Startups, Dienstleistungen, interne Prozesse oder neue digitale Geschäftsmodelle.“
+
+Features:
+- iOS & Android
+- Cross-Platform Apps
+- MVP-Entwicklung
+- App-Prototypen
+- Nutzerfreundliches Design
+
+C. Individuelle Softwareentwicklung
+Beschreibung:
+„Maßgeschneiderte Softwarelösungen, Dashboards und digitale Tools, die Abläufe vereinfachen und Unternehmen effizienter machen.“
+
+Features:
+- Dashboards
+- Verwaltungssysteme
+- Automatisierungstools
+- API-Integrationen
+- Interne Unternehmenssoftware
+
+D. KI-gestützte Lösungen
+Beschreibung:
+„Intelligente Funktionen, die Prozesse automatisieren, Daten nutzbar machen und digitale Produkte smarter gestalten.“
+
+Features:
+- KI-Chatbots
+- Automatisierung
+- Dokumentenanalyse
+- intelligente Suchfunktionen
+- KI-Assistenten
+
+E. Digitale Beratung
+Beschreibung:
+„Wir helfen dir, deine Idee zu ordnen, Funktionen zu planen und den besten digitalen Weg für dein Projekt zu finden.“
+
+Features:
+- Ideenanalyse
+- MVP-Konzept
+- technische Planung
+- digitale Strategie
+- KI-Potenzialanalyse
+
+5. Abschnitt: Für Gründer
+Überschrift:
+„Du hast eine Idee? Wir helfen dir beim ersten digitalen Schritt.“
+
+Text:
+„Du brauchst keine fertige technische Planung. Bring deine Idee mit – wir helfen dir, daraus ein klares Konzept, ein modernes Design und eine funktionierende digitale Lösung zu entwickeln.“
+
+Baue einen visuellen Ablauf ein:
+- Idee
+- Konzept
+- Design
+- Entwicklung
+- Launch
+- Wachstum
+
+Dieser Bereich soll besonders motivierend wirken und kleine Budgets nicht abschreckend darstellen. Verwende Formulierungen wie:
+„Auch mit kleinem Kapital kann der erste digitale Schritt möglich sein.“
+
+6. Abschnitt: KI verstehen und sinnvoll nutzen
+Überschrift:
+„KI als Chance für kleine Unternehmen“
+
+Text:
+„Künstliche Intelligenz verändert, wie Unternehmen arbeiten, kommunizieren und wachsen. Centofai macht KI verständlich und zeigt, wie sie praktisch eingesetzt werden kann – zum Beispiel für Automatisierung, Kundenservice, Content-Erstellung, Datenanalyse oder interne Prozesse.“
+
+Erstelle 4 KI-Anwendungsbereiche:
+- Automatisierung
+- Kundenkommunikation
+- Datenanalyse
+- KI-Assistenten
+
+Jeder Bereich soll kurz erklären, welchen Mehrwert er für kleine Unternehmen hat.
+
+Zusätzlich soll es einen kleinen Info-Bereich geben:
+„Centofai möchte Wissen über KI und aktuelle Entwicklungen zugänglich machen, damit Startups und kleine Unternehmen neue Technologien besser verstehen und nutzen können.“
+
+7. Abschnitt: Warum Centofai?
+Überschrift:
+„Warum Centofai?“
+
+Erstelle 5 Vorteilskarten:
+
+A. Für kleine Unternehmen gemacht
+„Wir verstehen, dass nicht jedes Unternehmen mit großem Budget startet. Deshalb entwickeln wir Lösungen, die realistisch, sinnvoll und wachstumsfähig sind.“
+
+B. Von der Idee bis zur Umsetzung
+„Du brauchst keine fertige technische Planung. Wir begleiten dich Schritt für Schritt.“
+
+C. KI verständlich nutzen
+„Wir integrieren KI dort, wo sie echten Mehrwert bringt – praktisch, verständlich und zielgerichtet.“
+
+D. Persönliche Begleitung
+„Wir arbeiten nah an deiner Idee und erklären technische Entscheidungen klar und verständlich.“
+
+E. Zukunftsfähige Lösungen
+„Unsere digitalen Produkte sind so aufgebaut, dass sie mit deinem Unternehmen wachsen können.“
+
+8. Abschnitt: Unser Prozess
+Überschrift:
+„Von der Idee zur digitalen Lösung“
+
+Erstelle eine horizontale Timeline auf Desktop und eine vertikale Timeline auf Mobile.
+
+Schritte:
+1. Idee verstehen
+„Wir hören zu, analysieren deine Ziele und verstehen, welches Problem deine Idee lösen soll.“
+
+2. Konzept entwickeln
+„Wir erstellen eine klare digitale Struktur mit Funktionen, Designrichtung und technischer Lösung.“
+
+3. Design gestalten
+„Wir entwerfen ein modernes, nutzerfreundliches Design, das zu deinem Unternehmen passt.“
+
+4. Lösung entwickeln
+„Wir setzen Website, App oder Software professionell um und integrieren bei Bedarf KI-gestützte Funktionen.“
+
+5. Veröffentlichen und begleiten
+„Nach dem Launch unterstützen wir dich bei Optimierung, Erweiterung und Weiterentwicklung.“
+
+9. Abschnitt: Projekte / Beispiele
+Da noch keine echten Projekte vorhanden sein müssen, erstelle beispielhafte Projektkarten mit Platzhalterdaten.
+
+Projektkarten:
+- Startup Landingpage
+- Mobile Buchungs-App
+- KI-Chatbot für Kundenservice
+- Dashboard für kleine Unternehmen
+
+Jede Karte soll enthalten:
+- Bild-/Mockup-Platzhalter
+- Kategorie
+- Titel
+- kurze Beschreibung
+- Button „Projekt ansehen“
+
+10. Abschnitt: Kontakt / Call to Action
+Dunkler, hochwertiger Abschnitt mit Gradient.
+
+Überschrift:
+„Bereit, deine Idee digital zu machen?“
+
+Text:
+„Erzähl uns von deiner Idee. Gemeinsam finden wir heraus, welche digitale Lösung zu deinem Ziel, deinem Budget und deinem Unternehmen passt.“
+
+Buttons:
+- „Idee besprechen“
+- „Kontakt aufnehmen“
+
+Kontaktinformationen als Platzhalter:
+- E-Mail: hallo@centofai.de
+- Telefon: +49 123 456 7890
+- Standort: Deutschland
+
+11. Footer
+Footer mit:
+- Logo Centofai
+- kurzer Beschreibung:
+„Centofai entwickelt digitale Lösungen für Startups, kleine Unternehmen und Menschen mit Ideen.“
+- Navigation
+- Leistungen
+- Rechtliches
+- Social Media Icons
+
+Footer Links:
+- Impressum
+- Datenschutz
+- AGB
+
+Funktionale Anforderungen:
+- Voll responsive für Desktop, Tablet und Mobile
+- Sticky Navigation
+- Mobile Burger-Menü
+- Smooth Scroll zu Sektionen
+- Moderne Hover-Effekte auf Buttons und Karten
+- Dezente Animationen beim Scrollen
+- Klare Call-to-Actions
+- Kontaktformular mit Feldern:
+  - Name
+  - E-Mail
+  - Unternehmen optional
+  - Projektart Dropdown:
+    - Website
+    - App
+    - Software
+    - KI-Lösung
+    - Beratung
+    - Noch unsicher
+  - Budget Dropdown:
+    - Kleines Startbudget
+    - Mittel
+    - Größeres Projekt
+    - Noch offen
+  - Nachricht
+  - Button „Anfrage senden“
+
+Das Formular muss visuell fertig gestaltet sein. Es kann technisch zunächst als Frontend-Formular ohne Backend funktionieren, soll aber eine Erfolgsmeldung anzeigen, wenn man absendet.
+
+Technische Umsetzung:
+Erstelle die Website als moderne React-Anwendung.
+Verwende:
+- React
+- Tailwind CSS
+- Framer Motion für Animationen
+- Lucide React Icons
+- Responsive Layout
+- Saubere Komponentenstruktur
+
+Komponenten:
+- Navbar
+- Hero
+- AudienceSection
+- ServicesSection
+- FounderSection
+- AISection
+- WhyCentofai
+- ProcessSection
+- ProjectsSection
+- ContactSection
+- Footer
+
+Design-Details:
+- Große Headlines
+- Viel Whitespace
+- Moderne Cards mit Schatten und Border
+- Gradient Buttons Blau/Violett
+- Glow-Effekte im Hero
+- Dunkle und helle Sektionen im Wechsel
+- Abgerundete Ecken
+- Professionelle Icons
+- Subtile Animationen, nicht überladen
+- Gute Lesbarkeit
+
+Stil der Texte:
+- professionell
+- motivierend
+- verständlich
+- nicht zu technisch
+- menschlich
+- startup-orientiert
+
+Vermeide:
+- zu viele Fachbegriffe
+- zu kalte KI-Roboter-Sprache
+- unrealistische Versprechen
+- überladene Animationen
+- generische Agenturtexte
+
+Wichtige Markenbotschaften:
+- „Wir machen Ideen digital.“
+- „Von der Idee zur digitalen Lösung.“
+- „Digitale Hilfe für Menschen mit Visionen.“
+- „KI verständlich und sinnvoll einsetzen.“
+- „Auch mit kleinem Kapital kann der erste digitale Schritt möglich sein.“
+
+Erstelle am Ende eine vollständige lauffähige React/Tailwind-Implementierung mit allen genannten Sektionen, Texten, Animationen und responsivem Design.
