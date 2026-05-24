@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Centofai Landingpage"
+version = "1.0.0"
+id = "artifacts/centofai"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23941
+
+[services.development]
+run = "pnpm --filter @workspace/centofai run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/centofai", "run", "build" ]
+publicDir = "artifacts/centofai/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23941"
+BASE_PATH = "/"
