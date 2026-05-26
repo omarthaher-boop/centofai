@@ -4,29 +4,69 @@
 @theme inline {
   --font-sans: 'Inter', sans-serif;
   --font-display: 'Sora', sans-serif;
-  --color-background: #070B14;
-  --color-foreground: #E2E8F0;
-  --color-card: #0F172A;
-  --color-card-border: #1E293B;
-  --color-primary: #2563EB;
-  --color-primary-foreground: #FFFFFF;
-  --color-accent: #7C3AED;
-  --color-accent-foreground: #FFFFFF;
-  --color-muted: #1E293B;
-  --color-muted-foreground: #94A3B8;
-  --color-border: #1E293B;
-  --color-cyan: #22D3EE;
-  --color-ring: #2563EB;
   --radius: 0.75rem;
+}
+
+/* ─── Dark Mode (default) ─────────────────────────────────────────── */
+:root {
+  --bg-page: #070B14;
+  --bg-section-alt: #0a0f1c;
+  --bg-card: #0F172A;
+  --bg-input: #0F172A;
+  --bg-tag: rgba(30, 41, 59, 0.6);
+  --bg-tag-active: #2563EB;
+  --text-heading: #FFFFFF;
+  --text-body: #E2E8F0;
+  --text-caption: #94A3B8;
+  --text-label: #64748B;
+  --border-color: #1E293B;
+  --border-hover: rgba(34, 211, 238, 0.3);
+  --glow-opacity: 0.15;
+  --shadow-card: rgba(37, 99, 235, 0.12);
+  --nav-bg: rgba(7, 11, 20, 0.9);
+  --nav-border: rgba(30, 41, 59, 0.6);
+  --mobile-menu-bg: rgba(7, 11, 20, 0.95);
+  --gradient-from: #22D3EE;
+  --gradient-to: #7C3AED;
+  --btn-secondary-bg: #1E293B;
+  --btn-secondary-border: #1E293B;
+}
+
+/* ─── Light Mode ────────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --bg-page: #F8FAFC;
+  --bg-section-alt: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --bg-input: #FFFFFF;
+  --bg-tag: rgba(226, 232, 240, 0.6);
+  --bg-tag-active: #2563EB;
+  --text-heading: #0F172A;
+  --text-body: #334155;
+  --text-caption: #64748B;
+  --text-label: #94A3B8;
+  --border-color: #E2E8F0;
+  --border-hover: rgba(37, 99, 235, 0.3);
+  --glow-opacity: 0.08;
+  --shadow-card: rgba(37, 99, 235, 0.08);
+  --nav-bg: rgba(248, 250, 252, 0.9);
+  --nav-border: rgba(226, 232, 240, 0.8);
+  --mobile-menu-bg: rgba(248, 250, 252, 0.98);
+  --gradient-from: #0EA5E9;
+  --gradient-to: #7C3AED;
+  --btn-secondary-bg: #F1F5F9;
+  --btn-secondary-border: #E2E8F0;
 }
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: var(--border-color);
   }
   body {
-    @apply bg-[#070B14] text-[#E2E8F0] font-sans antialiased;
+    @apply font-sans antialiased;
+    background-color: var(--bg-page);
+    color: var(--text-body);
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   html {
     scroll-behavior: smooth;
@@ -38,20 +78,42 @@
     font-family: 'Sora', sans-serif;
   }
   .gradient-text {
-    background: linear-gradient(135deg, #22D3EE 0%, #7C3AED 100%);
+    background: linear-gradient(135deg, var(--gradient-from) 0%, var(--gradient-to) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
   .glow-cyan {
-    box-shadow: 0 0 40px rgba(34, 211, 238, 0.15);
+    box-shadow: 0 0 40px rgba(34, 211, 238, var(--glow-opacity));
   }
   .card-hover {
     @apply transition-all duration-300;
   }
   .card-hover:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(37, 99, 235, 0.12);
-    border-color: rgba(37, 99, 235, 0.3);
+    box-shadow: 0 12px 40px var(--shadow-card);
+    border-color: var(--border-hover);
+  }
+  /* Theme-aware backgrounds */
+  .bg-page { background-color: var(--bg-page); }
+  .bg-section-alt { background-color: var(--bg-section-alt); }
+  .bg-card-theme { background-color: var(--bg-card); }
+  .bg-input-theme { background-color: var(--bg-input); }
+  .bg-tag { background-color: var(--bg-tag); }
+  .bg-nav { background-color: var(--nav-bg); }
+  .bg-mobile-menu { background-color: var(--mobile-menu-bg); }
+  /* Theme-aware text */
+  .text-heading { color: var(--text-heading); }
+  .text-body-theme { color: var(--text-body); }
+  .text-caption { color: var(--text-caption); }
+  .text-label { color: var(--text-label); }
+  /* Theme-aware borders */
+  .border-theme { border-color: var(--border-color); }
+  .border-nav { border-color: var(--nav-border); }
+  /* Theme-aware buttons */
+  .btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    border-color: var(--btn-secondary-border);
+    color: var(--text-heading);
   }
 }
