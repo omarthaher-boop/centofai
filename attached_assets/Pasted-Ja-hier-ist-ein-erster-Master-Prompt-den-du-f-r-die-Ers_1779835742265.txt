@@ -1,0 +1,551 @@
+Ja — hier ist ein erster **Master-Prompt**, den du für die Erstellung deiner Website **[www.centofai.com](http://www.centofai.com)** verwenden kannst, zum Beispiel in einem Website-Builder, mit einem Entwickler, in Cursor, Lovable, Bolt, Framer, Webflow AI oder einem ähnlichen Tool.
+
+---
+
+## Prompt für die Erstellung von [www.centofai.com](http://www.centofai.com)
+
+Erstelle eine moderne, professionelle und informative Website für **[www.centofai.com](http://www.centofai.com)**.
+
+Die Website soll eine zentrale Plattform rund um das Thema **Künstliche Intelligenz / Artificial Intelligence** sein. Ziel der Seite ist es, Besuchern einen klaren Überblick über aktuelle KI-News, KI-Tools, Kurse, Workshops und praktische Anwendungsmöglichkeiten von KI zu geben.
+
+Die Website soll seriös, modern, übersichtlich und technologieorientiert wirken. Das Design soll clean, futuristisch und benutzerfreundlich sein. Nutze ein responsives Layout für Desktop, Tablet und Mobile.
+
+### Zielgruppe
+
+Die Website richtet sich an:
+
+Unternehmer, Selbstständige, Startups, Creator, Studierende, Berufstätige, Entwickler, Marketer und alle Menschen, die KI verstehen und praktisch nutzen möchten.
+
+---
+
+# Struktur der Website
+
+## 1. Hero Section
+
+Erstelle eine starke Startsektion mit folgendem Fokus:
+
+**Headline:**
+„Entdecke die Welt der Künstlichen Intelligenz“
+
+**Subheadline:**
+„News, Tools, Kurse und Workshops – alles an einem Ort, um KI besser zu verstehen und produktiv einzusetzen.“
+
+Füge einen Call-to-Action hinzu:
+
+Button 1: „KI-Tools entdecken“
+Button 2: „Aktuelle KI-News lesen“
+
+Optional: Verwende eine moderne visuelle Darstellung mit AI-Elementen, Netzwerk-Grafiken, abstrakten Datenströmen oder einem futuristischen Dashboard.
+
+---
+
+## 2. Section: Top News der KI
+
+Erstelle eine Section für die aktuellsten und wichtigsten Nachrichten aus der KI-Welt.
+
+Diese Section soll heißen:
+
+**„Top News aus der KI-Welt“**
+
+Die News sollen als Cards dargestellt werden mit:
+
+Titel
+Kurzbeschreibung
+Quelle
+Datum
+Button „Mehr lesen“
+
+Die Inhalte sollen regelmäßig aktualisierbar sein. Die News können aus vertrauenswürdigen Quellen verlinkt werden, zum Beispiel:
+
+OpenAI Blog
+Google DeepMind Blog
+Anthropic News
+Microsoft AI Blog
+NVIDIA AI Blog
+MIT Technology Review
+The Verge AI
+TechCrunch AI
+VentureBeat AI
+Hugging Face Blog
+
+Die Section soll Platz für mindestens 6 News Cards haben.
+
+Optional: Füge Filter hinzu:
+
+„Alle“
+„OpenAI“
+„Google“
+„Startups“
+„Tools“
+„Forschung“
+„Business“
+
+---
+
+## 3. Section: KI-Kurse und Workshops
+
+Erstelle eine Section mit dem Titel:
+
+**„KI lernen: Kurse & Workshops“**
+
+Diese Section soll externe Kurse, Workshops und Lernangebote rund um KI präsentieren. Die Kurse sollen nicht selbst gehostet werden, sondern auf externe Anbieter verlinken.
+
+Jede Kurs-Card soll enthalten:
+
+Kursname
+Anbieter
+Schwierigkeitsgrad: Anfänger, Fortgeschritten, Experte
+Sprache
+Preis: Kostenlos oder kostenpflichtig
+Kurzbeschreibung
+Button „Zum Kurs“
+
+Beispiele für mögliche Kursanbieter:
+
+Coursera
+edX
+Udemy
+Google AI
+Microsoft Learn
+DeepLearning.AI
+Hugging Face Courses
+OpenAI Academy / OpenAI Resources
+DataCamp
+LinkedIn Learning
+MIT OpenCourseWare
+Kaggle Learn
+
+Füge Filter hinzu:
+
+Anfänger
+Business
+Programmierung
+Prompt Engineering
+Machine Learning
+Generative KI
+Datenanalyse
+Automatisierung
+Kostenlos
+Deutsch
+Englisch
+
+---
+
+## 4. Section: KI-Tools Verzeichnis
+
+Erstelle eine große Section mit dem Titel:
+
+**„KI-Tools entdecken“**
+
+Diese Section soll ein umfangreiches Verzeichnis aktueller KI-Tools darstellen. Die Tools sollen in Kategorien eingeteilt werden. Jede Tool-Card soll enthalten:
+
+Tool-Name
+Kategorie
+Kurzbeschreibung
+Preis-Modell: Kostenlos, Freemium, Kostenpflichtig
+Geeignet für: Anfänger, Creator, Unternehmen, Entwickler usw.
+Website-Link
+Button „Tool öffnen“
+
+Die Tools sollen durchsuchbar und filterbar sein.
+
+Füge eine Suchleiste hinzu:
+
+„Suche nach KI-Tools, Kategorien oder Anwendungsfällen …“
+
+Erstelle folgende Kategorien:
+
+### Text & Schreiben
+
+ChatGPT
+Claude
+Gemini
+Perplexity
+Jasper
+Copy.ai
+Writesonic
+Notion AI
+Grammarly
+QuillBot
+
+### Bildgenerierung & Design
+
+Midjourney
+DALL·E
+Stable Diffusion
+Leonardo AI
+Adobe Firefly
+Canva AI
+Ideogram
+Krea AI
+Freepik AI
+Runway Image Tools
+
+### Video erstellen & bearbeiten
+
+Runway
+Pika
+Synthesia
+HeyGen
+Luma AI
+Descript
+Kaiber
+InVideo AI
+Veed.io
+OpusClip
+
+### Website erstellen
+
+Framer AI
+Wix AI
+Durable
+10Web
+Webflow AI
+Hostinger AI Website Builder
+Relume
+TeleportHQ
+Builder.io
+Lovable
+
+### App erstellen & No-Code Development
+
+Bolt.new
+Lovable
+Cursor
+Replit AI
+Bubble AI
+FlutterFlow AI
+Adalo
+Softr
+Glide
+Retool AI
+
+### Programmierung & Developer Tools
+
+GitHub Copilot
+Cursor
+Codeium
+Tabnine
+Replit AI
+Amazon CodeWhisperer
+Sourcegraph Cody
+v0 by Vercel
+Bolt.new
+Devin
+
+### Datenanalyse & Business Intelligence
+
+ChatGPT Advanced Data Analysis
+Claude
+Gemini
+Julius AI
+Rows AI
+Akkio
+Polymer Search
+DataRobot
+Obviously AI
+Tableau AI
+
+### Finanzen & Investment
+
+BloombergGPT
+AlphaSense
+Kavout
+Numerai
+FinChat
+Tegus
+Sentieo
+Kensho
+Zest AI
+Upstart
+
+### Marketing & Social Media
+
+Jasper
+Copy.ai
+HubSpot AI
+Semrush AI
+Surfer SEO
+Ocoya
+Predis.ai
+AdCreative.ai
+Hootsuite AI
+Buffer AI
+
+### Präsentationen & Dokumente
+
+Gamma
+Tome
+Beautiful.ai
+Canva AI
+Pitch
+SlidesAI
+Decktopus
+Plus AI
+Microsoft Copilot
+Google Gemini for Workspace
+
+### Audio, Stimme & Musik
+
+ElevenLabs
+Murf AI
+PlayHT
+Suno
+Udio
+AIVA
+Soundraw
+Lalal.ai
+Adobe Podcast
+Descript
+
+### Automatisierung & Produktivität
+
+Zapier AI
+Make AI
+n8n
+Bardeen
+Motion
+Reclaim AI
+Notion AI
+Microsoft Copilot
+Google Gemini
+ClickUp AI
+
+### Recherche & Wissen
+
+Perplexity
+Elicit
+Consensus
+You.com
+Scite
+Semantic Scholar
+Research Rabbit
+Connected Papers
+NotebookLM
+ChatPDF
+
+### Kundenservice & Chatbots
+
+Intercom AI
+Zendesk AI
+Ada
+Tidio AI
+Drift
+Freshchat AI
+Botpress
+Manychat
+Landbot
+Chatbase
+
+### HR & Recruiting
+
+HireVue
+Paradox AI
+Eightfold AI
+Fetcher
+Manatal AI
+Textio
+Skillate
+SeekOut
+Beamery
+LinkedIn AI
+
+### Recht & Verträge
+
+Harvey AI
+Spellbook
+Lexion
+LawGeex
+DoNotPay
+Robin AI
+Casetext
+LegalOn
+Ironclad AI
+Evisort
+
+### Bildung & Lernen
+
+Khanmigo
+Duolingo Max
+Quizlet AI
+Socratic
+Coursera Coach
+Photomath
+Wolfram Alpha
+Perplexity
+NotebookLM
+Brilliant AI
+
+---
+
+## 5. Tool Detail Pages
+
+Für jedes KI-Tool soll optional eine eigene Detailseite möglich sein.
+
+Diese Detailseite soll enthalten:
+
+Tool-Name
+Logo oder Platzhalter
+Kategorie
+Beschreibung
+Hauptfunktionen
+Vorteile
+Nachteile
+Preis-Modell
+Beste Anwendungsfälle
+Alternative Tools
+Link zur offiziellen Website
+
+---
+
+## 6. Vergleichsfunktion
+
+Erstelle optional eine Vergleichsfunktion für KI-Tools.
+
+Nutzer sollen zwei oder mehrere Tools vergleichen können nach:
+
+Kategorie
+Preis
+Funktionen
+Benutzerfreundlichkeit
+Zielgruppe
+API-Verfügbarkeit
+Datenschutz
+Einsatzbereich
+
+Beispiel:
+
+ChatGPT vs Claude vs Gemini
+Midjourney vs DALL·E vs Leonardo AI
+Runway vs Pika vs Synthesia
+Cursor vs GitHub Copilot vs Replit AI
+
+---
+
+## 7. Newsletter Section
+
+Erstelle eine Newsletter Section mit dem Titel:
+
+**„Bleib auf dem Laufenden“**
+
+Text:
+
+„Erhalte die wichtigsten KI-News, neue Tools und spannende Lernangebote direkt in dein Postfach.“
+
+Felder:
+
+E-Mail-Adresse
+Button: „Newsletter abonnieren“
+
+---
+
+## 8. About Section
+
+Erstelle eine kurze About Section:
+
+**„Über Cent of AI“**
+
+Cent of AI ist eine Plattform, die Menschen hilft, Künstliche Intelligenz besser zu verstehen, passende Tools zu finden und KI sinnvoll im Alltag, Beruf und Business einzusetzen.
+
+---
+
+## 9. Footer
+
+Der Footer soll enthalten:
+
+Logo / Name: Cent of AI
+Navigation
+KI-News
+KI-Tools
+Kurse & Workshops
+Über uns
+Kontakt
+Impressum
+Datenschutz
+Social Media Links
+
+---
+
+# Design-Anforderungen
+
+Nutze ein modernes, klares Design mit:
+
+Dunklem oder hellem Tech-Look
+Akzentfarben wie Blau, Violett, Cyan oder Grün
+Großen Headlines
+Cards mit abgerundeten Ecken
+Such- und Filterfunktionen
+Responsivem Grid Layout
+Icons für Kategorien
+Schneller Ladezeit
+SEO-freundlicher Struktur
+
+---
+
+# Technische Anforderungen
+
+Die Website soll SEO-optimiert sein.
+
+Nutze saubere Überschriftenstruktur:
+
+H1 für Haupttitel
+H2 für Sections
+H3 für Cards und Unterbereiche
+
+Die Website soll schnell laden und für Google gut indexierbar sein.
+
+Erstelle strukturierte Daten, wenn möglich, für:
+
+Artikel / News
+Kurse
+SoftwareApplication / KI-Tools
+
+Die Tool-Daten sollten später einfach erweiterbar sein, zum Beispiel über:
+
+CMS
+JSON-Datei
+Datenbank
+Airtable
+Notion
+Google Sheets
+Headless CMS
+
+---
+
+# Wichtige Funktionen
+
+Die Website soll folgende Funktionen enthalten:
+
+KI-News-Bereich
+Kurs- und Workshop-Verzeichnis
+KI-Tool-Verzeichnis
+Suchfunktion
+Filter nach Kategorien
+Tool-Karten
+Externe Links
+Newsletter-Anmeldung
+Responsive Design
+SEO-Grundstruktur
+Option für spätere Monetarisierung durch Affiliate-Links oder gesponserte Einträge
+
+---
+
+# Tonalität
+
+Die Sprache der Website soll professionell, verständlich und motivierend sein.
+
+Vermeide zu technische Erklärungen für Anfänger, aber biete genug Tiefe für fortgeschrittene Nutzer.
+
+Die Inhalte sollen Vertrauen schaffen und zeigen, dass Cent of AI eine zentrale Anlaufstelle für KI-Wissen, KI-Tools und KI-Lernen ist.
+
+---
+
+## Zusätzliche Anweisung an das KI- oder Entwicklungstool
+
+Recherchiere aktuelle KI-Tools, Newsquellen, Kurse und Workshops regelmäßig und halte die Inhalte aktuell. Verwende nur seriöse Quellen. Verlinke immer auf die offiziellen Websites der Tools, Kursanbieter oder Newsquellen. Achte darauf, dass externe Inhalte korrekt gekennzeichnet und nicht kopiert, sondern nur zusammengefasst und verlinkt werden.
+
+---
+
+## Kurzversion des Prompts
+
+Erstelle eine moderne, responsive und SEO-optimierte Website für **[www.centofai.com](http://www.centofai.com)**. Die Website soll eine zentrale Informationsplattform für Künstliche Intelligenz sein. Sie soll aktuelle KI-News, externe KI-Kurse und Workshops sowie ein umfangreiches Verzeichnis aktueller KI-Tools enthalten. Die Tools sollen in Kategorien wie Text, Bild, Video, Website-Erstellung, App-Erstellung, Programmierung, Datenanalyse, Finanzen, Marketing, Audio, Automatisierung, Recherche, Kundenservice, HR, Recht und Bildung sortiert werden. Jede Tool-Card soll Name, Kategorie, Kurzbeschreibung, Preis-Modell, Zielgruppe und offiziellen Link enthalten. Die Seite soll Such- und Filterfunktionen, Newsletter-Anmeldung, moderne Cards, klare Navigation, starke Hero Section und professionelle KI-Ästhetik enthalten.

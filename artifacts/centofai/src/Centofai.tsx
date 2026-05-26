@@ -1,44 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu,
   X,
-  Rocket,
-  Lightbulb,
-  Building2,
-  Briefcase,
-  Globe,
-  Smartphone,
-  Code2,
+  Search,
+  Newspaper,
+  GraduationCap,
+  Wrench,
+  Mail,
+  ArrowRight,
+  ExternalLink,
+  ChevronRight,
+  Zap,
   Brain,
-  Compass,
+  Rocket,
+  Sparkles,
+  TrendingUp,
+  CheckCircle2,
+  Filter,
+  Globe,
   Bot,
   MessageSquare,
-  BarChart3,
-  Sparkles,
-  ShieldCheck,
-  HeartHandshake,
-  TrendingUp,
-  ArrowRight,
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Instagram,
-  Github,
-  CheckCircle2,
-  Workflow,
-  Zap,
+  BookOpen,
+  Star,
+  Tag,
+  User,
+  Building2,
+  Clock,
+  Languages,
+  ArrowUpRight,
 } from "lucide-react";
+import { tools, toolCategories, type Tool } from "./data/tools";
+import { newsItems, newsCategories, type NewsItem } from "./data/news";
+import { courses, courseCategories, type Course } from "./data/courses";
 
+/* ─── Navbar ───────────────────────────────────────────────────────── */
 const navLinks = [
-  { name: "Startseite", href: "#home" },
-  { name: "Leistungen", href: "#leistungen" },
-  { name: "Für Gründer", href: "#gruender" },
-  { name: "KI-Lösungen", href: "#ki" },
-  { name: "Projekte", href: "#projekte" },
-  { name: "Über Centofai", href: "#ueber" },
-  { name: "Kontakt", href: "#kontakt" },
+  { name: "News", href: "#news" },
+  { name: "Kurse", href: "#kurse" },
+  { name: "KI-Tools", href: "#tools" },
+  { name: "Über uns", href: "#about" },
+  { name: "Newsletter", href: "#newsletter" },
 ];
 
 function Navbar() {
@@ -52,48 +54,45 @@ function Navbar() {
   }, []);
 
   return (
-    <header
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "backdrop-blur-xl bg-[#070B14]/80 border-b border-white/5"
+          ? "bg-[#070B14]/90 backdrop-blur-xl border-b border-[#1E293B]/60"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2 group">
-          <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563EB] via-[#7C3AED] to-[#22D3EE] flex items-center justify-center shadow-lg shadow-blue-500/20">
-            <Sparkles className="w-5 h-5 text-white" />
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] blur-md opacity-50 group-hover:opacity-80 transition" />
-          </div>
-          <span className="font-sora font-bold text-xl tracking-tight text-white">
-            Centofai
-          </span>
-        </a>
-
-        <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-sm text-slate-300 hover:text-white transition-colors relative group"
-            >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-[#22D3EE] to-[#7C3AED] group-hover:w-full transition-all duration-300" />
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a
-            href="#kontakt"
-            className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white text-sm font-medium shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:scale-105 transition-all"
-          >
-            Idee besprechen <ArrowRight className="w-4 h-4" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <a href="#" className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center shadow-lg shadow-[#2563EB]/20 group-hover:shadow-[#2563EB]/30 transition-shadow">
+              <Brain className="w-5 h-5 text-white" />
+            </div>
+            <span className="font-display font-bold text-lg text-white tracking-tight">
+              Cent of <span className="text-[#22D3EE]">AI</span>
+            </span>
           </a>
+
+          <div className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="px-3 py-2 text-sm font-medium text-[#94A3B8] hover:text-white rounded-lg hover:bg-white/5 transition-all"
+              >
+                {link.name}
+              </a>
+            ))}
+            <a
+              href="#newsletter"
+              className="ml-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/20"
+            >
+              Newsletter
+            </a>
+          </div>
+
           <button
+            className="md:hidden p-2 text-[#94A3B8] hover:text-white"
             onClick={() => setOpen(!open)}
-            className="lg:hidden p-2 text-white"
-            aria-label="Menü"
           >
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -106,525 +105,143 @@ function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="lg:hidden overflow-hidden bg-[#070B14]/95 backdrop-blur-xl border-t border-white/5"
+            className="md:hidden bg-[#070B14]/95 backdrop-blur-xl border-b border-[#1E293B]"
           >
-            <div className="px-6 py-6 flex flex-col gap-4">
+            <div className="px-4 py-3 space-y-1">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-slate-300 hover:text-white transition py-2"
+                  className="block px-3 py-2.5 text-sm font-medium text-[#94A3B8] hover:text-white rounded-lg hover:bg-white/5"
                 >
                   {link.name}
                 </a>
               ))}
               <a
-                href="#kontakt"
+                href="#newsletter"
                 onClick={() => setOpen(false)}
-                className="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-medium"
+                className="block px-3 py-2.5 text-sm font-semibold bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white rounded-lg mt-2 text-center"
               >
-                Idee besprechen <ArrowRight className="w-4 h-4" />
+                Newsletter abonnieren
               </a>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </nav>
   );
 }
 
+/* ─── Hero ─────────────────────────────────────────────────────────── */
 function Hero() {
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden pt-32 pb-24 lg:pt-44 lg:pb-32"
-    >
-      {/* Background glow */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 -left-32 w-[500px] h-[500px] rounded-full bg-[#2563EB]/20 blur-3xl" />
-        <div className="absolute top-40 right-0 w-[600px] h-[600px] rounded-full bg-[#7C3AED]/20 blur-3xl" />
-        <div className="absolute bottom-0 left-1/2 w-[400px] h-[400px] rounded-full bg-[#22D3EE]/10 blur-3xl" />
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.04]"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <pattern
-              id="grid"
-              width="60"
-              height="60"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 60 0 L 0 0 0 60"
-                fill="none"
-                stroke="white"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#grid)" />
-        </svg>
-      </div>
+    <section className="relative min-h-[90vh] flex items-center pt-16 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#070B14] via-[#0a1628] to-[#070B14]" />
+      <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#2563EB]/10 rounded-full blur-[120px]" />
+      <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-[#7C3AED]/10 rounded-full blur-[100px]" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur text-xs text-slate-300 mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#22D3EE] animate-pulse" />
-            Digitales Studio mit KI im Kern
-          </div>
-
-          <h1 className="font-sora text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] text-white tracking-tight">
-            Wir machen{" "}
-            <span className="relative inline-block">
-              <span className="bg-gradient-to-r from-[#22D3EE] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-                Ideen digital.
-              </span>
-              <span className="absolute -inset-1 bg-gradient-to-r from-[#22D3EE]/20 to-[#7C3AED]/20 blur-2xl -z-10" />
-            </span>
-          </h1>
-
-          <p className="mt-6 text-lg text-slate-300 max-w-xl leading-relaxed">
-            Centofai hilft Startups, Gründern und kleinen Unternehmen dabei,
-            ihre Ideen in professionelle Websites, Apps, Softwarelösungen und
-            KI-gestützte Produkte zu verwandeln.
-          </p>
-
-          <p className="mt-4 text-base text-slate-400 max-w-xl">
-            Von der ersten Idee über das Design bis zur fertigen Anwendung
-            begleiten wir dich Schritt für Schritt – verständlich, persönlich
-            und zukunftsorientiert.
-          </p>
-
-          <div className="mt-10 flex flex-wrap gap-4">
-            <a
-              href="#kontakt"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-medium shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105 transition-all"
-            >
-              Idee besprechen <ArrowRight className="w-4 h-4" />
-            </a>
-            <a
-              href="#leistungen"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-white/15 bg-white/5 backdrop-blur text-white font-medium hover:bg-white/10 transition-all"
-            >
-              Leistungen ansehen
-            </a>
-          </div>
-
-          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-400">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#22D3EE]" />
-              Für Startups & kleine Unternehmen
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#22D3EE]" />
-              KI-gestützte Entwicklung
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-[#22D3EE]" />
-              Von der Idee bis zum Launch
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Visual / Mockup */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative"
-        >
-          <div className="relative rounded-3xl border border-white/10 bg-gradient-to-br from-[#111827] to-[#070B14] p-6 shadow-2xl shadow-blue-500/10 overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-[#7C3AED]/30 blur-3xl" />
-            <div className="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-[#2563EB]/30 blur-3xl" />
-
-            <div className="relative flex items-center gap-2 mb-4">
-              <div className="w-3 h-3 rounded-full bg-red-400/70" />
-              <div className="w-3 h-3 rounded-full bg-yellow-400/70" />
-              <div className="w-3 h-3 rounded-full bg-green-400/70" />
-              <div className="ml-3 text-xs text-slate-500 font-mono">
-                centofai.ai/dashboard
-              </div>
-            </div>
-
-            <div className="relative grid grid-cols-3 gap-3">
-              <div className="col-span-2 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-xs text-slate-400">Projekt-Status</span>
-                  <Sparkles className="w-4 h-4 text-[#22D3EE]" />
-                </div>
-                <div className="text-2xl font-sora font-semibold text-white">
-                  +127%
-                </div>
-                <div className="text-xs text-slate-500 mt-1">
-                  KI-gestützte Conversion
-                </div>
-                <div className="mt-4 h-20 flex items-end gap-1.5">
-                  {[40, 65, 30, 80, 55, 90, 75, 95, 60, 100, 85, 70].map(
-                    (h, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ height: 0 }}
-                        animate={{ height: `${h}%` }}
-                        transition={{ delay: 0.5 + i * 0.05, duration: 0.5 }}
-                        className="flex-1 rounded-t bg-gradient-to-t from-[#2563EB] to-[#22D3EE]"
-                      />
-                    ),
-                  )}
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4 flex flex-col justify-between">
-                <Bot className="w-6 h-6 text-[#7C3AED]" />
-                <div>
-                  <div className="text-lg font-sora font-semibold text-white">
-                    AI
-                  </div>
-                  <div className="text-xs text-slate-500">Assistant aktiv</div>
-                </div>
-              </div>
-
-              <div className="col-span-3 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="text-xs text-slate-400 mb-2 font-mono">
-                  &gt; centofai build --idea
-                </div>
-                <div className="font-mono text-xs text-slate-300 space-y-1">
-                  <div>
-                    <span className="text-[#22D3EE]">✓</span> Idee analysiert
-                  </div>
-                  <div>
-                    <span className="text-[#22D3EE]">✓</span> Konzept erstellt
-                  </div>
-                  <div>
-                    <span className="text-[#22D3EE]">✓</span> Design generiert
-                  </div>
-                  <div>
-                    <span className="text-[#7C3AED] animate-pulse">⟳</span>{" "}
-                    Entwicklung läuft...
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Floating badge */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1 }}
-            className="absolute -left-6 top-1/2 hidden md:flex items-center gap-3 px-4 py-3 rounded-2xl border border-white/10 bg-[#111827]/90 backdrop-blur-xl shadow-xl"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#22D3EE] to-[#2563EB] flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white" />
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1E293B]/60 border border-[#22D3EE]/20 mb-6">
+              <Zap className="w-4 h-4 text-[#22D3EE]" />
+              <span className="text-sm text-[#22D3EE] font-medium">Deine KI-Plattform</span>
             </div>
-            <div>
-              <div className="text-xs text-slate-400">Time-to-Launch</div>
-              <div className="text-sm font-semibold text-white">
-                4–8 Wochen
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
 
-const audience = [
-  {
-    icon: Lightbulb,
-    title: "Gründer mit einer Idee",
-    desc: "Du hast eine Vision, aber noch keinen technischen Plan? Wir geben deiner Idee Struktur, Design und ein digitales Zuhause.",
-  },
-  {
-    icon: Rocket,
-    title: "Startups in der Anfangsphase",
-    desc: "Schneller MVP, sauberes Branding und eine Plattform, die mit deinem Wachstum mithält – von Tag eins an.",
-  },
-  {
-    icon: Building2,
-    title: "Kleine Unternehmen",
-    desc: "Eine professionelle Website, smartere Prozesse und KI-Funktionen, die deinem Team echte Zeit sparen.",
-  },
-  {
-    icon: Briefcase,
-    title: "Selbstständige & lokale Anbieter",
-    desc: "Mehr Sichtbarkeit, mehr Anfragen, weniger Aufwand – mit Tools, die zu deinem Alltag passen.",
-  },
-];
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+              Entdecke die Welt der{" "}
+              <span className="gradient-text">Künstlichen Intelligenz</span>
+            </h1>
 
-function AudienceSection() {
-  return (
-    <section className="relative py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl"
-        >
-          <div className="text-sm font-medium text-[#22D3EE] mb-4">
-            Für wen ist Centofai?
-          </div>
-          <h2 className="font-sora text-4xl md:text-5xl font-bold text-white leading-tight">
-            Digitale Unterstützung für{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-              Menschen mit Ideen
-            </span>
-          </h2>
-          <p className="mt-5 text-lg text-slate-400 leading-relaxed">
-            Viele gute Ideen scheitern nicht daran, dass sie schlecht sind,
-            sondern daran, dass der technische Weg fehlt. Genau hier setzt
-            Centofai an. Wir helfen dir, deine Idee zu strukturieren, zu
-            gestalten und digital umzusetzen.
-          </p>
-        </motion.div>
-
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {audience.map((item, i) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group relative rounded-2xl p-[1px] bg-gradient-to-br from-white/10 to-white/[0.02] hover:from-[#2563EB]/50 hover:to-[#7C3AED]/50 transition-all"
-            >
-              <div className="h-full rounded-2xl bg-[#111827] p-6 hover:bg-[#111827]/80 transition">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2563EB]/20 to-[#7C3AED]/20 border border-white/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <item.icon className="w-6 h-6 text-[#22D3EE]" />
-                </div>
-                <h3 className="font-sora text-lg font-semibold text-white mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">
-                  {item.desc}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const services = [
-  {
-    icon: Globe,
-    title: "Website-Entwicklung",
-    desc: "Professionelle, schnelle und responsive Websites, die Vertrauen schaffen, deine Idee sichtbar machen und Kunden überzeugen.",
-    features: [
-      "Firmenwebsites",
-      "Landingpages",
-      "Portfolio-Websites",
-      "SEO-Grundstruktur",
-      "Performance-Optimierung",
-    ],
-  },
-  {
-    icon: Smartphone,
-    title: "App-Entwicklung",
-    desc: "Benutzerfreundliche mobile Apps für Startups, Dienstleistungen, interne Prozesse oder neue digitale Geschäftsmodelle.",
-    features: [
-      "iOS & Android",
-      "Cross-Platform Apps",
-      "MVP-Entwicklung",
-      "App-Prototypen",
-      "Nutzerfreundliches Design",
-    ],
-  },
-  {
-    icon: Code2,
-    title: "Individuelle Software",
-    desc: "Maßgeschneiderte Softwarelösungen, Dashboards und digitale Tools, die Abläufe vereinfachen und Unternehmen effizienter machen.",
-    features: [
-      "Dashboards",
-      "Verwaltungssysteme",
-      "Automatisierungstools",
-      "API-Integrationen",
-      "Interne Unternehmenssoftware",
-    ],
-  },
-  {
-    icon: Brain,
-    title: "KI-gestützte Lösungen",
-    desc: "Intelligente Funktionen, die Prozesse automatisieren, Daten nutzbar machen und digitale Produkte smarter gestalten.",
-    features: [
-      "KI-Chatbots",
-      "Automatisierung",
-      "Dokumentenanalyse",
-      "Intelligente Suchfunktionen",
-      "KI-Assistenten",
-    ],
-  },
-  {
-    icon: Compass,
-    title: "Digitale Beratung",
-    desc: "Wir helfen dir, deine Idee zu ordnen, Funktionen zu planen und den besten digitalen Weg für dein Projekt zu finden.",
-    features: [
-      "Ideenanalyse",
-      "MVP-Konzept",
-      "Technische Planung",
-      "Digitale Strategie",
-      "KI-Potenzialanalyse",
-    ],
-  },
-];
-
-function ServicesSection() {
-  return (
-    <section
-      id="leistungen"
-      className="relative py-24 lg:py-32 bg-[#F8FAFC] text-[#070B14]"
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl"
-        >
-          <div className="text-sm font-medium text-[#2563EB] mb-4">
-            Unsere Leistungen
-          </div>
-          <h2 className="font-sora text-4xl md:text-5xl font-bold leading-tight">
-            Digitale Produkte, die zu{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-              deinem Unternehmen passen
-            </span>
-          </h2>
-          <p className="mt-5 text-lg text-slate-600 leading-relaxed">
-            Von der ersten digitalen Präsenz bis zur intelligenten
-            Softwarelösung – Centofai entwickelt digitale Produkte, die zu
-            deinem Unternehmen passen.
-          </p>
-        </motion.div>
-
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => (
-            <motion.div
-              key={s.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group relative rounded-2xl bg-white border border-slate-200 p-7 hover:border-transparent hover:shadow-2xl hover:shadow-blue-500/10 transition-all hover:-translate-y-1"
-            >
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[#2563EB]/5 to-[#7C3AED]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center mb-5 shadow-lg shadow-blue-500/20">
-                  <s.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-sora text-xl font-semibold mb-3">
-                  {s.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed mb-5">{s.desc}</p>
-                <ul className="space-y-2">
-                  {s.features.map((f) => (
-                    <li
-                      key={f}
-                      className="flex items-center gap-2 text-sm text-slate-700"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-[#2563EB] flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const founderSteps = [
-  "Idee",
-  "Konzept",
-  "Design",
-  "Entwicklung",
-  "Launch",
-  "Wachstum",
-];
-
-function FounderSection() {
-  return (
-    <section id="gruender" className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-[#2563EB]/10 blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            <div className="text-sm font-medium text-[#7C3AED] mb-4">
-              Für Gründer
-            </div>
-            <h2 className="font-sora text-4xl md:text-5xl font-bold text-white leading-tight">
-              Du hast eine Idee? Wir helfen dir beim{" "}
-              <span className="bg-gradient-to-r from-[#22D3EE] to-[#7C3AED] bg-clip-text text-transparent">
-                ersten digitalen Schritt
-              </span>
-              .
-            </h2>
-            <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-              Du brauchst keine fertige technische Planung. Bring deine Idee
-              mit – wir helfen dir, daraus ein klares Konzept, ein modernes
-              Design und eine funktionierende digitale Lösung zu entwickeln.
+            <p className="text-lg text-[#94A3B8] leading-relaxed mb-8 max-w-xl">
+              News, Tools, Kurse und Workshops – alles an einem Ort, um KI besser zu verstehen und produktiv einzusetzen.
             </p>
-            <div className="mt-8 p-5 rounded-2xl border border-[#22D3EE]/20 bg-[#22D3EE]/5">
-              <p className="text-slate-200 italic">
-                „Auch mit kleinem Kapital kann der erste digitale Schritt
-                möglich sein.“
-              </p>
+
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#tools"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/25"
+              >
+                <Wrench className="w-5 h-5" />
+                KI-Tools entdecken
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <a
+                href="#news"
+                className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#1E293B] border border-[#1E293B] text-white font-semibold rounded-xl hover:border-[#22D3EE]/30 transition-all"
+              >
+                <Newspaper className="w-5 h-5 text-[#22D3EE]" />
+                Aktuelle KI-News
+              </a>
             </div>
-            <a
-              href="#kontakt"
-              className="mt-8 inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-medium shadow-xl shadow-blue-500/30 hover:scale-105 transition-all"
-            >
-              Lass uns starten <ArrowRight className="w-4 h-4" />
-            </a>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-10 text-sm text-[#64748B]">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#22D3EE] shrink-0" />
+                100+ KI-Tools
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#22D3EE] shrink-0" />
+                Tägliche News
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-[#22D3EE] shrink-0" />
+                Kuratierte Kurse
+              </span>
+            </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative hidden lg:block"
           >
-            <div className="space-y-3">
-              {founderSteps.map((step, i) => (
-                <motion.div
-                  key={step}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  className="flex items-center gap-4 p-4 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur hover:border-[#22D3EE]/30 hover:bg-white/[0.06] transition-all group"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center font-sora font-bold text-white shadow-lg shadow-blue-500/20">
-                    {i + 1}
-                  </div>
-                  <div className="flex-1">
-                    <div className="font-sora font-semibold text-white">
-                      {step}
+            <div className="relative bg-[#0F172A]/80 border border-[#1E293B] rounded-2xl p-6 backdrop-blur-sm glow-cyan">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <span className="text-xs text-[#64748B] ml-2">centofai.com/dashboard</span>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-[#1E293B]/50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <Bot className="w-8 h-8 text-[#22D3EE]" />
+                    <div>
+                      <p className="text-sm font-semibold text-white">KI-News Heute</p>
+                      <p className="text-xs text-[#64748B]">12 neue Artikel</p>
                     </div>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-slate-500 group-hover:text-[#22D3EE] group-hover:translate-x-1 transition-all" />
-                </motion.div>
-              ))}
+                  <TrendingUp className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="p-3 bg-[#1E293B]/50 rounded-lg">
+                    <p className="text-xs text-[#64748B]">KI-Tools im Verzeichnis</p>
+                    <p className="text-2xl font-bold text-white mt-1">100+</p>
+                  </div>
+                  <div className="p-3 bg-[#1E293B]/50 rounded-lg">
+                    <p className="text-xs text-[#64748B]">Kurse verfügbar</p>
+                    <p className="text-2xl font-bold text-white mt-1">15+</p>
+                  </div>
+                </div>
+                <div className="p-3 bg-gradient-to-r from-[#2563EB]/20 to-[#7C3AED]/20 rounded-lg border border-[#2563EB]/20">
+                  <div className="flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#22D3EE]" />
+                    <span className="text-sm text-[#22D3EE] font-medium">Tipp des Tages</span>
+                  </div>
+                  <p className="text-xs text-[#94A3B8] mt-1">
+                    Perplexity + Claude = Perfekte Recherche-Combo für wissenschaftliche Arbeiten
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
@@ -633,749 +250,578 @@ function FounderSection() {
   );
 }
 
-const aiAreas = [
-  {
-    icon: Workflow,
-    title: "Automatisierung",
-    desc: "Wiederkehrende Aufgaben laufen im Hintergrund – dein Team konzentriert sich auf das, was wirklich zählt.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Kundenkommunikation",
-    desc: "Intelligente Chatbots und Assistenten beantworten Fragen rund um die Uhr und entlasten dein Support-Team.",
-  },
-  {
-    icon: BarChart3,
-    title: "Datenanalyse",
-    desc: "Aus rohen Zahlen werden klare Erkenntnisse, die dir helfen, bessere Entscheidungen für dein Unternehmen zu treffen.",
-  },
-  {
-    icon: Bot,
-    title: "KI-Assistenten",
-    desc: "Maßgeschneiderte Assistenten, die in deinen Tools leben und genau dort helfen, wo dein Team sie braucht.",
-  },
-];
+/* ─── News Section ──────────────────────────────────────────────────── */
+function NewsSection() {
+  const [activeFilter, setActiveFilter] = useState("Alle");
 
-function AISection() {
+  const filtered = useMemo(() => {
+    if (activeFilter === "Alle") return newsItems.slice(0, 6);
+    return newsItems.filter((n) => n.category === activeFilter).slice(0, 6);
+  }, [activeFilter]);
+
   return (
-    <section id="ki" className="relative py-24 lg:py-32 bg-[#111827]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section id="news" className="py-24 relative">
+      <div className="absolute top-0 left-1/3 w-72 h-72 bg-[#2563EB]/5 rounded-full blur-[100px]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl"
+          className="text-center mb-12"
         >
-          <div className="text-sm font-medium text-[#22D3EE] mb-4">
-            KI verstehen und sinnvoll nutzen
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1E293B]/60 border border-[#22D3EE]/20 mb-4">
+            <Newspaper className="w-4 h-4 text-[#22D3EE]" />
+            <span className="text-xs text-[#22D3EE] font-medium">Aktuell</span>
           </div>
-          <h2 className="font-sora text-4xl md:text-5xl font-bold text-white leading-tight">
-            KI als Chance für{" "}
-            <span className="bg-gradient-to-r from-[#22D3EE] to-[#7C3AED] bg-clip-text text-transparent">
-              kleine Unternehmen
-            </span>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Top News aus der <span className="gradient-text">KI-Welt</span>
           </h2>
-          <p className="mt-5 text-lg text-slate-300 leading-relaxed">
-            Künstliche Intelligenz verändert, wie Unternehmen arbeiten,
-            kommunizieren und wachsen. Centofai macht KI verständlich und
-            zeigt, wie sie praktisch eingesetzt werden kann – zum Beispiel für
-            Automatisierung, Kundenservice, Content-Erstellung, Datenanalyse
-            oder interne Prozesse.
+          <p className="text-[#94A3B8] max-w-2xl mx-auto">
+            Die wichtigsten Nachrichten aus der Welt der Künstlichen Intelligenz – kuratiert und zusammengefasst.
           </p>
         </motion.div>
 
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {aiAreas.map((a, i) => (
-            <motion.div
-              key={a.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group relative rounded-2xl p-6 bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/10 hover:border-[#22D3EE]/30 transition-all"
-            >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#22D3EE]/20 to-[#7C3AED]/20 border border-white/10 flex items-center justify-center mb-5">
-                <a.icon className="w-6 h-6 text-[#22D3EE]" />
-              </div>
-              <h3 className="font-sora text-lg font-semibold text-white mb-2">
-                {a.title}
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">{a.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-12 p-6 lg:p-8 rounded-2xl border border-[#7C3AED]/20 bg-gradient-to-r from-[#7C3AED]/10 to-[#2563EB]/10 flex items-start gap-4"
-        >
-          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#22D3EE] to-[#7C3AED] flex items-center justify-center flex-shrink-0">
-            <Sparkles className="w-6 h-6 text-white" />
-          </div>
-          <p className="text-slate-200 leading-relaxed">
-            Centofai möchte Wissen über KI und aktuelle Entwicklungen
-            zugänglich machen, damit Startups und kleine Unternehmen neue
-            Technologien besser verstehen und nutzen können.
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-const advantages = [
-  {
-    icon: HeartHandshake,
-    title: "Für kleine Unternehmen gemacht",
-    desc: "Wir verstehen, dass nicht jedes Unternehmen mit großem Budget startet. Deshalb entwickeln wir Lösungen, die realistisch, sinnvoll und wachstumsfähig sind.",
-  },
-  {
-    icon: Rocket,
-    title: "Von der Idee bis zur Umsetzung",
-    desc: "Du brauchst keine fertige technische Planung. Wir begleiten dich Schritt für Schritt – verständlich und transparent.",
-  },
-  {
-    icon: Brain,
-    title: "KI verständlich nutzen",
-    desc: "Wir integrieren KI dort, wo sie echten Mehrwert bringt – praktisch, verständlich und zielgerichtet.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Persönliche Begleitung",
-    desc: "Wir arbeiten nah an deiner Idee und erklären technische Entscheidungen klar und verständlich.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Zukunftsfähige Lösungen",
-    desc: "Unsere digitalen Produkte sind so aufgebaut, dass sie mit deinem Unternehmen wachsen können.",
-  },
-];
-
-function WhyCentofai() {
-  return (
-    <section id="ueber" className="relative py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto"
-        >
-          <div className="text-sm font-medium text-[#22D3EE] mb-4">
-            Warum Centofai?
-          </div>
-          <h2 className="font-sora text-4xl md:text-5xl font-bold text-white leading-tight">
-            Ein Partner, der{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-              deine Welt versteht
-            </span>
-          </h2>
-        </motion.div>
-
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {advantages.map((a, i) => (
-            <motion.div
-              key={a.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className={`group relative rounded-2xl p-7 border border-white/10 bg-[#111827] hover:border-[#2563EB]/40 transition-all hover:-translate-y-1 ${
-                i === 4 ? "lg:col-start-2" : ""
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {newsCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                activeFilter === cat
+                  ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-lg shadow-[#2563EB]/20"
+                  : "bg-[#1E293B]/60 text-[#94A3B8] hover:text-white hover:bg-[#1E293B]"
               }`}
             >
-              <div className="absolute -top-px left-6 right-6 h-px bg-gradient-to-r from-transparent via-[#22D3EE]/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center mb-5 shadow-lg shadow-blue-500/20">
-                <a.icon className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-sora text-lg font-semibold text-white mb-2">
-                {a.title}
-              </h3>
-              <p className="text-slate-400 leading-relaxed text-sm">{a.desc}</p>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
-      </div>
-    </section>
-  );
-}
 
-const processSteps = [
-  {
-    title: "Idee verstehen",
-    desc: "Wir hören zu, analysieren deine Ziele und verstehen, welches Problem deine Idee lösen soll.",
-  },
-  {
-    title: "Konzept entwickeln",
-    desc: "Wir erstellen eine klare digitale Struktur mit Funktionen, Designrichtung und technischer Lösung.",
-  },
-  {
-    title: "Design gestalten",
-    desc: "Wir entwerfen ein modernes, nutzerfreundliches Design, das zu deinem Unternehmen passt.",
-  },
-  {
-    title: "Lösung entwickeln",
-    desc: "Wir setzen Website, App oder Software professionell um und integrieren bei Bedarf KI-gestützte Funktionen.",
-  },
-  {
-    title: "Veröffentlichen & begleiten",
-    desc: "Nach dem Launch unterstützen wir dich bei Optimierung, Erweiterung und Weiterentwicklung.",
-  },
-];
-
-function ProcessSection() {
-  return (
-    <section className="relative py-24 lg:py-32 bg-[#F8FAFC] text-[#070B14]">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl"
-        >
-          <div className="text-sm font-medium text-[#2563EB] mb-4">
-            Unser Prozess
-          </div>
-          <h2 className="font-sora text-4xl md:text-5xl font-bold leading-tight">
-            Von der Idee zur{" "}
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-              digitalen Lösung
-            </span>
-          </h2>
-        </motion.div>
-
-        {/* Desktop horizontal timeline */}
-        <div className="hidden lg:block mt-20 relative">
-          <div className="absolute top-6 left-0 right-0 h-px bg-gradient-to-r from-[#2563EB] via-[#7C3AED] to-[#22D3EE]" />
-          <div className="grid grid-cols-5 gap-6">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 30 }}
+        {/* News Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((news, i) => (
+              <motion.article
+                key={news.title}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.12 }}
-                className="relative"
+                transition={{ delay: i * 0.1 }}
+                className="group bg-[#0F172A] border border-[#1E293B] rounded-xl p-5 card-hover"
               >
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2563EB] to-[#7C3AED] text-white flex items-center justify-center font-sora font-bold shadow-xl shadow-blue-500/30 mb-5 mx-auto">
-                  {i + 1}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="px-2 py-0.5 rounded-md bg-[#2563EB]/15 text-[#22D3EE] text-xs font-medium">
+                    {news.category}
+                  </span>
+                  <span className="text-xs text-[#64748B]">{news.date}</span>
                 </div>
-                <h3 className="font-sora font-semibold text-lg mb-2 text-center">
-                  {step.title}
+                <h3 className="text-base font-semibold text-white mb-2 group-hover:text-[#22D3EE] transition-colors line-clamp-2">
+                  {news.title}
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed text-center">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile vertical timeline */}
-        <div className="lg:hidden mt-12 space-y-6">
-          {processSteps.map((step, i) => (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="flex gap-4"
-            >
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#2563EB] to-[#7C3AED] text-white flex items-center justify-center font-sora font-bold shadow-lg shadow-blue-500/30 flex-shrink-0">
-                  {i + 1}
-                </div>
-                {i < processSteps.length - 1 && (
-                  <div className="w-px flex-1 bg-gradient-to-b from-[#7C3AED] to-transparent my-2" />
-                )}
-              </div>
-              <div className="pb-6">
-                <h3 className="font-sora font-semibold text-lg mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-slate-600 leading-relaxed">{step.desc}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-const projects = [
-  {
-    category: "Website",
-    title: "Startup Landingpage",
-    desc: "Conversion-fokussierte Landingpage mit klarer Story, schnellem Pageload und integriertem Lead-Formular.",
-    gradient: "from-[#2563EB] to-[#22D3EE]",
-  },
-  {
-    category: "Mobile App",
-    title: "Mobile Buchungs-App",
-    desc: "Plattformübergreifende App mit intuitivem Buchungsflow, Push-Benachrichtigungen und Kalender-Integration.",
-    gradient: "from-[#7C3AED] to-[#2563EB]",
-  },
-  {
-    category: "KI-Lösung",
-    title: "KI-Chatbot für Kundenservice",
-    desc: "Intelligenter Assistent, der häufige Fragen automatisch beantwortet und nur komplexe Fälle an das Team übergibt.",
-    gradient: "from-[#22D3EE] to-[#7C3AED]",
-  },
-  {
-    category: "Software",
-    title: "Dashboard für kleine Unternehmen",
-    desc: "Zentrales Cockpit mit Echtzeit-Daten, Auswertungen und Automatisierungen für den Geschäftsalltag.",
-    gradient: "from-[#7C3AED] to-[#22D3EE]",
-  },
-];
-
-function ProjectsSection() {
-  return (
-    <section id="projekte" className="relative py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6"
-        >
-          <div className="max-w-2xl">
-            <div className="text-sm font-medium text-[#22D3EE] mb-4">
-              Projekte & Beispiele
-            </div>
-            <h2 className="font-sora text-4xl md:text-5xl font-bold text-white leading-tight">
-              Ein Einblick in das, was{" "}
-              <span className="bg-gradient-to-r from-[#22D3EE] to-[#7C3AED] bg-clip-text text-transparent">
-                möglich ist
-              </span>
-            </h2>
-          </div>
-        </motion.div>
-
-        <div className="mt-14 grid md:grid-cols-2 gap-6">
-          {projects.map((p, i) => (
-            <motion.div
-              key={p.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group rounded-3xl overflow-hidden border border-white/10 bg-[#111827] hover:border-[#2563EB]/40 transition-all"
-            >
-              <div
-                className={`relative h-56 bg-gradient-to-br ${p.gradient} overflow-hidden`}
-              >
-                <div className="absolute inset-0 opacity-30">
-                  <svg
-                    className="w-full h-full"
-                    xmlns="http://www.w3.org/2000/svg"
+                <p className="text-sm text-[#94A3B8] mb-4 line-clamp-3">{news.description}</p>
+                <div className="flex items-center justify-between pt-3 border-t border-[#1E293B]">
+                  <span className="text-xs text-[#64748B]">{news.source}</span>
+                  <a
+                    href={news.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-[#22D3EE] hover:text-white transition-colors"
                   >
-                    <defs>
-                      <pattern
-                        id={`p${i}`}
-                        width="40"
-                        height="40"
-                        patternUnits="userSpaceOnUse"
-                      >
-                        <path
-                          d="M 40 0 L 0 0 0 40"
-                          fill="none"
-                          stroke="white"
-                          strokeWidth="0.5"
-                        />
-                      </pattern>
-                    </defs>
-                    <rect width="100%" height="100%" fill={`url(#p${i})`} />
-                  </svg>
+                    Mehr lesen
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-20 rounded-xl bg-white/10 backdrop-blur-xl border border-white/30 flex items-center justify-center transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                    <Sparkles className="w-8 h-8 text-white" />
-                  </div>
-                </div>
-              </div>
-              <div className="p-7">
-                <div className="text-xs font-medium text-[#22D3EE] uppercase tracking-wider mb-3">
-                  {p.category}
-                </div>
-                <h3 className="font-sora text-2xl font-semibold text-white mb-3">
-                  {p.title}
-                </h3>
-                <p className="text-slate-400 leading-relaxed mb-5">{p.desc}</p>
-                <button className="inline-flex items-center gap-2 text-white font-medium group/btn">
-                  Projekt ansehen
-                  <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+              </motion.article>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
 }
 
-function ContactSection() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    company: "",
-    projectType: "",
-    budget: "",
-    message: "",
-  });
-  const [sent, setSent] = useState(false);
+/* ─── Courses Section ──────────────────────────────────────────────── */
+function CoursesSection() {
+  const [activeFilter, setActiveFilter] = useState("Alle");
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(() => {
-      setForm({
-        name: "",
-        email: "",
-        company: "",
-        projectType: "",
-        budget: "",
-        message: "",
-      });
-      setSent(false);
-    }, 4000);
+  const filtered = useMemo(() => {
+    if (activeFilter === "Alle") return courses;
+    if (activeFilter === "Kostenlos")
+      return courses.filter((c) => c.pricing === "Kostenlos");
+    if (activeFilter === "Deutsch")
+      return courses.filter((c) => c.language === "Deutsch");
+    if (activeFilter === "Englisch")
+      return courses.filter((c) => c.language === "Englisch");
+    if (activeFilter === "Anfänger")
+      return courses.filter((c) => c.level === "Anfänger");
+    return courses.filter((c) => c.category === activeFilter);
+  }, [activeFilter]);
+
+  const getLevelColor = (level: string) => {
+    switch (level) {
+      case "Anfänger":
+        return "bg-emerald-500/15 text-emerald-400";
+      case "Fortgeschritten":
+        return "bg-[#2563EB]/15 text-[#22D3EE]";
+      case "Experte":
+        return "bg-[#7C3AED]/15 text-[#A78BFA]";
+      default:
+        return "bg-[#1E293B] text-[#94A3B8]";
+    }
   };
 
   return (
-    <section id="kontakt" className="relative py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111827] to-[#070B14]" />
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[#2563EB]/20 blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full bg-[#7C3AED]/20 blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
+    <section id="kurse" className="py-24 relative bg-[#0a0f1c]">
+      <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#7C3AED]/5 rounded-full blur-[100px]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="font-sora text-4xl md:text-6xl font-bold text-white leading-tight">
-            Bereit, deine Idee{" "}
-            <span className="bg-gradient-to-r from-[#22D3EE] via-[#2563EB] to-[#7C3AED] bg-clip-text text-transparent">
-              digital zu machen?
-            </span>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1E293B]/60 border border-[#22D3EE]/20 mb-4">
+            <GraduationCap className="w-4 h-4 text-[#22D3EE]" />
+            <span className="text-xs text-[#22D3EE] font-medium">Lernen</span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            KI lernen: <span className="gradient-text">Kurse & Workshops</span>
           </h2>
-          <p className="mt-6 text-lg text-slate-300 leading-relaxed">
-            Erzähl uns von deiner Idee. Gemeinsam finden wir heraus, welche
-            digitale Lösung zu deinem Ziel, deinem Budget und deinem
-            Unternehmen passt.
+          <p className="text-[#94A3B8] max-w-2xl mx-auto">
+            Die besten Kurse und Lernressourcen rund um Künstliche Intelligenz – von Anfänger bis Experte.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-10">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2 space-y-6"
-          >
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-6">
-              <Mail className="w-6 h-6 text-[#22D3EE] mb-3" />
-              <div className="text-sm text-slate-400 mb-1">E-Mail</div>
-              <a
-                href="mailto:hallo@centofai.de"
-                className="text-white font-medium hover:text-[#22D3EE] transition"
-              >
-                hallo@centofai.de
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-6">
-              <Phone className="w-6 h-6 text-[#22D3EE] mb-3" />
-              <div className="text-sm text-slate-400 mb-1">Telefon</div>
-              <a
-                href="tel:+491234567890"
-                className="text-white font-medium hover:text-[#22D3EE] transition"
-              >
-                +49 123 456 7890
-              </a>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur p-6">
-              <MapPin className="w-6 h-6 text-[#22D3EE] mb-3" />
-              <div className="text-sm text-slate-400 mb-1">Standort</div>
-              <div className="text-white font-medium">Deutschland</div>
-            </div>
-          </motion.div>
+        {/* Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {courseCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveFilter(cat)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                activeFilter === cat
+                  ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-lg shadow-[#2563EB]/20"
+                  : "bg-[#1E293B]/60 text-[#94A3B8] hover:text-white hover:bg-[#1E293B]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-          <motion.form
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            onSubmit={onSubmit}
-            className="lg:col-span-3 rounded-3xl border border-white/10 bg-[#111827]/80 backdrop-blur-xl p-8 lg:p-10"
-          >
-            <AnimatePresence mode="wait">
-              {sent ? (
-                <motion.div
-                  key="sent"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="py-16 text-center"
-                >
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#22D3EE] to-[#7C3AED] flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-8 h-8 text-white" />
+        {/* Courses Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((course, i) => (
+              <motion.div
+                key={course.name + course.provider}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="group bg-[#0F172A] border border-[#1E293B] rounded-xl p-5 card-hover flex flex-col"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex items-center gap-2">
+                    <BookOpen className="w-5 h-5 text-[#22D3EE]" />
+                    <span className={`px-2 py-0.5 rounded-md text-xs font-medium ${getLevelColor(course.level)}`}>
+                      {course.level}
+                    </span>
                   </div>
-                  <h3 className="font-sora text-2xl font-bold text-white mb-3">
-                    Vielen Dank!
-                  </h3>
-                  <p className="text-slate-300">
-                    Deine Anfrage ist bei uns angekommen. Wir melden uns
-                    innerhalb von 24 Stunden bei dir.
-                  </p>
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="form"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="space-y-5"
-                >
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <Field
-                      label="Name"
-                      value={form.name}
-                      onChange={(v) => setForm({ ...form, name: v })}
-                      required
-                    />
-                    <Field
-                      label="E-Mail"
-                      type="email"
-                      value={form.email}
-                      onChange={(v) => setForm({ ...form, email: v })}
-                      required
-                    />
-                  </div>
-                  <Field
-                    label="Unternehmen (optional)"
-                    value={form.company}
-                    onChange={(v) => setForm({ ...form, company: v })}
-                  />
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <Select
-                      label="Projektart"
-                      value={form.projectType}
-                      onChange={(v) => setForm({ ...form, projectType: v })}
-                      options={[
-                        "Website",
-                        "App",
-                        "Software",
-                        "KI-Lösung",
-                        "Beratung",
-                        "Noch unsicher",
-                      ]}
-                    />
-                    <Select
-                      label="Budget"
-                      value={form.budget}
-                      onChange={(v) => setForm({ ...form, budget: v })}
-                      options={[
-                        "Kleines Startbudget",
-                        "Mittel",
-                        "Größeres Projekt",
-                        "Noch offen",
-                      ]}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm text-slate-300 mb-2">
-                      Nachricht
-                    </label>
-                    <textarea
-                      required
-                      rows={5}
-                      value={form.message}
-                      onChange={(e) =>
-                        setForm({ ...form, message: e.target.value })
-                      }
-                      placeholder="Erzähl uns von deiner Idee..."
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#22D3EE]/50 focus:ring-2 focus:ring-[#22D3EE]/10 transition resize-none"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-semibold shadow-xl shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-[1.02] transition-all"
+                  <span
+                    className={`px-2 py-0.5 rounded-md text-xs font-medium ${
+                      course.pricing === "Kostenlos"
+                        ? "bg-emerald-500/15 text-emerald-400"
+                        : "bg-[#F59E0B]/15 text-[#F59E0B]"
+                    }`}
                   >
-                    Anfrage senden <ArrowRight className="w-4 h-4" />
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.form>
+                    {course.pricing}
+                  </span>
+                </div>
+
+                <h3 className="text-base font-semibold text-white mb-1 group-hover:text-[#22D3EE] transition-colors">
+                  {course.name}
+                </h3>
+                <p className="text-xs text-[#64748B] mb-3">{course.provider}</p>
+                <p className="text-sm text-[#94A3B8] mb-4 flex-grow">{course.description}</p>
+
+                <div className="flex items-center gap-4 text-xs text-[#64748B] mb-4">
+                  <span className="flex items-center gap-1">
+                    <Languages className="w-3.5 h-3.5" />
+                    {course.language}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Tag className="w-3.5 h-3.5" />
+                    {course.category}
+                  </span>
+                </div>
+
+                <a
+                  href={course.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 w-full py-2.5 bg-[#1E293B] border border-[#1E293B] text-white text-sm font-medium rounded-lg hover:border-[#22D3EE]/30 hover:bg-[#1E293B]/80 transition-all"
+                >
+                  Zum Kurs
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>
   );
 }
 
-function Field({ label, type = "text", value, onChange, required }: any) {
+/* ─── Tools Directory ──────────────────────────────────────────────── */
+function ToolsSection() {
+  const [search, setSearch] = useState("");
+  const [activeCategory, setActiveCategory] = useState("Alle");
+
+  const filtered = useMemo(() => {
+    let result = tools;
+    if (activeCategory !== "Alle") {
+      result = result.filter((t) => t.category === activeCategory);
+    }
+    if (search.trim()) {
+      const q = search.toLowerCase();
+      result = result.filter(
+        (t) =>
+          t.name.toLowerCase().includes(q) ||
+          t.description.toLowerCase().includes(q) ||
+          t.category.toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [search, activeCategory]);
+
+  const getPricingColor = (pricing: string) => {
+    switch (pricing) {
+      case "Kostenlos":
+        return "bg-emerald-500/15 text-emerald-400 border-emerald-500/20";
+      case "Freemium":
+        return "bg-[#2563EB]/15 text-[#22D3EE] border-[#2563EB]/20";
+      case "Kostenpflichtig":
+        return "bg-[#F59E0B]/15 text-[#F59E0B] border-[#F59E0B]/20";
+      default:
+        return "bg-[#1E293B] text-[#94A3B8]";
+    }
+  };
+
   return (
-    <div>
-      <label className="block text-sm text-slate-300 mb-2">{label}</label>
-      <input
-        type={type}
-        required={required}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-slate-500 focus:outline-none focus:border-[#22D3EE]/50 focus:ring-2 focus:ring-[#22D3EE]/10 transition"
-      />
-    </div>
-  );
-}
-
-function Select({ label, value, onChange, options }: any) {
-  return (
-    <div>
-      <label className="block text-sm text-slate-300 mb-2">{label}</label>
-      <select
-        required
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-[#22D3EE]/50 focus:ring-2 focus:ring-[#22D3EE]/10 transition appearance-none"
-      >
-        <option value="" className="bg-[#111827]">
-          Bitte wählen
-        </option>
-        {options.map((o) => (
-          <option key={o} value={o} className="bg-[#111827]">
-            {o}
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="relative border-t border-white/10 bg-[#070B14] pt-16 pb-8">
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#2563EB] via-[#7C3AED] to-[#22D3EE] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <span className="font-sora font-bold text-xl text-white">
-                Centofai
-              </span>
-            </div>
-            <p className="text-sm text-slate-400 leading-relaxed">
-              Centofai entwickelt digitale Lösungen für Startups, kleine
-              Unternehmen und Menschen mit Ideen.
-            </p>
-            <div className="mt-5 flex gap-3">
-              {[Linkedin, Instagram, Github].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-9 h-9 rounded-lg border border-white/10 bg-white/[0.03] flex items-center justify-center text-slate-400 hover:text-white hover:border-[#22D3EE]/40 hover:bg-white/10 transition"
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
-            </div>
+    <section id="tools" className="py-24 relative">
+      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[#22D3EE]/5 rounded-full blur-[100px]" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1E293B]/60 border border-[#22D3EE]/20 mb-4">
+            <Wrench className="w-4 h-4 text-[#22D3EE]" />
+            <span className="text-xs text-[#22D3EE] font-medium">Verzeichnis</span>
           </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            KI-Tools <span className="gradient-text">entdecken</span>
+          </h2>
+          <p className="text-[#94A3B8] max-w-2xl mx-auto">
+            Das umfangreichste Verzeichnis aktueller KI-Tools – durchsuchbar, filterbar und immer aktuell.
+          </p>
+        </motion.div>
 
-          <div>
-            <div className="font-sora font-semibold text-white mb-4">
-              Navigation
-            </div>
-            <ul className="space-y-2">
-              {navLinks.slice(0, 4).map((l) => (
-                <li key={l.name}>
-                  <a
-                    href={l.href}
-                    className="text-sm text-slate-400 hover:text-white transition"
-                  >
-                    {l.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <div className="font-sora font-semibold text-white mb-4">
-              Leistungen
-            </div>
-            <ul className="space-y-2">
-              {[
-                "Website-Entwicklung",
-                "App-Entwicklung",
-                "Software",
-                "KI-Lösungen",
-                "Digitale Beratung",
-              ].map((l) => (
-                <li key={l}>
-                  <a
-                    href="#leistungen"
-                    className="text-sm text-slate-400 hover:text-white transition"
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <div className="font-sora font-semibold text-white mb-4">
-              Rechtliches
-            </div>
-            <ul className="space-y-2">
-              {["Impressum", "Datenschutz", "AGB"].map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
-                    className="text-sm text-slate-400 hover:text-white transition"
-                  >
-                    {l}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {/* Search */}
+        <div className="max-w-xl mx-auto mb-8">
+          <div className="relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#64748B]" />
+            <input
+              type="text"
+              placeholder="Suche nach KI-Tools, Kategorien oder Anwendungsfällen..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-12 pr-4 py-3.5 bg-[#0F172A] border border-[#1E293B] rounded-xl text-white placeholder-[#64748B] focus:outline-none focus:border-[#22D3EE]/50 focus:ring-1 focus:ring-[#22D3EE]/20 transition-all"
+            />
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="text-sm text-slate-500">
-            © {new Date().getFullYear()} Centofai. Alle Rechte vorbehalten.
+        {/* Category Filters */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10 max-h-48 overflow-y-auto scrollbar-thin">
+          <button
+            onClick={() => setActiveCategory("Alle")}
+            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+              activeCategory === "Alle"
+                ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white"
+                : "bg-[#1E293B]/60 text-[#94A3B8] hover:text-white hover:bg-[#1E293B]"
+            }`}
+          >
+            Alle
+          </button>
+          {toolCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
+                activeCategory === cat
+                  ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white"
+                  : "bg-[#1E293B]/60 text-[#94A3B8] hover:text-white hover:bg-[#1E293B]"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
+        {/* Tools Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((tool, i) => (
+              <motion.div
+                key={tool.name}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ delay: (i % 12) * 0.03 }}
+                className="group bg-[#0F172A] border border-[#1E293B] rounded-xl p-4 card-hover"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-sm font-semibold text-white group-hover:text-[#22D3EE] transition-colors">
+                    {tool.name}
+                  </h3>
+                  <span
+                    className={`px-2 py-0.5 rounded text-xs font-medium border ${getPricingColor(
+                      tool.pricing
+                    )}`}
+                  >
+                    {tool.pricing}
+                  </span>
+                </div>
+                <p className="text-xs text-[#64748B] mb-1">{tool.category}</p>
+                <p className="text-sm text-[#94A3B8] mb-3 line-clamp-2">{tool.description}</p>
+                <div className="flex items-center justify-between pt-2 border-t border-[#1E293B]">
+                  <span className="text-xs text-[#64748B]">{tool.audience}</span>
+                  <a
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs text-[#22D3EE] hover:text-white transition-colors"
+                  >
+                    Tool öffnen
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {filtered.length === 0 && (
+          <div className="text-center py-12">
+            <Search className="w-10 h-10 text-[#64748B] mx-auto mb-3" />
+            <p className="text-[#94A3B8]">Keine Tools gefunden. Versuche einen anderen Suchbegriff.</p>
           </div>
-          <div className="text-sm text-slate-500">Wir machen Ideen digital.</div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ─── Newsletter ───────────────────────────────────────────────────── */
+function NewsletterSection() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setSubmitted(true);
+      setEmail("");
+    }
+  };
+
+  return (
+    <section id="newsletter" className="py-24 relative bg-[#0a0f1c]">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#2563EB]/8 rounded-full blur-[150px]" />
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] mb-6 shadow-lg shadow-[#2563EB]/20">
+            <Mail className="w-7 h-7 text-white" />
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4">
+            Bleib auf dem <span className="gradient-text">Laufenden</span>
+          </h2>
+          <p className="text-[#94A3B8] mb-8 max-w-lg mx-auto">
+            Erhalte die wichtigsten KI-News, neue Tools und spannende Lernangebote direkt in dein Postfach.
+          </p>
+
+          {submitted ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="inline-flex items-center gap-3 px-6 py-4 bg-emerald-500/15 border border-emerald-500/30 rounded-xl"
+            >
+              <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+              <span className="text-emerald-400 font-medium">Danke! Du erhältst bald die ersten Updates.</span>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                required
+                placeholder="Deine E-Mail-Adresse"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 px-4 py-3.5 bg-[#0F172A] border border-[#1E293B] rounded-xl text-white placeholder-[#64748B] focus:outline-none focus:border-[#22D3EE]/50 focus:ring-1 focus:ring-[#22D3EE]/20 transition-all"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/25 whitespace-nowrap"
+              >
+                Abonnieren
+              </button>
+            </form>
+          )}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── About ────────────────────────────────────────────────────────── */
+function AboutSection() {
+  return (
+    <section id="about" className="py-24 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1E293B]/60 border border-[#22D3EE]/20 mb-4">
+            <Sparkles className="w-4 h-4 text-[#22D3EE]" />
+            <span className="text-xs text-[#22D3EE] font-medium">Mission</span>
+          </div>
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-6">
+            Über <span className="gradient-text">Cent of AI</span>
+          </h2>
+          <p className="text-lg text-[#94A3B8] leading-relaxed max-w-2xl mx-auto">
+            Cent of AI ist eine Plattform, die Menschen hilft, Künstliche Intelligenz besser zu verstehen,
+            passende Tools zu finden und KI sinnvoll im Alltag, Beruf und Business einzusetzen.
+            Wir kuratieren die besten Ressourcen, damit du den Überblick behältst.
+          </p>
+
+          <div className="grid sm:grid-cols-3 gap-6 mt-12">
+            {[
+              { icon: Newspaper, label: "Tägliche KI-News", value: "Aktuell & kuratiert" },
+              { icon: Wrench, label: "Tool-Verzeichnis", value: "100+ KI-Tools" },
+              { icon: GraduationCap, label: "Lernangebote", value: "Kurse & Workshops" },
+            ].map((stat) => (
+              <div
+                key={stat.label}
+                className="p-5 bg-[#0F172A] border border-[#1E293B] rounded-xl"
+              >
+                <stat.icon className="w-6 h-6 text-[#22D3EE] mx-auto mb-3" />
+                <p className="text-white font-semibold mb-1">{stat.label}</p>
+                <p className="text-sm text-[#64748B]">{stat.value}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Footer ───────────────────────────────────────────────────────── */
+function Footer() {
+  const footerLinks = [
+    { label: "KI-News", href: "#news" },
+    { label: "KI-Tools", href: "#tools" },
+    { label: "Kurse & Workshops", href: "#kurse" },
+    { label: "Über uns", href: "#about" },
+    { label: "Newsletter", href: "#newsletter" },
+  ];
+
+  return (
+    <footer className="border-t border-[#1E293B] bg-[#070B14]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid md:grid-cols-4 gap-8 mb-10">
+          <div className="md:col-span-2">
+            <a href="#" className="flex items-center gap-2.5 mb-4">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center">
+                <Brain className="w-4 h-4 text-white" />
+              </div>
+              <span className="font-display font-bold text-white">
+                Cent of <span className="text-[#22D3EE]">AI</span>
+              </span>
+            </a>
+            <p className="text-sm text-[#64748B] max-w-sm">
+              Die zentrale Plattform für Künstliche Intelligenz. News, Tools, Kurse und Workshops – alles an einem Ort.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-4">Navigation</h4>
+            <ul className="space-y-2.5">
+              {footerLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="text-sm text-[#94A3B8] hover:text-[#22D3EE] transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-white mb-4">Rechtliches</h4>
+            <ul className="space-y-2.5">
+              <li>
+                <a href="#" className="text-sm text-[#94A3B8] hover:text-[#22D3EE] transition-colors">
+                  Impressum
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-[#94A3B8] hover:text-[#22D3EE] transition-colors">
+                  Datenschutz
+                </a>
+              </li>
+              <li>
+                <a href="#" className="text-sm text-[#94A3B8] hover:text-[#22D3EE] transition-colors">
+                  Kontakt
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="pt-8 border-t border-[#1E293B] flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-[#64748B]">
+            © {new Date().getFullYear()} Cent of AI. Alle Rechte vorbehalten.
+          </p>
+          <p className="text-xs text-[#64748B]">
+            Alle Links zu externen Tools und Kursen sind Affiliate-freie Empfehlungen.
+          </p>
         </div>
       </div>
     </footer>
   );
 }
 
+/* ─── Main App ─────────────────────────────────────────────────────── */
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#070B14] text-[#F8FAFC] font-inter antialiased selection:bg-[#2563EB]/40">
+    <div className="min-h-screen bg-[#070B14]">
       <Navbar />
-      <main>
-        <Hero />
-        <AudienceSection />
-        <ServicesSection />
-        <FounderSection />
-        <AISection />
-        <WhyCentofai />
-        <ProcessSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
+      <Hero />
+      <NewsSection />
+      <CoursesSection />
+      <ToolsSection />
+      <NewsletterSection />
+      <AboutSection />
       <Footer />
     </div>
   );
