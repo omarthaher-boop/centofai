@@ -12,7 +12,7 @@ import { courses, courseCategories } from "./data/courses";
 
 /* ─── Theme Hook ───────────────────────────────────────────────────────── */
 function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
