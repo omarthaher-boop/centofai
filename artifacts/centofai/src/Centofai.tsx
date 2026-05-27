@@ -185,67 +185,183 @@ function Hero() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:block">
-            <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
-              <div className="flex items-center gap-2 mb-5">
-                <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                {/* Top Card: Kurse & Workshops */}
-                <div className="p-4 bg-card border border-theme rounded-xl">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB]/15 to-[#7C3AED]/15 flex items-center justify-center shrink-0">
-                      <GraduationCap className="w-5 h-5 text-[#7C3AED]" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-heading">Top Kurse & Workshops</p>
-                      <p className="text-xs text-caption mt-0.5">Praxisnahe KI-, Automatisierungs- und Digital-Kurse</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
-                      <BookOpen className="w-3 h-3" /> 15+ Kurse
-                    </span>
-                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
-                      <Users className="w-3 h-3" /> Live Workshops
-                    </span>
-                  </div>
-                  <a href="#kurse" className="flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity">
-                    Jetzt Kurse entdecken <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-
-                {/* Bottom Card: Projekt vorschlagen */}
-                <div className="p-4 bg-card border border-theme rounded-xl">
-                  <div className="flex items-start gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#22D3EE]/15 to-[#2563EB]/15 flex items-center justify-center shrink-0">
-                      <Lightbulb className="w-5 h-5 text-[#22D3EE]" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-heading">Projekt vorschlagen</p>
-                      <p className="text-xs text-caption mt-0.5">Deine Idee in digitaler Form</p>
-                    </div>
-                  </div>
-                  <textarea
-                    readOnly
-                    placeholder="Beschreibe deine Idee – wir entwickeln sie als Website oder Mobile App."
-                    className="w-full px-3 py-2.5 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg resize-none placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
-                    rows={2}
-                  />
-                  <button className="mt-3 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors">
-                    <Send className="w-4 h-4" /> Idee senden
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ProposalWidget />
           </motion.div>
         </div>
       </div>
     </section>
+  );
+}
+
+/* ─── Proposal Widget (functional form) ──────────────────────────────────── */
+function ProposalWidget() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    idea: "",
+    budget: "",
+    timeline: "",
+  });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (field: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) {
+      setStatus("error");
+      setErrorMsg("Bitte fülle Name, E-Mail und Idee aus.");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/proposals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Fehler beim Senden");
+      }
+
+      setStatus("success");
+      setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" });
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg((err as Error).message || "Fehler beim Senden. Bitte versuche es erneut.");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
+        <div className="flex items-center gap-2 mb-5">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-red-500/80" />
+            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+            <div className="w-3 h-3 rounded-full bg-green-500/80" />
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center py-12 text-center">
+          <div className="w-14 h-14 rounded-full bg-emerald-500/15 flex items-center justify-center mb-4">
+            <CheckCircle2 className="w-7 h-7 text-emerald-500" />
+          </div>
+          <p className="text-lg font-semibold text-heading mb-2">Vielen Dank!</p>
+          <p className="text-sm text-caption">Deine Idee wurde erfolgreich übermittelt. Wir melden uns bei dir.</p>
+          <button
+            onClick={() => setStatus("idle")}
+            className="mt-6 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors"
+          >
+            Weitere Idee senden
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
+      <div className="flex items-center gap-2 mb-5">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-red-500/80" />
+          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        {/* Top Card: Kurse & Workshops */}
+        <div className="p-4 bg-card border border-theme rounded-xl">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB]/15 to-[#7C3AED]/15 flex items-center justify-center shrink-0">
+              <GraduationCap className="w-5 h-5 text-[#7C3AED]" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-heading">Top Kurse & Workshops</p>
+              <p className="text-xs text-caption mt-0.5">Praxisnahe KI-, Automatisierungs- und Digital-Kurse</p>
+            </div>
+          </div>
+          <div className="flex flex-wrap gap-2 mb-3">
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
+              <BookOpen className="w-3 h-3" /> 15+ Kurse
+            </span>
+            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
+              <Users className="w-3 h-3" /> Live Workshops
+            </span>
+          </div>
+          <a href="#kurse" className="flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity">
+            Jetzt Kurse entdecken <ArrowRight className="w-4 h-4" />
+          </a>
+        </div>
+
+        {/* Bottom Card: Projekt vorschlagen */}
+        <div className="p-4 bg-card border border-theme rounded-xl">
+          <div className="flex items-start gap-3 mb-3">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#22D3EE]/15 to-[#2563EB]/15 flex items-center justify-center shrink-0">
+              <Lightbulb className="w-5 h-5 text-[#22D3EE]" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-heading">Projekt vorschlagen</p>
+              <p className="text-xs text-caption mt-0.5">Deine Idee in digitaler Form</p>
+            </div>
+          </div>
+
+          {status === "error" && (
+            <div className="mb-3 p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-600">
+              {errorMsg}
+            </div>
+          )}
+
+          <div className="space-y-2 mb-3">
+            <input
+              type="text"
+              placeholder="Dein Name"
+              value={formData.name}
+              onChange={(e) => handleChange("name", e.target.value)}
+              className="w-full px-3 py-2 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
+            />
+            <input
+              type="email"
+              placeholder="Deine E-Mail"
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className="w-full px-3 py-2 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
+            />
+            <textarea
+              placeholder="Beschreibe deine Idee – wir entwickeln sie als Website oder Mobile App."
+              value={formData.idea}
+              onChange={(e) => handleChange("idea", e.target.value)}
+              className="w-full px-3 py-2.5 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg resize-none placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
+              rows={2}
+            />
+          </div>
+
+          <button
+            onClick={handleSubmit}
+            disabled={status === "sending"}
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors disabled:opacity-50"
+          >
+            {status === "sending" ? (
+              <>
+                <span className="w-4 h-4 border-2 border-[#22D3EE]/30 border-t-[#22D3EE] rounded-full animate-spin" />
+                Wird gesendet...
+              </>
+            ) : (
+              <>
+                <Send className="w-4 h-4" /> Idee senden
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
