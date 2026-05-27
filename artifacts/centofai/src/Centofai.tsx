@@ -12,7 +12,10 @@ import { courses, courseCategories } from "./data/courses";
 
 /* ─── Theme Hook ───────────────────────────────────────────────────────── */
 function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">("light");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("centofai-theme") : null;
+    return (saved as "dark" | "light" | null) ?? "dark";
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -184,8 +187,10 @@ function Hero() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:block">
-            <ProposalWidget />
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:block perspective-1000">
+            <div className="dashboard-3d preserve-3d">
+              <ProposalWidget />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -278,7 +283,7 @@ function ProposalWidget() {
 
       <div className="space-y-4">
         {/* Top Card: Kurse & Workshops */}
-        <div className="p-4 bg-card border border-theme rounded-xl">
+        <div className="p-4 bg-card border border-theme rounded-xl card-3d">
           <div className="flex items-start gap-3 mb-3">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB]/15 to-[#7C3AED]/15 flex items-center justify-center shrink-0">
               <GraduationCap className="w-5 h-5 text-[#7C3AED]" />
@@ -302,7 +307,7 @@ function ProposalWidget() {
         </div>
 
         {/* Bottom Card: Projekt vorschlagen */}
-        <div className="p-4 bg-card border border-theme rounded-xl">
+        <div className="p-4 bg-card border border-theme rounded-xl card-3d">
           <div className="flex items-start gap-3 mb-3">
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#22D3EE]/15 to-[#2563EB]/15 flex items-center justify-center shrink-0">
               <Lightbulb className="w-5 h-5 text-[#22D3EE]" />
@@ -557,6 +562,14 @@ function ToolsSection() {
     }
   };
 
+  const getContrastColor = (hex: string) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    const yiq = (r * 299 + g * 587 + b * 114) / 1000;
+    return yiq >= 160 ? "#0F172A" : "#FFFFFF";
+  };
+
   return (
     <section id="tools" className="py-24 relative">
       <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[#22D3EE]/5 rounded-full blur-[100px]" />
@@ -617,7 +630,18 @@ function ToolsSection() {
                 className="group bg-card-theme border border-theme rounded-xl p-4 card-hover"
               >
                 <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-sm font-semibold text-heading group-hover:text-[#22D3EE] transition-colors">{tool.name}</h3>
+                  <div className="flex items-center gap-2.5">
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
+                      style={{
+                        backgroundColor: tool.color,
+                        color: getContrastColor(tool.color),
+                      }}
+                    >
+                      {tool.name.charAt(0)}
+                    </div>
+                    <h3 className="text-sm font-semibold text-heading group-hover:text-[#22D3EE] transition-colors">{tool.name}</h3>
+                  </div>
                   <span className={`px-2 py-0.5 rounded text-xs font-medium border ${getPricingColor(tool.pricing)}`}>{tool.pricing}</span>
                 </div>
                 <p className="text-xs text-label mb-1">{tool.category}</p>
