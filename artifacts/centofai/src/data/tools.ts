@@ -9,6 +9,21 @@ export interface Tool {
   logoUrl?: string;
 }
 
+function slugify(value: string): string {
+  return (
+    value
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "") || "x"
+  );
+}
+
+function toolKey(tool: { name: string; category: string }): string {
+  return `${tool.name}|||${tool.category}`;
+}
+
 export const toolCategories = [
   "Text & Schreiben",
   "Bildgenerierung & Design",
@@ -170,3 +185,45 @@ export const tools: Tool[] = [
   { name: "Inworld AI", category: "Gaming & Unterhaltung", description: "KI-gest\u00fctzte NPCs und Charaktere f\u00fcr Spiele", pricing: "Kostenpflichtig", audience: "Game-Developer", url: "https://inworld.ai", color: "#F59E0B", logoUrl: "tool-logos/inworld-ai.png" },
   { name: "Scenario", category: "Gaming & Unterhaltung", description: "KI-Plattform f\u00fcr Game-Assets und Charaktere", pricing: "Freemium", audience: "Game-Developer", url: "https://scenario.com", color: "#EF4444", logoUrl: "tool-logos/scenario-com.png" },
 ];
+
+const slugByKey = new Map<string, string>();
+const toolBySlug = new Map<string, Tool>();
+{
+  const nameCounts = new Map<string, number>();
+  for (const t of tools) {
+    nameCounts.set(t.name, (nameCounts.get(t.name) ?? 0) + 1);
+  }
+  for (const t of tools) {
+    const base = slugify(t.name);
+    let slug =
+      (nameCounts.get(t.name) ?? 0) > 1
+        ? `${base}-${slugify(t.category)}`
+        : base;
+    // Final safety against any leftover collisions
+    if (toolBySlug.has(slug)) {
+      let i = 2;
+      while (toolBySlug.has(`${slug}-${i}`)) i++;
+      slug = `${slug}-${i}`;
+    }
+    slugByKey.set(toolKey(t), slug);
+    toolBySlug.set(slug, t);
+  }
+}
+
+export function toolSlug(tool: { name: string; category: string }): string {
+  return slugByKey.get(toolKey(tool)) ?? slugify(tool.name);
+}
+
+export function findToolBySlug(slug: string): Tool | undefined {
+  return toolBySlug.get(decodeURIComponent(slug).toLowerCase());
+}
+
+export function relatedTools(tool: Tool, limit = 4): Tool[] {
+  return tools
+    .filter(
+      (t) =>
+        t.category === tool.category &&
+        !(t.name === tool.name && t.category === tool.category),
+    )
+    .slice(0, limit);
+}

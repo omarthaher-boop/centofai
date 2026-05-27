@@ -6,7 +6,8 @@ import {
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Sun, Moon, Users, Lightbulb, Send, ChevronDown,
 } from "lucide-react";
-import { tools, toolCategories } from "./data/tools";
+import { Link } from "wouter";
+import { tools, toolCategories, toolSlug } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
 import { courses, courseCategories } from "./data/courses";
 
@@ -394,14 +395,47 @@ function NewsSection() {
 }
 
 /* ─── Tools Section ───────────────────────────────────────────────── */
+function readToolFilterFromUrl(): { search: string; category: string } {
+  if (typeof window === "undefined") return { search: "", category: "Alle" };
+  const sp = new URLSearchParams(window.location.search);
+  let search = sp.get("search") ?? "";
+  const category = sp.get("category") ?? "Alle";
+  if (!sp.has("search")) {
+    const hashMatch = window.location.hash.match(/[?&]search=([^&]*)/);
+    if (hashMatch) search = decodeURIComponent(hashMatch[1]);
+  }
+  return { search, category };
+}
+
 function ToolsSection() {
-  const [search, setSearch] = useState(() => {
-    if (typeof window === "undefined") return "";
-    const hash = window.location.hash;
-    const match = hash.match(/[?&]search=([^&]*)/);
-    return match ? decodeURIComponent(match[1]) : "";
-  });
-  const [activeCategory, setActiveCategory] = useState("Alle");
+  const initial = readToolFilterFromUrl();
+  const [search, setSearch] = useState(initial.search);
+  const [activeCategory, setActiveCategory] = useState(initial.category);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const sp = new URLSearchParams(window.location.search);
+    if (search.trim()) sp.set("search", search);
+    else sp.delete("search");
+    if (activeCategory && activeCategory !== "Alle")
+      sp.set("category", activeCategory);
+    else sp.delete("category");
+    const qs = sp.toString();
+    const newUrl =
+      window.location.pathname +
+      (qs ? `?${qs}` : "") +
+      window.location.hash;
+    window.history.replaceState(null, "", newUrl);
+  }, [search, activeCategory]);
+
+  const detailQuery = useMemo(() => {
+    const sp = new URLSearchParams();
+    if (search.trim()) sp.set("search", search);
+    if (activeCategory && activeCategory !== "Alle")
+      sp.set("category", activeCategory);
+    const qs = sp.toString();
+    return qs ? `?${qs}` : "";
+  }, [search, activeCategory]);
 
   const [expanded, setExpanded] = useState(false);
 
@@ -482,7 +516,7 @@ function ToolsSection() {
         <AnimatePresence mode="popLayout">
           {filtered.map((tool, i) => (
             <motion.div
-              key={tool.name}
+              key={`${tool.name}|${tool.category}`}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
@@ -501,9 +535,24 @@ function ToolsSection() {
               </div>
               <div className="text-xs text-[var(--text-label)] font-medium pt-2 border-t border-[var(--border-color)] flex items-center justify-between">
                 <span>{tool.category}</span>
-                <a href={tool.url} target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1">
-                  Öffnen <ArrowUpRight className="w-3 h-3" />
-                </a>
+                <div className="flex items-center gap-3">
+                  <a
+                    href={tool.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[var(--text-label)] hover:text-purple-300 transition inline-flex items-center gap-1"
+                    aria-label={`${tool.name} Website öffnen`}
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                  <Link
+                    href={`/tools/${toolSlug(tool)}${detailQuery}`}
+                    className="text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1"
+                  >
+                    Details <ArrowUpRight className="w-3 h-3" />
+                  </Link>
+                </div>
               </div>
             </motion.div>
           ))}
