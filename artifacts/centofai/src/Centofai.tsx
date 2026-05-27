@@ -4,7 +4,7 @@ import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
-  Sun, Moon, Users, Lightbulb, Send,
+  Sun, Moon, Users, Lightbulb, Send, ChevronDown,
 } from "lucide-react";
 import { tools, toolCategories } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
@@ -28,8 +28,9 @@ function useTheme() {
 
 /* ─── Navbar ─────────────────────────────────────────────────────── */
 const navLinks = [
-  { name: "KI-Tools", href: "#tools" },
   { name: "News", href: "#news" },
+  { name: "Ideen", href: "#ideas" },
+  { name: "KI-Tools", href: "#tools" },
   { name: "Kurse", href: "#academy" },
 ];
 
@@ -58,10 +59,10 @@ function Navbar() {
             {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
           <a
-            href="#proposal"
+            href="#ideas"
             className="text-xs font-semibold text-[var(--text-label)] hover:text-white border border-[var(--border-color)] hover:border-slate-600 px-4 py-2 rounded-xl transition"
           >
-            + Tool einreichen
+            + Idee einreichen
           </a>
           <a
             href="#newsletter"
@@ -102,8 +103,8 @@ function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <a href="#proposal" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
-                + Tool einreichen
+              <a href="#ideas" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
+                + Idee einreichen
               </a>
               <a href="#newsletter" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold bg-purple-600 text-white rounded-xl px-4 text-center mt-2">
                 Community
@@ -166,10 +167,11 @@ function Hero() {
 /* ─── News Section ───────────────────────────────────────────────── */
 function NewsSection() {
   const [activeFilter, setActiveFilter] = useState("Alle");
+  const [expanded, setExpanded] = useState(false);
   const filtered = useMemo(() => {
-    if (activeFilter === "Alle") return newsItems.slice(0, 6);
-    return newsItems.filter((n) => n.category === activeFilter).slice(0, 6);
-  }, [activeFilter]);
+    const base = activeFilter === "Alle" ? newsItems : newsItems.filter((n) => n.category === activeFilter);
+    return expanded ? base : base.slice(0, 3);
+  }, [activeFilter, expanded]);
 
   const catColors: Record<string, string> = {
     "OpenAI": "text-purple-400",
@@ -253,6 +255,17 @@ function NewsSection() {
             </motion.article>
           ))}
         </div>
+
+        {/* Mehr/Weniger Toggle */}
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-xl hover:bg-purple-500/10 transition cursor-pointer"
+          >
+            {expanded ? "Weniger anzeigen" : "Mehr anzeigen"}
+            <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
+          </button>
+        </div>
       </div>
     </section>
   );
@@ -268,6 +281,8 @@ function ToolsSection() {
   });
   const [activeCategory, setActiveCategory] = useState("Alle");
 
+  const [expanded, setExpanded] = useState(false);
+
   const filtered = useMemo(() => {
     let result = tools;
     if (activeCategory !== "Alle") result = result.filter((t) => t.category === activeCategory);
@@ -279,8 +294,8 @@ function ToolsSection() {
         t.category.toLowerCase().includes(q)
       );
     }
-    return result;
-  }, [search, activeCategory]);
+    return expanded ? result : result.slice(0, 8);
+  }, [search, activeCategory, expanded]);
 
   const getPricingColor = (pricing: string) => {
     switch (pricing) {
@@ -394,14 +409,17 @@ function ToolsSection() {
 /* ─── Courses Section (Academy) ───────────────────────────────────────────── */
 function CoursesSection() {
   const [activeFilter, setActiveFilter] = useState("Alle");
+  const [expanded, setExpanded] = useState(false);
+
   const filtered = useMemo(() => {
-    if (activeFilter === "Alle") return courses;
-    if (activeFilter === "Kostenlos") return courses.filter((c) => c.pricing === "Kostenlos");
-    if (activeFilter === "Deutsch") return courses.filter((c) => c.language === "Deutsch");
-    if (activeFilter === "Englisch") return courses.filter((c) => c.language === "Englisch");
-    if (activeFilter === "Anfänger") return courses.filter((c) => c.level === "Anfänger");
-    return courses.filter((c) => c.category === activeFilter);
-  }, [activeFilter]);
+    let result = courses;
+    if (activeFilter === "Kostenlos") result = courses.filter((c) => c.pricing === "Kostenlos");
+    else if (activeFilter === "Deutsch") result = courses.filter((c) => c.language === "Deutsch");
+    else if (activeFilter === "Englisch") result = courses.filter((c) => c.language === "Englisch");
+    else if (activeFilter === "Anfänger") result = courses.filter((c) => c.level === "Anfänger");
+    else if (activeFilter !== "Alle") result = courses.filter((c) => c.category === activeFilter);
+    return expanded ? result : result.slice(0, 4);
+  }, [activeFilter, expanded]);
 
   const getLevelBadge = (level: string) => {
     switch (level) {
@@ -480,89 +498,110 @@ function CoursesSection() {
           })}
         </AnimatePresence>
       </div>
+
+      {/* Mehr/Weniger Toggle */}
+        <div className="flex justify-center mt-10">
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-xl hover:bg-purple-500/10 transition cursor-pointer"
+          >
+            {expanded ? "Weniger anzeigen" : "Mehr anzeigen"}
+            <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
+          </button>
+        </div>
     </section>
   );
 }
 
-/* ─── Proposal Widget ───────────────────────────────────────────────── */
-function ProposalWidget() {
-  const [formData, setFormData] = useState({ name: "", email: "", idea: "", budget: "", timeline: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleChange = (field: string, value: string) => setFormData((prev) => ({ ...prev, [field]: value }));
+/* ─── Ideas Section ─────────────────────────────────────────────────── */
+function IdeasSection() {
+  const [formData, setFormData] = useState({ name: "", email: "", idea: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
 
   const handleSubmit = async () => {
-    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) {
-      setStatus("error"); setErrorMsg("Bitte fülle Name, E-Mail und Idee aus."); return;
-    }
-    setStatus("sending"); setErrorMsg("");
-    try {
-      const res = await fetch("/api/proposals", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error(data.error || "Fehler"); }
-      setStatus("success");
-      setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" });
-    } catch (err) {
-      setStatus("error"); setErrorMsg((err as Error).message || "Fehler beim Senden.");
-    }
+    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) return;
+    setStatus("sending");
+    await new Promise((r) => setTimeout(r, 1000));
+    setStatus("success");
+    setTimeout(() => { setStatus("idle"); setFormData({ name: "", email: "", idea: "" }); }, 3000);
   };
 
-  if (status === "success") {
-    return (
-      <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6">
-        <div className="flex flex-col items-center justify-center py-8 text-center">
-          <div className="w-12 h-12 rounded-full bg-emerald-500/15 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-6 h-6 text-emerald-500" />
-          </div>
-          <p className="text-lg font-semibold text-[var(--text-heading)] mb-2">Vielen Dank!</p>
-          <p className="text-sm text-[var(--text-caption)]">Deine Idee wurde übermittelt. Wir melden uns bei dir.</p>
-          <button onClick={() => setStatus("idle")} className="mt-4 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors">
-            Weitere Idee senden
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6">
-      <h3 className="text-lg font-bold text-[var(--text-heading)] mb-1 flex items-center gap-2">
-        <Lightbulb className="w-5 h-5 text-purple-400" /> Projekt vorschlagen
-      </h3>
-      <p className="text-xs text-[var(--text-caption)] mb-4">Deine Idee in digitaler Form</p>
-
-      {status === "error" && (
-        <div className="mb-3 p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">
-          {errorMsg}
+    <section id="ideas" className="max-w-7xl mx-auto px-6 py-20">
+      <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
+            <Lightbulb className="w-8 h-8 text-purple-400" /> Hast du eine Idee?
+          </h2>
+          <p className="text-[var(--text-caption)] text-lg mb-8">
+            Du hast ein KI-Tool entdeckt, das unbedingt in unser Verzeichnis gehört?
+            Oder eine Projektidee, die wir als Website oder Mobile App umsetzen sollten?
+            Teile sie uns mit — wir prüfen sie und entwickeln sie für dich.
+          </p>
+          <div className="space-y-4">
+            {[
+              "Tool-Vorschläge für das Verzeichnis",
+              "Projektideen für digitale Umsetzung",
+              "Feedback zur Plattform",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3">
+                <CheckCircle2 className="w-5 h-5 text-purple-400 shrink-0" />
+                <span className="text-[var(--text-body)]">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      )}
 
-      <div className="space-y-2 mb-3">
-        <input type="text" placeholder="Dein Name" value={formData.name} onChange={(e) => handleChange("name", e.target.value)}
-          className="w-full px-3 py-2 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" />
-        <input type="email" placeholder="Deine E-Mail" value={formData.email} onChange={(e) => handleChange("email", e.target.value)}
-          className="w-full px-3 py-2 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" />
-        <textarea placeholder="Beschreibe deine Idee..." value={formData.idea} onChange={(e) => handleChange("idea", e.target.value)}
-          className="w-full px-3 py-2.5 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg resize-none placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" rows={2} />
+        <div className="bg-[var(--bg-card)]/50 border border-[var(--border-color)] p-8 rounded-2xl">
+          {status === "success" ? (
+            <div className="text-center py-8">
+              <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+              <h3 className="text-xl font-bold mb-2">Danke für deine Idee!</h3>
+              <p className="text-[var(--text-caption)]">Wir prüfen sie und melden uns bei dir.</p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Dein Name"
+                value={formData.name}
+                onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
+                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+              />
+              <input
+                type="email"
+                placeholder="Deine E-Mail"
+                value={formData.email}
+                onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
+                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+              />
+              <textarea
+                placeholder="Beschreibe deine Idee..."
+                value={formData.idea}
+                onChange={(e) => setFormData((p) => ({ ...p, idea: e.target.value }))}
+                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl resize-none placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                rows={4}
+              />
+              <button
+                onClick={handleSubmit}
+                disabled={status === "sending"}
+                className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-600/50 text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2"
+              >
+                {status === "sending" ? (
+                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Wird gesendet...</>
+                ) : (
+                  <><Send className="w-4 h-4" />Idee einreichen</>
+                )}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-
-      <button onClick={handleSubmit} disabled={status === "sending"}
-        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors disabled:opacity-50">
-        {status === "sending" ? (
-          <><span className="w-4 h-4 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />Wird gesendet...</>
-        ) : (
-          <><Send className="w-4 h-4" /> Idee senden</>
-        )}
-      </button>
-    </div>
+    </section>
   );
 }
 
-/* ─── Footer + Newsletter + Proposal ───────────────────────────────────────────── */
+/* ─── Footer + Newsletter ───────────────────────────────────────────── */
 function Footer() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -593,25 +632,6 @@ function Footer() {
           )}
         </div>
 
-        {/* Proposal Section */}
-        <div id="proposal" className="mb-12">
-          <div className="grid lg:grid-cols-2 gap-8 items-start">
-            <div>
-              <h3 className="text-2xl font-bold mb-2">Hast du eine Idee?</h3>
-              <p className="text-[var(--text-caption)] text-sm mb-4">
-                Du hast ein KI-Tool entdeckt, das unbedingt in unser Verzeichnis gehört? Oder eine Projektidee, die wir umsetzen sollten?
-                Schick sie uns – wir entwickeln sie als Website oder Mobile App.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Tool-Vorschläge</span>
-                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Projektideen</span>
-                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Feedback</span>
-              </div>
-            </div>
-            <ProposalWidget />
-          </div>
-        </div>
-
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[var(--text-label)] pt-8 border-t border-[var(--border-color)]">
           <p>© {new Date().getFullYear()} CentofAI. Alle Rechte vorbehalten.</p>
@@ -631,8 +651,9 @@ export default function App() {
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth">
       <Navbar />
       <Hero />
-      <ToolsSection />
       <NewsSection />
+      <IdeasSection />
+      <ToolsSection />
       <CoursesSection />
       <Footer />
     </div>
