@@ -569,10 +569,10 @@ function AboutSection() {
             <span className="text-xs text-[#22D3EE] font-medium">Mission</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-6">
-            Über <span className="gradient-text">Cent of AI</span>
+            Über <span className="gradient-text">CentofAi</span>
           </h2>
           <p className="text-lg text-caption leading-relaxed max-w-2xl mx-auto">
-            Cent of AI ist eine Plattform, die Menschen hilft, Künstliche Intelligenz besser zu verstehen,
+            CentofAi ist eine Plattform, die Menschen hilft, Künstliche Intelligenz besser zu verstehen,
             passende Tools zu finden und KI sinnvoll im Alltag, Beruf und Business einzusetzen.
             Wir kuratieren die besten Ressourcen, damit du den Überblick behältst.
           </p>
@@ -639,7 +639,7 @@ function Footer() {
           </div>
         </div>
         <div className="pt-8 border-t border-theme flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-label">© {new Date().getFullYear()} Cent of AI. Alle Rechte vorbehalten.</p>
+          <p className="text-xs text-label">© {new Date().getFullYear()} CentofAi. Alle Rechte vorbehalten.</p>
           <p className="text-xs text-label">Alle Links zu externen Tools und Kursen sind Affiliate-freie Empfehlungen.</p>
         </div>
       </div>
