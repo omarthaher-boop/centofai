@@ -20,10 +20,20 @@ function getFaviconUrl(url: string): string | null {
   }
 }
 
+function resolveLogoSrc(logoUrl: string | undefined): string | null {
+  if (!logoUrl) return null;
+  if (/^(https?:)?\/\//.test(logoUrl) || logoUrl.startsWith("data:")) return logoUrl;
+  const base = import.meta.env.BASE_URL ?? "/";
+  return `${base}${logoUrl.replace(/^\/+/, "")}`;
+}
+
 function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; url: string; logoUrl?: string }) {
-  const [failed, setFailed] = useState(false);
-  const src = logoUrl || getFaviconUrl(url);
-  if (!src || failed) {
+  const [primaryFailed, setPrimaryFailed] = useState(false);
+  const [fallbackFailed, setFallbackFailed] = useState(false);
+  const primary = resolveLogoSrc(logoUrl);
+  const favicon = getFaviconUrl(url);
+  const src = !primaryFailed && primary ? primary : !fallbackFailed ? favicon : null;
+  if (!src) {
     return (
       <div
         className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
@@ -33,6 +43,7 @@ function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; 
       </div>
     );
   }
+  const isPrimary = !primaryFailed && primary !== null;
   return (
     <div
       className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-lg overflow-hidden p-1.5"
@@ -43,7 +54,7 @@ function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; 
         alt={`${name} logo`}
         loading="lazy"
         decoding="async"
-        onError={() => setFailed(true)}
+        onError={() => (isPrimary ? setPrimaryFailed(true) : setFallbackFailed(true))}
         className="w-full h-full object-contain"
       />
     </div>
