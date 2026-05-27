@@ -4,7 +4,7 @@ import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
-  Sun, Moon,
+  Sun, Moon, Users, Lightbulb, Send,
 } from "lucide-react";
 import { tools, toolCategories } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
@@ -185,43 +185,60 @@ function Hero() {
           </motion.div>
 
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:block">
-            <div className="relative bg-card-theme/80 border border-theme rounded-2xl p-6 backdrop-blur-sm glow-cyan">
-              <div className="flex items-center gap-2 mb-4">
+            <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
+              <div className="flex items-center gap-2 mb-5">
                 <div className="flex gap-1.5">
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
                 </div>
-                <span className="text-xs text-label ml-2">centofai.com/dashboard</span>
               </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between p-3 bg-[var(--bg-section-alt)] rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Bot className="w-8 h-8 text-[#22D3EE]" />
+
+              <div className="space-y-4">
+                {/* Top Card: Kurse & Workshops */}
+                <div className="p-4 bg-card border border-theme rounded-xl">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB]/15 to-[#7C3AED]/15 flex items-center justify-center shrink-0">
+                      <GraduationCap className="w-5 h-5 text-[#7C3AED]" />
+                    </div>
                     <div>
-                      <p className="text-sm font-semibold text-heading">KI-News Heute</p>
-                      <p className="text-xs text-label">12 neue Artikel</p>
+                      <p className="text-sm font-semibold text-heading">Top Kurse & Workshops</p>
+                      <p className="text-xs text-caption mt-0.5">Praxisnahe KI-, Automatisierungs- und Digital-Kurse</p>
                     </div>
                   </div>
-                  <TrendingUp className="w-5 h-5 text-emerald-400" />
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {[
-                    { label: "KI-Tools im Verzeichnis", val: "100+" },
-                    { label: "Kurse verfügbar", val: "15+" },
-                  ].map((s) => (
-                    <div key={s.label} className="p-3 bg-[var(--bg-section-alt)] rounded-lg">
-                      <p className="text-xs text-label">{s.label}</p>
-                      <p className="text-2xl font-bold text-heading mt-1">{s.val}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="p-3 bg-gradient-to-r from-[#2563EB]/20 to-[#7C3AED]/20 rounded-lg border border-[#2563EB]/20">
-                  <div className="flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#22D3EE]" />
-                    <span className="text-sm text-[#22D3EE] font-medium">Tipp des Tages</span>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
+                      <BookOpen className="w-3 h-3" /> 15+ Kurse
+                    </span>
+                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
+                      <Users className="w-3 h-3" /> Live Workshops
+                    </span>
                   </div>
-                  <p className="text-xs text-caption mt-1">Perplexity + Claude = Perfekte Recherche-Combo</p>
+                  <a href="#kurse" className="flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity">
+                    Jetzt Kurse entdecken <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+
+                {/* Bottom Card: Projekt vorschlagen */}
+                <div className="p-4 bg-card border border-theme rounded-xl">
+                  <div className="flex items-start gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#22D3EE]/15 to-[#2563EB]/15 flex items-center justify-center shrink-0">
+                      <Lightbulb className="w-5 h-5 text-[#22D3EE]" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-heading">Projekt vorschlagen</p>
+                      <p className="text-xs text-caption mt-0.5">Deine Idee in digitaler Form</p>
+                    </div>
+                  </div>
+                  <textarea
+                    readOnly
+                    placeholder="Beschreibe deine Idee – wir entwickeln sie als Website oder Mobile App."
+                    className="w-full px-3 py-2.5 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg resize-none placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
+                    rows={2}
+                  />
+                  <button className="mt-3 inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors">
+                    <Send className="w-4 h-4" /> Idee senden
+                  </button>
                 </div>
               </div>
             </div>
