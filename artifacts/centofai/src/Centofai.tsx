@@ -319,7 +319,7 @@ function ToolsSection() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-            <Lightbulb className="w-6 h-6 text-purple-400" /> KI-Tool Verzeichnis
+            <Wrench className="w-6 h-6 text-purple-400" /> KI-Tool Verzeichnis
           </h2>
           <p className="text-[var(--text-caption)] text-sm mt-1">Die weltweit besten KI-Tools, von uns getestet und kategorisiert.</p>
         </div>
