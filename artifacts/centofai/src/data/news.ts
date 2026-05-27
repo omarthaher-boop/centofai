@@ -28,7 +28,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-18",
     url: "https://deepmind.google/discover/blog/",
     category: "Google",
-    imageUrl: unsplash("photo-1581090464777-f3220bbe1b8b"),
+    imageUrl: unsplash("photo-1532187863486-abf9dbad1b69"),
   },
   {
     title: "Anthropic veröffentlicht Claude 4 mit erweitertem Kontext",
@@ -37,7 +37,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-15",
     url: "https://www.anthropic.com/news",
     category: "Forschung",
-    imageUrl: unsplash("photo-1620712943543-bcc4688e7485"),
+    imageUrl: unsplash("photo-1743385779436-a6950c168fff"),
   },
   {
     title: "NVIDIA stellt neue KI-Chip-Architektur Blackwell Ultra vor",
@@ -64,7 +64,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-08",
     url: "https://www.theverge.com/ai-artificial-intelligence/",
     category: "Startups",
-    imageUrl: unsplash("photo-1633613286848-e6f43bbafb8d"),
+    imageUrl: unsplash("photo-1745848413060-0827ec268cda"),
   },
   {
     title: "Microsoft integriert Copilot tief in Windows 12",
@@ -73,7 +73,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-05",
     url: "https://blogs.microsoft.com/ai/",
     category: "OpenAI",
-    imageUrl: unsplash("photo-1633419461186-7d40a38105ec"),
+    imageUrl: unsplash("photo-1584397540868-ff082da01a4a"),
   },
   {
     title: "Hugging Face startet Open-Source-KI-Agent-Plattform",
@@ -82,7 +82,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-03",
     url: "https://huggingface.co/blog",
     category: "Startups",
-    imageUrl: unsplash("photo-1526374965328-7f61d4dc18c5"),
+    imageUrl: unsplash("photo-1774901128276-1eab48f1fb9c"),
   },
   {
     title: "Perplexity führt Echtzeit-Forschungs-Agent ein",
@@ -91,7 +91,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-28",
     url: "https://techcrunch.com/category/artificial-intelligence/",
     category: "Tools",
-    imageUrl: unsplash("photo-1551434678-e076c223a692"),
+    imageUrl: unsplash("photo-1507842217343-583bb7270b66"),
   },
   {
     title: "AI Startup erreicht 10 Milliarden Dollar Bewertung",
@@ -118,7 +118,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-20",
     url: "https://deepmind.google/discover/blog/",
     category: "Google",
-    imageUrl: unsplash("photo-1485827404703-89b55fcc595e"),
+    imageUrl: unsplash("photo-1766371900950-929959f2bb67"),
   },
 ];
 

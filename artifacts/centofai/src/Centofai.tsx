@@ -50,26 +50,70 @@ function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; 
   );
 }
 
+const ogImageCache = new Map<string, string | null>();
+
 function NewsThumbnail({
+  articleUrl,
   imageUrl,
   category,
   catBg,
 }: {
+  articleUrl: string;
   imageUrl?: string;
   category: string;
   catBg: Record<string, string>;
 }) {
-  const [failed, setFailed] = useState(false);
-  const showImage = imageUrl && !failed;
+  const [ogUrl, setOgUrl] = useState<string | null | undefined>(() =>
+    ogImageCache.has(articleUrl) ? ogImageCache.get(articleUrl) ?? null : undefined,
+  );
+  const [ogFailed, setOgFailed] = useState(false);
+  const [curatedFailed, setCuratedFailed] = useState(false);
+
+  useEffect(() => {
+    if (ogImageCache.has(articleUrl)) return;
+    let cancelled = false;
+    const controller = new AbortController();
+    fetch(`/api/og-image?url=${encodeURIComponent(articleUrl)}`, {
+      signal: controller.signal,
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: { imageUrl?: string | null } | null) => {
+        if (cancelled) return;
+        const found = data?.imageUrl ?? null;
+        ogImageCache.set(articleUrl, found);
+        setOgUrl(found);
+      })
+      .catch(() => {
+        if (cancelled) return;
+        ogImageCache.set(articleUrl, null);
+        setOgUrl(null);
+      });
+    return () => {
+      cancelled = true;
+      controller.abort();
+    };
+  }, [articleUrl]);
+
+  const activeSrc = ogUrl && !ogFailed
+    ? ogUrl
+    : imageUrl && !curatedFailed
+      ? imageUrl
+      : null;
+
   return (
     <div className="bg-[var(--bg-card)] border border-[var(--border-color)] aspect-video rounded-2xl mb-4 overflow-hidden relative">
-      {showImage ? (
+      {activeSrc ? (
         <img
-          src={imageUrl}
+          key={activeSrc}
+          src={activeSrc}
           alt={category}
           loading="lazy"
           decoding="async"
-          onError={() => setFailed(true)}
+          referrerPolicy="no-referrer"
+          onError={() => {
+            if (activeSrc === ogUrl) setOgFailed(true);
+            else setCuratedFailed(true);
+          }}
           className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
       ) : (
@@ -305,7 +349,7 @@ function NewsSection() {
               transition={{ delay: i * 0.1 }}
               className="group cursor-pointer"
             >
-              <NewsThumbnail imageUrl={news.imageUrl} category={news.category} catBg={catBg} />
+              <NewsThumbnail articleUrl={news.url} imageUrl={news.imageUrl} category={news.category} catBg={catBg} />
               <span className={`text-xs font-bold uppercase tracking-wider ${catColors[news.category] || "text-purple-400"}`}>
                 {news.category}
               </span>
