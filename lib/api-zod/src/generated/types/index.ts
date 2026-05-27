@@ -6,4 +6,11 @@
  * OpenAPI spec version: 0.1.0
  */
 
+export * from './addFavoriteBody';
+export * from './createProposalBody';
+export * from './createToolSubmissionBody';
+export * from './errorResponse';
+export * from './favorite';
 export * from './healthStatus';
+export * from './proposalResponse';
+export * from './toolSubmissionResponse';

@@ -12,13 +12,16 @@ tags:
     description: Health operations
   - name: proposals
     description: Project proposal operations
+  - name: favorites
+    description: User favorites
+  - name: tool-submissions
+    description: User-submitted tools
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -32,7 +35,6 @@ paths:
       operationId: createProposal
       tags: [proposals]
       summary: Submit a project proposal
-      description: Submits a new project idea and sends email notification
       requestBody:
         required: true
         content:
@@ -59,6 +61,102 @@ paths:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
 
+  /favorites:
+    get:
+      operationId: listFavorites
+      tags: [favorites]
+      summary: List the signed-in user's favorite tools
+      responses:
+        "200":
+          description: Favorites list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Favorite"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: addFavorite
+      tags: [favorites]
+      summary: Add a tool to the signed-in user's favorites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddFavoriteBody"
+      responses:
+        "201":
+          description: Favorite added
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorite"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /favorites/{toolName}:
+    delete:
+      operationId: removeFavorite
+      tags: [favorites]
+      summary: Remove a tool from the signed-in user's favorites
+      parameters:
+        - in: path
+          name: toolName
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Favorite removed
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /tool-submissions:
+    post:
+      operationId: submitTool
+      tags: [tool-submissions]
+      summary: Submit a new tool (authenticated)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateToolSubmissionBody"
+      responses:
+        "201":
+          description: Submission created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ToolSubmissionResponse"
+        "400":
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -66,59 +164,71 @@ components:
       properties:
         status:
           type: string
-      required:
-        - status
+      required: [status]
 
     CreateProposalBody:
       type: object
       properties:
-        name:
-          type: string
-          minLength: 1
-        email:
-          type: string
-          format: email
-        idea:
-          type: string
-          minLength: 1
-        budget:
-          type: string
-        timeline:
-          type: string
-      required:
-        - name
-        - email
-        - idea
+        name: { type: string, minLength: 1 }
+        email: { type: string, format: email }
+        idea: { type: string, minLength: 1 }
+        budget: { type: string }
+        timeline: { type: string }
+      required: [name, email, idea]
 
     ProposalResponse:
       type: object
       properties:
-        id:
-          type: integer
-        name:
-          type: string
-        email:
-          type: string
-        idea:
-          type: string
-        budget:
-          type: string
-        timeline:
-          type: string
-        createdAt:
-          type: string
-          format: date-time
-      required:
-        - id
-        - name
-        - email
-        - idea
-        - createdAt
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        idea: { type: string }
+        budget: { type: string }
+        timeline: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, email, idea, createdAt]
+
+    Favorite:
+      type: object
+      properties:
+        id: { type: integer }
+        toolName: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, toolName, createdAt]
+
+    AddFavoriteBody:
+      type: object
+      properties:
+        toolName: { type: string, minLength: 1 }
+      required: [toolName]
+
+    CreateToolSubmissionBody:
+      type: object
+      properties:
+        name: { type: string, minLength: 1 }
+        category: { type: string, minLength: 1 }
+        description: { type: string, minLength: 1 }
+        pricing: { type: string, minLength: 1 }
+        audience: { type: string }
+        url: { type: string, minLength: 1 }
+      required: [name, category, description, pricing, url]
+
+    ToolSubmissionResponse:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        category: { type: string }
+        description: { type: string }
+        pricing: { type: string }
+        audience: { type: string }
+        url: { type: string }
+        status: { type: string }
+        createdAt: { type: string, format: date-time }
+      required: [id, name, category, description, pricing, url, status, createdAt]
 
     ErrorResponse:
       type: object
       properties:
-        error:
-          type: string
-      required:
-        - error
+        error: { type: string }
+      required: [error]

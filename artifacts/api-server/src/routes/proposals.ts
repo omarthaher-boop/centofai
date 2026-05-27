@@ -1,9 +1,6 @@
 import { Router, type IRouter } from "express";
 import { db, projectProposalsTable } from "@workspace/db";
-import {
-  CreateProposalBody,
-  ProposalResponse,
-} from "@workspace/api-zod";
+import { CreateProposalBody } from "@workspace/api-zod";
 import { logger } from "../lib/logger";
 import nodemailer from "nodemailer";
 
@@ -90,7 +87,15 @@ Gesendet via CentofAi Projektformular`,
       req.log.info("SMTP not configured — proposal saved but no email sent");
     }
 
-    res.status(201).json(ProposalResponse.parse(proposal));
+    res.status(201).json({
+      id: proposal.id,
+      name: proposal.name,
+      email: proposal.email,
+      idea: proposal.idea,
+      budget: proposal.budget ?? undefined,
+      timeline: proposal.timeline ?? undefined,
+      createdAt: proposal.createdAt.toISOString(),
+    });
   } catch (error) {
     req.log.error({ error: (error as Error).message }, "Failed to save proposal");
     res.status(500).json({ error: "Failed to process proposal" });

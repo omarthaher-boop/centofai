@@ -29,6 +29,43 @@ export interface ProposalResponse {
   createdAt: string;
 }
 
+export interface Favorite {
+  id: number;
+  toolName: string;
+  createdAt: string;
+}
+
+export interface AddFavoriteBody {
+  /** @minLength 1 */
+  toolName: string;
+}
+
+export interface CreateToolSubmissionBody {
+  /** @minLength 1 */
+  name: string;
+  /** @minLength 1 */
+  category: string;
+  /** @minLength 1 */
+  description: string;
+  /** @minLength 1 */
+  pricing: string;
+  audience?: string;
+  /** @minLength 1 */
+  url: string;
+}
+
+export interface ToolSubmissionResponse {
+  id: number;
+  name: string;
+  category: string;
+  description: string;
+  pricing: string;
+  audience?: string;
+  url: string;
+  status: string;
+  createdAt: string;
+}
+
 export interface ErrorResponse {
   error: string;
 }

@@ -2,11 +2,15 @@ import { Router, type IRouter } from "express";
 import healthRouter from "./health";
 import proposalsRouter from "./proposals";
 import ogImageRouter from "./og-image";
+import favoritesRouter from "./favorites";
+import toolSubmissionsRouter from "./tool-submissions";
 
 const router: IRouter = Router();
 
 router.use(healthRouter);
 router.use(proposalsRouter);
 router.use(ogImageRouter);
+router.use(favoritesRouter);
+router.use(toolSubmissionsRouter);
 
 export default router;

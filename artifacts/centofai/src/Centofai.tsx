@@ -4,12 +4,17 @@ import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
-  Sun, Moon, Users, Lightbulb, Send, ChevronDown,
+  Sun, Moon, Users, Lightbulb, Send, ChevronDown, Heart, LogOut,
 } from "lucide-react";
 import { Link } from "wouter";
+import { Show, useClerk, useUser } from "@clerk/react";
 import { tools, toolCategories, toolSlug } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
 import { courses, courseCategories } from "./data/courses";
+import {
+  useFavoriteToolNames,
+  useToggleFavorite,
+} from "./hooks/useFavorites";
 
 /* ─── Image helpers ─────────────────────────────────────────────────── */
 function getFaviconUrl(url: string): string | null {
@@ -164,13 +169,16 @@ const navLinks = [
 function Navbar() {
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { user } = useUser();
+  const { signOut } = useClerk();
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   return (
     <nav className="border-b border-slate-900 bg-[var(--nav-bg)] backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" className="text-2xl font-black tracking-wider gradient-text">
+        <Link to="/" className="text-2xl font-black tracking-wider gradient-text">
           CENTOF<span className="text-white">AI</span>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--text-caption)]">
@@ -191,12 +199,46 @@ function Navbar() {
           >
             + Idee einreichen
           </a>
-          <a
-            href="#newsletter"
-            className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition shadow-[0_0_25px_rgba(147,51,234,0.25)]"
-          >
-            Community
-          </a>
+          <Show when="signed-in">
+            <Link
+              to="/submit-tool"
+              className="text-xs font-semibold text-[var(--text-label)] hover:text-white border border-[var(--border-color)] hover:border-slate-600 px-4 py-2 rounded-xl transition"
+            >
+              + Tool einreichen
+            </Link>
+            <Link
+              to="/favorites"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--text-label)] hover:text-white border border-[var(--border-color)] hover:border-slate-600 px-4 py-2 rounded-xl transition"
+            >
+              <Heart className="w-3.5 h-3.5" /> Favoriten
+            </Link>
+            <div className="flex items-center gap-2 pl-2 border-l border-[var(--border-color)]">
+              <span className="text-xs text-[var(--text-caption)] hidden lg:inline">
+                {user?.firstName || user?.primaryEmailAddress?.emailAddress}
+              </span>
+              <button
+                onClick={() => signOut({ redirectUrl: basePath || "/" })}
+                title="Abmelden"
+                className="text-[var(--text-label)] hover:text-white transition"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          </Show>
+          <Show when="signed-out">
+            <Link
+              to="/sign-in"
+              className="text-xs font-semibold text-[var(--text-label)] hover:text-white border border-[var(--border-color)] hover:border-slate-600 px-4 py-2 rounded-xl transition"
+            >
+              Anmelden
+            </Link>
+            <Link
+              to="/sign-up"
+              className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition shadow-[0_0_25px_rgba(147,51,234,0.25)]"
+            >
+              Registrieren
+            </Link>
+          </Show>
         </div>
 
         {/* Mobile Toggle */}
@@ -233,9 +275,25 @@ function Navbar() {
               <a href="#ideas" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
                 + Idee einreichen
               </a>
-              <a href="#newsletter" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold bg-purple-600 text-white rounded-xl px-4 text-center mt-2">
-                Community
-              </a>
+              <Show when="signed-in">
+                <Link to="/submit-tool" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
+                  + Tool einreichen
+                </Link>
+                <Link to="/favorites" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
+                  Meine Favoriten
+                </Link>
+                <button onClick={() => { setOpen(false); signOut({ redirectUrl: basePath || "/" }); }} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
+                  Abmelden
+                </button>
+              </Show>
+              <Show when="signed-out">
+                <Link to="/sign-in" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
+                  Anmelden
+                </Link>
+                <Link to="/sign-up" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold bg-purple-600 text-white rounded-xl px-4 text-center mt-2">
+                  Registrieren
+                </Link>
+              </Show>
             </div>
           </motion.div>
         )}
@@ -394,6 +452,46 @@ function NewsSection() {
   );
 }
 
+/* ─── Favorite Button ───────────────────────────────────────────────── */
+function FavoriteButton({ toolName }: { toolName: string }) {
+  const favs = useFavoriteToolNames();
+  const toggle = useToggleFavorite();
+  const isFav = favs.has(toolName);
+
+  return (
+    <>
+      <Show when="signed-in">
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggle.mutate({ toolName, isFav });
+          }}
+          aria-label={isFav ? "Aus Favoriten entfernen" : "Zu Favoriten hinzufügen"}
+          className={`p-1 rounded-md transition ${
+            isFav
+              ? "text-pink-500 hover:text-pink-400"
+              : "text-[var(--text-label)] hover:text-pink-400"
+          }`}
+        >
+          <Heart className="w-4 h-4" fill={isFav ? "currentColor" : "none"} />
+        </button>
+      </Show>
+      <Show when="signed-out">
+        <Link
+          to="/sign-in"
+          aria-label="Anmelden, um zu favorisieren"
+          className="p-1 rounded-md text-[var(--text-label)] hover:text-pink-400 transition"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Heart className="w-4 h-4" />
+        </Link>
+      </Show>
+    </>
+  );
+}
+
 /* ─── Tools Section ───────────────────────────────────────────────── */
 function readToolFilterFromUrl(): { search: string; category: string } {
   if (typeof window === "undefined") return { search: "", category: "Alle" };
@@ -526,9 +624,12 @@ function ToolsSection() {
               <div>
                 <div className="flex justify-between items-start mb-4">
                   <ToolLogo name={tool.name} color={tool.color} url={tool.url} logoUrl={tool.logoUrl} />
-                  <span className={`text-xs px-2 py-1 rounded-md font-medium ${getPricingColor(tool.pricing)}`}>
-                    {tool.pricing}
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <FavoriteButton toolName={tool.name} />
+                    <span className={`text-xs px-2 py-1 rounded-md font-medium ${getPricingColor(tool.pricing)}`}>
+                      {tool.pricing}
+                    </span>
+                  </div>
                 </div>
                 <h3 className="font-bold text-lg mb-1">{tool.name}</h3>
                 <p className="text-[var(--text-caption)] text-xs line-clamp-2 mb-4">{tool.description}</p>

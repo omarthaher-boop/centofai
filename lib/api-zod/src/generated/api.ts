@@ -9,7 +9,6 @@ import * as zod from 'zod';
 
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const HealthCheckResponse = zod.object({
@@ -18,7 +17,6 @@ export const HealthCheckResponse = zod.object({
 
 
 /**
- * Submits a new project idea and sends email notification
  * @summary Submit a project proposal
  */
 
@@ -33,18 +31,54 @@ export const CreateProposalBody = zod.object({
   "timeline": zod.string().optional()
 })
 
-export const ProposalResponse = zod.object({
+
+/**
+ * @summary List the signed-in user's favorite tools
+ */
+export const ListFavoritesResponseItem = zod.object({
   "id": zod.number(),
-  "name": zod.string(),
-  "email": zod.string(),
-  "idea": zod.string(),
-  "budget": zod.string().optional().nullable(),
-  "timeline": zod.string().optional().nullable(),
-  "createdAt": zod.string().datetime().optional()
+  "toolName": zod.string(),
+  "createdAt": zod.coerce.date()
+})
+export const ListFavoritesResponse = zod.array(ListFavoritesResponseItem)
+
+
+/**
+ * @summary Add a tool to the signed-in user's favorites
+ */
+
+
+
+export const AddFavoriteBody = zod.object({
+  "toolName": zod.string().min(1)
 })
 
-export const ErrorResponse = zod.object({
-  "error": zod.string()
+
+/**
+ * @summary Remove a tool from the signed-in user's favorites
+ */
+export const RemoveFavoriteParams = zod.object({
+  "toolName": zod.coerce.string()
+})
+
+
+/**
+ * @summary Submit a new tool (authenticated)
+ */
+
+
+
+
+
+
+
+export const SubmitToolBody = zod.object({
+  "name": zod.string().min(1),
+  "category": zod.string().min(1),
+  "description": zod.string().min(1),
+  "pricing": zod.string().min(1),
+  "audience": zod.string().optional(),
+  "url": zod.string().min(1)
 })
 
 

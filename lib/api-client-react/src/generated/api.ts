@@ -20,10 +20,14 @@ import type {
 } from '@tanstack/react-query';
 
 import type {
+  AddFavoriteBody,
   CreateProposalBody,
+  CreateToolSubmissionBody,
   ErrorResponse,
+  Favorite,
   HealthStatus,
-  ProposalResponse
+  ProposalResponse,
+  ToolSubmissionResponse
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -47,7 +51,6 @@ export const getHealthCheckUrl = () => {
 }
 
 /**
- * Returns server health status
  * @summary Health check
  */
 export const healthCheck = async ( options?: RequestInit): Promise<HealthStatus> => {
@@ -125,7 +128,6 @@ export const getCreateProposalUrl = () => {
 }
 
 /**
- * Submits a new project idea and sends email notification
  * @summary Submit a project proposal
  */
 export const createProposal = async (createProposalBody: CreateProposalBody, options?: RequestInit): Promise<ProposalResponse> => {
@@ -186,5 +188,294 @@ export const useCreateProposal = <TError = ErrorType<ErrorResponse>,
         TContext
       > => {
       return useMutation(getCreateProposalMutationOptions(options));
+    }
+
+export const getListFavoritesUrl = () => {
+
+
+
+
+  return `/api/favorites`
+}
+
+/**
+ * @summary List the signed-in user's favorite tools
+ */
+export const listFavorites = async ( options?: RequestInit): Promise<Favorite[]> => {
+
+  return customFetch<Favorite[]>(getListFavoritesUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getListFavoritesQueryKey = () => {
+    return [
+    `/api/favorites`
+    ] as const;
+    }
+
+
+export const getListFavoritesQueryOptions = <TData = Awaited<ReturnType<typeof listFavorites>>, TError = ErrorType<ErrorResponse>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listFavorites>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getListFavoritesQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof listFavorites>>> = ({ signal }) => listFavorites({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof listFavorites>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type ListFavoritesQueryResult = NonNullable<Awaited<ReturnType<typeof listFavorites>>>
+export type ListFavoritesQueryError = ErrorType<ErrorResponse>
+
+
+/**
+ * @summary List the signed-in user's favorite tools
+ */
+
+export function useListFavorites<TData = Awaited<ReturnType<typeof listFavorites>>, TError = ErrorType<ErrorResponse>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof listFavorites>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getListFavoritesQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getAddFavoriteUrl = () => {
+
+
+
+
+  return `/api/favorites`
+}
+
+/**
+ * @summary Add a tool to the signed-in user's favorites
+ */
+export const addFavorite = async (addFavoriteBody: AddFavoriteBody, options?: RequestInit): Promise<Favorite> => {
+
+  return customFetch<Favorite>(getAddFavoriteUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      addFavoriteBody,)
+  }
+);}
+
+
+
+
+export const getAddFavoriteMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof addFavorite>>, TError,{data: BodyType<AddFavoriteBody>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof addFavorite>>, TError,{data: BodyType<AddFavoriteBody>}, TContext> => {
+
+const mutationKey = ['addFavorite'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof addFavorite>>, {data: BodyType<AddFavoriteBody>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  addFavorite(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type AddFavoriteMutationResult = NonNullable<Awaited<ReturnType<typeof addFavorite>>>
+    export type AddFavoriteMutationBody = BodyType<AddFavoriteBody>
+    export type AddFavoriteMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary Add a tool to the signed-in user's favorites
+ */
+export const useAddFavorite = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof addFavorite>>, TError,{data: BodyType<AddFavoriteBody>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof addFavorite>>,
+        TError,
+        {data: BodyType<AddFavoriteBody>},
+        TContext
+      > => {
+      return useMutation(getAddFavoriteMutationOptions(options));
+    }
+
+export const getRemoveFavoriteUrl = (toolName: string,) => {
+
+
+
+
+  return `/api/favorites/${toolName}`
+}
+
+/**
+ * @summary Remove a tool from the signed-in user's favorites
+ */
+export const removeFavorite = async (toolName: string, options?: RequestInit): Promise<void> => {
+
+  return customFetch<void>(getRemoveFavoriteUrl(toolName),
+  {
+    ...options,
+    method: 'DELETE'
+
+
+  }
+);}
+
+
+
+
+export const getRemoveFavoriteMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeFavorite>>, TError,{toolName: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof removeFavorite>>, TError,{toolName: string}, TContext> => {
+
+const mutationKey = ['removeFavorite'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof removeFavorite>>, {toolName: string}> = (props) => {
+          const {toolName} = props ?? {};
+
+          return  removeFavorite(toolName,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type RemoveFavoriteMutationResult = NonNullable<Awaited<ReturnType<typeof removeFavorite>>>
+
+    export type RemoveFavoriteMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary Remove a tool from the signed-in user's favorites
+ */
+export const useRemoveFavorite = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof removeFavorite>>, TError,{toolName: string}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof removeFavorite>>,
+        TError,
+        {toolName: string},
+        TContext
+      > => {
+      return useMutation(getRemoveFavoriteMutationOptions(options));
+    }
+
+export const getSubmitToolUrl = () => {
+
+
+
+
+  return `/api/tool-submissions`
+}
+
+/**
+ * @summary Submit a new tool (authenticated)
+ */
+export const submitTool = async (createToolSubmissionBody: CreateToolSubmissionBody, options?: RequestInit): Promise<ToolSubmissionResponse> => {
+
+  return customFetch<ToolSubmissionResponse>(getSubmitToolUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createToolSubmissionBody,)
+  }
+);}
+
+
+
+
+export const getSubmitToolMutationOptions = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitTool>>, TError,{data: BodyType<CreateToolSubmissionBody>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof submitTool>>, TError,{data: BodyType<CreateToolSubmissionBody>}, TContext> => {
+
+const mutationKey = ['submitTool'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof submitTool>>, {data: BodyType<CreateToolSubmissionBody>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  submitTool(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type SubmitToolMutationResult = NonNullable<Awaited<ReturnType<typeof submitTool>>>
+    export type SubmitToolMutationBody = BodyType<CreateToolSubmissionBody>
+    export type SubmitToolMutationError = ErrorType<ErrorResponse>
+
+    /**
+ * @summary Submit a new tool (authenticated)
+ */
+export const useSubmitTool = <TError = ErrorType<ErrorResponse>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof submitTool>>, TError,{data: BodyType<CreateToolSubmissionBody>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof submitTool>>,
+        TError,
+        {data: BodyType<CreateToolSubmissionBody>},
+        TContext
+      > => {
+      return useMutation(getSubmitToolMutationOptions(options));
     }
 
