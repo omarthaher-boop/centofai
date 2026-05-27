@@ -9,27 +9,27 @@
 
 /* ─── Dark Mode (default) ─────────────────────────────────────────── */
 :root {
-  --bg-page: #070B14;
-  --bg-section-alt: #0a0f1c;
-  --bg-card: #0F172A;
-  --bg-input: #0F172A;
-  --bg-tag: rgba(30, 41, 59, 0.6);
-  --bg-tag-active: #2563EB;
+  --bg-page: #020617;
+  --bg-section-alt: #0f172a;
+  --bg-card: #0f172a;
+  --bg-input: #0f172a;
+  --bg-tag: rgba(15, 23, 42, 0.6);
+  --bg-tag-active: #9333EA;
   --text-heading: #FFFFFF;
   --text-body: #E2E8F0;
-  --text-caption: #CBD5E1;
+  --text-caption: #94A3B8;
   --text-label: #64748B;
   --border-color: #1E293B;
-  --border-hover: rgba(34, 211, 238, 0.3);
+  --border-hover: rgba(147, 51, 234, 0.4);
   --glow-opacity: 0.15;
-  --shadow-card: rgba(37, 99, 235, 0.12);
-  --nav-bg: rgba(7, 11, 20, 0.9);
+  --shadow-card: rgba(147, 51, 234, 0.15);
+  --nav-bg: rgba(2, 6, 23, 0.8);
   --nav-border: rgba(30, 41, 59, 0.6);
-  --mobile-menu-bg: rgba(7, 11, 20, 0.95);
-  --gradient-from: #22D3EE;
-  --gradient-to: #7C3AED;
+  --mobile-menu-bg: rgba(2, 6, 23, 0.95);
+  --gradient-from: #c084fc;
+  --gradient-to: #6366f1;
   --btn-secondary-bg: #1E293B;
-  --btn-secondary-border: #1E293B;
+  --btn-secondary-border: #334155;
 }
 
 /* ─── Light Mode ────────────────────────────────────────────────────── */
@@ -39,20 +39,20 @@
   --bg-card: #FFFFFF;
   --bg-input: #FFFFFF;
   --bg-tag: rgba(226, 232, 240, 0.6);
-  --bg-tag-active: #2563EB;
+  --bg-tag-active: #9333EA;
   --text-heading: #0F172A;
   --text-body: #1E293B;
   --text-caption: #475569;
   --text-label: #64748B;
   --border-color: #E2E8F0;
-  --border-hover: rgba(37, 99, 235, 0.3);
+  --border-hover: rgba(147, 51, 234, 0.3);
   --glow-opacity: 0.08;
-  --shadow-card: rgba(37, 99, 235, 0.08);
+  --shadow-card: rgba(147, 51, 234, 0.08);
   --nav-bg: rgba(248, 250, 252, 0.9);
   --nav-border: rgba(226, 232, 240, 0.8);
   --mobile-menu-bg: rgba(248, 250, 252, 0.98);
-  --gradient-from: #0EA5E9;
-  --gradient-to: #7C3AED;
+  --gradient-from: #9333EA;
+  --gradient-to: #6366F1;
   --btn-secondary-bg: #F1F5F9;
   --btn-secondary-border: #E2E8F0;
 }
@@ -125,7 +125,7 @@
   }
   .card-3d {
     transform: translateZ(20px);
-    box-shadow: 0 10px 40px -10px rgba(37, 99, 235, 0.2);
+    box-shadow: 0 10px 40px -10px rgba(147, 51, 234, 0.2);
   }
 
   /* Reduced motion fallback */
@@ -135,6 +135,15 @@
       transform: none !important;
       box-shadow: none !important;
     }
+  }
+
+  /* New design card glow */
+  .card-glow {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card-glow:hover {
+    box-shadow: 0 10px 30px -10px rgba(147, 51, 234, 0.3);
+    border-color: rgba(147, 51, 234, 0.4);
   }
 
 }

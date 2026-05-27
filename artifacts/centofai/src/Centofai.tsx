@@ -10,7 +10,7 @@ import { tools, toolCategories } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
 import { courses, courseCategories } from "./data/courses";
 
-/* ─── Theme Hook ───────────────────────────────────────────────────────── */
+/* ─── Theme Hook ────────────────────────────────────────────────────── */
 function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
     const saved = typeof window !== "undefined" ? localStorage.getItem("centofai-theme") : null;
@@ -26,114 +26,87 @@ function useTheme() {
   return { theme, toggle };
 }
 
-/* ─── Navbar ───────────────────────────────────────────────────────── */
+/* ─── Navbar ─────────────────────────────────────────────────────── */
 const navLinks = [
-  { name: "News", href: "#news" },
-  { name: "Kurse", href: "#kurse" },
   { name: "KI-Tools", href: "#tools" },
-  { name: "Über uns", href: "#about" },
-  { name: "Newsletter", href: "#newsletter" },
+  { name: "News", href: "#news" },
+  { name: "Kurse", href: "#academy" },
 ];
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { theme, toggle } = useTheme();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-nav backdrop-blur-xl border-b border-nav" : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <a href="#" className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center shadow-lg shadow-[#2563EB]/20 group-hover:shadow-[#2563EB]/30 transition-shadow">
-              <Brain className="w-5 h-5 text-white" />
-            </div>
-            <span className="font-display font-bold text-lg text-heading tracking-tight">
-              Centof<span className="text-[#22D3EE]">Ai</span>
-            </span>
-          </a>
+    <nav className="border-b border-slate-900 bg-[var(--nav-bg)] backdrop-blur-md sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <a href="#" className="text-2xl font-black tracking-wider gradient-text">
+          CENTOF<span className="text-white">AI</span>
+        </a>
 
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="px-3 py-2 text-sm font-medium text-caption hover:text-heading rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-all"
-              >
-                {link.name}
-              </a>
-            ))}
-
-            {/* Theme Toggle */}
-            <button
-              onClick={toggle}
-              className="ml-1 p-2 rounded-lg text-caption hover:text-heading hover:bg-black/5 dark:hover:bg-white/5 transition-all"
-              aria-label={theme === "dark" ? "Light Mode" : "Dark Mode"}
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-
-            <a
-              href="#newsletter"
-              className="ml-2 px-4 py-2 text-sm font-semibold bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white rounded-lg hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/20"
-            >
-              Newsletter
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--text-caption)]">
+          {navLinks.map((link) => (
+            <a key={link.name} href={link.href} className="hover:text-purple-400 transition">
+              {link.name}
             </a>
-          </div>
+          ))}
+        </div>
 
-          <div className="flex items-center gap-1 md:hidden">
-            <button
-              onClick={toggle}
-              className="p-2 text-caption hover:text-heading"
-              aria-label={theme === "dark" ? "Light Mode" : "Dark Mode"}
-            >
-              {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-            <button
-              className="p-2 text-caption hover:text-heading"
-              onClick={() => setOpen(!open)}
-            >
-              {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
+        <div className="hidden md:flex items-center gap-4">
+          <button onClick={toggle} className="text-[var(--text-label)] hover:text-white transition" aria-label="Theme">
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+          <a
+            href="#proposal"
+            className="text-xs font-semibold text-[var(--text-label)] hover:text-white border border-[var(--border-color)] hover:border-slate-600 px-4 py-2 rounded-xl transition"
+          >
+            + Tool einreichen
+          </a>
+          <a
+            href="#newsletter"
+            className="bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-xl text-sm font-semibold transition shadow-[0_0_25px_rgba(147,51,234,0.25)]"
+          >
+            Community
+          </a>
+        </div>
+
+        {/* Mobile Toggle */}
+        <div className="flex items-center gap-2 md:hidden">
+          <button onClick={toggle} className="text-[var(--text-label)] hover:text-white transition" aria-label="Theme">
+            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+          </button>
+          <button onClick={() => setOpen(!open)} className="text-[var(--text-label)] hover:text-white transition">
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
       </div>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden bg-mobile-menu backdrop-blur-xl border-b border-theme"
+            className="md:hidden bg-[var(--mobile-menu-bg)] border-b border-[var(--border-color)]"
           >
-            <div className="px-4 py-3 space-y-1">
+            <div className="px-6 py-4 space-y-2">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2.5 text-sm font-medium text-caption hover:text-heading rounded-lg hover:bg-black/5 dark:hover:bg-white/5"
+                  className="block py-2 text-sm font-medium text-[var(--text-caption)] hover:text-purple-400 transition"
                 >
                   {link.name}
                 </a>
               ))}
-              <a
-                href="#newsletter"
-                onClick={() => setOpen(false)}
-                className="block px-3 py-2.5 text-sm font-semibold bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white rounded-lg mt-2 text-center"
-              >
-                Newsletter abonnieren
+              <a href="#proposal" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
+                + Tool einreichen
+              </a>
+              <a href="#newsletter" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold bg-purple-600 text-white rounded-xl px-4 text-center mt-2">
+                Community
               </a>
             </div>
           </motion.div>
@@ -143,234 +116,54 @@ function Navbar() {
   );
 }
 
-/* ─── Hero ─────────────────────────────────────────────────────────── */
+/* ─── Hero ─────────────────────────────────────────────────────── */
 function Hero() {
+  const [searchQuery, setSearchQuery] = useState("");
+
   return (
-    <section className="relative min-h-[90vh] flex items-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--bg-page)] via-[var(--bg-section-alt)] to-[var(--bg-page)]" />
-      <div className="absolute top-20 left-1/4 w-96 h-96 bg-[#2563EB]/[var(--glow-opacity)] rounded-full blur-[120px]" />
-      <div className="absolute bottom-20 right-1/4 w-80 h-80 bg-[#7C3AED]/[var(--glow-opacity)] rounded-full blur-[100px]" />
+    <header className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center relative">
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tag border border-[#22D3EE]/20 mb-6">
-              <Zap className="w-4 h-4 text-[#22D3EE]" />
-              <span className="text-sm text-[#22D3EE] font-medium">Deine KI-Plattform</span>
-            </div>
+      <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 tracking-wide uppercase">
+        Zentraler KI-Hub & Verzeichnis
+      </span>
 
-            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-heading leading-tight mb-6">
-              Entdecke die Welt der <span className="gradient-text">Künstlichen Intelligenz</span>
-            </h1>
+      <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">
+        Alles über Künstliche Intelligenz an <br />
+        <span className="gradient-text">einem einzigen Ort</span>
+      </h1>
 
-            <p className="text-lg text-caption leading-relaxed mb-8 max-w-xl">
-              News, Tools, Kurse und Workshops – alles an einem Ort, um KI besser zu verstehen und produktiv einzusetzen.
-            </p>
+      <p className="text-lg text-[var(--text-caption)] max-w-2xl mx-auto mb-10">
+        Entdecke die besten KI-Tools, bleibe mit täglichen News up-to-date und lerne in praxisnahen Workshops von den Experten.
+      </p>
 
-            <div className="flex flex-wrap gap-4">
-              <a href="#tools" className="inline-flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/25">
-                <Wrench className="w-5 h-5" />
-                KI-Tools entdecken <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#news" className="inline-flex items-center gap-2 px-6 py-3.5 btn-secondary border rounded-xl hover:border-[#22D3EE]/30 transition-all">
-                <Newspaper className="w-5 h-5 text-[#22D3EE]" />
-                Aktuelle KI-News
-              </a>
-            </div>
-
-            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-10 text-sm text-label">
-              {["100+ KI-Tools", "Tägliche News", "Kuratierte Kurse"].map((t) => (
-                <span key={t} className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#22D3EE] shrink-0" />{t}
-                </span>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, delay: 0.2 }} className="relative hidden lg:block perspective-1000">
-            <div className="dashboard-3d preserve-3d">
-              <ProposalWidget />
-            </div>
-          </motion.div>
-        </div>
+      {/* Globale Suche */}
+      <div className="max-w-2xl mx-auto bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
+        <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
+        <input
+          type="text"
+          placeholder="Suche nach Tools, News, Kursen..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && searchQuery.trim()) {
+              window.location.href = `#tools?search=${encodeURIComponent(searchQuery)}`;
+            }
+          }}
+          className="bg-transparent px-3 py-3 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-base"
+        />
+        <a
+          href={searchQuery.trim() ? `#tools?search=${encodeURIComponent(searchQuery)}` : "#tools"}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-xl transition whitespace-nowrap text-sm"
+        >
+          Suchen
+        </a>
       </div>
-    </section>
+    </header>
   );
 }
 
-/* ─── Proposal Widget (functional form) ──────────────────────────────────── */
-function ProposalWidget() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    idea: "",
-    budget: "",
-    timeline: "",
-  });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const handleSubmit = async () => {
-    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) {
-      setStatus("error");
-      setErrorMsg("Bitte fülle Name, E-Mail und Idee aus.");
-      return;
-    }
-
-    setStatus("sending");
-    setErrorMsg("");
-
-    try {
-      const res = await fetch("/api/proposals", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || "Fehler beim Senden");
-      }
-
-      setStatus("success");
-      setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" });
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg((err as Error).message || "Fehler beim Senden. Bitte versuche es erneut.");
-    }
-  };
-
-  if (status === "success") {
-    return (
-      <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
-        <div className="flex items-center gap-2 mb-5">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-        </div>
-        <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="w-14 h-14 rounded-full bg-emerald-500/15 flex items-center justify-center mb-4">
-            <CheckCircle2 className="w-7 h-7 text-emerald-500" />
-          </div>
-          <p className="text-lg font-semibold text-heading mb-2">Vielen Dank!</p>
-          <p className="text-sm text-caption">Deine Idee wurde erfolgreich übermittelt. Wir melden uns bei dir.</p>
-          <button
-            onClick={() => setStatus("idle")}
-            className="mt-6 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors"
-          >
-            Weitere Idee senden
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="relative bg-card border border-theme rounded-2xl p-5 backdrop-blur-sm glow-cyan">
-      <div className="flex items-center gap-2 mb-5">
-        <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        {/* Top Card: Kurse & Workshops */}
-        <div className="p-4 bg-card border border-theme rounded-xl card-3d">
-          <div className="flex items-start gap-3 mb-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#2563EB]/15 to-[#7C3AED]/15 flex items-center justify-center shrink-0">
-              <GraduationCap className="w-5 h-5 text-[#7C3AED]" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-heading">Top Kurse & Workshops</p>
-              <p className="text-xs text-caption mt-0.5">Praxisnahe KI-, Automatisierungs- und Digital-Kurse</p>
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-2 mb-3">
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
-              <BookOpen className="w-3 h-3" /> 15+ Kurse
-            </span>
-            <span className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-tag text-xs text-caption">
-              <Users className="w-3 h-3" /> Live Workshops
-            </span>
-          </div>
-          <a href="#kurse" className="flex items-center justify-center gap-2 w-full py-2.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white text-sm font-medium rounded-lg hover:opacity-90 transition-opacity">
-            Jetzt Kurse entdecken <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        {/* Bottom Card: Projekt vorschlagen */}
-        <div className="p-4 bg-card border border-theme rounded-xl card-3d">
-          <div className="flex items-start gap-3 mb-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#22D3EE]/15 to-[#2563EB]/15 flex items-center justify-center shrink-0">
-              <Lightbulb className="w-5 h-5 text-[#22D3EE]" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold text-heading">Projekt vorschlagen</p>
-              <p className="text-xs text-caption mt-0.5">Deine Idee in digitaler Form</p>
-            </div>
-          </div>
-
-          {status === "error" && (
-            <div className="mb-3 p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-600">
-              {errorMsg}
-            </div>
-          )}
-
-          <div className="space-y-2 mb-3">
-            <input
-              type="text"
-              placeholder="Dein Name"
-              value={formData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              className="w-full px-3 py-2 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
-            />
-            <input
-              type="email"
-              placeholder="Deine E-Mail"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              className="w-full px-3 py-2 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
-            />
-            <textarea
-              placeholder="Beschreibe deine Idee – wir entwickeln sie als Website oder Mobile App."
-              value={formData.idea}
-              onChange={(e) => handleChange("idea", e.target.value)}
-              className="w-full px-3 py-2.5 text-sm text-body bg-[var(--bg-page)] border border-theme rounded-lg resize-none placeholder:text-label focus:outline-none focus:border-[#22D3EE]/40"
-              rows={2}
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            disabled={status === "sending"}
-            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#22D3EE] border border-[#22D3EE]/30 rounded-lg hover:bg-[#22D3EE]/10 transition-colors disabled:opacity-50"
-          >
-            {status === "sending" ? (
-              <>
-                <span className="w-4 h-4 border-2 border-[#22D3EE]/30 border-t-[#22D3EE] rounded-full animate-spin" />
-                Wird gesendet...
-              </>
-            ) : (
-              <>
-                <Send className="w-4 h-4" /> Idee senden
-              </>
-            )}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── News Section ───────────────────────────────────────────────────────── */
+/* ─── News Section ───────────────────────────────────────────────── */
 function NewsSection() {
   const [activeFilter, setActiveFilter] = useState("Alle");
   const filtered = useMemo(() => {
@@ -378,32 +171,50 @@ function NewsSection() {
     return newsItems.filter((n) => n.category === activeFilter).slice(0, 6);
   }, [activeFilter]);
 
-  return (
-    <section id="news" className="py-24 relative">
-      <div className="absolute top-0 left-1/3 w-72 h-72 bg-[#2563EB]/5 rounded-full blur-[100px]" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tag border border-[#22D3EE]/20 mb-4">
-            <Newspaper className="w-4 h-4 text-[#22D3EE]" />
-            <span className="text-xs text-[#22D3EE] font-medium">Aktuell</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-4">
-            Top News aus der <span className="gradient-text">KI-Welt</span>
-          </h2>
-          <p className="text-caption max-w-2xl mx-auto">
-            Die wichtigsten Nachrichten aus der Welt der Künstlichen Intelligenz – kuratiert und zusammengefasst.
-          </p>
-        </motion.div>
+  const catColors: Record<string, string> = {
+    "OpenAI": "text-purple-400",
+    "Google": "text-blue-400",
+    "Anthropic": "text-emerald-400",
+    "Meta": "text-pink-400",
+    "Microsoft": "text-cyan-400",
+    "Business": "text-amber-400",
+    "Recht": "text-red-400",
+    "Open Source": "text-indigo-400",
+  };
 
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+  const catBg: Record<string, string> = {
+    "OpenAI": "from-purple-900/20",
+    "Google": "from-blue-900/20",
+    "Anthropic": "from-emerald-900/20",
+    "Meta": "from-pink-900/20",
+    "Microsoft": "from-cyan-900/20",
+    "Business": "from-amber-900/20",
+    "Recht": "from-red-900/20",
+    "Open Source": "from-indigo-900/20",
+  };
+
+  return (
+    <section id="news" className="bg-[var(--bg-section-alt)]/20 border-t border-b border-[var(--border-color)] py-16">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+              <Newspaper className="w-6 h-6 text-purple-400" /> KI-News & Updates
+            </h2>
+            <p className="text-[var(--text-caption)] text-sm mt-1">Verpasse keine wichtigen Durchbrüche und Tech-Entwicklungen mehr.</p>
+          </div>
+        </div>
+
+        {/* Category Filters */}
+        <div className="flex flex-wrap gap-2 mb-8">
           {newsCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveFilter(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
                 activeFilter === cat
-                  ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-lg shadow-[#2563EB]/20"
-                  : "bg-tag text-caption hover:text-heading hover:bg-[var(--btn-secondary-bg)]"
+                  ? "bg-purple-600 text-white"
+                  : "bg-[var(--bg-card)] text-[var(--text-caption)] hover:text-white hover:bg-slate-800 border border-[var(--border-color)]"
               }`}
             >
               {cat}
@@ -411,136 +222,50 @@ function NewsSection() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((news, i) => (
-              <motion.article
-                key={news.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group bg-card-theme border border-theme rounded-xl p-5 card-hover"
-              >
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="px-2 py-0.5 rounded-md bg-[#2563EB]/15 text-[#22D3EE] text-xs font-medium">{news.category}</span>
-                  <span className="text-xs text-label">{news.date}</span>
-                </div>
-                <h3 className="text-base font-semibold text-heading mb-2 group-hover:text-[#22D3EE] transition-colors line-clamp-2">
-                  {news.title}
-                </h3>
-                <p className="text-sm text-caption mb-4 line-clamp-3">{news.description}</p>
-                <div className="flex items-center justify-between pt-3 border-t border-theme">
-                  <span className="text-xs text-label">{news.source}</span>
-                  <a href={news.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-sm text-[#22D3EE] hover:text-heading transition-colors">
-                    Mehr lesen <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Courses Section ───────────────────────────────────────────────────────── */
-function CoursesSection() {
-  const [activeFilter, setActiveFilter] = useState("Alle");
-  const filtered = useMemo(() => {
-    if (activeFilter === "Alle") return courses;
-    if (activeFilter === "Kostenlos") return courses.filter((c) => c.pricing === "Kostenlos");
-    if (activeFilter === "Deutsch") return courses.filter((c) => c.language === "Deutsch");
-    if (activeFilter === "Englisch") return courses.filter((c) => c.language === "Englisch");
-    if (activeFilter === "Anfänger") return courses.filter((c) => c.level === "Anfänger");
-    return courses.filter((c) => c.category === activeFilter);
-  }, [activeFilter]);
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case "Anfänger": return "bg-emerald-500/15 text-emerald-500";
-      case "Fortgeschritten": return "bg-[#2563EB]/15 text-[#2563EB]";
-      case "Experte": return "bg-[#7C3AED]/15 text-[#7C3AED]";
-      default: return "bg-[var(--bg-section-alt)] text-caption";
-    }
-  };
-
-  return (
-    <section id="kurse" className="py-24 relative bg-section-alt">
-      <div className="absolute top-0 right-1/4 w-72 h-72 bg-[#7C3AED]/5 rounded-full blur-[100px]" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tag border border-[#22D3EE]/20 mb-4">
-            <GraduationCap className="w-4 h-4 text-[#22D3EE]" />
-            <span className="text-xs text-[#22D3EE] font-medium">Lernen</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-4">
-            KI lernen: <span className="gradient-text">Kurse & Workshops</span>
-          </h2>
-          <p className="text-caption max-w-2xl mx-auto">
-            Die besten Kurse und Lernressourcen rund um Künstliche Intelligenz – von Anfänger bis Experte.
-          </p>
-        </motion.div>
-
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {courseCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                activeFilter === cat
-                  ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white shadow-lg shadow-[#2563EB]/20"
-                  : "bg-tag text-caption hover:text-heading hover:bg-[var(--btn-secondary-bg)]"
-              }`}
+        <div className="grid md:grid-cols-3 gap-8">
+          {filtered.map((news, i) => (
+            <motion.article
+              key={news.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="group cursor-pointer"
             >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((course, i) => (
-              <motion.div
-                key={course.name + course.provider}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group bg-card-theme border border-theme rounded-xl p-5 card-hover flex flex-col"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    <BookOpen className="w-5 h-5 text-[#22D3EE]" />
-                    <span className={`px-2 py-0.5 rounded-md text-xs font-medium ${getLevelColor(course.level)}`}>{course.level}</span>
-                  </div>
-                  <span className={`px-2 py-0.5 rounded-md text-xs font-medium ${course.pricing === "Kostenlos" ? "bg-emerald-500/15 text-emerald-500" : "bg-[#F59E0B]/15 text-[#F59E0B]"}`}>
-                    {course.pricing}
-                  </span>
+              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] aspect-video rounded-2xl mb-4 overflow-hidden relative">
+                <div className={`absolute inset-0 bg-gradient-to-tr ${catBg[news.category] || "from-slate-800"} to-slate-800 flex items-center justify-center`}>
+                  <span className="font-bold text-slate-600 text-sm tracking-wider uppercase">{news.category}</span>
                 </div>
-                <h3 className="text-base font-semibold text-heading mb-1 group-hover:text-[#22D3EE] transition-colors">{course.name}</h3>
-                <p className="text-xs text-label mb-3">{course.provider}</p>
-                <p className="text-sm text-caption mb-4 flex-grow">{course.description}</p>
-                <div className="flex items-center gap-4 text-xs text-label mb-4">
-                  <span className="flex items-center gap-1"><Languages className="w-3.5 h-3.5" />{course.language}</span>
-                  <span className="flex items-center gap-1"><Tag className="w-3.5 h-3.5" />{course.category}</span>
-                </div>
-                <a href={course.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 w-full py-2.5 btn-secondary border rounded-lg hover:border-[#22D3EE]/30 transition-all">
-                  Zum Kurs <ArrowUpRight className="w-4 h-4" />
+              </div>
+              <span className={`text-xs font-bold uppercase tracking-wider ${catColors[news.category] || "text-purple-400"}`}>
+                {news.category}
+              </span>
+              <h3 className="text-xl font-bold mt-2 group-hover:text-purple-400 transition line-clamp-2">
+                {news.title}
+              </h3>
+              <p className="text-[var(--text-caption)] text-sm mt-2 line-clamp-2">{news.description}</p>
+              <div className="flex items-center justify-between mt-3 pt-3 border-t border-[var(--border-color)]">
+                <span className="text-xs text-[var(--text-label)]">{news.source} • {news.date}</span>
+                <a href={news.url} target="_blank" rel="noopener noreferrer" className="text-sm text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1">
+                  Mehr lesen <ExternalLink className="w-3.5 h-3.5" />
                 </a>
-              </motion.div>
-            ))}
-          </AnimatePresence>
+              </div>
+            </motion.article>
+          ))}
         </div>
       </div>
     </section>
   );
 }
 
-/* ─── Tools Directory ───────────────────────────────────────────────────────── */
+/* ─── Tools Section ───────────────────────────────────────────────── */
 function ToolsSection() {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(() => {
+    if (typeof window === "undefined") return "";
+    const hash = window.location.hash;
+    const match = hash.match(/[?&]search=([^&]*)/);
+    return match ? decodeURIComponent(match[1]) : "";
+  });
   const [activeCategory, setActiveCategory] = useState("Alle");
 
   const filtered = useMemo(() => {
@@ -548,17 +273,21 @@ function ToolsSection() {
     if (activeCategory !== "Alle") result = result.filter((t) => t.category === activeCategory);
     if (search.trim()) {
       const q = search.toLowerCase();
-      result = result.filter((t) => t.name.toLowerCase().includes(q) || t.description.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
+      result = result.filter((t) =>
+        t.name.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        t.category.toLowerCase().includes(q)
+      );
     }
     return result;
   }, [search, activeCategory]);
 
   const getPricingColor = (pricing: string) => {
     switch (pricing) {
-      case "Kostenlos": return "bg-emerald-500/15 text-emerald-500 border-emerald-500/20";
-      case "Freemium": return "bg-[#2563EB]/15 text-[#2563EB] border-[#2563EB]/20";
-      case "Kostenpflichtig": return "bg-[#F59E0B]/15 text-[#F59E0B] border-[#F59E0B]/20";
-      default: return "bg-[var(--bg-section-alt)] text-caption";
+      case "Kostenlos": return "bg-emerald-500/10 text-emerald-400";
+      case "Freemium": return "bg-blue-500/10 text-blue-400";
+      case "Kostenpflichtig": return "bg-amber-500/10 text-amber-400";
+      default: return "bg-[var(--bg-section-alt)] text-[var(--text-caption)]";
     }
   };
 
@@ -571,250 +300,340 @@ function ToolsSection() {
   };
 
   return (
-    <section id="tools" className="py-24 relative">
-      <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-[#22D3EE]/5 rounded-full blur-[100px]" />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tag border border-[#22D3EE]/20 mb-4">
-            <Wrench className="w-4 h-4 text-[#22D3EE]" />
-            <span className="text-xs text-[#22D3EE] font-medium">Verzeichnis</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-4">
-            KI-Tools <span className="gradient-text">entdecken</span>
+    <section id="tools" className="max-w-7xl mx-auto px-6 py-16 border-t border-[var(--border-color)]">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
+        <div>
+          <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
+            <Lightbulb className="w-6 h-6 text-purple-400" /> KI-Tool Verzeichnis
           </h2>
-          <p className="text-caption max-w-2xl mx-auto">
-            Das umfangreichste Verzeichnis aktueller KI-Tools – durchsuchbar, filterbar und immer aktuell.
-          </p>
-        </motion.div>
-
-        <div className="max-w-xl mx-auto mb-8">
-          <div className="relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-label" />
-            <input
-              type="text"
-              placeholder="Suche nach KI-Tools, Kategorien oder Anwendungsfällen..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-12 pr-4 py-3.5 bg-input-theme border border-theme rounded-xl text-heading placeholder-label focus:outline-none focus:border-[#22D3EE]/50 focus:ring-1 focus:ring-[#22D3EE]/20 transition-all"
-            />
-          </div>
+          <p className="text-[var(--text-caption)] text-sm mt-1">Die weltweit besten KI-Tools, von uns getestet und kategorisiert.</p>
         </div>
+        <span className="text-sm font-semibold text-purple-400">{tools.length}+ Tools</span>
+      </div>
 
-        <div className="flex flex-wrap justify-center gap-2 mb-10 max-h-48 overflow-y-auto">
+      {/* Search */}
+      <div className="max-w-xl mb-6 bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center focus-within:border-purple-500/50 transition">
+        <Search className="ml-2 w-4 h-4 text-[var(--text-label)]" />
+        <input
+          type="text"
+          placeholder="Suche Tools..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="bg-transparent px-3 py-2 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-sm"
+        />
+      </div>
+
+      {/* Filter-Tags */}
+      <div className="flex gap-2 overflow-x-auto pb-4 mb-8 text-sm no-scrollbar">
+        {["Alle", ...toolCategories].map((cat) => (
           <button
-            onClick={() => setActiveCategory("Alle")}
-            className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${activeCategory === "Alle" ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white" : "bg-tag text-caption hover:text-heading hover:bg-[var(--btn-secondary-bg)]"}`}
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-4 py-2 rounded-xl font-medium cursor-pointer shrink-0 transition ${
+              activeCategory === cat
+                ? "bg-purple-600 text-white"
+                : "bg-[var(--bg-card)] hover:bg-slate-800 text-[var(--text-caption)] border border-[var(--border-color)]"
+            }`}
           >
-            Alle
+            {cat}
           </button>
-          {toolCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${activeCategory === cat ? "bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white" : "bg-tag text-caption hover:text-heading hover:bg-[var(--btn-secondary-bg)]"}`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        ))}
+      </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          <AnimatePresence mode="popLayout">
-            {filtered.map((tool, i) => (
-              <motion.div
-                key={tool.name}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ delay: (i % 12) * 0.03 }}
-                className="group bg-card-theme border border-theme rounded-xl p-4 card-hover"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
-                      style={{
-                        backgroundColor: tool.color,
-                        color: getContrastColor(tool.color),
-                      }}
-                    >
-                      {tool.name.charAt(0)}
-                    </div>
-                    <h3 className="text-sm font-semibold text-heading group-hover:text-[#22D3EE] transition-colors">{tool.name}</h3>
+      {/* Tool Cards Grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <AnimatePresence mode="popLayout">
+          {filtered.map((tool, i) => (
+            <motion.div
+              key={tool.name}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ delay: (i % 12) * 0.03 }}
+              className="bg-[var(--bg-card)]/40 border border-[var(--border-color)] p-6 rounded-2xl hover:border-purple-500/40 transition card-glow flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex justify-between items-start mb-4">
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
+                    style={{
+                      backgroundColor: tool.color + "15",
+                      color: tool.color,
+                    }}
+                  >
+                    {tool.name.charAt(0)}
                   </div>
-                  <span className={`px-2 py-0.5 rounded text-xs font-medium border ${getPricingColor(tool.pricing)}`}>{tool.pricing}</span>
+                  <span className={`text-xs px-2 py-1 rounded-md font-medium ${getPricingColor(tool.pricing)}`}>
+                    {tool.pricing}
+                  </span>
                 </div>
-                <p className="text-xs text-label mb-1">{tool.category}</p>
-                <p className="text-sm text-caption mb-3 line-clamp-2">{tool.description}</p>
-                <div className="flex items-center justify-between pt-2 border-t border-theme">
-                  <span className="text-xs text-label">{tool.audience}</span>
-                  <a href={tool.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs text-[#22D3EE] hover:text-heading transition-colors">
-                    Tool öffnen <ArrowUpRight className="w-3 h-3" />
+                <h3 className="font-bold text-lg mb-1">{tool.name}</h3>
+                <p className="text-[var(--text-caption)] text-xs line-clamp-2 mb-4">{tool.description}</p>
+              </div>
+              <div className="text-xs text-[var(--text-label)] font-medium pt-2 border-t border-[var(--border-color)] flex items-center justify-between">
+                <span>{tool.category}</span>
+                <a href={tool.url} target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1">
+                  Öffnen <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="text-center py-12">
+          <Search className="w-10 h-10 text-[var(--text-label)] mx-auto mb-3" />
+          <p className="text-[var(--text-caption)]">Keine Tools gefunden. Versuche einen anderen Suchbegriff.</p>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/* ─── Courses Section (Academy) ───────────────────────────────────────────── */
+function CoursesSection() {
+  const [activeFilter, setActiveFilter] = useState("Alle");
+  const filtered = useMemo(() => {
+    if (activeFilter === "Alle") return courses;
+    if (activeFilter === "Kostenlos") return courses.filter((c) => c.pricing === "Kostenlos");
+    if (activeFilter === "Deutsch") return courses.filter((c) => c.language === "Deutsch");
+    if (activeFilter === "Englisch") return courses.filter((c) => c.language === "Englisch");
+    if (activeFilter === "Anfänger") return courses.filter((c) => c.level === "Anfänger");
+    return courses.filter((c) => c.category === activeFilter);
+  }, [activeFilter]);
+
+  const getLevelBadge = (level: string) => {
+    switch (level) {
+      case "Anfänger": return { bg: "bg-indigo-500/10", text: "text-indigo-400", border: "border-indigo-500/20" };
+      case "Fortgeschritten": return { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/20" };
+      case "Experte": return { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/20" };
+      default: return { bg: "bg-[var(--bg-section-alt)]", text: "text-[var(--text-caption)]", border: "border-[var(--border-color)]" };
+    }
+  };
+
+  return (
+    <section id="academy" className="max-w-7xl mx-auto px-6 py-20">
+      <div className="text-center max-w-2xl mx-auto mb-16">
+        <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
+          <GraduationCap className="w-7 h-7 text-purple-400" /> CentofAI Academy
+        </h2>
+        <p className="text-[var(--text-caption)] mt-2">
+          Vom Einsteiger zum Prompt-Engineer. Erweitere deine Skills in unseren Videokursen und exklusiven Live-Workshops.
+        </p>
+      </div>
+
+      {/* Filter */}
+      <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {courseCategories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveFilter(cat)}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              activeFilter === cat
+                ? "bg-purple-600 text-white shadow-lg shadow-purple-500/20"
+                : "bg-[var(--bg-card)] text-[var(--text-caption)] hover:text-white hover:bg-slate-800 border border-[var(--border-color)]"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* 2-Spalten Grid */}
+      <div className="grid md:grid-cols-2 gap-8">
+        <AnimatePresence mode="popLayout">
+          {filtered.map((course, i) => {
+            const badge = getLevelBadge(course.level);
+            return (
+              <motion.div
+                key={course.name + course.provider}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="bg-[var(--bg-card)]/50 border border-[var(--border-color)] p-8 rounded-2xl flex flex-col justify-between hover:border-purple-500/30 transition card-glow"
+              >
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <span className={`px-3 py-1 rounded-lg text-xs font-semibold ${badge.bg} ${badge.text} border ${badge.border}`}>
+                      {course.level}
+                    </span>
+                    <span className="text-[var(--text-label)] text-xs font-medium">{course.language} • {course.category}</span>
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3">{course.name}</h3>
+                  <p className="text-[var(--text-caption)] text-sm mb-6 leading-relaxed">{course.description}</p>
+                </div>
+                <div className="flex items-center justify-between pt-4 border-t border-[var(--border-color)]/60">
+                  <span className="text-xl font-bold text-white">{course.pricing === "Kostenlos" ? "Kostenlos" : "Paid"}</span>
+                  <a
+                    href={course.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition"
+                  >
+                    Jetzt starten
                   </a>
                 </div>
               </motion.div>
-            ))}
-          </AnimatePresence>
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-12">
-            <Search className="w-10 h-10 text-label mx-auto mb-3" />
-            <p className="text-caption">Keine Tools gefunden. Versuche einen anderen Suchbegriff.</p>
-          </div>
-        )}
+            );
+          })}
+        </AnimatePresence>
       </div>
     </section>
   );
 }
 
-/* ─── Newsletter ────────────────────────────────────────────────────────── */
-function NewsletterSection() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); if (email) { setSubmitted(true); setEmail(""); } };
+/* ─── Proposal Widget ───────────────────────────────────────────────── */
+function ProposalWidget() {
+  const [formData, setFormData] = useState({ name: "", email: "", idea: "", budget: "", timeline: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange = (field: string, value: string) => setFormData((prev) => ({ ...prev, [field]: value }));
+
+  const handleSubmit = async () => {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) {
+      setStatus("error"); setErrorMsg("Bitte fülle Name, E-Mail und Idee aus."); return;
+    }
+    setStatus("sending"); setErrorMsg("");
+    try {
+      const res = await fetch("/api/proposals", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (!res.ok) { const data = await res.json().catch(() => ({})); throw new Error(data.error || "Fehler"); }
+      setStatus("success");
+      setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" });
+    } catch (err) {
+      setStatus("error"); setErrorMsg((err as Error).message || "Fehler beim Senden.");
+    }
+  };
+
+  if (status === "success") {
+    return (
+      <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6">
+        <div className="flex flex-col items-center justify-center py-8 text-center">
+          <div className="w-12 h-12 rounded-full bg-emerald-500/15 flex items-center justify-center mb-4">
+            <CheckCircle2 className="w-6 h-6 text-emerald-500" />
+          </div>
+          <p className="text-lg font-semibold text-[var(--text-heading)] mb-2">Vielen Dank!</p>
+          <p className="text-sm text-[var(--text-caption)]">Deine Idee wurde übermittelt. Wir melden uns bei dir.</p>
+          <button onClick={() => setStatus("idle")} className="mt-4 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors">
+            Weitere Idee senden
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <section id="newsletter" className="py-24 relative bg-section-alt">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#2563EB]/8 rounded-full blur-[150px]" />
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#7C3AED] mb-6 shadow-lg shadow-[#2563EB]/20">
-            <Mail className="w-7 h-7 text-white" />
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-4">
-            Bleib auf dem <span className="gradient-text">Laufenden</span>
-          </h2>
-          <p className="text-caption mb-8 max-w-lg mx-auto">
-            Erhalte die wichtigsten KI-News, neue Tools und spannende Lernangebote direkt in dein Postfach.
-          </p>
+    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6">
+      <h3 className="text-lg font-bold text-[var(--text-heading)] mb-1 flex items-center gap-2">
+        <Lightbulb className="w-5 h-5 text-purple-400" /> Projekt vorschlagen
+      </h3>
+      <p className="text-xs text-[var(--text-caption)] mb-4">Deine Idee in digitaler Form</p>
 
+      {status === "error" && (
+        <div className="mb-3 p-2.5 bg-red-500/10 border border-red-500/20 rounded-lg text-sm text-red-400">
+          {errorMsg}
+        </div>
+      )}
+
+      <div className="space-y-2 mb-3">
+        <input type="text" placeholder="Dein Name" value={formData.name} onChange={(e) => handleChange("name", e.target.value)}
+          className="w-full px-3 py-2 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" />
+        <input type="email" placeholder="Deine E-Mail" value={formData.email} onChange={(e) => handleChange("email", e.target.value)}
+          className="w-full px-3 py-2 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" />
+        <textarea placeholder="Beschreibe deine Idee..." value={formData.idea} onChange={(e) => handleChange("idea", e.target.value)}
+          className="w-full px-3 py-2.5 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg resize-none placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40" rows={2} />
+      </div>
+
+      <button onClick={handleSubmit} disabled={status === "sending"}
+        className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-lg hover:bg-purple-500/10 transition-colors disabled:opacity-50">
+        {status === "sending" ? (
+          <><span className="w-4 h-4 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />Wird gesendet...</>
+        ) : (
+          <><Send className="w-4 h-4" /> Idee senden</>
+        )}
+      </button>
+    </div>
+  );
+}
+
+/* ─── Footer + Newsletter + Proposal ───────────────────────────────────────────── */
+function Footer() {
+  const [email, setEmail] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const handleNewsletter = (e: React.FormEvent) => { e.preventDefault(); if (email) { setSubmitted(true); setEmail(""); } };
+
+  return (
+    <footer className="border-t border-[var(--border-color)] bg-[var(--bg-page)]">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Newsletter Box */}
+        <div id="newsletter" className="bg-gradient-to-r from-purple-950/40 to-[var(--bg-card)] border border-[var(--border-color)] p-8 rounded-3xl flex flex-col md:flex-row justify-between items-center gap-6 mb-12">
+          <div className="text-center md:text-left">
+            <h4 className="text-lg font-bold">Nichts mehr verpassen</h4>
+            <p className="text-[var(--text-caption)] text-xs mt-1">Erhalte 1x pro Woche die wichtigsten KI-Tools & News direkt in dein Postfach.</p>
+          </div>
           {submitted ? (
-            <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="inline-flex items-center gap-3 px-6 py-4 bg-emerald-500/15 border border-emerald-500/30 rounded-xl">
-              <CheckCircle2 className="w-6 h-6 text-emerald-500" />
-              <span className="text-emerald-500 font-medium">Danke! Du erhältst bald die ersten Updates.</span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm font-medium">
+              <CheckCircle2 className="w-4 h-4" /> Danke für dein Abo!
+            </div>
           ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input type="email" required placeholder="Deine E-Mail-Adresse" value={email} onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 px-4 py-3.5 bg-input-theme border border-theme rounded-xl text-heading placeholder-label focus:outline-none focus:border-[#22D3EE]/50 focus:ring-1 focus:ring-[#22D3EE]/20 transition-all" />
-              <button type="submit" className="px-6 py-3.5 bg-gradient-to-r from-[#2563EB] to-[#7C3AED] text-white font-semibold rounded-xl hover:opacity-90 transition-opacity shadow-lg shadow-[#2563EB]/25 whitespace-nowrap">
+            <form onSubmit={handleNewsletter} className="flex gap-2 w-full md:w-auto">
+              <input type="email" required placeholder="Deine E-Mail"
+                value={email} onChange={(e) => setEmail(e.target.value)}
+                className="bg-[var(--bg-page)] border border-[var(--border-color)] px-4 py-2.5 rounded-xl text-sm text-[var(--text-body)] focus:outline-none focus:border-purple-500 w-full md:w-64" />
+              <button type="submit" className="bg-white text-slate-950 hover:bg-slate-200 font-bold px-5 py-2.5 rounded-xl text-sm transition whitespace-nowrap">
                 Abonnieren
               </button>
             </form>
           )}
-        </motion.div>
-      </div>
-    </section>
-  );
-}
+        </div>
 
-/* ─── About ────────────────────────────────────────────────────────── */
-function AboutSection() {
-  const stats = [
-    { icon: Newspaper, label: "Tägliche KI-News", value: "Aktuell & kuratiert" },
-    { icon: Wrench, label: "Tool-Verzeichnis", value: "100+ KI-Tools" },
-    { icon: GraduationCap, label: "Lernangebote", value: "Kurse & Workshops" },
-  ];
-
-  return (
-    <section id="about" className="py-24 relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-tag border border-[#22D3EE]/20 mb-4">
-            <Sparkles className="w-4 h-4 text-[#22D3EE]" />
-            <span className="text-xs text-[#22D3EE] font-medium">Mission</span>
-          </div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-heading mb-6">
-            Über <span className="gradient-text">CentofAi</span>
-          </h2>
-          <p className="text-lg text-caption leading-relaxed max-w-2xl mx-auto">
-            CentofAi ist eine Plattform, die Menschen hilft, Künstliche Intelligenz besser zu verstehen,
-            passende Tools zu finden und KI sinnvoll im Alltag, Beruf und Business einzusetzen.
-            Wir kuratieren die besten Ressourcen, damit du den Überblick behältst.
-          </p>
-
-          <div className="grid sm:grid-cols-3 gap-6 mt-12">
-            {stats.map((stat) => (
-              <div key={stat.label} className="p-5 bg-card-theme border border-theme rounded-xl">
-                <stat.icon className="w-6 h-6 text-[#22D3EE] mx-auto mb-3" />
-                <p className="text-heading font-semibold mb-1">{stat.label}</p>
-                <p className="text-sm text-label">{stat.value}</p>
+        {/* Proposal Section */}
+        <div id="proposal" className="mb-12">
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            <div>
+              <h3 className="text-2xl font-bold mb-2">Hast du eine Idee?</h3>
+              <p className="text-[var(--text-caption)] text-sm mb-4">
+                Du hast ein KI-Tool entdeckt, das unbedingt in unser Verzeichnis gehört? Oder eine Projektidee, die wir umsetzen sollten?
+                Schick sie uns – wir entwickeln sie als Website oder Mobile App.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Tool-Vorschläge</span>
+                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Projektideen</span>
+                <span className="flex items-center gap-1 text-xs text-[var(--text-label)]"><CheckCircle2 className="w-3.5 h-3.5 text-purple-400" /> Feedback</span>
               </div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-/* ─── Footer ───────────────────────────────────────────────────────── */
-function Footer() {
-  const footerLinks = [
-    { label: "KI-News", href: "#news" },
-    { label: "KI-Tools", href: "#tools" },
-    { label: "Kurse & Workshops", href: "#kurse" },
-    { label: "Über uns", href: "#about" },
-    { label: "Newsletter", href: "#newsletter" },
-  ];
-
-  return (
-    <footer className="border-t border-theme bg-page">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-4 gap-8 mb-10">
-          <div className="md:col-span-2">
-            <a href="#" className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center">
-                <Brain className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-display font-bold text-heading">Centof<span className="text-[#22D3EE]">Ai</span></span>
-            </a>
-            <p className="text-sm text-label max-w-sm">
-              Die zentrale Plattform für Künstliche Intelligenz. News, Tools, Kurse und Workshops – alles an einem Ort.
-            </p>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-heading mb-4">Navigation</h4>
-            <ul className="space-y-2.5">
-              {footerLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-sm text-caption hover:text-[#22D3EE] transition-colors">{link.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-sm font-semibold text-heading mb-4">Rechtliches</h4>
-            <ul className="space-y-2.5">
-              {["Impressum", "Datenschutz", "Kontakt"].map((l) => (
-                <li key={l}>
-                  <a href="#" className="text-sm text-caption hover:text-[#22D3EE] transition-colors">{l}</a>
-                </li>
-              ))}
-            </ul>
+            </div>
+            <ProposalWidget />
           </div>
         </div>
-        <div className="pt-8 border-t border-theme flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-label">© {new Date().getFullYear()} CentofAi. Alle Rechte vorbehalten.</p>
-          <p className="text-xs text-label">Alle Links zu externen Tools und Kursen sind Affiliate-freie Empfehlungen.</p>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[var(--text-label)] pt-8 border-t border-[var(--border-color)]">
+          <p>© {new Date().getFullYear()} CentofAI. Alle Rechte vorbehalten.</p>
+          <div className="space-x-6">
+            <a href="#" className="hover:text-[var(--text-caption)] transition">Impressum</a>
+            <a href="#" className="hover:text-[var(--text-caption)] transition">Datenschutz</a>
+          </div>
         </div>
       </div>
     </footer>
   );
 }
 
-/* ─── Main App ─────────────────────────────────────────────────────── */
+/* ─── Main App ────────────────────────────────────────────────────────────────── */
 export default function App() {
   return (
-    <div className="min-h-screen bg-page">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth">
       <Navbar />
       <Hero />
+      <ToolsSection />
       <NewsSection />
       <CoursesSection />
-      <ToolsSection />
-      <NewsletterSection />
-      <AboutSection />
       <Footer />
     </div>
   );

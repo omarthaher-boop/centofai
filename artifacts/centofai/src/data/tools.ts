@@ -160,4 +160,12 @@ export const tools: Tool[] = [
   { name: "Coursera Coach", category: "Bildung & Lernen", description: "KI-Lernassistent auf Coursera", pricing: "Freemium", audience: "Studierende", url: "https://coursera.org", color: "#0056D2" },
   { name: "Brilliant AI", category: "Bildung & Lernen", description: "KI-gest\u00fctztes interaktives Lernen", pricing: "Kostenpflichtig", audience: "Studierende", url: "https://brilliant.org", color: "#00D4AA" },
   { name: "Wolfram Alpha", category: "Bildung & Lernen", description: "KI-Wissens-Engine f\u00fcr Mathe und Wissenschaft", pricing: "Freemium", audience: "Studierende", url: "https://wolframalpha.com", color: "#DD1100" },
+
+  // Forschung & Wissenschaft
+  { name: "Elicit", category: "Forschung & Wissenschaft", description: "KI-Assistent f\u00fcr wissenschaftliche Recherche und Literatur", pricing: "Freemium", audience: "Forscher", url: "https://elicit.org", color: "#7C3AED" },
+  { name: "Consensus", category: "Forschung & Wissenschaft", description: "KI-Suchmaschine f\u00fcr wissenschaftliche Erkenntnisse", pricing: "Freemium", audience: "Wissenschaftler", url: "https://consensus.app", color: "#10B981" },
+
+  // Gaming & Unterhaltung
+  { name: "Inworld AI", category: "Gaming & Unterhaltung", description: "KI-gest\u00fctzte NPCs und Charaktere f\u00fcr Spiele", pricing: "Kostenpflichtig", audience: "Game-Developer", url: "https://inworld.ai", color: "#F59E0B" },
+  { name: "Scenario", category: "Gaming & Unterhaltung", description: "KI-Plattform f\u00fcr Game-Assets und Charaktere", pricing: "Freemium", audience: "Game-Developer", url: "https://scenario.com", color: "#EF4444" },
 ];
