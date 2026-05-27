@@ -10,6 +10,77 @@ import { tools, toolCategories } from "./data/tools";
 import { newsItems, newsCategories } from "./data/news";
 import { courses, courseCategories } from "./data/courses";
 
+/* ─── Image helpers ─────────────────────────────────────────────────── */
+function getFaviconUrl(url: string): string | null {
+  try {
+    const host = new URL(url).hostname;
+    return `https://www.google.com/s2/favicons?domain=${host}&sz=128`;
+  } catch {
+    return null;
+  }
+}
+
+function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; url: string; logoUrl?: string }) {
+  const [failed, setFailed] = useState(false);
+  const src = logoUrl || getFaviconUrl(url);
+  if (!src || failed) {
+    return (
+      <div
+        className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
+        style={{ backgroundColor: color + "15", color }}
+      >
+        {name.charAt(0)}
+      </div>
+    );
+  }
+  return (
+    <div
+      className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 shadow-lg overflow-hidden p-1.5"
+      style={{ backgroundColor: color + "15" }}
+    >
+      <img
+        src={src}
+        alt={`${name} logo`}
+        loading="lazy"
+        decoding="async"
+        onError={() => setFailed(true)}
+        className="w-full h-full object-contain"
+      />
+    </div>
+  );
+}
+
+function NewsThumbnail({
+  imageUrl,
+  category,
+  catBg,
+}: {
+  imageUrl?: string;
+  category: string;
+  catBg: Record<string, string>;
+}) {
+  const [failed, setFailed] = useState(false);
+  const showImage = imageUrl && !failed;
+  return (
+    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] aspect-video rounded-2xl mb-4 overflow-hidden relative">
+      {showImage ? (
+        <img
+          src={imageUrl}
+          alt={category}
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        <div className={`absolute inset-0 bg-gradient-to-tr ${catBg[category] || "from-slate-800"} to-slate-800 flex items-center justify-center`}>
+          <span className="font-bold text-slate-600 text-sm tracking-wider uppercase">{category}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 /* ─── Theme Hook ────────────────────────────────────────────────────── */
 function useTheme() {
   const [theme, setTheme] = useState<"dark" | "light">(() => {
@@ -234,11 +305,7 @@ function NewsSection() {
               transition={{ delay: i * 0.1 }}
               className="group cursor-pointer"
             >
-              <div className="bg-[var(--bg-card)] border border-[var(--border-color)] aspect-video rounded-2xl mb-4 overflow-hidden relative">
-                <div className={`absolute inset-0 bg-gradient-to-tr ${catBg[news.category] || "from-slate-800"} to-slate-800 flex items-center justify-center`}>
-                  <span className="font-bold text-slate-600 text-sm tracking-wider uppercase">{news.category}</span>
-                </div>
-              </div>
+              <NewsThumbnail imageUrl={news.imageUrl} category={news.category} catBg={catBg} />
               <span className={`text-xs font-bold uppercase tracking-wider ${catColors[news.category] || "text-purple-400"}`}>
                 {news.category}
               </span>
@@ -369,15 +436,7 @@ function ToolsSection() {
             >
               <div>
                 <div className="flex justify-between items-start mb-4">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 font-bold text-sm shadow-lg"
-                    style={{
-                      backgroundColor: tool.color + "15",
-                      color: tool.color,
-                    }}
-                  >
-                    {tool.name.charAt(0)}
-                  </div>
+                  <ToolLogo name={tool.name} color={tool.color} url={tool.url} logoUrl={tool.logoUrl} />
                   <span className={`text-xs px-2 py-1 rounded-md font-medium ${getPricingColor(tool.pricing)}`}>
                     {tool.pricing}
                   </span>

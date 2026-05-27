@@ -5,7 +5,11 @@ export interface NewsItem {
   date: string;
   url: string;
   category: string;
+  imageUrl?: string;
 }
+
+const unsplash = (id: string) =>
+  `https://images.unsplash.com/${id}?w=800&h=450&fit=crop&auto=format&q=75`;
 
 export const newsItems: NewsItem[] = [
   {
@@ -15,6 +19,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-20",
     url: "https://openai.com/blog",
     category: "OpenAI",
+    imageUrl: unsplash("photo-1677442136019-21780ecad995"),
   },
   {
     title: "Google DeepMind erreicht neuen Meilenstein bei Protein-Faltung",
@@ -23,6 +28,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-18",
     url: "https://deepmind.google/discover/blog/",
     category: "Google",
+    imageUrl: unsplash("photo-1581090464777-f3220bbe1b8b"),
   },
   {
     title: "Anthropic veröffentlicht Claude 4 mit erweitertem Kontext",
@@ -31,6 +37,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-15",
     url: "https://www.anthropic.com/news",
     category: "Forschung",
+    imageUrl: unsplash("photo-1620712943543-bcc4688e7485"),
   },
   {
     title: "NVIDIA stellt neue KI-Chip-Architektur Blackwell Ultra vor",
@@ -39,6 +46,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-12",
     url: "https://blogs.nvidia.com/",
     category: "Tools",
+    imageUrl: unsplash("photo-1518770660439-4636190af475"),
   },
   {
     title: "EU-KI-Gesetz: Neue Regulierungen für KI-Systeme treten in Kraft",
@@ -47,6 +55,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-10",
     url: "https://www.technologyreview.com/topic/artificial-intelligence/",
     category: "Business",
+    imageUrl: unsplash("photo-1529107386315-e1a2ed48a620"),
   },
   {
     title: "Midjourney v8 ermöglicht 4K-Video-Generierung in Echtzeit",
@@ -55,6 +64,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-08",
     url: "https://www.theverge.com/ai-artificial-intelligence/",
     category: "Startups",
+    imageUrl: unsplash("photo-1633613286848-e6f43bbafb8d"),
   },
   {
     title: "Microsoft integriert Copilot tief in Windows 12",
@@ -63,6 +73,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-05",
     url: "https://blogs.microsoft.com/ai/",
     category: "OpenAI",
+    imageUrl: unsplash("photo-1633419461186-7d40a38105ec"),
   },
   {
     title: "Hugging Face startet Open-Source-KI-Agent-Plattform",
@@ -71,6 +82,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-05-03",
     url: "https://huggingface.co/blog",
     category: "Startups",
+    imageUrl: unsplash("photo-1526374965328-7f61d4dc18c5"),
   },
   {
     title: "Perplexity führt Echtzeit-Forschungs-Agent ein",
@@ -79,6 +91,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-28",
     url: "https://techcrunch.com/category/artificial-intelligence/",
     category: "Tools",
+    imageUrl: unsplash("photo-1551434678-e076c223a692"),
   },
   {
     title: "AI Startup erreicht 10 Milliarden Dollar Bewertung",
@@ -87,6 +100,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-25",
     url: "https://venturebeat.com/ai/",
     category: "Business",
+    imageUrl: unsplash("photo-1559136555-9303baea8ebd"),
   },
   {
     title: "OpenAI kündigt kostenlosen Bildungszugang für Universitäten an",
@@ -95,6 +109,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-22",
     url: "https://openai.com/blog",
     category: "OpenAI",
+    imageUrl: unsplash("photo-1523240795612-9a054b0db644"),
   },
   {
     title: "Google Gemini 2.5 Pro übertrifft menschliche Benchmarks",
@@ -103,6 +118,7 @@ export const newsItems: NewsItem[] = [
     date: "2026-04-20",
     url: "https://deepmind.google/discover/blog/",
     category: "Google",
+    imageUrl: unsplash("photo-1485827404703-89b55fcc595e"),
   },
 ];
 

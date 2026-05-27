@@ -6,6 +6,7 @@ export interface Tool {
   audience: string;
   url: string;
   color: string;
+  logoUrl?: string;
 }
 
 export const toolCategories = [
