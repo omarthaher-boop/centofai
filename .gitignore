@@ -47,3 +47,22 @@ Thumbs.db
 # Replit
 .cache/
 .local/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Attached assets (user uploads)
+attached_assets/
+
+# Logs
+*.log
+/tmp/
+
+# Build outputs
+*.mjs.map
+
+# OS files
+*.swp
+*.swo
