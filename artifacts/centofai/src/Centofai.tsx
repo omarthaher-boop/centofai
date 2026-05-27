@@ -56,7 +56,7 @@ function Navbar() {
               <Brain className="w-5 h-5 text-white" />
             </div>
             <span className="font-display font-bold text-lg text-heading tracking-tight">
-              Cent of <span className="text-[#22D3EE]">AI</span>
+              Centof<span className="text-[#22D3EE]">Ai</span>
             </span>
           </a>
 
@@ -611,7 +611,7 @@ function Footer() {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#2563EB] to-[#7C3AED] flex items-center justify-center">
                 <Brain className="w-4 h-4 text-white" />
               </div>
-              <span className="font-display font-bold text-heading">Cent of <span className="text-[#22D3EE]">AI</span></span>
+              <span className="font-display font-bold text-heading">Centof<span className="text-[#22D3EE]">Ai</span></span>
             </a>
             <p className="text-sm text-label max-w-sm">
               Die zentrale Plattform für Künstliche Intelligenz. News, Tools, Kurse und Workshops – alles an einem Ort.
