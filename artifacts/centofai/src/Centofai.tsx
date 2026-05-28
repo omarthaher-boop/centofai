@@ -345,7 +345,7 @@ function Hero() {
         </div>
 
         {/* ─── Center Text ─── */}
-        <div className="lg:col-span-5 text-center lg:text-left">
+        <div className="lg:col-span-4 text-center lg:text-left">
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 tracking-wide uppercase">
             Zentraler KI-Hub & Verzeichnis
           </span>
@@ -384,8 +384,8 @@ function Hero() {
         </div>
 
         {/* ─── Right Image ─── */}
-        <div className="lg:col-span-4 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-[420px]">
+        <div className="lg:col-span-5 flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-[520px]">
             <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
             <img
               src="centofai-hero.png"
