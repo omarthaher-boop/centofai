@@ -16,6 +16,8 @@ tags:
     description: User favorites
   - name: tool-submissions
     description: User-submitted tools
+  - name: account
+    description: User account management
 paths:
   /healthz:
     get:
@@ -152,6 +154,27 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
         "401":
           description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /account:
+    delete:
+      operationId: deleteAccount
+      tags: [account]
+      summary: Delete the signed-in user's account and all related data
+      responses:
+        "204":
+          description: Account deleted
+        "401":
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "500":
+          description: Server error
           content:
             application/json:
               schema:

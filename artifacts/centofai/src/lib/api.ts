@@ -49,6 +49,8 @@ export const api = {
       method: "POST",
       body: JSON.stringify(data),
     }),
+  deleteAccount: () =>
+    request<void>("/account", { method: "DELETE" }),
   submitProposal: (data: {
     name: string;
     email: string;

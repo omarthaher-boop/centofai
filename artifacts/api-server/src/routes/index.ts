@@ -4,6 +4,7 @@ import proposalsRouter from "./proposals";
 import ogImageRouter from "./og-image";
 import favoritesRouter from "./favorites";
 import toolSubmissionsRouter from "./tool-submissions";
+import accountRouter from "./account";
 
 const router: IRouter = Router();
 
@@ -12,5 +13,6 @@ router.use(proposalsRouter);
 router.use(ogImageRouter);
 router.use(favoritesRouter);
 router.use(toolSubmissionsRouter);
+router.use(accountRouter);
 
 export default router;

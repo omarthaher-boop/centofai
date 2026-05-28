@@ -24,6 +24,7 @@ import ToolDetail from "./pages/ToolDetail";
 import NotFound from "./pages/not-found";
 import FavoritesPage from "./pages/favorites";
 import SubmitToolPage from "./pages/submit-tool";
+import AccountPage from "./pages/account";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -186,6 +187,14 @@ function ClerkProviderWithRoutes() {
           <Route path="/submit-tool">
             <Show when="signed-in">
               <SubmitToolPage />
+            </Show>
+            <Show when="signed-out">
+              <SignInPage />
+            </Show>
+          </Route>
+          <Route path="/account">
+            <Show when="signed-in">
+              <AccountPage />
             </Show>
             <Show when="signed-out">
               <SignInPage />

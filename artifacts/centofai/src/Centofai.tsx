@@ -4,7 +4,7 @@ import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
-  Sun, Moon, Users, Lightbulb, Send, ChevronDown, Heart, LogOut,
+  Sun, Moon, Users, Lightbulb, Send, ChevronDown, Heart, LogOut, Settings,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useClerk, useUser } from "@clerk/react";
@@ -213,9 +213,16 @@ function Navbar() {
               <Heart className="w-3.5 h-3.5" /> Favoriten
             </Link>
             <div className="flex items-center gap-2 pl-2 border-l border-[var(--border-color)]">
-              <span className="text-xs text-[var(--text-caption)] hidden lg:inline">
-                {user?.firstName || user?.primaryEmailAddress?.emailAddress}
-              </span>
+              <Link
+                to="/account"
+                title="Konto-Einstellungen"
+                className="inline-flex items-center gap-1.5 text-xs text-[var(--text-caption)] hover:text-white transition"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="hidden lg:inline">
+                  {user?.firstName || user?.primaryEmailAddress?.emailAddress}
+                </span>
+              </Link>
               <button
                 onClick={() => signOut({ redirectUrl: basePath || "/" })}
                 title="Abmelden"
@@ -281,6 +288,9 @@ function Navbar() {
                 </Link>
                 <Link to="/favorites" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
                   Meine Favoriten
+                </Link>
+                <Link to="/account" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
+                  Konto-Einstellungen
                 </Link>
                 <button onClick={() => { setOpen(false); signOut({ redirectUrl: basePath || "/" }); }} className="block py-2 text-sm font-semibold text-[var(--text-caption)] hover:text-white transition">
                   Abmelden
