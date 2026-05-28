@@ -365,12 +365,25 @@ function Hero() {
             <span className="gradient-text">einem einzigen Ort</span>
           </h1>
 
-          <p className="text-lg text-[var(--text-caption)] max-w-lg mx-auto lg:mx-0 mb-8">
+          <p className="text-lg text-[var(--text-caption)] max-w-lg mx-auto lg:mx-0 mb-6">
             Entdecke die besten KI-Tools, bleibe mit täglichen News up-to-date und lerne in praxisnahen Workshops von den Experten.
           </p>
+        </div>
+
+        {/* ─── Right: Image + Search ─── */}
+        <div className="lg:col-span-5 flex flex-col gap-4 justify-center">
+          <div className="relative w-full max-w-[520px] mx-auto lg:mx-0">
+            <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
+            <img
+              src="centofai-hero.png"
+              alt="CentofAI - Center of Artificial Intelligence"
+              className="relative w-full h-auto rounded-xl border border-[var(--border-color)] shadow-2xl"
+              loading="eager"
+            />
+          </div>
 
           {/* Globale Suche */}
-          <div className="max-w-lg mx-auto lg:mx-0 bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
+          <div className="w-full max-w-[520px] mx-auto lg:mx-0 bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
             <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
             <input
               type="text"
@@ -390,19 +403,6 @@ function Hero() {
             >
               Suchen
             </a>
-          </div>
-        </div>
-
-        {/* ─── Right Image ─── */}
-        <div className="lg:col-span-5 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-[520px]">
-            <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
-            <img
-              src="centofai-hero.png"
-              alt="CentofAI - Center of Artificial Intelligence"
-              className="relative w-full h-auto rounded-xl border border-[var(--border-color)] shadow-2xl"
-              loading="eager"
-            />
           </div>
         </div>
       </div>
