@@ -66,7 +66,52 @@ export interface ToolSubmissionResponse {
   createdAt: string;
 }
 
+export type SearchResultsToolsItem = {
+  name: string;
+  category: string;
+  description: string;
+  pricing: string;
+  url: string;
+  color: string;
+  logoUrl?: string;
+  slug?: string;
+};
+
+export type SearchResultsNewsItem = {
+  title: string;
+  description: string;
+  source: string;
+  date: string;
+  url: string;
+  category: string;
+  imageUrl?: string;
+};
+
+export type SearchResultsCoursesItem = {
+  name: string;
+  provider: string;
+  level: string;
+  language: string;
+  pricing: string;
+  description: string;
+  url: string;
+  category: string;
+};
+
+export interface SearchResults {
+  tools: SearchResultsToolsItem[];
+  news: SearchResultsNewsItem[];
+  courses: SearchResultsCoursesItem[];
+}
+
 export interface ErrorResponse {
   error: string;
 }
+
+export type GlobalSearchParams = {
+/**
+ * @minLength 1
+ */
+q: string;
+};
 

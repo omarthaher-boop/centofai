@@ -82,3 +82,46 @@ export const SubmitToolBody = zod.object({
 })
 
 
+/**
+ * @summary Search across tools, news, and courses
+ */
+
+
+
+export const GlobalSearchQueryParams = zod.object({
+  "q": zod.coerce.string().min(1)
+})
+
+export const GlobalSearchResponse = zod.object({
+  "tools": zod.array(zod.object({
+  "name": zod.string(),
+  "category": zod.string(),
+  "description": zod.string(),
+  "pricing": zod.string(),
+  "url": zod.string(),
+  "color": zod.string(),
+  "logoUrl": zod.string().optional(),
+  "slug": zod.string().optional()
+})),
+  "news": zod.array(zod.object({
+  "title": zod.string(),
+  "description": zod.string(),
+  "source": zod.string(),
+  "date": zod.string(),
+  "url": zod.string(),
+  "category": zod.string(),
+  "imageUrl": zod.string().optional()
+})),
+  "courses": zod.array(zod.object({
+  "name": zod.string(),
+  "provider": zod.string(),
+  "level": zod.string(),
+  "language": zod.string(),
+  "pricing": zod.string(),
+  "description": zod.string(),
+  "url": zod.string(),
+  "category": zod.string()
+}))
+})
+
+

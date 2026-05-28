@@ -16,7 +16,7 @@ import {
   relatedTools,
   toolSlug,
   type Tool,
-} from "../data/tools";
+} from "@workspace/data";
 import NotFound from "./not-found";
 
 const PRICING_BADGE: Record<Tool["pricing"], string> = {
@@ -300,7 +300,7 @@ export default function ToolDetail() {
             <div className="bg-[var(--bg-card)]/40 border border-[var(--border-color)] rounded-2xl p-5">
               <h3 className="font-bold mb-4">Ähnliche Tools</h3>
               <ul className="space-y-2">
-                {related.map((r) => (
+                {related.map((r: any) => (
                   <li key={r.name}>
                     <Link
                       href={`/tools/${toolSlug(r)}`}

@@ -51,6 +51,8 @@ export const api = {
     }),
   deleteAccount: () =>
     request<void>("/account", { method: "DELETE" }),
+  search: (q: string) =>
+    request<{ tools: any[]; news: any[]; courses: any[] }>(`/search?q=${encodeURIComponent(q)}`),
   submitProposal: (data: {
     name: string;
     email: string;

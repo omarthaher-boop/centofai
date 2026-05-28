@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { ArrowLeft, ArrowUpRight, Heart, Trash2 } from "lucide-react";
 import { useMemo } from "react";
 import { useFavorites, useToggleFavorite } from "../hooks/useFavorites";
-import { tools } from "../data/tools";
+import { tools } from "@workspace/data";
 
 export default function FavoritesPage() {
   const { data, isLoading, error } = useFavorites();
@@ -11,7 +11,7 @@ export default function FavoritesPage() {
   const items = useMemo(() => {
     if (!data) return [];
     return data.map((fav) => {
-      const tool = tools.find((t) => t.name === fav.toolName);
+      const tool = tools.find((t: { name: string }) => t.name === fav.toolName);
       return { fav, tool };
     });
   }, [data]);

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowLeft, CheckCircle2, Send } from "lucide-react";
 import { api } from "../lib/api";
-import { toolCategories } from "../data/tools";
+import { toolCategories } from "@workspace/data";
 
 export default function SubmitToolPage() {
   const [form, setForm] = useState({
@@ -116,7 +116,7 @@ export default function SubmitToolPage() {
               onChange={(e) => update("category", e.target.value)}
               className="w-full px-3 py-2 text-sm bg-[var(--bg-page)] border border-[var(--border-color)] rounded-lg focus:outline-none focus:border-purple-500/40"
             >
-              {toolCategories.map((c) => (
+              {toolCategories.map((c: string) => (
                 <option key={c} value={c}>
                   {c}
                 </option>

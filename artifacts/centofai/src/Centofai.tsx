@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
@@ -8,13 +8,14 @@ import {
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useClerk, useUser } from "@clerk/react";
-import { tools, toolCategories, toolSlug } from "./data/tools";
-import { newsItems, newsCategories } from "./data/news";
-import { courses, courseCategories } from "./data/courses";
+import { tools, toolCategories, toolSlug } from "@workspace/data";
+import { newsItems, newsCategories } from "@workspace/data";
+import { courses, courseCategories } from "@workspace/data";
 import {
   useFavoriteToolNames,
   useToggleFavorite,
 } from "./hooks/useFavorites";
+import { api } from "./lib/api";
 
 /* ─── Image helpers ─────────────────────────────────────────────────── */
 function getFaviconUrl(url: string): string | null {
@@ -321,9 +322,140 @@ const heroCategories = [
   { name: "Community", href: "#newsletter", icon: Users, desc: "Mitglieder & Netzwerk", color: "#EC4899", bg: "bg-pink-500/10", hoverBg: "group-hover:bg-pink-500/20", text: "text-pink-400", hoverText: "group-hover:text-pink-300" },
 ];
 
-function Hero() {
-  const [searchQuery, setSearchQuery] = useState("");
+function GlobalSearch() {
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<{ tools: any[]; news: any[]; courses: any[] } | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  useEffect(() => {
+    const q = query.trim();
+    if (!q) {
+      setResults(null);
+      setOpen(false);
+      return;
+    }
+    setLoading(true);
+    const id = setTimeout(() => {
+      api.search(q).then((r) => {
+        setResults(r);
+        setOpen(true);
+        setLoading(false);
+      }).catch(() => {
+        setLoading(false);
+      });
+    }, 250);
+    return () => clearTimeout(id);
+  }, [query]);
+
+  return (
+    <div ref={wrapRef} className="relative w-full max-w-[520px] mx-auto lg:mx-0">
+      <div className="bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
+        <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
+        <input
+          type="text"
+          placeholder="Suche nach Tools, News, Kursen..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && query.trim()) {
+              window.location.href = `#tools?search=${encodeURIComponent(query)}`;
+              setOpen(false);
+            }
+          }}
+          className="bg-transparent px-3 py-3 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-base"
+        />
+        <button
+          onClick={() => {
+            if (query.trim()) {
+              window.location.href = `#tools?search=${encodeURIComponent(query)}`;
+              setOpen(false);
+            }
+          }}
+          className="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-xl transition whitespace-nowrap text-sm"
+        >
+          Suchen
+        </button>
+      </div>
+
+      {open && (results || loading) && (
+        <div className="absolute top-full left-0 right-0 mt-2 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl shadow-2xl z-50 max-h-[420px] overflow-y-auto">
+          {loading && (
+            <div className="p-6 text-center text-[var(--text-label)] text-sm">Suche läuft...</div>
+          )}
+          {results && !loading && (
+            <div className="p-3">
+              {results.tools.length === 0 && results.news.length === 0 && results.courses.length === 0 && (
+                <div className="p-4 text-center text-[var(--text-label)] text-sm">Keine Ergebnisse für „{query}“</div>
+              )}
+              {results.tools.length > 0 && (
+                <div className="mb-3">
+                  <p className="text-[10px] font-semibold text-purple-400 uppercase tracking-wider px-2 mb-1">KI-Tools</p>
+                  {results.tools.slice(0, 4).map((t: any) => (
+                    <a key={t.slug} href={`#tools?search=${encodeURIComponent(t.name)}`} onClick={() => setOpen(false)} className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-purple-500/10 transition">
+                      <div className="w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold shrink-0" style={{ backgroundColor: t.color + "15", color: t.color }}>
+                        {t.name.charAt(0)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-[var(--text-body)]">{t.name}</p>
+                        <p className="text-xs text-[var(--text-label)] truncate max-w-[260px]">{t.description}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+              {results.news.length > 0 && (
+                <div className="mb-3">
+                  <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider px-2 mb-1">News</p>
+                  {results.news.slice(0, 3).map((n: any) => (
+                    <a key={n.title} href={n.url} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-blue-500/10 transition">
+                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
+                        <Newspaper className="w-4 h-4 text-blue-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-[var(--text-body)] truncate max-w-[260px]">{n.title}</p>
+                        <p className="text-xs text-[var(--text-label)]">{n.source}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+              {results.courses.length > 0 && (
+                <div>
+                  <p className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider px-2 mb-1">Kurse</p>
+                  {results.courses.slice(0, 3).map((c: any) => (
+                    <a key={c.name} href={c.url} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-emerald-500/10 transition">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
+                        <GraduationCap className="w-4 h-4 text-emerald-400" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-[var(--text-body)]">{c.name}</p>
+                        <p className="text-xs text-[var(--text-label)]">{c.provider}</p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function Hero() {
   return (
     <header className="max-w-7xl mx-auto px-6 pt-16 pb-12 relative">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
@@ -381,29 +513,7 @@ function Hero() {
               loading="eager"
             />
           </div>
-
-          {/* Globale Suche */}
-          <div className="w-full max-w-[520px] mx-auto lg:mx-0 bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
-            <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
-            <input
-              type="text"
-              placeholder="Suche nach Tools, News, Kursen..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && searchQuery.trim()) {
-                  window.location.href = `#tools?search=${encodeURIComponent(searchQuery)}`;
-                }
-              }}
-              className="bg-transparent px-3 py-3 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-base"
-            />
-            <a
-              href={searchQuery.trim() ? `#tools?search=${encodeURIComponent(searchQuery)}` : "#tools"}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-xl transition whitespace-nowrap text-sm"
-            >
-              Suchen
-            </a>
-          </div>
+          <GlobalSearch />
         </div>
       </div>
     </header>
@@ -786,7 +896,7 @@ function CoursesSection() {
       {/* 2-Spalten Grid */}
       <div className="grid md:grid-cols-2 gap-8">
         <AnimatePresence mode="popLayout">
-          {filtered.map((course, i) => {
+          {filtered.map((course: any, i: number) => {
             const badge = getLevelBadge(course.level);
             return (
               <motion.div

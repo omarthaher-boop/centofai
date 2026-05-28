@@ -1030,7 +1030,7 @@ function ContactSection() {
   });
   const [sent, setSent] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSent(true);
     setTimeout(() => {
@@ -1147,27 +1147,27 @@ function ContactSection() {
                     <Field
                       label="Name"
                       value={form.name}
-                      onChange={(v) => setForm({ ...form, name: v })}
+                      onChange={(v: string) => setForm({ ...form, name: v })}
                       required
                     />
                     <Field
                       label="E-Mail"
                       type="email"
                       value={form.email}
-                      onChange={(v) => setForm({ ...form, email: v })}
+                      onChange={(v: string) => setForm({ ...form, email: v })}
                       required
                     />
                   </div>
                   <Field
                     label="Unternehmen (optional)"
                     value={form.company}
-                    onChange={(v) => setForm({ ...form, company: v })}
+                    onChange={(v: string) => setForm({ ...form, company: v })}
                   />
                   <div className="grid sm:grid-cols-2 gap-5">
                     <Select
                       label="Projektart"
                       value={form.projectType}
-                      onChange={(v) => setForm({ ...form, projectType: v })}
+                      onChange={(v: string) => setForm({ ...form, projectType: v })}
                       options={[
                         "Website",
                         "App",
@@ -1180,7 +1180,7 @@ function ContactSection() {
                     <Select
                       label="Budget"
                       value={form.budget}
-                      onChange={(v) => setForm({ ...form, budget: v })}
+                      onChange={(v: string) => setForm({ ...form, budget: v })}
                       options={[
                         "Kleines Startbudget",
                         "Mittel",
@@ -1248,7 +1248,7 @@ function Select({ label, value, onChange, options }: any) {
         <option value="" className="bg-[#111827]">
           Bitte wählen
         </option>
-        {options.map((o) => (
+        {options.map((o: string) => (
           <option key={o} value={o} className="bg-[#111827]">
             {o}
           </option>
