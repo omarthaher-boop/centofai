@@ -303,47 +303,98 @@ function Navbar() {
 }
 
 /* ─── Hero ─────────────────────────────────────────────────────── */
+const heroCategories = [
+  { name: "News", href: "#news", icon: Newspaper, desc: "Aktuelle KI-Nachrichten" },
+  { name: "Ideen", href: "#ideas", icon: Lightbulb, desc: "Projekte einreichen" },
+  { name: "KI-Tools", href: "#tools", icon: Wrench, desc: "102+ Tools entdecken" },
+  { name: "Kurse", href: "#academy", icon: GraduationCap, desc: "Lernen & wachsen" },
+  { name: "Community", href: "#newsletter", icon: Users, desc: "Mitglieder & Netzwerk" },
+];
+
 function Hero() {
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
-    <header className="max-w-5xl mx-auto px-6 pt-20 pb-16 text-center relative">
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+    <header className="max-w-7xl mx-auto px-6 pt-16 pb-12 relative">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        {/* ─── Left Sidebar ─── */}
+        <div className="lg:col-span-3 hidden lg:flex flex-col gap-3">
+          <p className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider mb-2">
+            Kategorien
+          </p>
+          {heroCategories.map((cat) => {
+            const Icon = cat.icon;
+            return (
+              <a
+                key={cat.name}
+                href={cat.href}
+                className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-purple-500/30 hover:bg-purple-500/5 transition-all"
+              >
+                <div className="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0 group-hover:bg-purple-500/20 transition">
+                  <Icon className="w-4.5 h-4.5 text-purple-400" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-[var(--text-body)] group-hover:text-purple-300 transition">
+                    {cat.name}
+                  </p>
+                  <p className="text-xs text-[var(--text-label)]">{cat.desc}</p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
 
-      <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 tracking-wide uppercase">
-        Zentraler KI-Hub & Verzeichnis
-      </span>
+        {/* ─── Center Text ─── */}
+        <div className="lg:col-span-5 text-center lg:text-left">
+          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 tracking-wide uppercase">
+            Zentraler KI-Hub & Verzeichnis
+          </span>
 
-      <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">
-        Alles über Künstliche Intelligenz an <br />
-        <span className="gradient-text">einem einzigen Ort</span>
-      </h1>
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">
+            Alles über Künstliche Intelligenz an{" "}
+            <span className="gradient-text">einem einzigen Ort</span>
+          </h1>
 
-      <p className="text-lg text-[var(--text-caption)] max-w-2xl mx-auto mb-10">
-        Entdecke die besten KI-Tools, bleibe mit täglichen News up-to-date und lerne in praxisnahen Workshops von den Experten.
-      </p>
+          <p className="text-lg text-[var(--text-caption)] max-w-lg mx-auto lg:mx-0 mb-8">
+            Entdecke die besten KI-Tools, bleibe mit täglichen News up-to-date und lerne in praxisnahen Workshops von den Experten.
+          </p>
 
-      {/* Globale Suche */}
-      <div className="max-w-2xl mx-auto bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
-        <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
-        <input
-          type="text"
-          placeholder="Suche nach Tools, News, Kursen..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter" && searchQuery.trim()) {
-              window.location.href = `#tools?search=${encodeURIComponent(searchQuery)}`;
-            }
-          }}
-          className="bg-transparent px-3 py-3 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-base"
-        />
-        <a
-          href={searchQuery.trim() ? `#tools?search=${encodeURIComponent(searchQuery)}` : "#tools"}
-          className="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-xl transition whitespace-nowrap text-sm"
-        >
-          Suchen
-        </a>
+          {/* Globale Suche */}
+          <div className="max-w-lg mx-auto lg:mx-0 bg-[var(--bg-card)] border border-[var(--border-color)] p-2 rounded-2xl flex items-center shadow-2xl focus-within:border-purple-500/50 transition">
+            <Search className="ml-3 w-5 h-5 text-[var(--text-label)]" />
+            <input
+              type="text"
+              placeholder="Suche nach Tools, News, Kursen..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && searchQuery.trim()) {
+                  window.location.href = `#tools?search=${encodeURIComponent(searchQuery)}`;
+                }
+              }}
+              className="bg-transparent px-3 py-3 w-full text-[var(--text-body)] focus:outline-none placeholder-[var(--text-label)] text-base"
+            />
+            <a
+              href={searchQuery.trim() ? `#tools?search=${encodeURIComponent(searchQuery)}` : "#tools"}
+              className="bg-purple-600 hover:bg-purple-700 text-white font-medium px-6 py-3 rounded-xl transition whitespace-nowrap text-sm"
+            >
+              Suchen
+            </a>
+          </div>
+        </div>
+
+        {/* ─── Right Image ─── */}
+        <div className="lg:col-span-4 flex justify-center lg:justify-end">
+          <div className="relative w-full max-w-[420px]">
+            <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
+            <img
+              src="centofai-hero.png"
+              alt="CentofAI - Center of Artificial Intelligence"
+              className="relative w-full h-auto rounded-xl border border-[var(--border-color)] shadow-2xl"
+              loading="eager"
+            />
+          </div>
+        </div>
       </div>
     </header>
   );
