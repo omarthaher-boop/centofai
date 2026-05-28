@@ -360,7 +360,7 @@ function Hero() {
             Zentraler KI-Hub & Verzeichnis
           </span>
 
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-6 mb-6 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-5 mb-5 leading-tight">
             Alles über Künstliche Intelligenz an{" "}
             <span className="gradient-text">einem einzigen Ort</span>
           </h1>
