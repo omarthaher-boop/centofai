@@ -165,6 +165,7 @@ const navLinks = [
   { name: "Ideen", href: "#ideas" },
   { name: "KI-Tools", href: "#tools" },
   { name: "Kurse", href: "#academy" },
+  { name: "Produkte", href: "/products" },
 ];
 
 function Navbar() {
@@ -183,11 +184,17 @@ function Navbar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-[var(--text-caption)]">
-          {navLinks.map((link) => (
-            <a key={link.name} href={link.href} className="hover:text-purple-400 transition">
-              {link.name}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.href.startsWith("/") ? (
+              <Link key={link.name} to={link.href} className="hover:text-purple-400 transition">
+                {link.name}
+              </Link>
+            ) : (
+              <a key={link.name} href={link.href} className="hover:text-purple-400 transition">
+                {link.name}
+              </a>
+            )
+          )}
         </div>
 
         <div className="hidden md:flex items-center gap-4">
@@ -270,16 +277,27 @@ function Navbar() {
             className="md:hidden bg-[var(--mobile-menu-bg)] border-b border-[var(--border-color)]"
           >
             <div className="px-6 py-4 space-y-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="block py-2 text-sm font-medium text-[var(--text-caption)] hover:text-purple-400 transition"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {navLinks.map((link) =>
+                link.href.startsWith("/") ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-2 text-sm font-medium text-[var(--text-caption)] hover:text-purple-400 transition"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-2 text-sm font-medium text-[var(--text-caption)] hover:text-purple-400 transition"
+                  >
+                    {link.name}
+                  </a>
+                )
+              )}
               <a href="#ideas" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition">
                 + Idee einreichen
               </a>
