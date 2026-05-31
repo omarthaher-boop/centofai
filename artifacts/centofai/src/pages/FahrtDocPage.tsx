@@ -314,6 +314,7 @@ function ScreenshotsSection() {
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
+>>>>>>> 90bce0e (feat(fahrtdoc): Add app screenshots carousel with iPhone mockup frames)
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -522,34 +523,6 @@ export default function FahrtDocPage() {
               </motion.div>
             );
           })}
-        </div>
-      </section>
-
-      {/* Promo Images */}
-      <section className="max-w-6xl mx-auto px-6 py-8 space-y-6">
-        <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-          style={{ height: "0", paddingBottom: "28.5%", position: "relative" }}>
-          <img
-            src="/fahrtdoc-promo.png"
-            alt="FahrtDoc – Übersicht Seite 1 & 2"
-            style={{
-              position: "absolute", top: 0, left: 0,
-              width: "100%", height: "200%",
-              objectFit: "cover", objectPosition: "top",
-            }}
-          />
-        </div>
-        <div className="overflow-hidden rounded-2xl border border-white/10 shadow-2xl"
-          style={{ height: "0", paddingBottom: "28.5%", position: "relative" }}>
-          <img
-            src="/fahrtdoc-promo.png"
-            alt="FahrtDoc – Übersicht Seite 3 & 4"
-            style={{
-              position: "absolute", top: 0, left: 0,
-              width: "100%", height: "200%",
-              objectFit: "cover", objectPosition: "bottom",
-            }}
-          />
         </div>
       </section>
 
