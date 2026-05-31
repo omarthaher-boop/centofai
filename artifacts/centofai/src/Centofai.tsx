@@ -4,7 +4,7 @@ import {
   Menu, X, Search, Newspaper, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
-  Sun, Moon, Users, Lightbulb, Send, ChevronDown, Heart, LogOut, Settings,
+  Sun, Moon, Users, Lightbulb, Send, ChevronDown, Heart, LogOut, Settings, Package,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useClerk, useUser } from "@clerk/react";
@@ -335,6 +335,7 @@ function Navbar() {
 const heroCategories = [
   { name: "News", href: "#news", icon: Newspaper, desc: "Aktuelle KI-Nachrichten", color: "#3B82F6", bg: "bg-blue-500/10", hoverBg: "group-hover:bg-blue-500/20", text: "text-blue-400", hoverText: "group-hover:text-blue-300" },
   { name: "Ideen", href: "#ideas", icon: Lightbulb, desc: "Projekte einreichen", color: "#F59E0B", bg: "bg-amber-500/10", hoverBg: "group-hover:bg-amber-500/20", text: "text-amber-400", hoverText: "group-hover:text-amber-300" },
+  { name: "Unsere Produkte", href: "/products", icon: Package, desc: "KI-Lösungen entdecken", color: "#06B6D4", bg: "bg-cyan-500/10", hoverBg: "group-hover:bg-cyan-500/20", text: "text-cyan-400", hoverText: "group-hover:text-cyan-300" },
   { name: "KI-Tools", href: "#tools", icon: Wrench, desc: "102+ Tools entdecken", color: "#8B5CF6", bg: "bg-purple-500/10", hoverBg: "group-hover:bg-purple-500/20", text: "text-purple-400", hoverText: "group-hover:text-purple-300" },
   { name: "Kurse", href: "#academy", icon: GraduationCap, desc: "Lernen & wachsen", color: "#10B981", bg: "bg-emerald-500/10", hoverBg: "group-hover:bg-emerald-500/20", text: "text-emerald-400", hoverText: "group-hover:text-emerald-300" },
   { name: "Community", href: "#newsletter", icon: Users, desc: "Mitglieder & Netzwerk", color: "#EC4899", bg: "bg-pink-500/10", hoverBg: "group-hover:bg-pink-500/20", text: "text-pink-400", hoverText: "group-hover:text-pink-300" },
@@ -484,22 +485,22 @@ function Hero() {
           </p>
           {heroCategories.map((cat) => {
             const Icon = cat.icon;
-            return (
-              <a
-                key={cat.name}
-                href={cat.href}
-                className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-purple-500/30 hover:bg-purple-500/5 transition-all"
-              >
+            const inner = (
+              <>
                 <div className={`w-9 h-9 rounded-lg ${cat.bg} flex items-center justify-center shrink-0 ${cat.hoverBg} transition`}>
                   <Icon className={`w-4.5 h-4.5 ${cat.text}`} />
                 </div>
                 <div>
-                  <p className={`text-sm font-semibold ${cat.hoverText} transition`}>
-                    {cat.name}
-                  </p>
+                  <p className={`text-sm font-semibold ${cat.hoverText} transition`}>{cat.name}</p>
                   <p className="text-xs text-[var(--text-label)]">{cat.desc}</p>
                 </div>
-              </a>
+              </>
+            );
+            const cls = "group flex items-center gap-3 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-purple-500/30 hover:bg-purple-500/5 transition-all";
+            return cat.href.startsWith("/") ? (
+              <Link key={cat.name} to={cat.href} className={cls}>{inner}</Link>
+            ) : (
+              <a key={cat.name} href={cat.href} className={cls}>{inner}</a>
             );
           })}
         </div>
