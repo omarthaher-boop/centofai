@@ -52,194 +52,48 @@ const TARGETS = [
   { icon: Car, label: "Private Fahrten" },
 ];
 
-function ScreenFahrtenliste() {
-  const trips = [
-    { date: "Mo, 27. Mai", from: "München HBF", to: "Unterföhring", km: "14,2 km", type: "Geschäftlich", color: "#0066CC" },
-    { date: "Di, 28. Mai", from: "Büro Schwabing", to: "Flughafen MUC", km: "37,8 km", type: "Geschäftlich", color: "#0066CC" },
-    { date: "Mi, 29. Mai", from: "Zuhause", to: "Supermarkt", km: "3,4 km", type: "Privat", color: "#64748b" },
-    { date: "Do, 30. Mai", from: "Werkstatt GmbH", to: "Kunde Giesing", km: "8,9 km", type: "Geschäftlich", color: "#0066CC" },
-  ];
-  return (
-    <div className="w-full h-full bg-[#0A1628] flex flex-col text-white overflow-hidden">
-      <div className="px-4 pt-4 pb-3 bg-[#0A1628]">
-        <p className="text-[10px] text-slate-400 mb-1">Mai 2026</p>
-        <h3 className="text-sm font-bold">Meine Fahrten</h3>
-        <div className="mt-2 flex gap-2">
-          <span className="text-[9px] bg-[#0066CC] text-white px-2 py-0.5 rounded-full font-semibold">Alle</span>
-          <span className="text-[9px] bg-white/10 text-slate-300 px-2 py-0.5 rounded-full">Geschäftlich</span>
-          <span className="text-[9px] bg-white/10 text-slate-300 px-2 py-0.5 rounded-full">Privat</span>
-        </div>
-      </div>
-      <div className="flex-1 overflow-hidden px-3 pb-3 flex flex-col gap-2">
-        {trips.map((t, i) => (
-          <div key={i} className="flex items-center gap-2 bg-white/5 rounded-xl p-2.5 border border-white/8">
-            <div className="w-7 h-7 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: t.color + "22" }}>
-              <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke={t.color} strokeWidth="2.5">
-                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-              </svg>
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-[9px] text-slate-400 leading-none mb-0.5">{t.date}</p>
-              <p className="text-[10px] font-semibold leading-tight truncate">{t.from} → {t.to}</p>
-            </div>
-            <div className="text-right shrink-0">
-              <p className="text-[10px] font-bold text-[#4DA6FF]">{t.km}</p>
-              <p className="text-[9px]" style={{ color: t.color }}>{t.type}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="border-t border-white/10 px-4 py-2 flex justify-between items-center">
-        <div>
-          <p className="text-[9px] text-slate-400">Gesamt Mai</p>
-          <p className="text-xs font-bold text-[#4DA6FF]">64,3 km</p>
-        </div>
-        <div className="w-8 h-8 rounded-full bg-[#0066CC] flex items-center justify-center shadow-lg shadow-[#0066CC]/30">
-          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="white">
-            <path d="M19 11H7.83l4.88-4.88c.39-.39.39-1.03 0-1.42-.39-.39-1.02-.39-1.41 0l-6.59 6.59c-.39.39-.39 1.02 0 1.41l6.59 6.59c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L7.83 13H19c.55 0 1-.45 1-1s-.45-1-1-1z" />
-          </svg>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ScreenGPSKarte() {
-  return (
-    <div className="w-full h-full bg-[#0A1628] flex flex-col text-white overflow-hidden">
-      <div className="px-4 pt-4 pb-2 flex items-center gap-2">
-        <div className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center">
-          <ChevronLeft className="w-3.5 h-3.5 text-slate-300" />
-        </div>
-        <div>
-          <h3 className="text-xs font-bold leading-none">Fahrt Details</h3>
-          <p className="text-[9px] text-slate-400">Do, 30. Mai 2026</p>
-        </div>
-      </div>
-      <div className="relative mx-3 rounded-xl overflow-hidden flex-1" style={{ maxHeight: "52%" }}>
-        <svg viewBox="0 0 220 130" className="w-full h-full" style={{ background: "linear-gradient(135deg, #0d2240 0%, #0a1a35 100%)" }}>
-          <defs>
-            <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#0066CC" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="#0066CC" stopOpacity="0" />
-            </radialGradient>
-          </defs>
-          {[...Array(8)].map((_, i) => (
-            <line key={`h${i}`} x1="0" y1={i * 18} x2="220" y2={i * 18} stroke="#ffffff08" strokeWidth="0.5" />
-          ))}
-          {[...Array(12)].map((_, i) => (
-            <line key={`v${i}`} x1={i * 20} y1="0" x2={i * 20} y2="130" stroke="#ffffff08" strokeWidth="0.5" />
-          ))}
-          <path d="M 30 100 Q 50 80 80 70 Q 110 60 140 50 Q 165 42 190 30" stroke="#0066CC" strokeWidth="3" fill="none" strokeLinecap="round" strokeDasharray="none" />
-          <path d="M 30 100 Q 50 80 80 70 Q 110 60 140 50 Q 165 42 190 30" stroke="#4DA6FF" strokeWidth="1" fill="none" strokeLinecap="round" opacity="0.5" />
-          <circle cx="30" cy="100" r="5" fill="#22c55e" />
-          <circle cx="30" cy="100" r="9" fill="#22c55e" fillOpacity="0.25" />
-          <circle cx="190" cy="30" r="5" fill="#ef4444" />
-          <circle cx="190" cy="30" r="9" fill="#ef4444" fillOpacity="0.25" />
-          <rect x="8" y="89" rx="3" ry="3" width="40" height="13" fill="#0A2040" stroke="#22c55e" strokeWidth="0.8" />
-          <text x="28" y="98.5" textAnchor="middle" fill="#22c55e" fontSize="5.5" fontFamily="system-ui">Start</text>
-          <rect x="168" y="18" rx="3" ry="3" width="44" height="13" fill="#0A2040" stroke="#ef4444" strokeWidth="0.8" />
-          <text x="190" y="27.5" textAnchor="middle" fill="#ef4444" fontSize="5.5" fontFamily="system-ui">Kunde Giesing</text>
-        </svg>
-      </div>
-      <div className="px-3 py-2 flex flex-col gap-2">
-        <div className="grid grid-cols-3 gap-2">
-          {[
-            { label: "Strecke", value: "8,9 km", color: "#4DA6FF" },
-            { label: "Dauer", value: "22 Min", color: "#BFFF00" },
-            { label: "Typ", value: "Geschäftl.", color: "#0066CC" },
-          ].map((s) => (
-            <div key={s.label} className="bg-white/5 rounded-lg p-2 text-center border border-white/8">
-              <p className="text-[8px] text-slate-400 mb-0.5">{s.label}</p>
-              <p className="text-[10px] font-bold" style={{ color: s.color }}>{s.value}</p>
-            </div>
-          ))}
-        </div>
-        <div className="bg-white/5 rounded-lg p-2.5 border border-white/8 flex items-center gap-2">
-          <FileText className="w-3.5 h-3.5 text-[#0066CC] shrink-0" />
-          <div className="flex-1">
-            <p className="text-[9px] text-slate-300 font-medium">Werkstatt GmbH → Kunde Giesing</p>
-            <p className="text-[8px] text-slate-500">Zweck: Kundenbesuch</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ScreenPDFExport() {
-  return (
-    <div className="w-full h-full bg-[#0A1628] flex flex-col text-white overflow-hidden">
-      <div className="px-4 pt-4 pb-2">
-        <h3 className="text-xs font-bold">PDF-Export</h3>
-        <p className="text-[9px] text-slate-400">Fahrtenbuch Mai 2026</p>
-      </div>
-      <div className="flex-1 mx-3 mb-3 rounded-xl overflow-hidden border border-white/10 bg-white flex flex-col">
-        <div className="bg-[#0066CC] px-3 py-2 flex items-center justify-between">
-          <div>
-            <p className="text-[8px] text-blue-200 leading-none">Fahrtenbuch</p>
-            <p className="text-[10px] font-bold text-white leading-none mt-0.5">Max Mustermann</p>
-          </div>
-          <div className="text-right">
-            <p className="text-[8px] text-blue-200 leading-none">Mai 2026</p>
-            <p className="text-[9px] font-semibold text-white leading-none mt-0.5">64,3 km</p>
-          </div>
-        </div>
-        <div className="flex-1 overflow-hidden">
-          <div className="grid grid-cols-4 bg-slate-100 px-2 py-1 border-b border-slate-200">
-            {["Datum", "Start", "Ziel", "km"].map((h) => (
-              <p key={h} className="text-[7px] font-bold text-slate-500 uppercase">{h}</p>
-            ))}
-          </div>
-          {[
-            ["27.05.", "München HBF", "Unterföhring", "14,2"],
-            ["28.05.", "Büro Schwabing", "Flughafen MUC", "37,8"],
-            ["29.05.", "Zuhause", "Supermarkt", "3,4"],
-            ["30.05.", "Werkstatt", "Giesing", "8,9"],
-          ].map(([d, f, t, k], i) => (
-            <div key={i} className={`grid grid-cols-4 px-2 py-1.5 ${i % 2 === 0 ? "bg-white" : "bg-slate-50"} border-b border-slate-100`}>
-              <p className="text-[7.5px] text-slate-700 font-medium">{d}</p>
-              <p className="text-[7.5px] text-slate-600 truncate">{f}</p>
-              <p className="text-[7.5px] text-slate-600 truncate">{t}</p>
-              <p className="text-[7.5px] font-bold text-[#0066CC]">{k}</p>
-            </div>
-          ))}
-          <div className="flex items-center justify-between px-2 py-1.5 bg-[#0066CC]/8 border-t border-[#0066CC]/20">
-            <p className="text-[7.5px] font-bold text-[#0066CC]">Gesamt</p>
-            <p className="text-[7.5px] font-bold text-[#0066CC]">64,3 km</p>
-          </div>
-        </div>
-        <div className="px-3 py-2 border-t border-slate-100 flex justify-center">
-          <div className="flex items-center gap-1.5 px-3 py-1 bg-[#0066CC] rounded-full">
-            <svg viewBox="0 0 24 24" className="w-2.5 h-2.5" fill="white">
-              <path d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8.5 7.5c0 .83-.67 1.5-1.5 1.5H9v2H7.5V7H10c.83 0 1.5.67 1.5 1.5v1zm5 2c0 .83-.67 1.5-1.5 1.5h-2.5V7H15c.83 0 1.5.67 1.5 1.5v3zm4-3H19v1h1.5V11H19v2h-1.5V7h3v1.5zM9 9.5h1v-1H9v1zM4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm10 5.5h1v-3h-1v3z" />
-            </svg>
-            <p className="text-[7px] font-bold text-white">Als PDF teilen</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const SCREENSHOTS = [
   {
+    id: "anmelden",
+    src: "/fahrtdoc-screen-1.png",
+    label: "Anmelden",
+    desc: "Sicherer Login mit E-Mail und Passwort – oder Face ID & Fingerabdruck.",
+  },
+  {
+    id: "registrieren",
+    src: "/fahrtdoc-screen-2.png",
+    label: "Registrieren",
+    desc: "Konto in Sekunden erstellt: Name, E-Mail, Kennzeichen, Passwort – fertig.",
+  },
+  {
+    id: "dashboard",
+    src: "/fahrtdoc-screen-3.png",
+    label: "Dashboard & Statistiken",
+    desc: "Alle Kennzahlen auf einen Blick: Kilometer, Fahrten, Fahrtzeit und Zweckverteilung.",
+  },
+  {
+    id: "starten",
+    src: "/fahrtdoc-screen-4.png",
+    label: "Fahrt starten",
+    desc: "Mit einem Tipp Geschäftsreise oder private Fahrt starten – GPS läuft automatisch.",
+  },
+  {
+    id: "aktiv",
+    src: "/fahrtdoc-screen-5.png",
+    label: "Fahrt läuft",
+    desc: "Echtzeit-Erfassung von Strecke und Fahrtzeit während der aktiven Fahrt.",
+  },
+  {
     id: "fahrtenliste",
+    src: "/fahrtdoc-screen-6.png",
     label: "Fahrtenliste",
-    desc: "Alle Fahrten auf einen Blick – sortiert und kategorisiert.",
-    Screen: ScreenFahrtenliste,
+    desc: "Alle Fahrten gefiltert nach Zeitraum und Zweck – inkl. PDF, CSV & E-Mail-Export.",
   },
   {
-    id: "gps",
-    label: "GPS-Karte",
-    desc: "Routen-Visualisierung mit Start, Ziel und Streckendetails.",
-    Screen: ScreenGPSKarte,
-  },
-  {
-    id: "pdf",
-    label: "PDF-Export",
-    desc: "Professionelles Fahrtenbuch als PDF – bereit für Ihr Finanzamt.",
-    Screen: ScreenPDFExport,
+    id: "bearbeiten",
+    src: "/fahrtdoc-screen-7.png",
+    label: "Fahrt bearbeiten",
+    desc: "Route auf der Karte sehen, Zweck und Adressen direkt bearbeiten und speichern.",
   },
 ];
 
@@ -343,7 +197,11 @@ function ScreenshotsSection() {
               onClick={() => scrollTo(i)}
             >
               <PhoneMockup active={active === i}>
-                <s.Screen />
+                <img
+                  src={s.src}
+                  alt={s.label}
+                  className="w-full h-full object-cover object-top"
+                />
               </PhoneMockup>
             </div>
           ))}
