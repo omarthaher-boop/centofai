@@ -278,13 +278,19 @@ export default function FahrtDocPage() {
             transition={{ duration: 0.6, delay: 0.15 }}
             className="shrink-0"
           >
-            <div className="relative">
-              <div className="absolute -inset-4 rounded-[2.5rem] bg-[#0066CC]/20 blur-2xl" />
-              <img
-                src="/fahrtdoc-logo.jpeg"
-                alt="FahrtDoc App – Automatische Fahrterfassung"
-                className="relative w-64 h-64 md:w-80 md:h-80 rounded-[2rem] object-cover shadow-2xl border border-white/10"
-              />
+            <div className="relative flex flex-col items-center gap-4">
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-[2.5rem] bg-[#0066CC]/20 blur-2xl" />
+                <img
+                  src="/fahrtdoc-logo.jpeg"
+                  alt="FahrtDoc App – Automatische Fahrterfassung"
+                  className="relative w-64 h-64 md:w-80 md:h-80 rounded-[2rem] object-cover shadow-2xl border border-white/10"
+                />
+              </div>
+              <div className="text-center">
+                <p className="text-2xl font-extrabold text-white tracking-tight">FahrtDoc</p>
+                <p className="text-sm text-slate-400 mt-0.5">Einfach fahren, clever erfassen</p>
+              </div>
             </div>
           </motion.div>
         </div>
