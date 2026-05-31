@@ -26,6 +26,7 @@ import FavoritesPage from "./pages/favorites";
 import SubmitToolPage from "./pages/submit-tool";
 import AccountPage from "./pages/account";
 import ProductsPage from "./pages/products";
+import FahrtDocPage from "./pages/FahrtDocPage";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -202,6 +203,7 @@ function ClerkProviderWithRoutes() {
             </Show>
           </Route>
           <Route path="/products" component={ProductsPage} />
+          <Route path="/products/fahrtdoc" component={FahrtDocPage} />
           <Route path="/sign-in/*?" component={SignInPage} />
           <Route path="/sign-up/*?" component={SignUpPage} />
           <Route component={NotFound} />

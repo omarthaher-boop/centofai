@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "wouter";
 import {
-  Link,
   ArrowRight,
   ExternalLink,
   CheckCircle2,
@@ -14,8 +14,6 @@ import {
   BarChart3,
   Globe,
   Search,
-  Lightbulb,
-  BookOpen,
   ArrowLeft,
   Wrench,
   Newspaper,
@@ -34,6 +32,17 @@ function setMeta() {
   }
   el.setAttribute("content", desc);
 }
+
+const FAHRTDOC = {
+  title: "FahrtDoc",
+  subtitle: "Fahrtendokumentation",
+  description:
+    "FahrtDoc ist die intelligente Lösung zur einfachen Fahrtendokumentation. Automatische GPS-Erfassung, sichere Cloud-Speicherung und PDF-Export. Ideal für Privatpersonen und Unternehmen.",
+  logo: "/fahrtdoc-logo.jpeg",
+  href: "/products/fahrtdoc",
+  features: ["GPS-Erfassung", "PDF-Export", "Cloud-Speicher", "Excel-Export"],
+  cta: "Mehr erfahren",
+};
 
 const PRODUCTS = [
   {
@@ -167,6 +176,65 @@ export default function ProductsPage() {
 
       {/* Products Grid */}
       <main className="max-w-6xl mx-auto px-6 pb-20">
+
+        {/* ── FahrtDoc Featured Card ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <Link
+            href={FAHRTDOC.href}
+            className="group block rounded-2xl border border-[#0066CC]/30 bg-gradient-to-r from-[#001833] to-[#001020] hover:border-[#0066CC]/60 transition-all overflow-hidden"
+          >
+            <div className="flex flex-col md:flex-row items-center gap-6 p-6 md:p-8">
+              {/* Logo */}
+              <div className="shrink-0">
+                <div className="relative">
+                  <div className="absolute -inset-2 rounded-2xl bg-[#0066CC]/20 blur-xl opacity-0 group-hover:opacity-100 transition" />
+                  <img
+                    src={FAHRTDOC.logo}
+                    alt="FahrtDoc Logo"
+                    className="relative w-24 h-24 rounded-2xl object-cover shadow-lg border border-white/10 group-hover:scale-105 transition"
+                  />
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 text-center md:text-left">
+                <div className="flex items-center gap-2 justify-center md:justify-start mb-1">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#4DA6FF] border border-[#0066CC]/40 bg-[#0066CC]/10 px-2 py-0.5 rounded-full">
+                    {FAHRTDOC.subtitle}
+                  </span>
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#BFFF00] border border-[#BFFF00]/30 bg-[#BFFF00]/10 px-2 py-0.5 rounded-full">
+                    Eigenes Produkt
+                  </span>
+                </div>
+                <h3 className="text-2xl font-extrabold text-white mb-2">{FAHRTDOC.title}</h3>
+                <p className="text-sm text-slate-300 leading-relaxed max-w-xl mb-4">{FAHRTDOC.description}</p>
+                <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-4">
+                  {FAHRTDOC.features.map((f) => (
+                    <span key={f} className="inline-flex items-center gap-1.5 text-xs text-slate-300 border border-white/10 bg-white/5 px-2.5 py-1 rounded-lg">
+                      <CheckCircle2 className="w-3 h-3 text-[#4DA6FF]" /> {f}
+                    </span>
+                  ))}
+                </div>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#4DA6FF] group-hover:text-white transition">
+                  {FAHRTDOC.cta} <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </div>
+          </Link>
+        </motion.div>
+
+        {/* ── Divider ── */}
+        <div className="flex items-center gap-4 mb-8">
+          <div className="h-px flex-1 bg-[var(--border-color)]" />
+          <span className="text-xs font-semibold uppercase tracking-wider text-[var(--text-label)]">Weitere Angebote</span>
+          <div className="h-px flex-1 bg-[var(--border-color)]" />
+        </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
           {PRODUCTS.map((p, i) => {
             const Icon = p.icon;
