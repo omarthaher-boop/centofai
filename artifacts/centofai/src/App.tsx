@@ -6,6 +6,7 @@ import {
   Show,
   useClerk,
 } from "@clerk/react";
+import { deDE } from "@clerk/localizations";
 import { publishableKeyFromHost } from "@clerk/react/internal";
 import { shadcn } from "@clerk/themes";
 import {
@@ -158,20 +159,7 @@ function ClerkProviderWithRoutes() {
       appearance={clerkAppearance}
       signInUrl={`${basePath}/sign-in`}
       signUpUrl={`${basePath}/sign-up`}
-      localization={{
-        signIn: {
-          start: {
-            title: "Willkommen zurück",
-            subtitle: "Melde dich an, um deine Favoriten zu sehen",
-          },
-        },
-        signUp: {
-          start: {
-            title: "Konto erstellen",
-            subtitle: "Speichere Favoriten und reiche Tools ein",
-          },
-        },
-      }}
+      localization={deDE}
       routerPush={(to) => setLocation(stripBase(to))}
       routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
     >
