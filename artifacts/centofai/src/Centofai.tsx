@@ -846,20 +846,20 @@ function IdeasSection() {
                 placeholder="Dein Name *"
                 value={formData.name}
                 onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
               />
               <input
                 type="email"
                 placeholder="Deine E-Mail *"
                 value={formData.email}
                 onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
               />
               <textarea
                 placeholder="Beschreibe deine Idee... *"
                 value={formData.idea}
                 onChange={(e) => setFormData((p) => ({ ...p, idea: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl resize-none placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl resize-none placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
                 rows={4}
               />
               <div className="grid grid-cols-2 gap-3">
@@ -868,14 +868,14 @@ function IdeasSection() {
                   placeholder="Budget (optional)"
                   value={formData.budget}
                   onChange={(e) => setFormData((p) => ({ ...p, budget: e.target.value }))}
-                  className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                  className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
                 />
                 <input
                   type="text"
                   placeholder="Zeitrahmen (optional)"
                   value={formData.timeline}
                   onChange={(e) => setFormData((p) => ({ ...p, timeline: e.target.value }))}
-                  className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                  className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
                 />
               </div>
               {status === "error" && (
