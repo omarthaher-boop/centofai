@@ -251,6 +251,19 @@ export default function FahrtDocPage() {
                 Funktionen entdecken
               </a>
             </div>
+
+            <div className="mt-8 text-slate-400 text-sm leading-relaxed space-y-3 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
+              <p>
+                FahrtDoc ist die moderne und intelligente Lösung zur einfachen Dokumentation von Fahrten. Die App wurde entwickelt, um Fahrten automatisch, übersichtlich und professionell zu erfassen – ideal für Privatpersonen, Selbstständige und Unternehmen.
+              </p>
+              <p>
+                Mit einem klaren Design ermöglicht FahrtDoc die schnelle Erfassung von Strecken, Kilometern, Fahrtdauer sowie Start- und Zielorten direkt über GPS. Alle Fahrten können jederzeit gefiltert und als PDF- oder CSV-Datei exportiert werden.
+              </p>
+              <p>
+                Dank Face ID oder Fingerabdruck ist der Zugriff schnell und sicher. Standortdaten werden ausschließlich während aktiver Fahrten verwendet und können jederzeit exportiert oder gelöscht werden.{" "}
+                <span style={{ color: "#BFFF00" }} className="font-semibold">FahrtDoc macht Fahrtendokumentation smarter, schneller und einfacher.</span>
+              </p>
+            </div>
           </motion.div>
 
           {/* Logo / Hero Image */}
