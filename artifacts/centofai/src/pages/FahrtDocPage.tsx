@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowLeft,
   Navigation,
@@ -16,6 +16,8 @@ import {
   Car,
   Shield,
   QrCode,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { Link } from "wouter";
 
@@ -49,6 +51,159 @@ const TARGETS = [
   { icon: UserCheck, label: "Arbeitgeber & Mitarbeiter" },
   { icon: Car, label: "Private Fahrten" },
 ];
+
+const SCREENS = [
+  { src: "/fahrtdoc-screen-1.png", caption: "Anmelden" },
+  { src: "/fahrtdoc-screen-2.png", caption: "Registrieren" },
+  { src: "/fahrtdoc-screen-3.png", caption: "Dashboard & Statistiken" },
+  { src: "/fahrtdoc-screen-4.png", caption: "Fahrt starten" },
+  { src: "/fahrtdoc-screen-5.png", caption: "Fahrt läuft – Live-Tracking" },
+  { src: "/fahrtdoc-screen-6.png", caption: "Fahrtenliste & Export" },
+  { src: "/fahrtdoc-screen-7.png", caption: "Fahrt bearbeiten mit Karte" },
+];
+
+function ScreenshotCarousel() {
+  const [active, setActive] = useState(2);
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const prev = () => setActive((a) => Math.max(0, a - 1));
+  const next = () => setActive((a) => Math.min(SCREENS.length - 1, a + 1));
+
+  return (
+    <section className="py-20 overflow-hidden">
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-14 px-6"
+      >
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
+          Die App in{" "}
+          <span className="text-[#0066CC]">Aktion</span>
+        </h2>
+        <p className="text-slate-400 text-base max-w-xl mx-auto">
+          Sieben echte Screens – so sieht FahrtDoc auf Ihrem iPhone aus.
+        </p>
+      </motion.div>
+
+      {/* Carousel track */}
+      <div className="relative">
+        {/* Gradient fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-[#020B18] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-[#020B18] to-transparent z-10 pointer-events-none" />
+
+        <div
+          ref={trackRef}
+          className="flex items-end justify-center gap-4 md:gap-6 px-8 transition-all duration-500"
+          style={{ minHeight: 520 }}
+        >
+          {SCREENS.map((screen, i) => {
+            const offset = i - active;
+            const isActive = i === active;
+            const isAdjacent = Math.abs(offset) === 1;
+            const isVisible = Math.abs(offset) <= 2;
+
+            if (!isVisible) return null;
+
+            return (
+              <motion.button
+                key={screen.src}
+                onClick={() => setActive(i)}
+                aria-label={screen.caption}
+                animate={{
+                  scale: isActive ? 1 : isAdjacent ? 0.82 : 0.68,
+                  opacity: isActive ? 1 : isAdjacent ? 0.6 : 0.3,
+                  y: isActive ? 0 : isAdjacent ? 20 : 40,
+                  zIndex: isActive ? 20 : isAdjacent ? 10 : 5,
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                className="relative shrink-0 focus:outline-none"
+                style={{ width: isActive ? 220 : isAdjacent ? 180 : 150 }}
+              >
+                {/* iPhone frame */}
+                <div className="relative">
+                  {/* Outer shell */}
+                  <div
+                    className="relative rounded-[2.8rem] overflow-hidden shadow-2xl border-[3px]"
+                    style={{
+                      borderColor: isActive ? "#0066CC" : "rgba(255,255,255,0.12)",
+                      aspectRatio: "9/19.5",
+                    }}
+                  >
+                    {/* Dynamic island notch */}
+                    <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[38%] h-[3.5%] bg-black rounded-full z-10" />
+                    <img
+                      src={screen.src}
+                      alt={screen.caption}
+                      className="w-full h-full object-cover object-top"
+                      draggable={false}
+                    />
+                  </div>
+                  {/* Glow for active */}
+                  {isActive && (
+                    <div className="absolute -inset-3 rounded-[3.5rem] bg-[#0066CC]/25 blur-2xl -z-10" />
+                  )}
+                </div>
+              </motion.button>
+            );
+          })}
+        </div>
+
+        {/* Caption */}
+        <div className="text-center mt-6 h-6">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={active}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.2 }}
+              className="text-sm font-medium text-slate-300"
+            >
+              {SCREENS[active].caption}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+
+        {/* Nav buttons */}
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <button
+            onClick={prev}
+            disabled={active === 0}
+            className="w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronLeft className="w-5 h-5 text-white" />
+          </button>
+
+          {/* Dot indicators */}
+          <div className="flex gap-1.5">
+            {SCREENS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className="transition-all duration-300 rounded-full"
+                style={{
+                  width: i === active ? 24 : 8,
+                  height: 8,
+                  backgroundColor: i === active ? "#0066CC" : "rgba(255,255,255,0.25)",
+                }}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={next}
+            disabled={active === SCREENS.length - 1}
+            className="w-10 h-10 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 flex items-center justify-center transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-5 h-5 text-white" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function FahrtDocPage() {
   useEffect(() => {
@@ -134,6 +289,9 @@ export default function FahrtDocPage() {
           </motion.div>
         </div>
       </header>
+
+      {/* ── Screenshot Carousel ── */}
+      <ScreenshotCarousel />
 
       {/* Features Grid */}
       <section id="features" className="max-w-6xl mx-auto px-6 py-16">
@@ -241,7 +399,7 @@ export default function FahrtDocPage() {
             </h3>
             <p className="text-blue-100 text-sm leading-relaxed max-w-xl">
               FahrtDoc speichert Ihre Fahrtdaten sicher und verschlüsselt in
-              der Cloud. Kein Datenweitergabe an Dritte. Vollständig
+              der Cloud. Keine Datenweitergabe an Dritte. Vollständig
               DSGVO-konform.
             </p>
           </div>
