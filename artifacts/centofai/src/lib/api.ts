@@ -64,4 +64,9 @@ export const api = {
       method: "POST",
       body: JSON.stringify(data),
     }),
+  subscribeNewsletter: (email: string) =>
+    request<unknown>("/newsletter", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    }),
 };

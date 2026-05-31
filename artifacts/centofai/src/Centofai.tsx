@@ -782,15 +782,28 @@ function CoursesSection() {
 
 /* ─── Ideas Section ─────────────────────────────────────────────────── */
 function IdeasSection() {
-  const [formData, setFormData] = useState({ name: "", email: "", idea: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success">("idle");
+  const [formData, setFormData] = useState({ name: "", email: "", idea: "", budget: "", timeline: "" });
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errMsg, setErrMsg] = useState("");
 
   const handleSubmit = async () => {
     if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) return;
     setStatus("sending");
-    await new Promise((r) => setTimeout(r, 1000));
-    setStatus("success");
-    setTimeout(() => { setStatus("idle"); setFormData({ name: "", email: "", idea: "" }); }, 3000);
+    setErrMsg("");
+    try {
+      await api.submitProposal({
+        name: formData.name,
+        email: formData.email,
+        idea: formData.idea,
+        budget: formData.budget || undefined,
+        timeline: formData.timeline || undefined,
+      });
+      setStatus("success");
+      setTimeout(() => { setStatus("idle"); setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" }); }, 4000);
+    } catch (err) {
+      setStatus("error");
+      setErrMsg((err as Error).message || "Fehler beim Senden. Bitte versuche es erneut.");
+    }
   };
 
   return (
@@ -830,29 +843,48 @@ function IdeasSection() {
             <div className="space-y-4">
               <input
                 type="text"
-                placeholder="Dein Name"
+                placeholder="Dein Name *"
                 value={formData.name}
                 onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
                 className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
               />
               <input
                 type="email"
-                placeholder="Deine E-Mail"
+                placeholder="Deine E-Mail *"
                 value={formData.email}
                 onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                 className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
               />
               <textarea
-                placeholder="Beschreibe deine Idee..."
+                placeholder="Beschreibe deine Idee... *"
                 value={formData.idea}
                 onChange={(e) => setFormData((p) => ({ ...p, idea: e.target.value }))}
                 className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl resize-none placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
                 rows={4}
               />
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="Budget (optional)"
+                  value={formData.budget}
+                  onChange={(e) => setFormData((p) => ({ ...p, budget: e.target.value }))}
+                  className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                />
+                <input
+                  type="text"
+                  placeholder="Zeitrahmen (optional)"
+                  value={formData.timeline}
+                  onChange={(e) => setFormData((p) => ({ ...p, timeline: e.target.value }))}
+                  className="w-full px-4 py-3 text-sm text-[var(--text-body)] bg-[var(--bg-page)] border border-[var(--border-color)] rounded-xl placeholder:text-[var(--text-label)] focus:outline-none focus:border-purple-500/40"
+                />
+              </div>
+              {status === "error" && (
+                <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg">{errMsg}</p>
+              )}
               <button
                 onClick={handleSubmit}
-                disabled={status === "sending"}
-                className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-600/50 text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2"
+                disabled={status === "sending" || !formData.name.trim() || !formData.email.trim() || !formData.idea.trim()}
+                className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-600/50 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2"
               >
                 {status === "sending" ? (
                   <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Wird gesendet...</>
@@ -871,8 +903,20 @@ function IdeasSection() {
 /* ─── Footer + Newsletter ───────────────────────────────────────────── */
 function Footer() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const handleNewsletter = (e: React.FormEvent) => { e.preventDefault(); if (email) { setSubmitted(true); setEmail(""); } };
+  const [nlStatus, setNlStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+
+  const handleNewsletter = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setNlStatus("sending");
+    try {
+      await api.subscribeNewsletter(email.trim());
+      setNlStatus("success");
+      setEmail("");
+    } catch {
+      setNlStatus("error");
+    }
+  };
 
   return (
     <footer className="border-t border-[var(--border-color)] bg-[var(--bg-page)]">
@@ -883,19 +927,25 @@ function Footer() {
             <h4 className="text-lg font-bold">Nichts mehr verpassen</h4>
             <p className="text-[var(--text-caption)] text-xs mt-1">Erhalte 1x pro Woche die wichtigsten KI-Tools & News direkt in dein Postfach.</p>
           </div>
-          {submitted ? (
+          {nlStatus === "success" ? (
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/15 border border-emerald-500/30 rounded-xl text-emerald-400 text-sm font-medium">
               <CheckCircle2 className="w-4 h-4" /> Danke für dein Abo!
             </div>
           ) : (
-            <form onSubmit={handleNewsletter} className="flex gap-2 w-full md:w-auto">
-              <input type="email" required placeholder="Deine E-Mail"
-                value={email} onChange={(e) => setEmail(e.target.value)}
-                className="bg-[var(--bg-page)] border border-[var(--border-color)] px-4 py-2.5 rounded-xl text-sm text-[var(--text-body)] focus:outline-none focus:border-purple-500 w-full md:w-64" />
-              <button type="submit" className="bg-white text-slate-950 hover:bg-slate-200 font-bold px-5 py-2.5 rounded-xl text-sm transition whitespace-nowrap">
-                Abonnieren
-              </button>
-            </form>
+            <div className="flex flex-col gap-2 w-full md:w-auto">
+              <form onSubmit={handleNewsletter} className="flex gap-2">
+                <input type="email" required placeholder="Deine E-Mail"
+                  value={email} onChange={(e) => setEmail(e.target.value)}
+                  disabled={nlStatus === "sending"}
+                  className="bg-[var(--bg-page)] border border-[var(--border-color)] px-4 py-2.5 rounded-xl text-sm text-[var(--text-body)] focus:outline-none focus:border-purple-500 w-full md:w-64 disabled:opacity-50" />
+                <button type="submit" disabled={nlStatus === "sending"} className="bg-white text-slate-950 hover:bg-slate-200 disabled:opacity-50 font-bold px-5 py-2.5 rounded-xl text-sm transition whitespace-nowrap">
+                  {nlStatus === "sending" ? "…" : "Abonnieren"}
+                </button>
+              </form>
+              {nlStatus === "error" && (
+                <p className="text-xs text-red-400">Fehler beim Anmelden. Bitte versuche es erneut.</p>
+              )}
+            </div>
           )}
         </div>
 
@@ -903,8 +953,8 @@ function Footer() {
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-[var(--text-label)] pt-8 border-t border-[var(--border-color)]">
           <p>© {new Date().getFullYear()} CentofAI. Alle Rechte vorbehalten.</p>
           <div className="space-x-6">
-            <a href="#" className="hover:text-[var(--text-caption)] transition">Impressum</a>
-            <a href="#" className="hover:text-[var(--text-caption)] transition">Datenschutz</a>
+            <Link to="/impressum" className="hover:text-[var(--text-caption)] transition">Impressum</Link>
+            <Link to="/datenschutz" className="hover:text-[var(--text-caption)] transition">Datenschutz</Link>
           </div>
         </div>
       </div>
