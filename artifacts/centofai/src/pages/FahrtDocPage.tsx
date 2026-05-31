@@ -323,6 +323,39 @@ export default function FahrtDocPage() {
         </div>
       </section>
 
+      {/* Über FahrtDoc */}
+      <section className="max-w-6xl mx-auto px-6 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-12"
+        >
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-6">
+            Über{" "}
+            <span style={{ color: "#0066CC" }}>FahrtDoc</span>
+          </h2>
+          <div className="text-slate-300 text-base leading-relaxed space-y-4 max-w-4xl">
+            <p>
+              FahrtDoc ist die moderne und intelligente Lösung zur einfachen Dokumentation von Fahrten. Die App wurde entwickelt, um Fahrten automatisch, übersichtlich und professionell zu erfassen – ideal für Privatpersonen, Selbstständige und Unternehmen.
+            </p>
+            <p>
+              Mit einem klaren und modernen Design ermöglicht FahrtDoc die schnelle Erfassung von Strecken, Kilometern, Fahrtdauer sowie Start- und Zielorten direkt über GPS. Während aktiver Fahrten werden relevante Daten präzise dokumentiert und übersichtlich im persönlichen Fahrtenbuch gespeichert.
+            </p>
+            <p>
+              Alle Fahrten können jederzeit gefiltert, eingesehen und als PDF- oder CSV-Datei exportiert werden. Dank Face ID oder Fingerabdruck ist der Zugriff schnell und sicher möglich. Die intuitive Benutzeroberfläche sorgt dafür, dass alle wichtigen Informationen sofort sichtbar sind, ohne komplizierte Menüs oder unnötige Funktionen.
+            </p>
+            <p>
+              FahrtDoc kombiniert modernes minimalistisches Design mit leistungsstarker Technologie und bietet eine einfache Möglichkeit, Fahrten effizient zu verwalten, Kilometer nachzuweisen und Fahrten professionell zu dokumentieren.
+            </p>
+            <p>
+              Datenschutz und Kontrolle stehen dabei im Mittelpunkt: Standortdaten werden ausschließlich während aktiver Fahrten verwendet und können jederzeit exportiert oder gelöscht werden. <span style={{ color: "#BFFF00" }} className="font-semibold">FahrtDoc macht Fahrtendokumentation smarter, schneller und einfacher.</span>
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
       {/* Ideal für */}
       <section className="max-w-6xl mx-auto px-6 py-16">
         <motion.div
