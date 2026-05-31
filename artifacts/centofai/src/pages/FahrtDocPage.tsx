@@ -314,7 +314,6 @@ function ScreenshotsSection() {
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
->>>>>>> 90bce0e (feat(fahrtdoc): Add app screenshots carousel with iPhone mockup frames)
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
