@@ -139,7 +139,7 @@ export default function ProductsPage() {
             <ArrowLeft className="w-4 h-4" /> Zurück zur Startseite
           </Link>
           <Link href="/" className="text-lg font-black tracking-wider gradient-text">
-            CENTOF<span className="text-white">AI</span>
+            Centof.<span className="text-white">Ai</span>
           </Link>
         </div>
       </div>

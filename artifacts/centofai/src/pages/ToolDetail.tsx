@@ -143,7 +143,7 @@ export default function ToolDetail() {
             href="/"
             className="text-lg font-black tracking-wider gradient-text"
           >
-            CENTOF<span className="text-white">AI</span>
+            Centof.<span className="text-white">Ai</span>
           </Link>
         </div>
       </div>

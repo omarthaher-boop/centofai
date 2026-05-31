@@ -179,7 +179,7 @@ function Navbar() {
     <nav className="border-b border-slate-900 bg-[var(--nav-bg)] backdrop-blur-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-black tracking-wider gradient-text">
-          CENTOF<span className="text-white">AI</span>
+          Centof.<span className="text-white">Ai</span>
         </Link>
 
         {/* Desktop Menu */}
