@@ -1,7 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowLeft,
   Navigation,
   FileText,
   Mail,
@@ -20,6 +19,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { Link } from "wouter";
+import Navbar from "../components/Navbar";
 
 function setMeta() {
   document.title = "FahrtDoc – Automatische Fahrtendokumentation";
@@ -213,25 +213,7 @@ export default function FahrtDocPage() {
 
   return (
     <div className="min-h-screen bg-[#020B18] text-white font-sans antialiased">
-      {/* Sticky Nav */}
-      <nav className="border-b border-white/10 bg-[#020B18]/90 backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            to="/products"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 hover:text-white transition"
-          >
-            <ArrowLeft className="w-4 h-4" /> Unsere Produkte
-          </Link>
-          <div className="flex items-center gap-2">
-            <img
-              src="/fahrtdoc-logo.jpeg"
-              alt="FahrtDoc"
-              className="w-8 h-8 rounded-lg object-cover"
-            />
-            <span className="text-sm font-bold text-white">FahrtDoc</span>
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">

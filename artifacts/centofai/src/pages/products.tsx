@@ -14,12 +14,12 @@ import {
   BarChart3,
   Globe,
   Search,
-  ArrowLeft,
   Wrench,
   Newspaper,
   MessageSquare,
   ArrowUpRight,
 } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 function setMeta() {
   document.title = "Produkte & Services – CentofAI";
@@ -138,20 +138,7 @@ export default function ProductsPage() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased">
-      {/* Top Bar */}
-      <div className="border-b border-[var(--border-color)] bg-[var(--nav-bg)] backdrop-blur-md sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-sm font-medium text-[var(--text-caption)] hover:text-purple-400 transition"
-          >
-            <ArrowLeft className="w-4 h-4" /> Zurück zur Startseite
-          </Link>
-          <Link href="/" className="text-lg font-black tracking-wider gradient-text">
-            Centof.<span className="text-white">Ai</span>
-          </Link>
-        </div>
-      </div>
+      <Navbar />
 
       {/* Hero */}
       <header className="max-w-6xl mx-auto px-6 pt-16 pb-12">
