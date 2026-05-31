@@ -171,14 +171,28 @@ function ScreenshotsSection() {
                 />
               )}
 
-              {/* Real screenshot — iPhone frame already baked in */}
-              <img
-                src={s.src}
-                alt={s.label}
-                style={{ height: 540, width: "auto" }}
-                className="object-contain select-none"
-                draggable={false}
-              />
+              {/* Clip container: crops white Mac-screenshot border, keeps iPhone shape */}
+              <div style={{
+                width: 252,
+                height: 530,
+                borderRadius: 44,
+                overflow: "hidden",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}>
+                <img
+                  src={s.src}
+                  alt={s.label}
+                  style={{
+                    width: "128%",
+                    height: "auto",
+                    display: "block",
+                    flexShrink: 0,
+                  }}
+                  draggable={false}
+                />
+              </div>
             </div>
           );
         })}
