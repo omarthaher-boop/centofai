@@ -99,54 +99,30 @@ const SCREENSHOTS = [
 
 
 function ScreenshotsSection() {
-  const [active, setActive] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(2); // Dashboard als attraktivster Einstieg
 
-  const scrollTo = (index: number) => {
-    setActive(index);
-    if (scrollRef.current) {
-      const child = scrollRef.current.children[index] as HTMLElement;
-      if (child) {
-        scrollRef.current.scrollTo({ left: child.offsetLeft - (scrollRef.current.offsetWidth / 2) + (child.offsetWidth / 2), behavior: "smooth" });
-      }
-    }
-  };
-
-  const prev = () => scrollTo(Math.max(0, active - 1));
-  const next = () => scrollTo(Math.min(SCREENSHOTS.length - 1, active + 1));
+  const prev = () => setActive((i) => Math.max(0, i - 1));
+  const next = () => setActive((i) => Math.min(SCREENSHOTS.length - 1, i + 1));
 
   useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const handler = () => {
-      const center = el.scrollLeft + el.offsetWidth / 2;
-      let closest = 0;
-      let minDist = Infinity;
-      Array.from(el.children).forEach((child, i) => {
-        const c = child as HTMLElement;
-        const childCenter = c.offsetLeft + c.offsetWidth / 2;
-        if (Math.abs(childCenter - center) < minDist) {
-          minDist = Math.abs(childCenter - center);
-          closest = i;
-        }
-      });
-      setActive(closest);
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
     };
-    el.addEventListener("scrollend", handler);
-    el.addEventListener("scroll", handler);
-    return () => { el.removeEventListener("scrollend", handler); el.removeEventListener("scroll", handler); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
   }, []);
 
   const current = SCREENSHOTS[active];
 
   return (
-    <section className="max-w-6xl mx-auto px-6 py-16">
+    <section className="py-16 overflow-hidden">
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
-        className="text-center mb-10"
+        className="text-center mb-12 px-6"
       >
         <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
           Die App im{" "}
@@ -157,70 +133,123 @@ function ScreenshotsSection() {
         </p>
       </motion.div>
 
-      <div className="flex flex-col items-center gap-8">
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 px-4 w-full justify-start md:justify-center"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {SCREENSHOTS.map((s, i) => (
+      {/* Cover-Flow Stage */}
+      <div className="relative flex items-center justify-center" style={{ height: 620 }}>
+        {SCREENSHOTS.map((s, i) => {
+          const offset = i - active;
+          const abs = Math.abs(offset);
+          if (abs > 2) return null;
+
+          const SCALE  = [1,    0.78, 0.60][abs];
+          const OPA    = [1,    0.55, 0.25][abs];
+          const TX     = offset * 248;
+          const Z      = 20 - abs * 6;
+          const isActive = abs === 0;
+
+          return (
             <div
               key={s.id}
-              className={`snap-center shrink-0 cursor-pointer transition-all duration-300 ${active === i ? "scale-100 opacity-100" : "scale-95 opacity-50"}`}
-              onClick={() => scrollTo(i)}
+              onClick={isActive ? undefined : () => setActive(i)}
+              className={isActive ? "absolute" : "absolute cursor-pointer"}
+              style={{
+                transform: `translateX(${TX}px) scale(${SCALE})`,
+                opacity: OPA,
+                zIndex: Z,
+                transition: "transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s ease",
+              }}
             >
-              <img
-                src={s.src}
-                alt={s.label}
-                className="h-[580px] w-auto object-contain rounded-3xl"
-                style={{
-                  filter: active === i
-                    ? "drop-shadow(0 0 32px rgba(0,102,204,0.35)) drop-shadow(0 20px 40px rgba(0,0,0,0.6))"
-                    : "drop-shadow(0 8px 24px rgba(0,0,0,0.4))",
-                }}
-              />
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-center gap-4">
-          <div className="flex items-center gap-4">
-            <button
-              onClick={prev}
-              disabled={active === 0}
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </button>
-            <div className="flex gap-2">
-              {SCREENSHOTS.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => scrollTo(i)}
-                  className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2.5 bg-[#0066CC]" : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"}`}
+              {/* Blue radial glow behind active */}
+              {isActive && (
+                <div
+                  className="absolute inset-0 rounded-[3rem] pointer-events-none"
+                  style={{
+                    background: "radial-gradient(ellipse 80% 70% at 50% 60%, rgba(0,102,204,0.45) 0%, transparent 70%)",
+                    transform: "scale(1.1)",
+                    filter: "blur(24px)",
+                    zIndex: -1,
+                  }}
                 />
-              ))}
-            </div>
-            <button
-              onClick={next}
-              disabled={active === SCREENSHOTS.length - 1}
-              className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </button>
-          </div>
+              )}
 
-          <motion.div
-            key={current.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="text-center"
+              {/* iPhone frame with Dynamic Island */}
+              <div
+                className="relative overflow-hidden"
+                style={{
+                  width: 260,
+                  height: 540,
+                  borderRadius: "3rem",
+                  background: "#0a0a0a",
+                  boxShadow: isActive
+                    ? "0 0 0 8px #1c1c1e, 0 0 0 9px #3a3a3c, 0 32px 80px rgba(0,0,0,0.85)"
+                    : "0 0 0 8px #1c1c1e, 0 0 0 9px #3a3a3c, 0 12px 32px rgba(0,0,0,0.6)",
+                }}
+              >
+                {/* Dynamic Island notch */}
+                <div
+                  className="absolute top-3 left-1/2 -translate-x-1/2 z-20"
+                  style={{
+                    width: 90,
+                    height: 26,
+                    borderRadius: 20,
+                    background: "#0a0a0a",
+                  }}
+                />
+                {/* Screen content */}
+                <img
+                  src={s.src}
+                  alt={s.label}
+                  className="w-full h-full object-cover object-top"
+                  draggable={false}
+                />
+                {/* Bottom home indicator */}
+                <div
+                  className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20"
+                  style={{ width: 100, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.35)" }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Navigation */}
+      <div className="flex flex-col items-center gap-4 mt-6 px-6">
+        <div className="flex items-center gap-4">
+          <button
+            onClick={prev}
+            disabled={active === 0}
+            className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
           >
-            <p className="text-sm font-bold text-white mb-1">{current.label}</p>
-            <p className="text-xs text-slate-400 max-w-xs">{current.desc}</p>
-          </motion.div>
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <div className="flex gap-2">
+            {SCREENSHOTS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActive(i)}
+                className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2.5 bg-[#0066CC]" : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"}`}
+              />
+            ))}
+          </div>
+          <button
+            onClick={next}
+            disabled={active === SCREENSHOTS.length - 1}
+            className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
+
+        <motion.div
+          key={current.id}
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="text-center"
+        >
+          <p className="text-sm font-bold text-white mb-1">{current.label}</p>
+          <p className="text-xs text-slate-400 max-w-xs">{current.desc}</p>
+        </motion.div>
       </div>
     </section>
   );
