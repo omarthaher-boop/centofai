@@ -526,7 +526,7 @@ function Hero() {
             <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
             <img
               src="centofai-hero.png"
-              alt="CentofAI - Center of Artificial Intelligence"
+              alt="Centof.Ai - Center of Artificial Intelligence"
               className="relative w-full h-auto rounded-xl border border-[var(--border-color)] shadow-2xl"
               loading="eager"
             />
