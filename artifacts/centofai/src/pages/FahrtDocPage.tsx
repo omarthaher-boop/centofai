@@ -97,33 +97,6 @@ const SCREENSHOTS = [
   },
 ];
 
-function PhoneMockup({ children, active }: { children: React.ReactNode; active?: boolean }) {
-  return (
-    <div
-      className={`relative shrink-0 transition-all duration-300 ${active ? "scale-100 opacity-100" : "scale-95 opacity-60"}`}
-      style={{ width: 200, height: 400 }}
-    >
-      <div
-        className="absolute inset-0 rounded-[2.5rem] border-[6px] border-[#1a2a42] bg-[#0a1628] shadow-2xl overflow-hidden"
-        style={{ boxShadow: active ? "0 0 50px rgba(0,102,204,0.25), 0 20px 60px rgba(0,0,0,0.6)" : "0 10px 40px rgba(0,0,0,0.4)" }}
-      >
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-5 bg-[#1a2a42] rounded-b-2xl z-10 flex items-center justify-center gap-1.5">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#0a1628]" />
-          <div className="w-8 h-1 rounded-full bg-[#0a1628]" />
-        </div>
-        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 rounded-full bg-white/20 z-10" />
-        <div className="absolute inset-0 pt-5 pb-4 overflow-hidden">
-          <div className="w-full h-full overflow-hidden">
-            {children}
-          </div>
-        </div>
-      </div>
-      <div className="absolute right-[-8px] top-24 w-[3px] h-10 bg-[#1a2a42] rounded-r-md" />
-      <div className="absolute left-[-8px] top-20 w-[3px] h-6 bg-[#1a2a42] rounded-l-md" />
-      <div className="absolute left-[-8px] top-30 w-[3px] h-10 bg-[#1a2a42] rounded-l-md" />
-    </div>
-  );
-}
 
 function ScreenshotsSection() {
   const [active, setActive] = useState(0);
@@ -193,16 +166,19 @@ function ScreenshotsSection() {
           {SCREENSHOTS.map((s, i) => (
             <div
               key={s.id}
-              className="snap-center shrink-0 cursor-pointer"
+              className={`snap-center shrink-0 cursor-pointer transition-all duration-300 ${active === i ? "scale-100 opacity-100" : "scale-95 opacity-50"}`}
               onClick={() => scrollTo(i)}
             >
-              <PhoneMockup active={active === i}>
-                <img
-                  src={s.src}
-                  alt={s.label}
-                  className="w-full h-full object-cover object-top"
-                />
-              </PhoneMockup>
+              <img
+                src={s.src}
+                alt={s.label}
+                className="h-[580px] w-auto object-contain rounded-3xl"
+                style={{
+                  filter: active === i
+                    ? "drop-shadow(0 0 32px rgba(0,102,204,0.35)) drop-shadow(0 20px 40px rgba(0,0,0,0.6))"
+                    : "drop-shadow(0 8px 24px rgba(0,0,0,0.4))",
+                }}
+              />
             </div>
           ))}
         </div>
