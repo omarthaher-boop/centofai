@@ -161,52 +161,24 @@ function ScreenshotsSection() {
               {/* Blue radial glow behind active */}
               {isActive && (
                 <div
-                  className="absolute inset-0 rounded-[3rem] pointer-events-none"
+                  className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: "radial-gradient(ellipse 80% 70% at 50% 60%, rgba(0,102,204,0.45) 0%, transparent 70%)",
-                    transform: "scale(1.1)",
-                    filter: "blur(24px)",
+                    background: "radial-gradient(ellipse 80% 60% at 50% 65%, rgba(0,102,204,0.5) 0%, transparent 70%)",
+                    transform: "scale(1.15)",
+                    filter: "blur(28px)",
                     zIndex: -1,
                   }}
                 />
               )}
 
-              {/* iPhone frame with Dynamic Island */}
-              <div
-                className="relative overflow-hidden"
-                style={{
-                  width: 260,
-                  height: 540,
-                  borderRadius: "3rem",
-                  background: "#0a0a0a",
-                  boxShadow: isActive
-                    ? "0 0 0 8px #1c1c1e, 0 0 0 9px #3a3a3c, 0 32px 80px rgba(0,0,0,0.85)"
-                    : "0 0 0 8px #1c1c1e, 0 0 0 9px #3a3a3c, 0 12px 32px rgba(0,0,0,0.6)",
-                }}
-              >
-                {/* Dynamic Island notch */}
-                <div
-                  className="absolute top-3 left-1/2 -translate-x-1/2 z-20"
-                  style={{
-                    width: 90,
-                    height: 26,
-                    borderRadius: 20,
-                    background: "#0a0a0a",
-                  }}
-                />
-                {/* Screen content */}
-                <img
-                  src={s.src}
-                  alt={s.label}
-                  className="w-full h-full object-cover object-top"
-                  draggable={false}
-                />
-                {/* Bottom home indicator */}
-                <div
-                  className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20"
-                  style={{ width: 100, height: 4, borderRadius: 2, background: "rgba(255,255,255,0.35)" }}
-                />
-              </div>
+              {/* Real screenshot — iPhone frame already baked in */}
+              <img
+                src={s.src}
+                alt={s.label}
+                style={{ height: 540, width: "auto" }}
+                className="object-contain select-none"
+                draggable={false}
+              />
             </div>
           );
         })}
