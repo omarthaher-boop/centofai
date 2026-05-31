@@ -446,9 +446,6 @@ export default function FahrtDocPage() {
             <span className="px-4 py-2 rounded-lg bg-white/20 text-white text-xs font-semibold">
               🔒 DSGVO-konform
             </span>
-            <span className="px-4 py-2 rounded-lg bg-white/20 text-white text-xs font-semibold">
-              🇩🇪 Server in Deutschland
-            </span>
           </div>
         </motion.div>
       </section>
