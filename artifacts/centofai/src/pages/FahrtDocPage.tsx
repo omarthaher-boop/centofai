@@ -134,7 +134,7 @@ function ScreenshotsSection() {
       </motion.div>
 
       {/* Cover-Flow Stage */}
-      <div className="relative flex items-center justify-center" style={{ height: 620 }}>
+      <div className="relative flex items-center justify-center" style={{ height: 640 }}>
         {SCREENSHOTS.map((s, i) => {
           const offset = i - active;
           const abs = Math.abs(offset);
@@ -142,7 +142,7 @@ function ScreenshotsSection() {
 
           const SCALE  = [1,    0.78, 0.60][abs];
           const OPA    = [1,    0.55, 0.25][abs];
-          const TX     = offset * 248;
+          const TX     = offset * 250;
           const Z      = 20 - abs * 6;
           const isActive = abs === 0;
 
@@ -158,37 +158,46 @@ function ScreenshotsSection() {
                 transition: "transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s ease",
               }}
             >
-              {/* Blue radial glow behind active */}
+              {/* Blue radial glow behind active screen */}
               {isActive && (
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
-                    background: "radial-gradient(ellipse 80% 60% at 50% 65%, rgba(0,102,204,0.5) 0%, transparent 70%)",
-                    transform: "scale(1.15)",
-                    filter: "blur(28px)",
+                    background: "radial-gradient(ellipse 80% 60% at 50% 65%, rgba(0,102,204,0.45) 0%, transparent 70%)",
+                    transform: "scale(1.2)",
+                    filter: "blur(32px)",
                     zIndex: -1,
                   }}
                 />
               )}
 
-              {/* Clip container: crops white Mac-screenshot border, keeps iPhone shape */}
+              {/*
+                Clip container: crops iPhone bezel + gray bg,
+                leaving only the screen content on transparent bg.
+
+                iPhone 14 Pro mockup (1242×2688px):
+                  – Screen starts at ~11% from left, 7% from top
+                  – Screen width ≈ 80% of image width
+                Image is scaled to 127% so screen width = 127%×252≈320px×80%≈256px ≈ container width.
+                transform: translate(-11%, -7%) shifts image so screen top-left aligns with container origin.
+              */}
               <div style={{
                 width: 252,
-                height: 530,
+                height: 548,
                 borderRadius: 44,
                 overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                boxShadow: "0 14px 48px rgba(0,0,0,0.55), 0 2px 8px rgba(0,0,0,0.25)",
+                position: "relative",
               }}>
                 <img
                   src={s.src}
                   alt={s.label}
                   style={{
-                    width: "128%",
+                    width: "127%",
                     height: "auto",
                     display: "block",
-                    flexShrink: 0,
+                    transform: "translate(-11%, -8%)",
+                    transformOrigin: "top left",
                   }}
                   draggable={false}
                 />
