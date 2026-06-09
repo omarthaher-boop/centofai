@@ -28,6 +28,7 @@ import SubmitToolPage from "./pages/submit-tool";
 import AccountPage from "./pages/account";
 import ProductsPage from "./pages/products";
 import FahrtDocPage from "./pages/FahrtDocPage";
+import FahrtDocDatenschutzPage from "./pages/FahrtDocDatenschutz";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
 
@@ -159,7 +160,7 @@ function ClerkProviderWithRoutes() {
       appearance={clerkAppearance}
       signInUrl={`${basePath}/sign-in`}
       signUpUrl={`${basePath}/sign-up`}
-      localization={deDE}
+      localization={deDE as Parameters<typeof ClerkProvider>[0]["localization"]}
       routerPush={(to) => setLocation(stripBase(to))}
       routerReplace={(to) => setLocation(stripBase(to), { replace: true })}
     >
@@ -194,6 +195,7 @@ function ClerkProviderWithRoutes() {
           </Route>
           <Route path="/products" component={ProductsPage} />
           <Route path="/products/fahrtdoc" component={FahrtDocPage} />
+          <Route path="/products/fahrtdoc/datenschutz" component={FahrtDocDatenschutzPage} />
           <Route path="/impressum" component={ImpressumPage} />
           <Route path="/datenschutz" component={DatenschutzPage} />
           <Route path="/sign-in/*?" component={SignInPage} />

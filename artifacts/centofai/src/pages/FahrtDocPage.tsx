@@ -442,7 +442,13 @@ export default function FahrtDocPage() {
               DSGVO-konform.
             </p>
           </div>
-          <div className="shrink-0 flex flex-wrap gap-3 justify-center">
+          <div className="shrink-0 flex flex-col gap-3 items-center">
+            <Link
+              to="/products/fahrtdoc/datenschutz"
+              className="px-4 py-2 rounded-lg bg-white text-[#0066CC] text-xs font-semibold hover:bg-blue-50 transition-colors"
+            >
+              📄 Datenschutzerklärung
+            </Link>
             <span className="px-4 py-2 rounded-lg bg-white/20 text-white text-xs font-semibold">
               🔒 DSGVO-konform
             </span>
