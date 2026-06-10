@@ -23,7 +23,6 @@ export function useTheme() {
 
 const navLinks = [
   { name: "Home", href: "/" },
-  { name: "News", href: "/#news" },
   { name: "Ideen", href: "/#ideas" },
   { name: "KI-Tools", href: "/#tools" },
   { name: "Kurse", href: "/#academy" },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Search, Newspaper, GraduationCap, Wrench, Mail,
+  Search, GraduationCap, Wrench, Mail,
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Users, Lightbulb, Send, ChevronDown, Package, Heart,
@@ -10,7 +10,6 @@ import { Link } from "wouter";
 import { Show, useUser } from "@clerk/react";
 import Navbar from "./components/Navbar";
 import { tools, toolCategories, toolSlug } from "@workspace/data";
-import { newsItems, newsCategories } from "@workspace/data";
 import { courses, courseCategories } from "@workspace/data";
 import {
   useFavoriteToolNames,
@@ -69,84 +68,8 @@ function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; 
   );
 }
 
-const ogImageCache = new Map<string, string | null>();
-
-function NewsThumbnail({
-  articleUrl,
-  imageUrl,
-  category,
-  catBg,
-}: {
-  articleUrl: string;
-  imageUrl?: string;
-  category: string;
-  catBg: Record<string, string>;
-}) {
-  const [ogUrl, setOgUrl] = useState<string | null | undefined>(() =>
-    ogImageCache.has(articleUrl) ? ogImageCache.get(articleUrl) ?? null : undefined,
-  );
-  const [ogFailed, setOgFailed] = useState(false);
-  const [curatedFailed, setCuratedFailed] = useState(false);
-
-  useEffect(() => {
-    if (ogImageCache.has(articleUrl)) return;
-    let cancelled = false;
-    const controller = new AbortController();
-    fetch(`/api/og-image?url=${encodeURIComponent(articleUrl)}`, {
-      signal: controller.signal,
-    })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((data: { imageUrl?: string | null } | null) => {
-        if (cancelled) return;
-        const found = data?.imageUrl ?? null;
-        ogImageCache.set(articleUrl, found);
-        setOgUrl(found);
-      })
-      .catch(() => {
-        if (cancelled) return;
-        ogImageCache.set(articleUrl, null);
-        setOgUrl(null);
-      });
-    return () => {
-      cancelled = true;
-      controller.abort();
-    };
-  }, [articleUrl]);
-
-  const activeSrc = ogUrl && !ogFailed
-    ? ogUrl
-    : imageUrl && !curatedFailed
-      ? imageUrl
-      : null;
-
-  return (
-    <div className="bg-[var(--bg-card)] border border-[var(--border-color)] aspect-video rounded-2xl mb-4 overflow-hidden relative">
-      {activeSrc ? (
-        <img
-          key={activeSrc}
-          src={activeSrc}
-          alt={category}
-          loading="lazy"
-          decoding="async"
-          referrerPolicy="no-referrer"
-          onError={() => {
-            if (activeSrc === ogUrl) setOgFailed(true);
-            else setCuratedFailed(true);
-          }}
-          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      ) : (
-        <div className={`absolute inset-0 bg-gradient-to-tr ${catBg[category] || "from-slate-800"} to-slate-800 flex items-center justify-center`}>
-          <span className="font-bold text-slate-600 text-sm tracking-wider uppercase">{category}</span>
-        </div>
-      )}
-    </div>
-  );
-}
-
 /* ─── Hero ─────────────────────────────────────────────────────── */
 const heroCategories = [
-  { name: "News", href: "#news", icon: Newspaper, desc: "Aktuelle KI-Nachrichten", color: "#3B82F6", bg: "bg-blue-500/10", hoverBg: "group-hover:bg-blue-500/20", text: "text-blue-400", hoverText: "group-hover:text-blue-300" },
   { name: "Ideen", href: "#ideas", icon: Lightbulb, desc: "Projekte einreichen", color: "#F59E0B", bg: "bg-amber-500/10", hoverBg: "group-hover:bg-amber-500/20", text: "text-amber-400", hoverText: "group-hover:text-amber-300" },
   { name: "Unsere Produkte", href: "/products", icon: Package, desc: "KI-Lösungen entdecken", color: "#06B6D4", bg: "bg-cyan-500/10", hoverBg: "group-hover:bg-cyan-500/20", text: "text-cyan-400", hoverText: "group-hover:text-cyan-300" },
   { name: "KI-Tools", href: "#tools", icon: Wrench, desc: "102+ Tools entdecken", color: "#8B5CF6", bg: "bg-purple-500/10", hoverBg: "group-hover:bg-purple-500/20", text: "text-purple-400", hoverText: "group-hover:text-purple-300" },
@@ -247,22 +170,6 @@ function GlobalSearch() {
                   ))}
                 </div>
               )}
-              {results.news.length > 0 && (
-                <div className="mb-3">
-                  <p className="text-[10px] font-semibold text-blue-400 uppercase tracking-wider px-2 mb-1">News</p>
-                  {results.news.slice(0, 3).map((n: any) => (
-                    <a key={n.title} href={n.url} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-blue-500/10 transition">
-                      <div className="w-8 h-8 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0">
-                        <Newspaper className="w-4 h-4 text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-[var(--text-body)] truncate max-w-[260px]">{n.title}</p>
-                        <p className="text-xs text-[var(--text-label)]">{n.source}</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              )}
               {results.courses.length > 0 && (
                 <div>
                   <p className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider px-2 mb-1">Kurse</p>
@@ -349,109 +256,6 @@ function Hero() {
         </div>
       </div>
     </header>
-  );
-}
-
-/* ─── News Section ───────────────────────────────────────────────── */
-function NewsSection() {
-  const [activeFilter, setActiveFilter] = useState("Alle");
-  const [expanded, setExpanded] = useState(false);
-  const filtered = useMemo(() => {
-    const base = activeFilter === "Alle" ? newsItems : newsItems.filter((n) => n.category === activeFilter);
-    return expanded ? base : base.slice(0, 3);
-  }, [activeFilter, expanded]);
-
-  const catColors: Record<string, string> = {
-    "OpenAI": "text-purple-400",
-    "Google": "text-blue-400",
-    "Anthropic": "text-emerald-400",
-    "Meta": "text-pink-400",
-    "Microsoft": "text-cyan-400",
-    "Business": "text-amber-400",
-    "Recht": "text-red-400",
-    "Open Source": "text-indigo-400",
-  };
-
-  const catBg: Record<string, string> = {
-    "OpenAI": "from-purple-900/20",
-    "Google": "from-blue-900/20",
-    "Anthropic": "from-emerald-900/20",
-    "Meta": "from-pink-900/20",
-    "Microsoft": "from-cyan-900/20",
-    "Business": "from-amber-900/20",
-    "Recht": "from-red-900/20",
-    "Open Source": "from-indigo-900/20",
-  };
-
-  return (
-    <section id="news" className="bg-[var(--bg-section-alt)]/20 border-t border-b border-[var(--border-color)] py-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
-              <Newspaper className="w-6 h-6 text-purple-400" /> KI-News & Updates
-            </h2>
-            <p className="text-[var(--text-caption)] text-sm mt-1">Verpasse keine wichtigen Durchbrüche und Tech-Entwicklungen mehr.</p>
-          </div>
-        </div>
-
-        {/* Category Filters */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {newsCategories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
-                activeFilter === cat
-                  ? "bg-purple-600 text-white"
-                  : "bg-[var(--bg-card)] text-[var(--text-caption)] hover:text-white hover:bg-slate-800 border border-[var(--border-color)]"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-8">
-          {filtered.map((news, i) => (
-            <motion.article
-              key={news.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="group cursor-pointer"
-            >
-              <NewsThumbnail articleUrl={news.url} imageUrl={news.imageUrl} category={news.category} catBg={catBg} />
-              <span className={`text-xs font-bold uppercase tracking-wider ${catColors[news.category] || "text-purple-400"}`}>
-                {news.category}
-              </span>
-              <h3 className="text-xl font-bold mt-2 group-hover:text-purple-400 transition line-clamp-2">
-                {news.title}
-              </h3>
-              <p className="text-[var(--text-caption)] text-sm mt-2 line-clamp-2">{news.description}</p>
-              <div className="flex items-center justify-between mt-3 pt-3 border-t border-[var(--border-color)]">
-                <span className="text-xs text-[var(--text-label)]">{news.source} • {news.date}</span>
-                <a href={news.url} target="_blank" rel="noopener noreferrer" className="text-sm text-purple-400 hover:text-purple-300 transition inline-flex items-center gap-1">
-                  Mehr lesen <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-
-        {/* Mehr/Weniger Toggle */}
-        <div className="flex justify-center mt-10">
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-xl hover:bg-purple-500/10 transition cursor-pointer"
-          >
-            {expanded ? "Weniger anzeigen" : "Mehr anzeigen"}
-            <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-          </button>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -968,7 +772,6 @@ export default function App() {
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth">
       <Navbar />
       <Hero />
-      <NewsSection />
       <IdeasSection />
       <ToolsSection />
       <CoursesSection />
