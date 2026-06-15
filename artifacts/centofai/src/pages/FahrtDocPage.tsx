@@ -54,66 +54,16 @@ const TARGETS = [
 
 const SCREENSHOTS = [
   {
-    id: "anmelden",
-    src: "/fahrtdoc-screen-1.png",
-    label: "Anmelden",
-    desc: "Sicherer Login mit E-Mail und Passwort – oder Face ID & Fingerabdruck.",
-  },
-  {
-    id: "registrieren",
-    src: "/fahrtdoc-screen-2.png",
-    label: "Registrieren",
-    desc: "Konto in Sekunden erstellt: Name, E-Mail, Kennzeichen, Passwort – fertig.",
-  },
-  {
     id: "dashboard",
-    src: "/fahrtdoc-screen-3.png",
-    label: "Dashboard & Statistiken",
-    desc: "Alle Kennzahlen auf einen Blick: Kilometer, Fahrten, Fahrtzeit und Zweckverteilung.",
-  },
-  {
-    id: "starten",
-    src: "/fahrtdoc-screen-4.png",
-    label: "Fahrt starten",
-    desc: "Mit einem Tipp Geschäftsreise oder private Fahrt starten – GPS läuft automatisch.",
-  },
-  {
-    id: "aktiv",
-    src: "/fahrtdoc-screen-5.png",
-    label: "Fahrt läuft",
-    desc: "Echtzeit-Erfassung von Strecke und Fahrtzeit während der aktiven Fahrt.",
-  },
-  {
-    id: "fahrtenliste",
-    src: "/fahrtdoc-screen-6.png",
-    label: "Fahrtenliste",
-    desc: "Alle Fahrten gefiltert nach Zeitraum und Zweck – inkl. PDF, CSV & E-Mail-Export.",
-  },
-  {
-    id: "bearbeiten",
-    src: "/fahrtdoc-screen-7.png",
-    label: "Fahrt bearbeiten",
-    desc: "Route auf der Karte sehen, Zweck und Adressen direkt bearbeiten und speichern.",
+    src: "/fahrtdoc-screenshots.png",
+    label: "Dashboard & Übersicht",
+    desc: "Alle Funktionen auf einen Blick: Fahrt starten, Statistiken, Fahrtenliste und Kostenauswertung.",
   },
 ];
 
 
 function ScreenshotsSection() {
-  const [active, setActive] = useState(2); // Dashboard als attraktivster Einstieg
-
-  const prev = () => setActive((i) => Math.max(0, i - 1));
-  const next = () => setActive((i) => Math.min(SCREENSHOTS.length - 1, i + 1));
-
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prev();
-      if (e.key === "ArrowRight") next();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, []);
-
-  const current = SCREENSHOTS[active];
+  const s = SCREENSHOTS[0];
 
   return (
     <section className="py-16 overflow-hidden">
@@ -133,109 +83,34 @@ function ScreenshotsSection() {
         </p>
       </motion.div>
 
-      {/* Cover-Flow Stage */}
-      <div className="relative flex items-center justify-center" style={{ height: 620 }}>
-        {SCREENSHOTS.map((s, i) => {
-          const offset = i - active;
-          const abs = Math.abs(offset);
-          if (abs > 2) return null;
-
-          const SCALE  = [1,    0.78, 0.60][abs];
-          const OPA    = [1,    0.55, 0.25][abs];
-          const TX     = offset * 248;
-          const Z      = 20 - abs * 6;
-          const isActive = abs === 0;
-
-          return (
-            <div
-              key={s.id}
-              onClick={isActive ? undefined : () => setActive(i)}
-              className={isActive ? "absolute" : "absolute cursor-pointer"}
-              style={{
-                transform: `translateX(${TX}px) scale(${SCALE})`,
-                opacity: OPA,
-                zIndex: Z,
-                transition: "transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.45s ease",
-              }}
-            >
-              {/* Blue radial glow behind active */}
-              {isActive && (
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "radial-gradient(ellipse 80% 60% at 50% 65%, rgba(0,102,204,0.5) 0%, transparent 70%)",
-                    transform: "scale(1.15)",
-                    filter: "blur(28px)",
-                    zIndex: -1,
-                  }}
-                />
-              )}
-
-              {/* Clip container: crops white Mac-screenshot border, keeps iPhone shape */}
-              <div style={{
-                width: 252,
-                height: 530,
-                borderRadius: 44,
-                overflow: "hidden",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}>
-                <img
-                  src={s.src}
-                  alt={s.label}
-                  style={{
-                    width: "128%",
-                    height: "auto",
-                    display: "block",
-                    flexShrink: 0,
-                  }}
-                  draggable={false}
-                />
-              </div>
-            </div>
-          );
-        })}
+      {/* Composite screenshot display */}
+      <div className="relative flex items-center justify-center px-6">
+        {/* Blue radial glow behind image */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            width: 500,
+            height: 500,
+            background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(0,102,204,0.4) 0%, transparent 70%)",
+            filter: "blur(40px)",
+          }}
+        />
+        <motion.img
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          src={s.src}
+          alt={s.label}
+          style={{ maxWidth: 420, width: "100%", position: "relative", zIndex: 1 }}
+          draggable={false}
+        />
       </div>
 
-      {/* Navigation */}
-      <div className="flex flex-col items-center gap-4 mt-6 px-6">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={prev}
-            disabled={active === 0}
-            className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <div className="flex gap-2">
-            {SCREENSHOTS.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActive(i)}
-                className={`rounded-full transition-all duration-300 ${active === i ? "w-6 h-2.5 bg-[#0066CC]" : "w-2.5 h-2.5 bg-white/20 hover:bg-white/40"}`}
-              />
-            ))}
-          </div>
-          <button
-            onClick={next}
-            disabled={active === SCREENSHOTS.length - 1}
-            className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/40 transition disabled:opacity-30 disabled:cursor-not-allowed"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        <motion.div
-          key={current.id}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="text-center"
-        >
-          <p className="text-sm font-bold text-white mb-1">{current.label}</p>
-          <p className="text-xs text-slate-400 max-w-xs">{current.desc}</p>
-        </motion.div>
+      {/* Caption */}
+      <div className="text-center mt-8 px-6">
+        <p className="text-sm font-bold text-white mb-1">{s.label}</p>
+        <p className="text-xs text-slate-400 max-w-xs mx-auto">{s.desc}</p>
       </div>
     </section>
   );
