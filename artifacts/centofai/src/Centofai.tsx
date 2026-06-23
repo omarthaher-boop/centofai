@@ -219,97 +219,121 @@ function Hero() {
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
-      <div style={{ display: "flex", alignItems: "center", gap: "48px", flexWrap: "wrap" }}>
-        {/* Text column */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          style={{ flex: "1 1 400px", minWidth: 0 }}
-        >
-          {/* Eyebrow Badge */}
-          <div
-            className="inline-flex items-center gap-2 mb-6"
-            style={{
-              background: "rgba(38,33,92,0.7)",
-              border: "0.5px solid #534AB7",
-              borderRadius: 20,
-              padding: "5px 14px",
-              fontSize: 11,
-              color: "#CECBF6",
-              letterSpacing: "0.06em",
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
-            KI-gestützte digitale Lösungen
-          </div>
-
-          {/* H1 */}
-          <h1
-            style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
-          >
-            Ihr Alltag. Ihr Problem.{" "}
-            <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
-          </h1>
-
-          {/* Subtext */}
-          <p style={{ fontSize: 15, color: "#AFA9EC", maxWidth: 500, lineHeight: 1.7, marginBottom: 28 }}>
-            Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
-          </p>
-
-          {/* Secondary link */}
-          <a
-            href="/mehr-erfahren"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "12px 24px",
-              borderRadius: "10px",
-              border: "1px solid rgba(83,74,183,0.4)",
-              background: "transparent",
-              color: "var(--color-text-secondary, #AFA9EC)",
-              fontSize: "14px",
-              fontWeight: 500,
-              textDecoration: "none",
-              cursor: "pointer",
-            }}
-          >
-            Mehr erfahren
-          </a>
-        </motion.div>
-
-        {/* Square CTA button */}
-        <motion.a
-          href="/kontakt"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-2xl"
+      >
+        {/* Eyebrow Badge */}
+        <div
+          className="inline-flex items-center gap-2 mb-6"
           style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            width: "200px",
-            height: "200px",
-            borderRadius: "20px",
-            background: "linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)",
-            color: "#EEEDFE",
-            fontSize: "17px",
-            fontWeight: 700,
-            textDecoration: "none",
-            letterSpacing: "0.01em",
-            boxShadow: "0 8px 32px rgba(83,74,183,0.4)",
-            textAlign: "center",
-            gap: "12px",
-            flexShrink: 0,
-            cursor: "pointer",
+            background: "rgba(38,33,92,0.7)",
+            border: "0.5px solid #534AB7",
+            borderRadius: 20,
+            padding: "5px 14px",
+            fontSize: 11,
+            color: "#CECBF6",
+            letterSpacing: "0.06em",
           }}
         >
-          <span style={{ fontSize: "32px", lineHeight: 1 }}>→</span>
-          <span style={{ lineHeight: 1.3 }}>Jetzt kostenlos<br />starten</span>
-        </motion.a>
-      </div>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+          KI-gestützte digitale Lösungen
+        </div>
+
+        {/* H1 */}
+        <h1
+          style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
+        >
+          Ihr Alltag. Ihr Problem.{" "}
+          <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
+        </h1>
+
+        {/* Subtext */}
+        <p style={{ fontSize: 15, color: "#AFA9EC", maxWidth: 500, lineHeight: 1.7, marginBottom: 0 }}>
+          Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
+        </p>
+
+        {/* Buttons */}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+          gap: '16px',
+          marginTop: '36px',
+          flexWrap: 'wrap',
+        }}>
+          {/* Jetzt kostenlos starten */}
+          <a href="/kontakt" style={{
+            display: 'inline-flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px',
+            padding: '18px 36px',
+            borderRadius: '14px',
+            background: 'linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)',
+            color: '#ffffff',
+            fontSize: '15px',
+            fontWeight: '600',
+            textDecoration: 'none',
+            border: 'none',
+            cursor: 'pointer',
+            minWidth: '220px',
+          }}>
+            <svg width="36" height="28" viewBox="0 0 45 36" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 33 C13 33 7 27 7 19 C7 11 13 5 19 5 C19 3 21 2 22 2 C24 2 26 3 26 5 C33 5 38 11 38 19 C38 27 32 33 22 33Z"
+                fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"/>
+              <line x1="22" y1="3" x2="22" y2="33" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeDasharray="2 3"/>
+              <path d="M10 15 Q15 12 17 17" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
+              <path d="M9 23 Q15 20 17 25" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
+              <path d="M34 15 Q29 12 27 17" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
+              <path d="M35 23 Q29 20 27 25" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
+              <circle cx="11" cy="14" r="2.5" fill="rgba(93,202,165,0.9)"/>
+              <circle cx="33" cy="14" r="2.5" fill="rgba(93,202,165,0.9)"/>
+              <circle cx="10" cy="24" r="2" fill="rgba(206,203,246,0.8)"/>
+              <circle cx="34" cy="24" r="2" fill="rgba(206,203,246,0.8)"/>
+              <circle cx="18" cy="30" r="2" fill="rgba(127,119,221,0.8)"/>
+              <circle cx="26" cy="30" r="2" fill="rgba(127,119,221,0.8)"/>
+              <circle cx="22" cy="19" r="5" fill="rgba(83,74,183,0.9)"/>
+              <circle cx="22" cy="19" r="2" fill="rgba(255,255,255,0.9)"/>
+              <line x1="11" y1="14" x2="22" y2="19" stroke="rgba(93,202,165,0.7)" strokeWidth="0.9"/>
+              <line x1="33" y1="14" x2="22" y2="19" stroke="rgba(93,202,165,0.7)" strokeWidth="0.9"/>
+              <line x1="10" y1="24" x2="22" y2="19" stroke="rgba(206,203,246,0.5)" strokeWidth="0.8"/>
+              <line x1="34" y1="24" x2="22" y2="19" stroke="rgba(206,203,246,0.5)" strokeWidth="0.8"/>
+              <line x1="18" y1="30" x2="22" y2="19" stroke="rgba(127,119,221,0.5)" strokeWidth="0.8"/>
+              <line x1="26" y1="30" x2="22" y2="19" stroke="rgba(127,119,221,0.5)" strokeWidth="0.8"/>
+            </svg>
+            <span style={{ fontSize: '15px', fontWeight: '600', color: '#ffffff', letterSpacing: '0.01em' }}>
+              Jetzt kostenlos starten
+            </span>
+            <span style={{ fontSize: '10px', fontWeight: '400', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              Human + AI
+            </span>
+          </a>
+
+          {/* Mehr erfahren */}
+          <a href="/mehr-erfahren" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            padding: '16px 28px',
+            borderRadius: '14px',
+            border: '1.5px solid rgba(127,119,221,0.4)',
+            background: 'transparent',
+            color: '#AFA9EC',
+            fontSize: '15px',
+            fontWeight: '500',
+            textDecoration: 'none',
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+          }}>
+            Mehr erfahren
+          </a>
+        </div>
+      </motion.div>
 
       {/* Stats Bar */}
       <div
