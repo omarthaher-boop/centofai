@@ -40,6 +40,7 @@
   --color-accent: #534AB7;
   --color-accent-light: #7F77DD;
   --color-accent-muted: #3C3489;
+  --logo-text: #EEEDFE;
 
   --color-accent-teal: #1D9E75;
   --color-accent-teal-light: #5DCAA5;
@@ -83,6 +84,10 @@
   --color-accent: #534AB7;
   --color-accent-light: #7F77DD;
   --color-accent-muted: #3C3489;
+  --logo-text: #1a1a2e;
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #3a3560;
+  --color-text-muted: #534AB7;
 }
 
 @layer base {

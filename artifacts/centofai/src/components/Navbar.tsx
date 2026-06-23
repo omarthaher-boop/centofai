@@ -64,8 +64,33 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <Link to="/" className="text-2xl font-medium tracking-wide" style={{ color: "#EEEDFE" }}>
-            centof<span style={{ color: "#7F77DD" }}>.ai</span>
+          <Link to="/" style={{ display: "inline-flex", alignItems: "center" }}>
+            <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22 36 C13 36 7 30 7 22 C7 14 13 8 19 8 C19 6 21 5 22 5 C24 5 26 6 26 8 C33 8 38 14 38 22 C38 30 32 36 22 36Z"
+                fill="rgba(83,74,183,0.12)" stroke="#534AB7" strokeWidth="1.5"/>
+              <line x1="22" y1="6" x2="22" y2="36" stroke="#3C3489" strokeWidth="0.8" strokeDasharray="2 3"/>
+              <path d="M10 17 Q15 14 17 19" fill="none" stroke="#7F77DD" strokeWidth="1.2" strokeLinecap="round"/>
+              <path d="M9 27 Q15 24 17 29" fill="none" stroke="#7F77DD" strokeWidth="1.2" strokeLinecap="round"/>
+              <path d="M34 17 Q29 14 27 19" fill="none" stroke="#7F77DD" strokeWidth="1.2" strokeLinecap="round"/>
+              <path d="M35 27 Q29 24 27 29" fill="none" stroke="#7F77DD" strokeWidth="1.2" strokeLinecap="round"/>
+              <circle cx="11" cy="16" r="2.5" fill="#5DCAA5"/>
+              <circle cx="33" cy="16" r="2.5" fill="#5DCAA5"/>
+              <circle cx="10" cy="27" r="2" fill="#CECBF6"/>
+              <circle cx="34" cy="27" r="2" fill="#CECBF6"/>
+              <circle cx="18" cy="33" r="2" fill="#7F77DD"/>
+              <circle cx="26" cy="33" r="2" fill="#7F77DD"/>
+              <circle cx="22" cy="21" r="5" fill="#534AB7"/>
+              <circle cx="22" cy="21" r="2" fill="#CECBF6"/>
+              <line x1="11" y1="16" x2="22" y2="21" stroke="#5DCAA5" strokeWidth="0.9" opacity="0.7"/>
+              <line x1="33" y1="16" x2="22" y2="21" stroke="#5DCAA5" strokeWidth="0.9" opacity="0.7"/>
+              <line x1="10" y1="27" x2="22" y2="21" stroke="#AFA9EC" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="34" y1="27" x2="22" y2="21" stroke="#AFA9EC" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="18" y1="33" x2="22" y2="21" stroke="#534AB7" strokeWidth="0.8" opacity="0.5"/>
+              <line x1="26" y1="33" x2="22" y2="21" stroke="#534AB7" strokeWidth="0.8" opacity="0.5"/>
+              <text x="46" y="18" fontFamily="system-ui,sans-serif" fontSize="15" fontWeight="600" style={{ fill: "var(--logo-text, #EEEDFE)" }}>centof</text>
+              <text x="101" y="18" fontFamily="system-ui,sans-serif" fontSize="15" fontWeight="600" fill="#5DCAA5">.ai</text>
+              <text x="46" y="31" fontFamily="system-ui,sans-serif" fontSize="7" fill="#7F77DD" letterSpacing="1.2">HUMAN + AI</text>
+            </svg>
           </Link>
 
           {/* Desktop Menu */}
@@ -105,21 +130,6 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <button onClick={toggle} className="transition" style={{ color: "#7F77DD" }} aria-label="Theme">
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
-          <button
-            onClick={() => scrollTo("ideen")}
-            className="text-xs font-medium px-4 py-2 rounded-md transition-all"
-            style={{
-              border: "0.5px solid #534AB7",
-              background: "rgba(83,74,183,0.15)",
-              color: "#CECBF6",
-              cursor: "pointer",
-              fontFamily: "inherit",
-            }}
-            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(83,74,183,0.3)")}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(83,74,183,0.15)")}
-          >
-            + Idee einreichen
           </button>
           <Show when="signed-in">
             <Link
@@ -223,13 +233,6 @@ export default function Navbar() {
                 style={{ background: "none", border: "none", cursor: "pointer", color: "#AFA9EC", fontFamily: "inherit" }}
               >
                 Kontakt
-              </button>
-              <button
-                onClick={() => { scrollTo("ideen"); setOpen(false); }}
-                className="block py-2 text-sm font-semibold transition text-left w-full"
-                style={{ background: "none", border: "none", cursor: "pointer", color: "#7F77DD", fontFamily: "inherit" }}
-              >
-                + Idee einreichen
               </button>
               <Show when="signed-in">
                 <Link to="/submit-tool" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold transition" style={{ color: "#7F77DD" }}>

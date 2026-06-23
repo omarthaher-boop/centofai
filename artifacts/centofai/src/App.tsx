@@ -30,6 +30,7 @@ import ProductsPage from "./pages/products";
 import FahrtDocPage from "./pages/FahrtDocPage";
 import FahrtDocDatenschutzPage from "./pages/FahrtDocDatenschutz";
 import KontaktPage from "./pages/Kontakt";
+import MehrErfahrenPage from "./pages/MehrErfahren";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
 
@@ -200,6 +201,7 @@ function ClerkProviderWithRoutes() {
           <Route path="/impressum" component={ImpressumPage} />
           <Route path="/datenschutz" component={DatenschutzPage} />
           <Route path="/kontakt" component={KontaktPage} />
+          <Route path="/mehr-erfahren" component={MehrErfahrenPage} />
           <Route path="/sign-in/*?" component={SignInPage} />
           <Route path="/sign-up/*?" component={SignUpPage} />
           <Route component={NotFound} />

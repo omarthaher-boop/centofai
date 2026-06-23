@@ -256,35 +256,44 @@ function Hero() {
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-col sm:flex-row gap-3 mb-10">
+        <div style={{ margin: "36px 0", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
           <a
-            href="#ideas"
+            href="/kontakt"
             style={{
-              background: "#534AB7",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "10px",
+              padding: "18px 40px",
+              borderRadius: "14px",
+              background: "linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)",
               color: "#EEEDFE",
-              border: "none",
-              padding: "12px 26px",
-              borderRadius: 8,
-              fontWeight: 500,
-              fontSize: 14,
+              fontSize: "18px",
+              fontWeight: 700,
               textDecoration: "none",
-              display: "inline-block",
+              letterSpacing: "0.02em",
+              border: "none",
+              cursor: "pointer",
+              boxShadow: "0 4px 24px rgba(83,74,183,0.35)",
             }}
           >
-            Jetzt Anliegen einsenden
+            Jetzt kostenlos starten
+            <span style={{ fontSize: "20px" }}>→</span>
           </a>
           <a
-            href="#tools"
+            href="/mehr-erfahren"
             style={{
-              border: "0.5px solid rgba(127,119,221,0.4)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "18px 32px",
+              borderRadius: "14px",
+              border: "1.5px solid rgba(83,74,183,0.5)",
               background: "transparent",
-              color: "#AFA9EC",
-              padding: "12px 26px",
-              borderRadius: 8,
+              color: "var(--color-text-secondary, #AFA9EC)",
+              fontSize: "16px",
               fontWeight: 500,
-              fontSize: 14,
               textDecoration: "none",
-              display: "inline-block",
+              cursor: "pointer",
             }}
           >
             Mehr erfahren
