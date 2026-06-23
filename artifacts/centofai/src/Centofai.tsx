@@ -264,6 +264,26 @@ function Hero() {
           marginTop: '36px',
           flexWrap: 'wrap',
         }}>
+          {/* Mehr erfahren */}
+          <a href="/mehr-erfahren" style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            padding: '16px 28px',
+            borderRadius: '14px',
+            border: '1.5px solid rgba(127,119,221,0.4)',
+            background: 'transparent',
+            color: '#AFA9EC',
+            fontSize: '15px',
+            fontWeight: '500',
+            textDecoration: 'none',
+            cursor: 'pointer',
+            whiteSpace: 'nowrap',
+          }}>
+            Mehr erfahren
+          </a>
+
           {/* Jetzt kostenlos starten */}
           <a href="/kontakt" style={{
             display: 'inline-flex',
@@ -311,26 +331,6 @@ function Hero() {
             <span style={{ fontSize: '10px', fontWeight: '400', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
               Human + AI
             </span>
-          </a>
-
-          {/* Mehr erfahren */}
-          <a href="/mehr-erfahren" style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            padding: '16px 28px',
-            borderRadius: '14px',
-            border: '1.5px solid rgba(127,119,221,0.4)',
-            background: 'transparent',
-            color: '#AFA9EC',
-            fontSize: '15px',
-            fontWeight: '500',
-            textDecoration: 'none',
-            cursor: 'pointer',
-            whiteSpace: 'nowrap',
-          }}>
-            Mehr erfahren
           </a>
         </div>
       </motion.div>
