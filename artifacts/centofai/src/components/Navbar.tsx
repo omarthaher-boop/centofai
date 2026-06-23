@@ -141,6 +141,15 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
+          <button
+            onClick={() => navigate("/kontakt")}
+            className="text-xs font-semibold px-4 py-2 rounded-lg transition-all"
+            style={{ background: "#534AB7", color: "#EEEDFE", border: "none", cursor: "pointer", fontFamily: "inherit" }}
+            onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#3C3489")}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#534AB7")}
+          >
+            Kostenloses Erstgespräch vereinbaren →
+          </button>
           <Show when="signed-in">
             <Link
               to="/submit-tool"
