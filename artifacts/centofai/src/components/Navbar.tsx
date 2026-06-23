@@ -22,6 +22,24 @@ const scrollTo = (id: string) => {
   }
 };
 
+const scrollOrNavigate = (
+  id: string,
+  navigate: (to: string) => void,
+  basePath: string,
+) => {
+  const home = basePath + "/";
+  const isHome =
+    window.location.pathname === home ||
+    window.location.pathname === basePath ||
+    window.location.pathname === basePath + "";
+  if (isHome) {
+    scrollTo(id);
+  } else {
+    navigate(home);
+    setTimeout(() => scrollTo(id), 350);
+  }
+};
+
 const scrollNavItems = [
   { name: "Home", id: "home", icon: true },
   { name: "Ideen", id: "ideen" },
@@ -93,7 +111,7 @@ export default function Navbar() {
             {scrollNavItems.map((item) => (
               <button
                 key={item.name}
-                onClick={() => scrollTo(item.id)}
+                onClick={() => scrollOrNavigate(item.id, navigate, basePath)}
                 style={btnStyle}
                 onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EEEDFE")}
                 onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#AFA9EC")}
@@ -202,7 +220,7 @@ export default function Navbar() {
               {scrollNavItems.map((item) => (
                 <button
                   key={item.name}
-                  onClick={() => { scrollTo(item.id); setOpen(false); }}
+                  onClick={() => { scrollOrNavigate(item.id, navigate, basePath); setOpen(false); }}
                   className="block py-2 text-sm font-medium transition text-left w-full"
                   style={{ background: "none", border: "none", cursor: "pointer", color: "#AFA9EC", fontFamily: "inherit" }}
                 >
