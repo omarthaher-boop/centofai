@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useLocation } from 'wouter';
+import Navbar from '../components/Navbar';
 
 export default function Kontakt() {
   const [, navigate] = useLocation();
@@ -53,6 +54,8 @@ export default function Kontakt() {
   };
 
   if (submitted) return (
+    <div style={{ minHeight: '100vh', background: '#07071a' }}>
+      <Navbar />
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -127,9 +130,12 @@ export default function Kontakt() {
         ← Zurück zur Startseite
       </motion.button>
     </motion.div>
+    </div>
   );
 
   return (
+    <div style={{ minHeight: '100vh', background: '#07071a' }}>
+      <Navbar />
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
@@ -213,5 +219,6 @@ export default function Kontakt() {
         </p>
       </form>
     </motion.div>
+    </div>
   );
 }
