@@ -65,7 +65,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
           <Link to="/" style={{ display: "inline-flex", alignItems: "center" }}>
-            <svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
+            <svg width="180" height="32" viewBox="0 0 180 32" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 36 C13 36 7 30 7 22 C7 14 13 8 19 8 C19 6 21 5 22 5 C24 5 26 6 26 8 C33 8 38 14 38 22 C38 30 32 36 22 36Z"
                 fill="rgba(83,74,183,0.12)" stroke="#534AB7" strokeWidth="1.5"/>
               <line x1="22" y1="6" x2="22" y2="36" stroke="#3C3489" strokeWidth="0.8" strokeDasharray="2 3"/>
@@ -87,9 +87,10 @@ export default function Navbar() {
               <line x1="34" y1="27" x2="22" y2="21" stroke="#AFA9EC" strokeWidth="0.8" opacity="0.5"/>
               <line x1="18" y1="33" x2="22" y2="21" stroke="#534AB7" strokeWidth="0.8" opacity="0.5"/>
               <line x1="26" y1="33" x2="22" y2="21" stroke="#534AB7" strokeWidth="0.8" opacity="0.5"/>
-              <text x="46" y="18" fontFamily="system-ui,sans-serif" fontSize="15" fontWeight="600" style={{ fill: "var(--logo-text, #EEEDFE)" }}>centof</text>
-              <text x="101" y="18" fontFamily="system-ui,sans-serif" fontSize="15" fontWeight="600" fill="#5DCAA5">.ai</text>
-              <text x="46" y="31" fontFamily="system-ui,sans-serif" fontSize="7" fill="#7F77DD" letterSpacing="1.2">HUMAN + AI</text>
+              <text x="46" y="26" fontFamily="system-ui,sans-serif" fontSize="15" fontWeight="600">
+                <tspan style={{ fill: "var(--logo-text, #EEEDFE)" }}>centof</tspan>
+                <tspan fill="#5DCAA5">.ai</tspan>
+              </text>
             </svg>
           </Link>
 
