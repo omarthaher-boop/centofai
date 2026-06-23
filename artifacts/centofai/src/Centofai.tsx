@@ -420,9 +420,20 @@ function StrategySection() {
         {/* Closing Quote */}
         <div style={{ borderLeft: "2px solid #534AB7", paddingLeft: 18 }}>
           <p style={{ fontSize: 14, color: "#AFA9EC", lineHeight: 1.8 }}>
-            Auch wenn die finanziellen Mittel begrenzt sind: Durch unsere flexiblen Vergütungsmodelle und Kooperationsmodelle können Sie Ihre Idee nahezu kostenfrei verwirklichen. Alle Erstgespräche sind kostenlos. Denn eine gute Idee sollte niemals an finanziellen Hürden scheitern.{" "}
-            <strong style={{ color: "#EEEDFE" }}>Weniger Stress. Mehr Klarheit. Jeden Tag.</strong>
+            Auch wenn die finanziellen Mittel begrenzt sind: Durch unsere flexiblen Vergütungsmodelle und Kooperationsmodelle können Sie Ihre Idee nahezu kostenfrei verwirklichen. Alle Erstgespräche sind kostenlos. Denn eine gute Idee sollte niemals an finanziellen Hürden scheitern.
           </p>
+        </div>
+
+        {/* Slogan */}
+        <div style={{ textAlign: "center", marginTop: 40, padding: "32px 24px" }}>
+          <p style={{ fontSize: 28, fontWeight: 500, color: "#EEEDFE", letterSpacing: "0.04em", lineHeight: 1.6 }}>
+            <span style={{ color: "#AFA9EC" }}>Weniger Stress.</span>
+            {" "}
+            <span style={{ color: "#7F77DD" }}>Mehr Klarheit.</span>
+            {" "}
+            <span style={{ color: "#CECBF6" }}>Jeden Tag.</span>
+          </p>
+          <div style={{ width: 48, height: 2, background: "#534AB7", margin: "16px auto 0", borderRadius: 2 }} />
         </div>
       </motion.div>
     </section>
