@@ -814,27 +814,41 @@ function CoursesSection() {
 /* ─── Ideas Section ─────────────────────────────────────────────────── */
 function IdeasSection() {
   const [formData, setFormData] = useState({ name: "", email: "", idea: "", budget: "", timeline: "" });
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
-  const [errMsg, setErrMsg] = useState("");
+  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [errors, setErrors] = useState({ name: false, email: false, idea: false });
 
-  const handleSubmit = async () => {
-    if (!formData.name.trim() || !formData.email.trim() || !formData.idea.trim()) return;
-    setStatus("sending");
-    setErrMsg("");
-    try {
-      await api.submitProposal({
-        name: formData.name,
-        email: formData.email,
-        idea: formData.idea,
-        budget: formData.budget || undefined,
-        timeline: formData.timeline || undefined,
-      });
-      setStatus("success");
-      setTimeout(() => { setStatus("idle"); setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" }); }, 4000);
-    } catch (err) {
-      setStatus("error");
-      setErrMsg((err as Error).message || "Fehler beim Senden. Bitte versuche es erneut.");
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const nameErr = !formData.name.trim();
+    const emailErr = !formData.email.trim() || !formData.email.includes("@");
+    const ideaErr = !formData.idea.trim();
+
+    if (nameErr || emailErr || ideaErr) {
+      setErrors({ name: nameErr, email: emailErr, idea: ideaErr });
+      return;
     }
+    setErrors({ name: false, email: false, idea: false });
+
+    const subject = encodeURIComponent(`Neue Idee von ${formData.name}`);
+    const body = encodeURIComponent(
+      `NEUE IDEE — CENTOF.AI\n` +
+      `${"═".repeat(40)}\n\n` +
+      `NAME\n${formData.name}\n\n` +
+      `E-MAIL\n${formData.email}\n\n` +
+      `IDEE / PROBLEM\n${formData.idea}\n\n` +
+      `BUDGET\n${formData.budget || "— nicht angegeben —"}\n\n` +
+      `ZEITRAHMEN\n${formData.timeline || "— nicht angegeben —"}\n\n` +
+      `${"═".repeat(40)}\n` +
+      `Gesendet über centof.ai`
+    );
+
+    window.location.href = `mailto:info@centof.ai?subject=${subject}&body=${body}`;
+    setStatus("success");
+    setTimeout(() => {
+      setStatus("idle");
+      setFormData({ name: "", email: "", idea: "", budget: "", timeline: "" });
+    }, 4000);
   };
 
   return (
@@ -871,28 +885,37 @@ function IdeasSection() {
               <p className="text-[var(--text-caption)]">Wir prüfen sie und melden uns bei dir.</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Dein Name *"
-                value={formData.name}
-                onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
-              />
-              <input
-                type="email"
-                placeholder="Deine E-Mail *"
-                value={formData.email}
-                onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
-              />
-              <textarea
-                placeholder="Beschreibe deine Idee... *"
-                value={formData.idea}
-                onChange={(e) => setFormData((p) => ({ ...p, idea: e.target.value }))}
-                className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl resize-none placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
-                rows={4}
-              />
+            <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              <div>
+                <input
+                  type="text"
+                  placeholder="Dein Name *"
+                  value={formData.name}
+                  onChange={(e) => { setFormData((p) => ({ ...p, name: e.target.value })); setErrors((p) => ({ ...p, name: false })); }}
+                  className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
+                />
+                {errors.name && <p style={{ color: "#f87171", fontSize: 12, marginTop: 4 }}>Dieses Feld ist erforderlich.</p>}
+              </div>
+              <div>
+                <input
+                  type="email"
+                  placeholder="Deine E-Mail *"
+                  value={formData.email}
+                  onChange={(e) => { setFormData((p) => ({ ...p, email: e.target.value })); setErrors((p) => ({ ...p, email: false })); }}
+                  className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
+                />
+                {errors.email && <p style={{ color: "#f87171", fontSize: 12, marginTop: 4 }}>Bitte gib eine gültige E-Mail-Adresse ein.</p>}
+              </div>
+              <div>
+                <textarea
+                  placeholder="Beschreibe deine Idee... *"
+                  value={formData.idea}
+                  onChange={(e) => { setFormData((p) => ({ ...p, idea: e.target.value })); setErrors((p) => ({ ...p, idea: false })); }}
+                  className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl resize-none placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
+                  rows={4}
+                />
+                {errors.idea && <p style={{ color: "#f87171", fontSize: 12, marginTop: 4 }}>Dieses Feld ist erforderlich.</p>}
+              </div>
               <div className="grid grid-cols-2 gap-3">
                 <input
                   type="text"
@@ -909,21 +932,13 @@ function IdeasSection() {
                   className="w-full px-4 py-3 text-sm text-white bg-white/10 border border-white/20 rounded-xl placeholder:text-slate-400 focus:outline-none focus:border-purple-400 focus:bg-white/15 transition"
                 />
               </div>
-              {status === "error" && (
-                <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 px-3 py-2 rounded-lg">{errMsg}</p>
-              )}
               <button
-                onClick={handleSubmit}
-                disabled={status === "sending" || !formData.name.trim() || !formData.email.trim() || !formData.idea.trim()}
-                className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-600/50 disabled:cursor-not-allowed text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2"
+                type="submit"
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-xl text-sm transition flex items-center justify-center gap-2"
               >
-                {status === "sending" ? (
-                  <><span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />Wird gesendet...</>
-                ) : (
-                  <><Send className="w-4 h-4" />Idee einreichen</>
-                )}
+                <Send className="w-4 h-4" />Idee einreichen
               </button>
-            </div>
+            </form>
           )}
         </div>
       </div>
