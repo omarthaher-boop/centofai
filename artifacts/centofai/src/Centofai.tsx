@@ -1021,6 +1021,23 @@ function Footer() {
 export default function App() {
   return (
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth relative">
+      <Link
+        to="/kontakt"
+        className="hidden md:inline-flex items-center gap-2 text-sm font-semibold px-5 py-2.5 rounded-xl transition-all"
+        style={{
+          position: "fixed",
+          top: "72px",
+          right: "24px",
+          zIndex: 40,
+          background: "#534AB7",
+          color: "#EEEDFE",
+          boxShadow: "0 4px 20px rgba(83,74,183,0.35)",
+        }}
+        onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "#3C3489")}
+        onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "#534AB7")}
+      >
+        Kostenloses Erstgespräch vereinbaren →
+      </Link>
       <Navbar />
       <Hero />
       <StrategySection />
