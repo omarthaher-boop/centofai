@@ -1,24 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Menu, X, Sun, Moon, Heart, LogOut, Settings, Home,
+  Menu, X, Heart, LogOut, Settings, Home,
 } from "lucide-react";
 import { Link, useLocation } from "wouter";
 import { Show, useClerk, useUser } from "@clerk/react";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("centofai-theme") : null;
-    return (saved as "dark" | "light" | null) ?? "dark";
-  });
-
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("centofai-theme", theme);
-  }, [theme]);
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("centofai-theme", "dark");
+  }, []);
 
-  const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
-  return { theme, toggle };
+  return { theme: "dark" as const };
 }
 
 const scrollTo = (id: string) => {
@@ -37,7 +31,7 @@ const scrollNavItems = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { theme, toggle } = useTheme();
+  useTheme();
   const { user } = useUser();
   const { signOut } = useClerk();
   const [, navigate] = useLocation();
@@ -129,9 +123,6 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <button onClick={toggle} className="transition" style={{ color: "#7F77DD" }} aria-label="Theme">
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-          </button>
           <Show when="signed-in">
             <Link
               to="/submit-tool"
@@ -191,9 +182,6 @@ export default function Navbar() {
 
         {/* Mobile Toggle */}
         <div className="flex items-center gap-2 md:hidden">
-          <button onClick={toggle} className="transition" style={{ color: "#7F77DD" }} aria-label="Theme">
-            {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
           <button onClick={() => setOpen(!open)} className="transition" style={{ color: "#AFA9EC" }}>
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
