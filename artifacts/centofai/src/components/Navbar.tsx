@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu, X, Sun, Moon, Heart, LogOut, Settings, Home,
 } from "lucide-react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Show, useClerk, useUser } from "@clerk/react";
 
 export function useTheme() {
@@ -21,12 +21,18 @@ export function useTheme() {
   return { theme, toggle };
 }
 
-const navLinks = [
-  { name: "Home", href: "/" },
-  { name: "Ideen", href: "/#ideas" },
-  { name: "KI-Tools", href: "/#tools" },
-  { name: "Kurse", href: "/#academy" },
-  { name: "Produkte", href: "/products" },
+const scrollTo = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
+const scrollNavItems = [
+  { name: "Home", id: "home", icon: true },
+  { name: "Ideen", id: "ideen" },
+  { name: "KI-Tools", id: "ki-tools" },
+  { name: "Kurse", id: "kurse" },
 ];
 
 export default function Navbar() {
@@ -34,7 +40,19 @@ export default function Navbar() {
   const { theme, toggle } = useTheme();
   const { user } = useUser();
   const { signOut } = useClerk();
+  const [, navigate] = useLocation();
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+  const btnStyle: React.CSSProperties = {
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    color: "#AFA9EC",
+    fontSize: "14px",
+    padding: "6px 12px",
+    fontFamily: "inherit",
+    transition: "color 0.15s",
+  };
 
   return (
     <nav
@@ -52,35 +70,35 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center gap-1 text-sm font-medium">
-            {navLinks.map((link) => {
-              const cls = "px-3 py-1.5 rounded-md transition-all text-sm";
-              const inner = link.name === "Home"
-                ? <span className="inline-flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /><span>Home</span></span>
-                : link.name;
-              return link.href.startsWith("/") ? (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={cls}
-                  style={{ color: "#AFA9EC" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#EEEDFE")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#AFA9EC")}
-                >
-                  {inner}
-                </Link>
-              ) : (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className={cls}
-                  style={{ color: "#AFA9EC" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "#EEEDFE")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "#AFA9EC")}
-                >
-                  {inner}
-                </a>
-              );
-            })}
+            {scrollNavItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => scrollTo(item.id)}
+                style={btnStyle}
+                onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EEEDFE")}
+                onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#AFA9EC")}
+              >
+                {item.icon
+                  ? <span className="inline-flex items-center gap-1.5"><Home className="w-3.5 h-3.5" /><span>Home</span></span>
+                  : item.name}
+              </button>
+            ))}
+            <button
+              onClick={() => navigate("/products")}
+              style={btnStyle}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EEEDFE")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#AFA9EC")}
+            >
+              Produkte
+            </button>
+            <button
+              onClick={() => navigate("/kontakt")}
+              style={btnStyle}
+              onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = "#EEEDFE")}
+              onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = "#AFA9EC")}
+            >
+              Kontakt
+            </button>
           </div>
         </div>
 
@@ -88,19 +106,21 @@ export default function Navbar() {
           <button onClick={toggle} className="transition" style={{ color: "#7F77DD" }} aria-label="Theme">
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <a
-            href="/#ideas"
+          <button
+            onClick={() => scrollTo("ideen")}
             className="text-xs font-medium px-4 py-2 rounded-md transition-all"
             style={{
               border: "0.5px solid #534AB7",
               background: "rgba(83,74,183,0.15)",
               color: "#CECBF6",
+              cursor: "pointer",
+              fontFamily: "inherit",
             }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(83,74,183,0.3)")}
             onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.background = "rgba(83,74,183,0.15)")}
           >
             + Idee einreichen
-          </a>
+          </button>
           <Show when="signed-in">
             <Link
               to="/submit-tool"
@@ -180,37 +200,37 @@ export default function Navbar() {
             className="md:hidden"
           >
             <div className="px-6 py-4 space-y-2">
-              {navLinks.map((link) =>
-                link.href.startsWith("/") ? (
-                  <Link
-                    key={link.name}
-                    to={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-2 text-sm font-medium transition"
-                    style={{ color: "#AFA9EC" }}
-                  >
-                    {link.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block py-2 text-sm font-medium transition"
-                    style={{ color: "#AFA9EC" }}
-                  >
-                    {link.name}
-                  </a>
-                )
-              )}
-              <a
-                href="/#ideas"
-                onClick={() => setOpen(false)}
-                className="block py-2 text-sm font-semibold transition"
-                style={{ color: "#7F77DD" }}
+              {scrollNavItems.map((item) => (
+                <button
+                  key={item.name}
+                  onClick={() => { scrollTo(item.id); setOpen(false); }}
+                  className="block py-2 text-sm font-medium transition text-left w-full"
+                  style={{ background: "none", border: "none", cursor: "pointer", color: "#AFA9EC", fontFamily: "inherit" }}
+                >
+                  {item.name}
+                </button>
+              ))}
+              <button
+                onClick={() => { navigate("/products"); setOpen(false); }}
+                className="block py-2 text-sm font-medium transition text-left w-full"
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#AFA9EC", fontFamily: "inherit" }}
+              >
+                Produkte
+              </button>
+              <button
+                onClick={() => { navigate("/kontakt"); setOpen(false); }}
+                className="block py-2 text-sm font-medium transition text-left w-full"
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#AFA9EC", fontFamily: "inherit" }}
+              >
+                Kontakt
+              </button>
+              <button
+                onClick={() => { scrollTo("ideen"); setOpen(false); }}
+                className="block py-2 text-sm font-semibold transition text-left w-full"
+                style={{ background: "none", border: "none", cursor: "pointer", color: "#7F77DD", fontFamily: "inherit" }}
               >
                 + Idee einreichen
-              </a>
+              </button>
               <Show when="signed-in">
                 <Link to="/submit-tool" onClick={() => setOpen(false)} className="block py-2 text-sm font-semibold transition" style={{ color: "#7F77DD" }}>
                   + Tool einreichen

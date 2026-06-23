@@ -217,7 +217,7 @@ function NodeGraph() {
 
 function Hero() {
   return (
-    <header className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
+    <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -603,7 +603,7 @@ function ToolsSection() {
   };
 
   return (
-    <section id="tools" className="max-w-7xl mx-auto px-6 py-16 border-t border-[var(--border-color)]">
+    <section id="ki-tools" className="max-w-7xl mx-auto px-6 py-16 border-t border-[var(--border-color)]">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
         <div>
           <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-2">
@@ -729,7 +729,7 @@ function CoursesSection() {
   };
 
   return (
-    <section id="academy" className="max-w-7xl mx-auto px-6 py-20">
+    <section id="kurse" className="max-w-7xl mx-auto px-6 py-20">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
           <GraduationCap className="w-7 h-7 text-purple-400" /> CentofAI Academy
@@ -852,7 +852,7 @@ function IdeasSection() {
   };
 
   return (
-    <section id="ideas" className="max-w-7xl mx-auto px-6 py-20">
+    <section id="ideen" className="max-w-7xl mx-auto px-6 py-20">
       <div className="grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">

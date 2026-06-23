@@ -40,6 +40,21 @@
   --color-accent: #534AB7;
   --color-accent-light: #7F77DD;
   --color-accent-muted: #3C3489;
+
+  --color-accent-teal: #1D9E75;
+  --color-accent-teal-light: #5DCAA5;
+  --color-accent-teal-bg: rgba(29,158,117,0.12);
+  --color-accent-teal-border: rgba(29,158,117,0.3);
+
+  --color-accent-amber: #BA7517;
+  --color-accent-amber-light: #EF9F27;
+  --color-accent-amber-bg: rgba(186,117,23,0.12);
+  --color-accent-amber-border: rgba(186,117,23,0.3);
+
+  --color-accent-coral: #D85A30;
+  --color-accent-coral-light: #F0997B;
+  --color-accent-coral-bg: rgba(216,90,48,0.12);
+  --color-accent-coral-border: rgba(216,90,48,0.3);
 }
 
 /* ─── Light Mode ────────────────────────────────────────────────────── */
