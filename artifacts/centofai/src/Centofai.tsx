@@ -219,78 +219,57 @@ function Hero() {
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-2xl"
-      >
-        {/* Eyebrow Badge */}
-        <div
-          className="inline-flex items-center gap-2 mb-6"
-          style={{
-            background: "rgba(38,33,92,0.7)",
-            border: "0.5px solid #534AB7",
-            borderRadius: 20,
-            padding: "5px 14px",
-            fontSize: 11,
-            color: "#CECBF6",
-            letterSpacing: "0.06em",
-          }}
+      <div style={{ display: "flex", alignItems: "center", gap: "48px", flexWrap: "wrap" }}>
+        {/* Text column */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          style={{ flex: "1 1 400px", minWidth: 0 }}
         >
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
-          KI-gestützte digitale Lösungen
-        </div>
-
-        {/* H1 */}
-        <h1
-          style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
-        >
-          Ihr Alltag. Ihr Problem.{" "}
-          <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
-        </h1>
-
-        {/* Subtext */}
-        <p style={{ fontSize: 15, color: "#AFA9EC", maxWidth: 500, lineHeight: 1.7, marginBottom: 32 }}>
-          Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
-        </p>
-
-        {/* Buttons */}
-        <div style={{ margin: "36px 0", display: "flex", alignItems: "center", gap: "16px", flexWrap: "wrap" }}>
-          <a
-            href="/kontakt"
+          {/* Eyebrow Badge */}
+          <div
+            className="inline-flex items-center gap-2 mb-6"
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              padding: "18px 40px",
-              borderRadius: "14px",
-              background: "linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)",
-              color: "#EEEDFE",
-              fontSize: "18px",
-              fontWeight: 700,
-              textDecoration: "none",
-              letterSpacing: "0.02em",
-              border: "none",
-              cursor: "pointer",
-              boxShadow: "0 4px 24px rgba(83,74,183,0.35)",
+              background: "rgba(38,33,92,0.7)",
+              border: "0.5px solid #534AB7",
+              borderRadius: 20,
+              padding: "5px 14px",
+              fontSize: 11,
+              color: "#CECBF6",
+              letterSpacing: "0.06em",
             }}
           >
-            Jetzt kostenlos starten
-            <span style={{ fontSize: "20px" }}>→</span>
-          </a>
+            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+            KI-gestützte digitale Lösungen
+          </div>
+
+          {/* H1 */}
+          <h1
+            style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
+          >
+            Ihr Alltag. Ihr Problem.{" "}
+            <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
+          </h1>
+
+          {/* Subtext */}
+          <p style={{ fontSize: 15, color: "#AFA9EC", maxWidth: 500, lineHeight: 1.7, marginBottom: 28 }}>
+            Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
+          </p>
+
+          {/* Secondary link */}
           <a
             href="/mehr-erfahren"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              padding: "18px 32px",
-              borderRadius: "14px",
-              border: "1.5px solid rgba(83,74,183,0.5)",
+              padding: "12px 24px",
+              borderRadius: "10px",
+              border: "1px solid rgba(83,74,183,0.4)",
               background: "transparent",
               color: "var(--color-text-secondary, #AFA9EC)",
-              fontSize: "16px",
+              fontSize: "14px",
               fontWeight: 500,
               textDecoration: "none",
               cursor: "pointer",
@@ -298,38 +277,70 @@ function Hero() {
           >
             Mehr erfahren
           </a>
-        </div>
+        </motion.div>
 
-        {/* Stats Bar */}
-        <div
+        {/* Square CTA button */}
+        <motion.a
+          href="/kontakt"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           style={{
-            border: "0.5px solid rgba(127,119,221,0.2)",
-            borderRadius: 12,
-            background: "rgba(10,10,30,0.6)",
-            maxWidth: 520,
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "200px",
+            height: "200px",
+            borderRadius: "20px",
+            background: "linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)",
+            color: "#EEEDFE",
+            fontSize: "17px",
+            fontWeight: 700,
+            textDecoration: "none",
+            letterSpacing: "0.01em",
+            boxShadow: "0 8px 32px rgba(83,74,183,0.4)",
+            textAlign: "center",
+            gap: "12px",
+            flexShrink: 0,
+            cursor: "pointer",
           }}
         >
-          {[
-            { num: "100%", label: "Erstgespräch kostenlos" },
-            { num: "KI", label: "gestützte Analyse" },
-            { num: "Flexibel", label: "Vergütungsmodelle" },
-          ].map((s, i) => (
-            <div
-              key={s.num}
-              style={{
-                flex: 1,
-                padding: "16px 20px",
-                borderRight: i < 2 ? "0.5px solid rgba(127,119,221,0.2)" : undefined,
-                textAlign: "center",
-              }}
-            >
-              <p style={{ fontSize: 20, color: "#CECBF6", fontWeight: 600, marginBottom: 2 }}>{s.num}</p>
-              <p style={{ fontSize: 11, color: "#7F77DD" }}>{s.label}</p>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+          <span style={{ fontSize: "32px", lineHeight: 1 }}>→</span>
+          <span style={{ lineHeight: 1.3 }}>Jetzt kostenlos<br />starten</span>
+        </motion.a>
+      </div>
+
+      {/* Stats Bar */}
+      <div
+        style={{
+          marginTop: "40px",
+          border: "0.5px solid rgba(127,119,221,0.2)",
+          borderRadius: 12,
+          background: "rgba(10,10,30,0.6)",
+          maxWidth: 520,
+          display: "flex",
+        }}
+      >
+        {[
+          { num: "100%", label: "Erstgespräch kostenlos" },
+          { num: "KI", label: "gestützte Analyse" },
+          { num: "Flexibel", label: "Vergütungsmodelle" },
+        ].map((s, i) => (
+          <div
+            key={s.num}
+            style={{
+              flex: 1,
+              padding: "16px 20px",
+              borderRight: i < 2 ? "0.5px solid rgba(127,119,221,0.2)" : undefined,
+              textAlign: "center",
+            }}
+          >
+            <p style={{ fontSize: 20, color: "#CECBF6", fontWeight: 600, marginBottom: 2 }}>{s.num}</p>
+            <p style={{ fontSize: 11, color: "#7F77DD" }}>{s.label}</p>
+          </div>
+        ))}
+      </div>
     </header>
   );
 }
