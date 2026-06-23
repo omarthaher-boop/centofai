@@ -11,6 +11,8 @@ export default function Kontakt() {
   const [nachricht, setNachricht] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState('');
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -21,24 +23,29 @@ export default function Kontakt() {
     return e;
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e2 = validate();
     if (Object.keys(e2).length > 0) { setErrors(e2); return; }
-    const subject = encodeURIComponent(`Kontaktanfrage von ${name}`);
-    const body = encodeURIComponent(
-      `KONTAKTANFRAGE — CENTOF.AI\n` +
-      `${'═'.repeat(40)}\n\n` +
-      `NAME\n${name}\n\n` +
-      `E-MAIL\n${email}\n\n` +
-      `TELEFON\n${telefon || '— nicht angegeben —'}\n\n` +
-      `NACHRICHT\n${nachricht}\n\n` +
-      `${'═'.repeat(40)}\n` +
-      `Gesendet über centof.ai/kontakt`
-    );
-    window.location.href =
-      `mailto:info@centof.ai?subject=${subject}&body=${body}`;
-    setTimeout(() => setSubmitted(true), 300);
+    setLoading(true);
+    setServerError('');
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, telefon, nachricht }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setServerError((data as { error?: string }).error || 'Fehler beim Senden. Bitte versuchen Sie es erneut.');
+        return;
+      }
+      setSubmitted(true);
+    } catch {
+      setServerError('Netzwerkfehler. Bitte versuchen Sie es erneut.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inp: React.CSSProperties = {
@@ -203,14 +210,22 @@ export default function Kontakt() {
             style={{ ...inp, resize: 'vertical' }} />
           {errors.nachricht && <p style={errStyle}>{errors.nachricht}</p>}
         </div>
-        <button type="submit" style={{
+        {serverError && (
+          <p style={{ color: '#f87171', fontSize: '13px',
+                      textAlign: 'center', margin: '0' }}>
+            {serverError}
+          </p>
+        )}
+        <button type="submit" disabled={loading} style={{
           width: '100%', padding: '14px',
-          background: '#534AB7', border: 'none',
+          background: loading ? '#3C3489' : '#534AB7', border: 'none',
           borderRadius: '10px', color: '#EEEDFE',
-          fontSize: '15px', fontWeight: '500', cursor: 'pointer',
-          fontFamily: 'inherit',
+          fontSize: '15px', fontWeight: '500',
+          cursor: loading ? 'not-allowed' : 'pointer',
+          fontFamily: 'inherit', opacity: loading ? 0.7 : 1,
+          transition: 'background 0.2s, opacity 0.2s',
         }}>
-          Nachricht senden →
+          {loading ? 'Wird gesendet …' : 'Nachricht senden →'}
         </button>
         <p style={{ textAlign: 'center', fontSize: '12px',
                     color: '#7F77DD', marginTop: '-8px' }}>

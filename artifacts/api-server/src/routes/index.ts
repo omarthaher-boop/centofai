@@ -7,6 +7,7 @@ import toolSubmissionsRouter from "./tool-submissions";
 import accountRouter from "./account";
 import searchRouter from "./search";
 import newsletterRouter from "./newsletter";
+import contactRouter from "./contact";
 
 const router: IRouter = Router();
 
@@ -18,5 +19,6 @@ router.use(toolSubmissionsRouter);
 router.use(accountRouter);
 router.use(searchRouter);
 router.use(newsletterRouter);
+router.use(contactRouter);
 
 export default router;
