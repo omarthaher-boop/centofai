@@ -14,54 +14,60 @@
   --radius: 0.75rem;
 }
 
-/* ─── Dark Mode (default) ─────────────────────────────────────────── */
+/* ─── Deep Space Theme (default) ─────────────────────────────────── */
 :root {
-  --bg-page: #020617;
-  --bg-section-alt: #0f172a;
-  --bg-card: #0f172a;
-  --bg-input: #0f172a;
-  --bg-tag: rgba(15, 23, 42, 0.6);
-  --bg-tag-active: #9333EA;
-  --text-heading: #FFFFFF;
-  --text-body: #E2E8F0;
-  --text-caption: #94A3B8;
-  --text-label: #64748B;
-  --border-color: #1E293B;
-  --border-hover: rgba(147, 51, 234, 0.4);
-  --glow-opacity: 0.15;
-  --shadow-card: rgba(147, 51, 234, 0.15);
-  --nav-bg: rgba(2, 6, 23, 0.8);
-  --nav-border: rgba(30, 41, 59, 0.6);
-  --mobile-menu-bg: rgba(2, 6, 23, 0.95);
-  --gradient-from: #c084fc;
-  --gradient-to: #6366f1;
-  --btn-secondary-bg: #1E293B;
-  --btn-secondary-border: #334155;
+  --bg-page: #07071a;
+  --bg-section-alt: #0d0d2b;
+  --bg-card: rgba(10,10,30,0.6);
+  --bg-input: rgba(13,13,43,0.8);
+  --bg-tag: rgba(83,74,183,0.12);
+  --bg-tag-active: #534AB7;
+  --text-heading: #EEEDFE;
+  --text-body: #EEEDFE;
+  --text-caption: #AFA9EC;
+  --text-label: #7F77DD;
+  --border-color: rgba(127,119,221,0.2);
+  --border-hover: rgba(127,119,221,0.4);
+  --glow-opacity: 0.18;
+  --shadow-card: rgba(83,74,183,0.2);
+  --nav-bg: rgba(7,7,26,0.85);
+  --nav-border: rgba(127,119,221,0.15);
+  --mobile-menu-bg: rgba(7,7,26,0.97);
+  --gradient-from: #7F77DD;
+  --gradient-to: #534AB7;
+  --btn-secondary-bg: rgba(83,74,183,0.15);
+  --btn-secondary-border: #534AB7;
+  --color-accent: #534AB7;
+  --color-accent-light: #7F77DD;
+  --color-accent-muted: #3C3489;
 }
 
 /* ─── Light Mode ────────────────────────────────────────────────────── */
 [data-theme="light"] {
-  --bg-page: #F8FAFC;
-  --bg-section-alt: #F1F5F9;
-  --bg-card: #FFFFFF;
+  --bg-page: #F0EFFF;
+  --bg-section-alt: #E8E6FF;
+  --bg-card: rgba(255,255,255,0.85);
   --bg-input: #FFFFFF;
-  --bg-tag: rgba(226, 232, 240, 0.6);
-  --bg-tag-active: #9333EA;
-  --text-heading: #0F172A;
-  --text-body: #1E293B;
-  --text-caption: #475569;
-  --text-label: #64748B;
-  --border-color: #E2E8F0;
-  --border-hover: rgba(147, 51, 234, 0.3);
+  --bg-tag: rgba(83,74,183,0.08);
+  --bg-tag-active: #534AB7;
+  --text-heading: #1a1840;
+  --text-body: #2a2660;
+  --text-caption: #534AB7;
+  --text-label: #7F77DD;
+  --border-color: rgba(83,74,183,0.2);
+  --border-hover: rgba(83,74,183,0.4);
   --glow-opacity: 0.08;
-  --shadow-card: rgba(147, 51, 234, 0.08);
-  --nav-bg: rgba(248, 250, 252, 0.9);
-  --nav-border: rgba(226, 232, 240, 0.8);
-  --mobile-menu-bg: rgba(248, 250, 252, 0.98);
-  --gradient-from: #9333EA;
-  --gradient-to: #6366F1;
-  --btn-secondary-bg: #F1F5F9;
-  --btn-secondary-border: #E2E8F0;
+  --shadow-card: rgba(83,74,183,0.1);
+  --nav-bg: rgba(240,239,255,0.92);
+  --nav-border: rgba(83,74,183,0.15);
+  --mobile-menu-bg: rgba(240,239,255,0.98);
+  --gradient-from: #534AB7;
+  --gradient-to: #7F77DD;
+  --btn-secondary-bg: rgba(83,74,183,0.1);
+  --btn-secondary-border: #534AB7;
+  --color-accent: #534AB7;
+  --color-accent-light: #7F77DD;
+  --color-accent-muted: #3C3489;
 }
 
 @layer base {
@@ -74,6 +80,27 @@
     color: var(--text-body);
     font-family: 'Inter', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle, rgba(175,169,236,0.45) 1px, transparent 1px),
+      linear-gradient(rgba(83,74,183,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(83,74,183,0.06) 1px, transparent 1px);
+    background-size: 60px 60px, 48px 48px, 48px 48px;
+  }
+  [data-theme="light"] body::before,
+  [data-theme="light"] ~ body::before {
+    background-image:
+      radial-gradient(circle, rgba(83,74,183,0.2) 1px, transparent 1px),
+      linear-gradient(rgba(83,74,183,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(83,74,183,0.04) 1px, transparent 1px);
+    background-size: 60px 60px, 48px 48px, 48px 48px;
   }
   html {
     scroll-behavior: smooth;

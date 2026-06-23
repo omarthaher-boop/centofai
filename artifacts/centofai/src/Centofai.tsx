@@ -5,6 +5,7 @@ import {
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Users, Lightbulb, Send, ChevronDown, Package, Heart,
+  MapPin, Code2,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useUser } from "@clerk/react";
@@ -69,13 +70,6 @@ function ToolLogo({ name, color, url, logoUrl }: { name: string; color: string; 
 }
 
 /* ─── Hero ─────────────────────────────────────────────────────── */
-const heroCategories = [
-  { name: "Ideen", href: "#ideas", icon: Lightbulb, desc: "Projekte einreichen", color: "#F59E0B", bg: "bg-amber-500/10", hoverBg: "group-hover:bg-amber-500/20", text: "text-amber-400", hoverText: "group-hover:text-amber-300" },
-  { name: "Unsere Produkte", href: "/products", icon: Package, desc: "KI-Lösungen entdecken", color: "#06B6D4", bg: "bg-cyan-500/10", hoverBg: "group-hover:bg-cyan-500/20", text: "text-cyan-400", hoverText: "group-hover:text-cyan-300" },
-  { name: "KI-Tools", href: "#tools", icon: Wrench, desc: "102+ Tools entdecken", color: "#8B5CF6", bg: "bg-purple-500/10", hoverBg: "group-hover:bg-purple-500/20", text: "text-purple-400", hoverText: "group-hover:text-purple-300" },
-  { name: "Kurse", href: "#academy", icon: GraduationCap, desc: "Lernen & wachsen", color: "#10B981", bg: "bg-emerald-500/10", hoverBg: "group-hover:bg-emerald-500/20", text: "text-emerald-400", hoverText: "group-hover:text-emerald-300" },
-  { name: "Community", href: "#newsletter", icon: Users, desc: "Mitglieder & Netzwerk", color: "#EC4899", bg: "bg-pink-500/10", hoverBg: "group-hover:bg-pink-500/20", text: "text-pink-400", hoverText: "group-hover:text-pink-300" },
-];
 
 function GlobalSearch() {
   const [query, setQuery] = useState("");
@@ -194,68 +188,290 @@ function GlobalSearch() {
   );
 }
 
+function NodeGraph() {
+  return (
+    <svg
+      width="340"
+      height="280"
+      viewBox="0 0 340 280"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      style={{ position: "absolute", top: 0, right: 0, opacity: 0.4, pointerEvents: "none" }}
+      aria-hidden="true"
+    >
+      <line x1="60" y1="60" x2="170" y2="40" stroke="#534AB7" strokeWidth="1" />
+      <line x1="170" y1="40" x2="280" y2="100" stroke="#534AB7" strokeWidth="1" />
+      <line x1="280" y1="100" x2="220" y2="200" stroke="#3C3489" strokeWidth="1" />
+      <line x1="220" y1="200" x2="100" y2="180" stroke="#3C3489" strokeWidth="1" />
+      <line x1="100" y1="180" x2="60" y2="60" stroke="#26215C" strokeWidth="1" />
+      <line x1="170" y1="40" x2="220" y2="200" stroke="#26215C" strokeWidth="0.5" />
+      <line x1="60" y1="60" x2="280" y2="100" stroke="#534AB7" strokeWidth="0.5" />
+      <circle cx="60" cy="60" r="6" fill="#534AB7" />
+      <circle cx="170" cy="40" r="5" fill="#7F77DD" />
+      <circle cx="280" cy="100" r="7" fill="#534AB7" />
+      <circle cx="220" cy="200" r="5" fill="#3C3489" />
+      <circle cx="100" cy="180" r="6" fill="#7F77DD" />
+    </svg>
+  );
+}
+
 function Hero() {
   return (
-    <header className="max-w-7xl mx-auto px-6 pt-16 pb-12 relative">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-        {/* ─── Left Sidebar ─── */}
-        <div className="lg:col-span-3 hidden lg:flex flex-col gap-3">
-          <p className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider mb-2">
-            Kategorien
-          </p>
-          {heroCategories.map((cat) => {
-            const Icon = cat.icon;
-            const inner = (
-              <>
-                <div className={`w-9 h-9 rounded-lg ${cat.bg} flex items-center justify-center shrink-0 ${cat.hoverBg} transition`}>
-                  <Icon className={`w-4.5 h-4.5 ${cat.text}`} />
-                </div>
-                <div>
-                  <p className={`text-sm font-semibold ${cat.hoverText} transition`}>{cat.name}</p>
-                  <p className="text-xs text-[var(--text-label)]">{cat.desc}</p>
-                </div>
-              </>
-            );
-            const cls = "group flex items-center gap-3 px-4 py-3 rounded-xl border border-[var(--border-color)] bg-[var(--bg-card)] hover:border-purple-500/30 hover:bg-purple-500/5 transition-all";
-            return cat.href.startsWith("/") ? (
-              <Link key={cat.name} to={cat.href} className={cls}>{inner}</Link>
-            ) : (
-              <a key={cat.name} href={cat.href} className={cls}>{inner}</a>
-            );
-          })}
+    <header className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
+      <NodeGraph />
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-2xl"
+      >
+        {/* Eyebrow Badge */}
+        <div
+          className="inline-flex items-center gap-2 mb-6"
+          style={{
+            background: "rgba(38,33,92,0.7)",
+            border: "0.5px solid #534AB7",
+            borderRadius: 20,
+            padding: "5px 14px",
+            fontSize: 11,
+            color: "#CECBF6",
+            letterSpacing: "0.06em",
+          }}
+        >
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+          KI-gestützte digitale Lösungen
         </div>
 
-        {/* ─── Center Text ─── */}
-        <div className="lg:col-span-4 text-center lg:text-left">
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20 tracking-wide uppercase">
-            Zentraler KI-Hub & Verzeichnis
-          </span>
+        {/* H1 */}
+        <h1
+          style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
+        >
+          Ihr Alltag. Ihr Problem.{" "}
+          <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
+        </h1>
 
-          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight mt-5 mb-5 leading-tight">
-            Alles über Künstliche Intelligenz an{" "}
-            <span className="gradient-text">einem einzigen Ort</span>
-          </h1>
+        {/* Subtext */}
+        <p style={{ fontSize: 15, color: "#AFA9EC", maxWidth: 500, lineHeight: 1.7, marginBottom: 32 }}>
+          Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
+        </p>
 
-          <p className="text-lg text-[var(--text-caption)] max-w-lg mx-auto lg:mx-0 mb-6">
-            Entdecke die besten KI-Tools, bleibe mit täglichen News up-to-date und lerne in praxisnahen Workshops von den Experten.
-          </p>
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 mb-10">
+          <a
+            href="#ideas"
+            style={{
+              background: "#534AB7",
+              color: "#EEEDFE",
+              border: "none",
+              padding: "12px 26px",
+              borderRadius: 8,
+              fontWeight: 500,
+              fontSize: 14,
+              textDecoration: "none",
+              display: "inline-block",
+            }}
+          >
+            Jetzt Anliegen einsenden
+          </a>
+          <a
+            href="#tools"
+            style={{
+              border: "0.5px solid rgba(127,119,221,0.4)",
+              background: "transparent",
+              color: "#AFA9EC",
+              padding: "12px 26px",
+              borderRadius: 8,
+              fontWeight: 500,
+              fontSize: 14,
+              textDecoration: "none",
+              display: "inline-block",
+            }}
+          >
+            Mehr erfahren
+          </a>
         </div>
 
-        {/* ─── Right: Image + Search ─── */}
-        <div className="lg:col-span-5 flex flex-col gap-4 justify-center">
-          <div className="relative w-full max-w-[520px] mx-auto lg:mx-0">
-            <div className="absolute -inset-2 bg-purple-500/10 rounded-2xl blur-2xl pointer-events-none" />
-            <img
-              src="centofai-hero.png"
-              alt="Centof.Ai - Center of Artificial Intelligence"
-              className="relative w-full h-auto rounded-xl border border-[var(--border-color)] shadow-2xl"
-              loading="eager"
-            />
-          </div>
-          <GlobalSearch />
+        {/* Stats Bar */}
+        <div
+          style={{
+            border: "0.5px solid rgba(127,119,221,0.2)",
+            borderRadius: 12,
+            background: "rgba(10,10,30,0.6)",
+            maxWidth: 520,
+            display: "flex",
+          }}
+        >
+          {[
+            { num: "100%", label: "Erstgespräch kostenlos" },
+            { num: "KI", label: "gestützte Analyse" },
+            { num: "Flexibel", label: "Vergütungsmodelle" },
+          ].map((s, i) => (
+            <div
+              key={s.num}
+              style={{
+                flex: 1,
+                padding: "16px 20px",
+                borderRight: i < 2 ? "0.5px solid rgba(127,119,221,0.2)" : undefined,
+                textAlign: "center",
+              }}
+            >
+              <p style={{ fontSize: 20, color: "#CECBF6", fontWeight: 600, marginBottom: 2 }}>{s.num}</p>
+              <p style={{ fontSize: 11, color: "#7F77DD" }}>{s.label}</p>
+            </div>
+          ))}
         </div>
-      </div>
+      </motion.div>
     </header>
+  );
+}
+
+/* ─── Strategy Section ─────────────────────────────────────────── */
+function StrategySection() {
+  const steps = [
+    { n: "1", title: "Problem einsenden", desc: "Senden Sie uns Ihr Anliegen — egal wie groß oder klein. Kein Problem ist zu unbedeutend." },
+    { n: "2", title: "KI-gestützte Analyse", desc: "Mithilfe modernster KI-Tools analysieren wir Ihr Problem präzise und effizient." },
+    { n: "3", title: "Expertenberatung", desc: "Wir ziehen gezielt Fachexpertinnen und -experten aus dem relevanten Bereich hinzu." },
+    { n: "4", title: "Digitale Umsetzung", desc: "Vollständige Programmierung und technische Realisierung Ihrer maßgeschneiderten Lösung." },
+  ];
+
+  return (
+    <section className="max-w-3xl mx-auto px-6 py-6">
+      {/* Button */}
+      <div style={{ display: "flex", justifyContent: "center", paddingTop: 36, marginBottom: 36 }}>
+        <button
+          style={{
+            background: "rgba(38,33,92,0.5)",
+            border: "0.5px solid #534AB7",
+            color: "#CECBF6",
+            fontSize: 15,
+            fontWeight: 500,
+            borderRadius: 10,
+            padding: "14px 32px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            cursor: "default",
+          }}
+        >
+          <MapPin className="w-4 h-4" style={{ color: "#7F77DD" }} />
+          Unsere Strategie
+        </button>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 style={{ fontSize: 28, color: "#EEEDFE", fontWeight: 500, marginBottom: 20, textAlign: "center" }}>
+          Wir entwickeln unsere Projekte aus Ihrer Realität heraus.
+        </h2>
+
+        <p style={{ fontSize: 15, color: "#AFA9EC", lineHeight: 1.75, marginBottom: 32, textAlign: "center" }}>
+          Wir glauben daran, dass Technologie das Leben einfacher machen kann — für alle. Manchmal sind es keine großen Krisen, die uns belasten, sondern die kleinen, alltäglichen Probleme, die sich still anhäufen: komplexe Prozesse, zeitintensive Bürokratie, stundenlange Recherchen ohne klare Antwort. Was klein klingt, kann auf Dauer zu einer echten Belastung werden — für Ihre Zeit, Ihre Nerven und nicht zuletzt für Ihre Gesundheit.
+        </p>
+
+        {/* 4-Steps Grid */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-10">
+          {steps.map((s) => (
+            <motion.div
+              key={s.n}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              style={{
+                background: "rgba(10,10,30,0.5)",
+                border: "0.5px solid rgba(127,119,221,0.2)",
+                borderRadius: 10,
+                padding: "20px 24px",
+                display: "flex",
+                gap: 16,
+                alignItems: "flex-start",
+              }}
+            >
+              <span
+                style={{
+                  width: 28,
+                  height: 28,
+                  borderRadius: "50%",
+                  background: "#534AB7",
+                  color: "#EEEDFE",
+                  fontSize: 12,
+                  fontWeight: 600,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexShrink: 0,
+                  marginTop: 2,
+                }}
+              >
+                {s.n}
+              </span>
+              <div>
+                <p style={{ fontSize: 14, color: "#EEEDFE", fontWeight: 600, marginBottom: 4 }}>{s.title}</p>
+                <p style={{ fontSize: 13, color: "#AFA9EC", lineHeight: 1.6 }}>{s.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Closing Quote */}
+        <div style={{ borderLeft: "2px solid #534AB7", paddingLeft: 18 }}>
+          <p style={{ fontSize: 14, color: "#AFA9EC", lineHeight: 1.8 }}>
+            Auch wenn die finanziellen Mittel begrenzt sind: Durch unsere flexiblen Vergütungsmodelle und Kooperationsmodelle können Sie Ihre Idee nahezu kostenfrei verwirklichen. Alle Erstgespräche sind kostenlos. Denn eine gute Idee sollte niemals an finanziellen Hürden scheitern.{" "}
+            <strong style={{ color: "#EEEDFE" }}>Weniger Stress. Mehr Klarheit. Jeden Tag.</strong>
+          </p>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+/* ─── Feature Strip ────────────────────────────────────────────── */
+function FeatureStrip() {
+  const features = [
+    { icon: Brain, title: "KI-Analyse", desc: "Ihr Problem wird mithilfe modernster KI-Tools analysiert." },
+    { icon: Users, title: "Expertenberatung", desc: "Fachexpertinnen und -experten begleiten Sie von Anfang bis Ende." },
+    { icon: Code2, title: "Digitale Umsetzung", desc: "Vollständige Programmierung und technische Realisierung Ihrer Lösung." },
+  ];
+
+  return (
+    <section className="max-w-7xl mx-auto px-6 py-8 border-t" style={{ borderColor: "rgba(127,119,221,0.12)" }}>
+      <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x" style={{ "--tw-divide-opacity": 1 } as React.CSSProperties}>
+        {features.map((f, i) => {
+          const Icon = f.icon;
+          return (
+            <motion.div
+              key={f.title}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1 }}
+              className="flex items-start gap-4 px-6 py-6"
+              style={i > 0 ? { borderLeft: "0.5px solid rgba(127,119,221,0.15)" } : undefined}
+            >
+              <div
+                style={{
+                  background: "rgba(83,74,183,0.2)",
+                  border: "0.5px solid rgba(127,119,221,0.3)",
+                  borderRadius: 8,
+                  padding: 10,
+                  flexShrink: 0,
+                }}
+              >
+                <Icon className="w-5 h-5" style={{ color: "#7F77DD" }} />
+              </div>
+              <div>
+                <p style={{ fontSize: 14, color: "#EEEDFE", fontWeight: 600, marginBottom: 4 }}>{f.title}</p>
+                <p style={{ fontSize: 13, color: "#AFA9EC", lineHeight: 1.6 }}>{f.desc}</p>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
@@ -769,9 +985,11 @@ function Footer() {
 /* ─── Main App ────────────────────────────────────────────────────────────────── */
 export default function App() {
   return (
-    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth">
+    <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth relative">
       <Navbar />
       <Hero />
+      <StrategySection />
+      <FeatureStrip />
       <IdeasSection />
       <ToolsSection />
       <CoursesSection />
