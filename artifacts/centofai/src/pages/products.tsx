@@ -18,6 +18,9 @@ import {
   Newspaper,
   MessageSquare,
   ArrowUpRight,
+  Lightbulb,
+  Settings,
+  Smartphone,
 } from "lucide-react";
 import Navbar from "../components/Navbar";
 
@@ -222,54 +225,97 @@ export default function ProductsPage() {
           <div className="h-px flex-1 bg-[var(--border-color)]" />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-          {PRODUCTS.map((p, i) => {
-            const Icon = p.icon;
-            const isExternal = p.href.startsWith("mailto");
+        <style>{`
+          .weiteres-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 80px;
+          }
+          @media (max-width: 768px) { .weiteres-grid { grid-template-columns: repeat(2, 1fr); } }
+          @media (max-width: 480px) { .weiteres-grid { grid-template-columns: 1fr; } }
+        `}</style>
+        <div className="weiteres-grid">
+          {[
+            {
+              icon: Lightbulb, iconBg: "rgba(83,74,183,0.18)", iconColor: "#7F77DD",
+              border: "0.5px solid #534AB7", tag: "IDEE & KONZEPT",
+              title: "Ideen in digitaler Form entwickeln",
+              desc: "Aus Ihrer Vision wird ein konkretes digitales Produkt — strukturiert, umsetzbar und zukunftssicher.",
+              bullets: ["Konzeptanalyse & Machbarkeit", "Digitale Roadmap", "Prototyp-Entwicklung"],
+              bulletColor: "#534AB7", btnBg: "rgba(83,74,183,0.2)", btnColor: "#CECBF6",
+            },
+            {
+              icon: Globe, iconBg: "rgba(29,158,117,0.18)", iconColor: "#5DCAA5",
+              border: "0.5px solid #1D9E75", tag: "WEB & PRÄSENZ",
+              title: "Webseiten erstellen",
+              desc: "Moderne, schnelle und professionelle Webauftritte — massgeschneidert für Ihr Unternehmen.",
+              bullets: ["Design & Branding", "SEO-optimiert", "Mobile-first"],
+              bulletColor: "#1D9E75", btnBg: "rgba(29,158,117,0.2)", btnColor: "#9FE1CB",
+            },
+            {
+              icon: Settings, iconBg: "rgba(55,138,221,0.18)", iconColor: "#85B7EB",
+              border: "0.5px solid #378ADD", tag: "EFFIZIENZ",
+              title: "Automation Ihres Unternehmens",
+              desc: "Wiederkehrende Prozesse automatisieren — Zeit sparen, Fehler reduzieren, Ressourcen schonen.",
+              bullets: ["Workflow-Analyse", "KI-gestützte Prozesse", "Integration bestehender Tools"],
+              bulletColor: "#378ADD", btnBg: "rgba(55,138,221,0.2)", btnColor: "#B5D4F4",
+            },
+            {
+              icon: Smartphone, iconBg: "rgba(216,90,48,0.18)", iconColor: "#F0997B",
+              border: "0.5px solid #D85A30", tag: "APP-ENTWICKLUNG",
+              title: "App entwickeln für Ihre Idee",
+              desc: "Von der Idee zur fertigen iOS- oder Android-App — technisch solide, nutzerfreundlich und skalierbar.",
+              bullets: ["iOS & Android", "UX/UI Design", "App Store Einreichung"],
+              bulletColor: "#D85A30", btnBg: "rgba(216,90,48,0.2)", btnColor: "#F5C4B3",
+            },
+            {
+              icon: GraduationCap, iconBg: "rgba(212,83,126,0.18)", iconColor: "#ED93B1",
+              border: "0.5px solid #D4537E", tag: "WISSEN & WACHSTUM",
+              title: "KI-Workshops",
+              desc: "Praxisnahe Workshops für Teams und Einzelpersonen — von Prompt Engineering bis zu KI-Workflows.",
+              bullets: ["Prompt Engineering", "Tool-Workshops", "Zertifikat auf Anfrage"],
+              bulletColor: "#D4537E", btnBg: "rgba(212,83,126,0.2)", btnColor: "#F4C0D1",
+            },
+            {
+              icon: Brain, iconBg: "rgba(239,159,39,0.18)", iconColor: "#FAC775",
+              border: "0.5px solid #EF9F27", tag: "MASSGESCHNEIDERT",
+              title: "Weitere KI-Lösungen",
+              desc: "Individuelle KI-Lösungen angepasst an Ihre Bedürfnisse — von Chatbots bis zur Datenanalyse.",
+              bullets: ["Chatbots & Assistenten", "Datenanalyse & Reports", "API-Integration"],
+              bulletColor: "#EF9F27", btnBg: "rgba(239,159,39,0.2)", btnColor: "#FAC775",
+            },
+          ].map((c, i) => {
+            const Icon = c.icon;
             return (
               <motion.div
-                key={p.title}
-                initial={{ opacity: 0, y: 20 }}
+                key={c.title}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="group bg-[var(--bg-card)]/40 border border-[var(--border-color)] hover:border-purple-500/30 rounded-2xl p-6 transition flex flex-col"
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                style={{
+                  background: "rgba(255,255,255,0.03)", border: c.border,
+                  borderRadius: 12, padding: "20px 18px",
+                  display: "flex", flexDirection: "column", gap: 12,
+                }}
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition group-hover:scale-105"
-                  style={{ backgroundColor: p.color + "15", color: p.color }}
-                >
-                  <Icon className="w-6 h-6" />
+                <div style={{ width: 36, height: 36, borderRadius: 8, background: c.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Icon style={{ width: 18, height: 18, color: c.iconColor }} />
                 </div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-[var(--text-label)] mb-1">
-                  {p.subtitle}
-                </div>
-                <h3 className="text-lg font-bold mb-2">{p.title}</h3>
-                <p className="text-sm text-[var(--text-caption)] leading-relaxed mb-4 flex-1">
-                  {p.description}
-                </p>
-                <ul className="space-y-1.5 mb-5">
-                  {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-xs text-[var(--text-label)]">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 shrink-0" />
-                      {f}
+                <p style={{ fontSize: 10, letterSpacing: "0.07em", color: "#5F5E8A", margin: 0 }}>{c.tag}</p>
+                <p style={{ fontSize: 16, fontWeight: 500, color: "#EEEDFE", margin: 0, lineHeight: 1.3 }}>{c.title}</p>
+                <p style={{ fontSize: 13, color: "#AFA9EC", lineHeight: 1.6, margin: 0 }}>{c.desc}</p>
+                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 6 }}>
+                  {c.bullets.map((b) => (
+                    <li key={b} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#AFA9EC" }}>
+                      <span style={{ width: 4, height: 4, borderRadius: "50%", background: c.bulletColor, flexShrink: 0 }} />
+                      {b}
                     </li>
                   ))}
                 </ul>
-                {isExternal ? (
-                  <a
-                    href={p.href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition"
-                  >
-                    {p.cta} <ExternalLink className="w-4 h-4" />
-                  </a>
-                ) : (
-                  <Link
-                    href={p.href}
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-purple-400 hover:text-purple-300 transition"
-                  >
-                    {p.cta} <ArrowRight className="w-4 h-4" />
-                  </Link>
-                )}
+                <Link to="/kontakt" style={{ marginTop: "auto", display: "inline-block", padding: "8px 14px", borderRadius: 8, fontSize: 12, cursor: "pointer", border: "none", background: c.btnBg, color: c.btnColor, textDecoration: "none", textAlign: "center" }}>
+                  Beratung anfragen →
+                </Link>
               </motion.div>
             );
           })}
