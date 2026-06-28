@@ -77,8 +77,21 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle, rgba(175,169,236,0.18) 1px, transparent 1px);
-    background-size: 28px 28px;
+    background-image: radial-gradient(circle, rgba(175,169,236,0.22) 1px, transparent 1px);
+    background-size: 36px 36px;
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60vh;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(83,74,183,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 30% at 10% 20%, rgba(29,158,117,0.06) 0%, transparent 60%);
   }
   html {
     scroll-behavior: smooth;
