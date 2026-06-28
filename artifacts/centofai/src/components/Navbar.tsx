@@ -77,7 +77,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         <div className="flex items-center gap-6">
-          <Link to="/" style={{ display: "inline-flex", alignItems: "center" }}>
+          <Link to="/" onClick={() => window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior })} style={{ display: "inline-flex", alignItems: "center" }}>
             <svg width="180" height="32" viewBox="0 0 180 32" xmlns="http://www.w3.org/2000/svg">
               <path d="M22 36 C13 36 7 30 7 22 C7 14 13 8 19 8 C19 6 21 5 22 5 C24 5 26 6 26 8 C33 8 38 14 38 22 C38 30 32 36 22 36Z"
                 fill="rgba(83,74,183,0.12)" stroke="#534AB7" strokeWidth="1.5"/>
