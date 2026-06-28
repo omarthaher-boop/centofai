@@ -546,6 +546,20 @@ function StrategySection() {
           Wir glauben daran, dass Technologie das Leben einfacher machen kann — für alle. Manchmal sind es keine großen Krisen, die uns belasten, sondern die kleinen, alltäglichen Probleme, die sich still anhäufen: komplexe Prozesse, zeitintensive Bürokratie, stundenlange Recherchen ohne klare Antwort. Was klein klingt, kann auf Dauer zu einer echten Belastung werden — für Ihre Zeit, Ihre Nerven und nicht zuletzt für Ihre Gesundheit.
         </p>
 
+        {/* Closing Quote — über dem Grid */}
+        <div style={{
+          background: "rgba(38,33,92,0.45)",
+          border: "0.5px solid rgba(83,74,183,0.3)",
+          borderLeft: "3px solid #534AB7",
+          borderRadius: "0 10px 10px 0",
+          padding: "20px 24px",
+          marginBottom: 32,
+        }}>
+          <p style={{ fontSize: 14, color: "#CECBF6", lineHeight: 1.8, fontStyle: "italic" }}>
+            Auch wenn die finanziellen Mittel begrenzt sind: Durch unsere flexiblen Vergütungsmodelle und Kooperationsmodelle können Sie Ihre Idee nahezu kostenfrei verwirklichen. Alle Erstgespräche sind kostenlos. Denn eine gute Idee sollte niemals an finanziellen Hürden scheitern.
+          </p>
+        </div>
+
         {/* 4-Steps Grid */}
         <div className="grid sm:grid-cols-2 gap-4 mb-10">
           {steps.map((s) => (
@@ -589,13 +603,6 @@ function StrategySection() {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Closing Quote */}
-        <div style={{ borderLeft: "2px solid #534AB7", paddingLeft: 18 }}>
-          <p style={{ fontSize: 14, color: "#AFA9EC", lineHeight: 1.8 }}>
-            Auch wenn die finanziellen Mittel begrenzt sind: Durch unsere flexiblen Vergütungsmodelle und Kooperationsmodelle können Sie Ihre Idee nahezu kostenfrei verwirklichen. Alle Erstgespräche sind kostenlos. Denn eine gute Idee sollte niemals an finanziellen Hürden scheitern.
-          </p>
         </div>
 
       </motion.div>
