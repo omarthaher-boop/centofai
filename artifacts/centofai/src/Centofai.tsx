@@ -216,6 +216,7 @@ function NodeGraph() {
 }
 
 function Hero() {
+  const [ctaHovered, setCtaHovered] = useState(false);
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
@@ -278,60 +279,72 @@ function Hero() {
         </motion.div>
 
         {/* CTA Button rechts */}
-        <motion.a
+        <a
           href="/kontakt"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          onMouseEnter={() => setCtaHovered(true)}
+          onMouseLeave={() => setCtaHovered(false)}
           style={{
             display: 'inline-flex',
             flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
-            gap: '6px',
-            padding: '28px 44px',
-            borderRadius: '18px',
-            background: 'linear-gradient(135deg, #534AB7 0%, #1D9E75 100%)',
-            color: '#ffffff',
-            fontSize: '15px',
-            fontWeight: '600',
+            gap: '10px',
             textDecoration: 'none',
-            border: 'none',
             cursor: 'pointer',
             flexShrink: 0,
-            boxShadow: '0 8px 32px rgba(83,74,183,0.35)',
           }}
         >
-            <svg width="36" height="28" viewBox="0 0 45 36" xmlns="http://www.w3.org/2000/svg">
-              <path d="M22 33 C13 33 7 27 7 19 C7 11 13 5 19 5 C19 3 21 2 22 2 C24 2 26 3 26 5 C33 5 38 11 38 19 C38 27 32 33 22 33Z"
-                fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5"/>
-              <line x1="22" y1="3" x2="22" y2="33" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeDasharray="2 3"/>
-              <path d="M10 15 Q15 12 17 17" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
-              <path d="M9 23 Q15 20 17 25" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
-              <path d="M34 15 Q29 12 27 17" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
-              <path d="M35 23 Q29 20 27 25" fill="none" stroke="rgba(255,255,255,0.5)" strokeWidth="1.1" strokeLinecap="round"/>
-              <circle cx="11" cy="14" r="2.5" fill="rgba(93,202,165,0.9)"/>
-              <circle cx="33" cy="14" r="2.5" fill="rgba(93,202,165,0.9)"/>
-              <circle cx="10" cy="24" r="2" fill="rgba(206,203,246,0.8)"/>
-              <circle cx="34" cy="24" r="2" fill="rgba(206,203,246,0.8)"/>
-              <circle cx="18" cy="30" r="2" fill="rgba(127,119,221,0.8)"/>
-              <circle cx="26" cy="30" r="2" fill="rgba(127,119,221,0.8)"/>
-              <circle cx="22" cy="19" r="5" fill="rgba(83,74,183,0.9)"/>
-              <circle cx="22" cy="19" r="2" fill="rgba(255,255,255,0.9)"/>
-              <line x1="11" y1="14" x2="22" y2="19" stroke="rgba(93,202,165,0.7)" strokeWidth="0.9"/>
-              <line x1="33" y1="14" x2="22" y2="19" stroke="rgba(93,202,165,0.7)" strokeWidth="0.9"/>
-              <line x1="10" y1="24" x2="22" y2="19" stroke="rgba(206,203,246,0.5)" strokeWidth="0.8"/>
-              <line x1="34" y1="24" x2="22" y2="19" stroke="rgba(206,203,246,0.5)" strokeWidth="0.8"/>
-              <line x1="18" y1="30" x2="22" y2="19" stroke="rgba(127,119,221,0.5)" strokeWidth="0.8"/>
-              <line x1="26" y1="30" x2="22" y2="19" stroke="rgba(127,119,221,0.5)" strokeWidth="0.8"/>
-            </svg>
-            <span style={{ fontSize: '15px', fontWeight: '600', color: '#ffffff', letterSpacing: '0.01em' }}>
+          <div style={{
+            padding: '4px',
+            borderRadius: '50px',
+            border: `1.5px solid ${ctaHovered ? '#EF9F27' : '#BA7517'}`,
+            background: ctaHovered ? 'rgba(186,117,23,0.08)' : 'transparent',
+            transition: 'all 0.2s ease',
+          }}>
+            <div style={{
+              padding: '14px 32px',
+              borderRadius: '50px',
+              background: ctaHovered ? '#0C447C' : '#185FA5',
+              color: '#E6F1FB',
+              fontFamily: 'inherit',
+              fontSize: '16px',
+              fontWeight: '500',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              letterSpacing: '0.02em',
+              whiteSpace: 'nowrap',
+              transition: 'background 0.2s ease',
+            }}>
               Jetzt kostenlos starten
-            </span>
-            <span style={{ fontSize: '10px', fontWeight: '400', color: 'rgba(255,255,255,0.7)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-              Human + AI
-            </span>
-        </motion.a>
+              <span style={{
+                background: ctaHovered ? '#EF9F27' : '#BA7517',
+                color: '#FAEEDA',
+                borderRadius: '50%',
+                width: '28px',
+                height: '28px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '14px',
+                fontWeight: '600',
+                flexShrink: 0,
+                transition: 'background 0.2s ease',
+              }}>
+                →
+              </span>
+            </div>
+          </div>
+          <span style={{
+            fontSize: '10px',
+            color: ctaHovered ? 'rgba(239,159,39,0.8)' : 'rgba(186,117,23,0.65)',
+            letterSpacing: '2px',
+            fontFamily: 'inherit',
+            textTransform: 'uppercase',
+            transition: 'color 0.2s ease',
+          }}>
+            Human + AI
+          </span>
+        </a>
       </div>
 
       {/* Stats Bar */}
