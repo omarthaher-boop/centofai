@@ -217,6 +217,7 @@ function NodeGraph() {
 
 function Hero() {
   const [ctaHovered, setCtaHovered] = useState(false);
+  const [moreHovered, setMoreHovered] = useState(false);
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
@@ -230,36 +231,53 @@ function Hero() {
         <div
           className="inline-flex items-center gap-2 mb-6"
           style={{
-            background: "rgba(38,33,92,0.7)",
-            border: "0.5px solid #534AB7",
+            background: "rgba(4,44,83,0.9)",
+            border: "0.5px solid #185FA5",
             borderRadius: 20,
             padding: "5px 14px",
             fontSize: 11,
-            color: "#CECBF6",
+            color: "#B5D4F4",
             letterSpacing: "0.06em",
           }}
         >
-          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#378ADD", display: "inline-block", flexShrink: 0 }} />
           KI-gestützte digitale Lösungen
         </div>
 
         {/* H1 */}
-        <h1 style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}>
+        <h1 style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#E6F1FB", marginBottom: 20 }}>
           Ihr Alltag. Ihr Problem.{" "}
-          <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
+          <span style={{ color: "#378ADD" }}>Unsere Lösung.</span>
         </h1>
 
         {/* Subtext */}
-        <p style={{ fontSize: 15, color: "#AFA9EC", lineHeight: 1.7, marginBottom: 0 }}>
+        <p style={{ fontSize: 15, color: "#85B7EB", lineHeight: 1.7, marginBottom: 0 }}>
           Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
         </p>
 
-        {/* Buttons — vertikal, linksbündig */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginTop: '32px' }}>
+        {/* Tricolor-Trennlinie */}
+        <div style={{
+          display: 'flex',
+          width: '100%',
+          maxWidth: '460px',
+          height: '2px',
+          borderRadius: '1px',
+          overflow: 'hidden',
+          margin: '20px 0',
+        }}>
+          <div style={{ flex: 1, background: '#185FA5' }} />
+          <div style={{ flex: 1, background: '#0C7C5A' }} />
+          <div style={{ flex: 1, background: '#1D9E75' }} />
+        </div>
 
-          {/* Mehr erfahren — Teal-Ring Pill */}
+        {/* Buttons — nebeneinander */}
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '14px' }}>
+
+          {/* Mehr erfahren — Sekundär */}
           <a
             href="/mehr-erfahren"
+            onMouseEnter={() => setMoreHovered(true)}
+            onMouseLeave={() => setMoreHovered(false)}
             style={{
               display: 'inline-flex',
               flexDirection: 'column',
@@ -272,16 +290,16 @@ function Hero() {
             <div style={{
               padding: '4px',
               borderRadius: '50px',
-              border: '1.5px solid #1D9E75',
-              background: 'transparent',
-              transition: 'border-color 0.2s',
+              border: `1.5px solid rgba(56,138,221,0.4)`,
+              background: moreHovered ? 'rgba(24,95,165,0.1)' : 'transparent',
+              transition: 'all 0.2s ease',
               display: 'inline-flex',
             }}>
               <div style={{
                 padding: '13px 28px',
                 borderRadius: '50px',
-                background: '#534AB7',
-                color: '#EEEDFE',
+                background: 'transparent',
+                color: moreHovered ? '#E6F1FB' : '#85B7EB',
                 fontFamily: 'inherit',
                 fontSize: '15px',
                 fontWeight: '500',
@@ -290,11 +308,12 @@ function Hero() {
                 gap: '10px',
                 letterSpacing: '0.02em',
                 whiteSpace: 'nowrap',
+                transition: 'color 0.2s ease',
               }}>
                 Mehr erfahren
                 <span style={{
-                  background: '#1D9E75',
-                  color: '#E1F5EE',
+                  background: 'rgba(56,138,221,0.2)',
+                  color: moreHovered ? '#E6F1FB' : '#85B7EB',
                   borderRadius: '50%',
                   width: '26px',
                   height: '26px',
@@ -304,12 +323,13 @@ function Hero() {
                   fontSize: '13px',
                   fontWeight: '600',
                   flexShrink: 0,
+                  transition: 'color 0.2s ease',
                 }}>→</span>
               </div>
             </div>
           </a>
 
-          {/* CTA: Jetzt kostenlos starten — Gold-Ring Pill */}
+          {/* CTA: Jetzt kostenlos starten — Primär */}
           <a
             href="/kontakt"
             onMouseEnter={() => setCtaHovered(true)}
@@ -326,8 +346,8 @@ function Hero() {
             <div style={{
               padding: '4px',
               borderRadius: '50px',
-              border: `1.5px solid ${ctaHovered ? '#EF9F27' : '#BA7517'}`,
-              background: ctaHovered ? 'rgba(186,117,23,0.08)' : 'transparent',
+              border: 'none',
+              background: 'transparent',
               transition: 'all 0.2s ease',
               display: 'inline-flex',
             }}>
@@ -348,8 +368,8 @@ function Hero() {
               }}>
                 Jetzt kostenlos starten
                 <span style={{
-                  background: ctaHovered ? '#EF9F27' : '#BA7517',
-                  color: '#FAEEDA',
+                  background: ctaHovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.15)',
+                  color: '#E6F1FB',
                   borderRadius: '50%',
                   width: '28px',
                   height: '28px',
@@ -363,16 +383,6 @@ function Hero() {
                 }}>→</span>
               </div>
             </div>
-            <span style={{
-              fontSize: '10px',
-              color: ctaHovered ? 'rgba(239,159,39,0.8)' : 'rgba(186,117,23,0.65)',
-              letterSpacing: '2px',
-              fontFamily: 'inherit',
-              textTransform: 'uppercase',
-              transition: 'color 0.2s ease',
-            }}>
-              Human + AI
-            </span>
           </a>
 
         </div>
@@ -382,31 +392,95 @@ function Hero() {
       <div
         style={{
           marginTop: "40px",
-          border: "0.5px solid rgba(127,119,221,0.2)",
+          border: "0.5px solid rgba(24,95,165,0.2)",
           borderRadius: 12,
-          background: "rgba(10,10,30,0.6)",
+          background: "rgba(4,8,15,0.6)",
           maxWidth: 520,
           display: "flex",
         }}
       >
-        {[
-          { num: "100%", label: "Erstgespräch kostenlos" },
-          { num: "KI", label: "gestützte Analyse" },
-          { num: "Flexibel", label: "Vergütungsmodelle" },
-        ].map((s, i) => (
-          <div
-            key={s.num}
-            style={{
-              flex: 1,
-              padding: "16px 20px",
-              borderRight: i < 2 ? "0.5px solid rgba(127,119,221,0.2)" : undefined,
-              textAlign: "center",
-            }}
-          >
-            <p style={{ fontSize: 20, color: "#CECBF6", fontWeight: 600, marginBottom: 2 }}>{s.num}</p>
-            <p style={{ fontSize: 11, color: "#7F77DD" }}>{s.label}</p>
-          </div>
-        ))}
+        <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(24,95,165,0.2)", textAlign: "center" }}>
+          <p style={{ fontSize: 20, color: "#E6F1FB", fontWeight: 600, marginBottom: 2 }}>100%</p>
+          <p style={{ fontSize: 11, color: "#378ADD" }}>Erstgespräch kostenlos</p>
+        </div>
+        <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(29,158,117,0.2)", textAlign: "center" }}>
+          <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>KI</p>
+          <p style={{ fontSize: 11, color: "#5DCAA5" }}>gestützte Analyse</p>
+        </div>
+        <div style={{ flex: 1, padding: "16px 20px", textAlign: "center" }}>
+          <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>Individuell</p>
+          <p style={{ fontSize: 11, color: "#5DCAA5" }}>Individuelle Preismodelle</p>
+        </div>
+      </div>
+
+      {/* Drei Karten */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '14px',
+        width: '100%',
+        maxWidth: '760px',
+        marginTop: '28px',
+      }}>
+        {/* Karte 1 */}
+        <div style={{
+          background: 'rgba(4,44,83,0.4)',
+          border: '0.5px solid rgba(24,95,165,0.35)',
+          borderRadius: '10px',
+          borderTop: '3px solid #185FA5',
+          padding: '20px 16px',
+        }}>
+          <p style={{ fontSize: '9px', color: '#85B7EB', letterSpacing: '1px', marginBottom: '8px', textTransform: 'uppercase' }}>
+            Erstgespräch
+          </p>
+          <p style={{ fontSize: '20px', fontWeight: '700', color: '#E6F1FB', marginBottom: '8px' }}>
+            Kostenlos
+          </p>
+          <p style={{ fontSize: '11px', color: '#378ADD' }}>
+            Immer &amp; garantiert
+          </p>
+        </div>
+
+        {/* Karte 2 */}
+        <div style={{
+          background: 'rgba(12,124,90,0.12)',
+          border: '0.5px solid rgba(12,124,90,0.35)',
+          borderRadius: '10px',
+          borderTop: '3px solid #0C7C5A',
+          padding: '20px 16px',
+        }}>
+          <p style={{ fontSize: '9px', color: '#5DCAA5', letterSpacing: '1px', marginBottom: '8px', textTransform: 'uppercase' }}>
+            KI-Analyse
+          </p>
+          <p style={{ fontSize: '16px', fontWeight: '700', color: '#9FE1CB', marginBottom: '4px' }}>
+            Präzise &amp; schnell
+          </p>
+          <p style={{ fontSize: '11px', color: '#5DCAA5' }}>
+            Modernste KI-Tools
+          </p>
+        </div>
+
+        {/* Karte 3 */}
+        <div style={{
+          background: 'rgba(29,158,117,0.1)',
+          border: '0.5px solid rgba(29,158,117,0.3)',
+          borderRadius: '10px',
+          borderTop: '3px solid #1D9E75',
+          padding: '20px 16px',
+        }}>
+          <p style={{ fontSize: '9px', color: '#5DCAA5', letterSpacing: '1px', marginBottom: '8px', textTransform: 'uppercase' }}>
+            Preismodelle
+          </p>
+          <p style={{ fontSize: '16px', fontWeight: '700', color: '#9FE1CB', marginBottom: '4px' }}>
+            Nach Auftrag
+          </p>
+          <p style={{ fontSize: '16px', fontWeight: '700', color: '#9FE1CB', marginBottom: '10px' }}>
+            individuell
+          </p>
+          <span style={{ fontSize: '10px', color: '#1D9E75', padding: '4px 10px', background: 'rgba(29,158,117,0.1)', borderRadius: '6px' }}>
+            Ab Auftragsfreigabe
+          </span>
+        </div>
       </div>
     </header>
   );
