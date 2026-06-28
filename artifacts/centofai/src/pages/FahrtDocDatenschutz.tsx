@@ -236,7 +236,7 @@ export default function FahrtDocDatenschutzPage() {
               </SubSection>
               <p className="mt-3">
                 Zur Ausübung Ihrer Rechte wenden Sie sich bitte an:{" "}
-                <a href="mailto:info@centof.ai" className="text-[#0066CC] hover:underline">info@centof.ai</a>
+                <a href="mailto:datenschutz@centofai.com" className="text-[#0066CC] hover:underline">datenschutz@centofai.com</a>
               </p>
             </Section>
 
