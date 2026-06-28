@@ -610,20 +610,8 @@ function WorkflowSection() {
     <section style={{
       width: '100%',
       padding: '80px 0 60px',
-      background: 'rgba(7,7,26,0.8)',
-      borderTop: '0.5px solid rgba(83,74,183,0.15)',
-      borderBottom: '0.5px solid rgba(83,74,183,0.15)',
       position: 'relative',
-      overflow: 'hidden',
     }}>
-
-      {/* Dot-Raster */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        backgroundImage: 'radial-gradient(circle, rgba(175,169,236,0.18) 1px, transparent 1px)',
-        backgroundSize: '28px 28px',
-        pointerEvents: 'none',
-      }} />
 
       {/* Abschnitts-Header */}
       <div style={{
