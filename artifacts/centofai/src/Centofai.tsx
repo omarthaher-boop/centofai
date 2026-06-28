@@ -220,7 +220,7 @@ function Hero() {
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
-      <div style={{ display: "flex", alignItems: "center", gap: "48px", flexWrap: "wrap" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "48px", flexWrap: "wrap" }}>
 
         {/* Text + Mehr erfahren */}
         <motion.div
@@ -278,7 +278,7 @@ function Hero() {
           </a>
         </motion.div>
 
-        {/* CTA Button rechts */}
+        {/* CTA Button rechts — unter der Netzskizze */}
         <a
           href="/kontakt"
           onMouseEnter={() => setCtaHovered(true)}
@@ -291,6 +291,7 @@ function Hero() {
             textDecoration: 'none',
             cursor: 'pointer',
             flexShrink: 0,
+            marginTop: '210px',
           }}
         >
           <div style={{
