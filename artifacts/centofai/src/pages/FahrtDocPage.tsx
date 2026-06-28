@@ -374,24 +374,57 @@ export default function FahrtDocPage() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {FEATURES.map((f, i) => {
+        <style>{`
+          .fd-feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+          @media (max-width: 480px) { .fd-feature-grid { grid-template-columns: 1fr; } }
+          .fd-feature-card { transition: border-color 0.2s ease; }
+          .fd-feature-card:hover { border-color: rgba(127,119,221,0.35) !important; }
+        `}</style>
+        <div className="fd-feature-grid">
+          {[
+            { icon: Navigation,    iconBg: "rgba(83,74,183,0.18)",  iconColor: "#7F77DD", title: "Automatische Fahrterfassung", desc: "GPS-basiert, im Hintergrund" },
+            { icon: FileText,      iconBg: "rgba(29,158,117,0.18)", iconColor: "#5DCAA5", title: "PDF-Export",                   desc: "Steuerkonformer Bericht" },
+            { icon: Mail,          iconBg: "rgba(55,138,221,0.18)", iconColor: "#85B7EB", title: "Liste per Mail teilen",        desc: "Direkt aus der App" },
+            { icon: Table,         iconBg: "rgba(239,159,39,0.18)", iconColor: "#FAC775", title: "Excel-Liste erstellen",        desc: "Kompatibel mit Numbers" },
+            { icon: MapPin,        iconBg: "rgba(83,74,183,0.18)",  iconColor: "#7F77DD", title: "GPS-Tracking",                 desc: "Präzise Routenaufzeichnung" },
+            { icon: Flag,          iconBg: "rgba(29,158,117,0.18)", iconColor: "#5DCAA5", title: "Stopps speichern",             desc: "Mehrere Zwischenstopps" },
+            { icon: Calculator,    iconBg: "rgba(216,90,48,0.18)",  iconColor: "#F0997B", title: "Steuersparnisse berechnen",    desc: "CHF 0.70/km Pauschale" },
+            { icon: DollarSign,    iconBg: "rgba(239,159,39,0.18)", iconColor: "#FAC775", title: "Kostenübersicht",              desc: "Alle Fahrten auf einen Blick" },
+            { icon: List,          iconBg: "rgba(83,74,183,0.18)",  iconColor: "#7F77DD", title: "Fahrtenliste nach Wunsch",     desc: "Filter & Kategorien" },
+            { icon: Bluetooth,     iconBg: "rgba(55,138,221,0.18)", iconColor: "#85B7EB", title: "Bluetooth-Verbindung",         desc: "Auto-Start beim Einsteigen" },
+            { icon: Smartphone,    iconBg: "rgba(29,158,117,0.18)", iconColor: "#5DCAA5", title: "Einfache Bedienung",           desc: "Intuitiv & schnell" },
+            { icon: null,          iconBg: "rgba(127,119,221,0.08)", iconColor: "#534AB7", title: "Weitere Features",            desc: "Bald verfügbar", dimmed: true },
+          ].map((f, i) => {
             const Icon = f.icon;
             return (
               <motion.div
-                key={f.label}
-                initial={{ opacity: 0, y: 20 }}
+                key={f.title}
+                initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.07 }}
-                className="group flex flex-col items-center gap-3 p-5 rounded-2xl border border-white/10 bg-white/5 hover:border-[#0066CC]/50 hover:bg-[#0066CC]/10 transition text-center"
+                transition={{ duration: 0.4, delay: i * 0.05 }}
+                className="fd-feature-card"
+                style={{
+                  background: "rgba(255,255,255,0.03)",
+                  border: f.dimmed ? "0.5px solid rgba(127,119,221,0.15)" : "0.5px solid rgba(255,255,255,0.07)",
+                  borderRadius: 10,
+                  padding: "12px 16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 14,
+                  opacity: f.dimmed ? 0.5 : 1,
+                }}
               >
-                <div className="w-12 h-12 rounded-xl bg-[#0066CC]/15 flex items-center justify-center group-hover:scale-110 transition">
-                  <Icon className="w-6 h-6 text-[#4DA6FF]" />
+                <div style={{ width: 40, height: 40, borderRadius: 8, background: f.iconBg, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  {Icon
+                    ? <Icon style={{ width: 20, height: 20, color: f.iconColor }} />
+                    : <span style={{ fontSize: 18, color: f.iconColor, fontWeight: 700, letterSpacing: 2 }}>···</span>
+                  }
                 </div>
-                <p className="text-sm font-semibold text-slate-200 leading-tight">
-                  {f.label}
-                </p>
+                <div>
+                  <p style={{ fontSize: 13, fontWeight: 500, color: f.dimmed ? "#5F5E8A" : "#EEEDFE", lineHeight: 1.3, margin: 0 }}>{f.title}</p>
+                  <p style={{ fontSize: 11, color: "#5F5E8A", lineHeight: 1.4, marginTop: 3, marginBottom: 0 }}>{f.desc}</p>
+                </div>
               </motion.div>
             );
           })}
