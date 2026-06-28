@@ -530,6 +530,448 @@ function StrategySection() {
   );
 }
 
+/* ─── Workflow Section ──────────────────────────────────────────── */
+function WorkflowSection() {
+  return (
+    <section style={{
+      width: '100%',
+      padding: '80px 0 60px',
+      background: 'rgba(7,7,26,0.8)',
+      borderTop: '0.5px solid rgba(83,74,183,0.15)',
+      borderBottom: '0.5px solid rgba(83,74,183,0.15)',
+      position: 'relative',
+      overflow: 'hidden',
+    }}>
+
+      {/* Dot-Raster */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundImage: 'radial-gradient(circle, rgba(175,169,236,0.18) 1px, transparent 1px)',
+        backgroundSize: '28px 28px',
+        pointerEvents: 'none',
+      }} />
+
+      {/* Abschnitts-Header */}
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '48px',
+        position: 'relative', zIndex: 1,
+        padding: '0 24px',
+      }}>
+        <span style={{
+          display: 'inline-flex', alignItems: 'center', gap: '8px',
+          background: 'rgba(38,33,92,0.7)',
+          border: '0.5px solid #534AB7', borderRadius: '20px',
+          padding: '5px 16px', fontSize: '11px', color: '#CECBF6',
+          letterSpacing: '0.08em', marginBottom: '16px',
+        }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%',
+                         background: '#5DCAA5', display: 'inline-block' }} />
+          Transparenz & Vertrauen
+        </span>
+        <h2 style={{
+          fontSize: '30px', fontWeight: '500',
+          color: '#EEEDFE', marginBottom: '10px', lineHeight: '1.3',
+        }}>
+          Unser{' '}
+          <span style={{ color: '#7F77DD' }}>Workflow</span>
+        </h2>
+        <p style={{
+          fontSize: '15px', color: '#AFA9EC',
+          lineHeight: '1.7', maxWidth: '480px', margin: '0 auto',
+        }}>
+          Von der ersten Idee bis zum fertigen digitalen Produkt —
+          kollaborativ, KI-gestützt und vollständig transparent.
+        </p>
+      </div>
+
+      {/* SVG Workflow — volle Breite */}
+      <div style={{
+        width: '100%',
+        maxWidth: '1100px',
+        margin: '0 auto',
+        padding: '0 16px',
+        position: 'relative', zIndex: 1,
+      }}>
+        <div style={{
+          background: 'rgba(13,13,43,0.5)',
+          border: '0.5px solid rgba(83,74,183,0.2)',
+          borderRadius: '16px',
+          padding: '28px 16px',
+          overflow: 'hidden',
+        }}>
+          <svg
+            width="100%"
+            viewBox="0 0 680 860"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <marker id="wf-arr" viewBox="0 0 10 10" refX="8" refY="5"
+                markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke"
+                  strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </marker>
+            </defs>
+
+            {/* SWIMLANE HINTERGRÜNDE */}
+            <rect x="0" y="0" width="680" height="110"
+              fill="rgba(83,74,183,0.06)"/>
+            <rect x="0" y="0" width="3" height="110"
+              fill="#534AB7" opacity="0.7"/>
+            <text x="16" y="30" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(175,169,236,0.5)" letterSpacing="1.5">NUTZER</text>
+
+            <rect x="0" y="110" width="680" height="120"
+              fill="rgba(83,74,183,0.1)"/>
+            <rect x="0" y="110" width="3" height="120"
+              fill="#7F77DD" opacity="0.7"/>
+            <text x="16" y="138" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(175,169,236,0.5)" letterSpacing="1.5">
+              CENTOFAI TEAM
+            </text>
+
+            <rect x="0" y="230" width="680" height="110"
+              fill="rgba(29,158,117,0.06)"/>
+            <rect x="0" y="230" width="3" height="110"
+              fill="#1D9E75" opacity="0.7"/>
+            <text x="16" y="258" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(93,202,165,0.5)" letterSpacing="1.5">EXPERTEN</text>
+
+            <rect x="0" y="340" width="680" height="120"
+              fill="rgba(83,74,183,0.07)"/>
+            <rect x="0" y="340" width="3" height="120"
+              fill="#AFA9EC" opacity="0.7"/>
+            <text x="16" y="368" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(175,169,236,0.4)" letterSpacing="1.5">
+              TEAM + NUTZER
+            </text>
+
+            <rect x="0" y="460" width="680" height="160"
+              fill="rgba(186,117,23,0.06)"/>
+            <rect x="0" y="460" width="3" height="160"
+              fill="#EF9F27" opacity="0.7"/>
+            <text x="16" y="488" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(239,159,39,0.5)" letterSpacing="1.5">
+              ALLE BETEILIGTEN
+            </text>
+
+            <rect x="0" y="620" width="680" height="100"
+              fill="rgba(83,74,183,0.08)"/>
+            <rect x="0" y="620" width="3" height="100"
+              fill="#5DCAA5" opacity="0.7"/>
+            <text x="16" y="648" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="500"
+              fill="rgba(93,202,165,0.5)" letterSpacing="1.5">ERGEBNIS</text>
+
+            {/* Trennlinien */}
+            <line x1="0" y1="110" x2="680" y2="110"
+              stroke="rgba(83,74,183,0.2)" strokeWidth="0.5"/>
+            <line x1="0" y1="230" x2="680" y2="230"
+              stroke="rgba(83,74,183,0.2)" strokeWidth="0.5"/>
+            <line x1="0" y1="340" x2="680" y2="340"
+              stroke="rgba(83,74,183,0.2)" strokeWidth="0.5"/>
+            <line x1="0" y1="460" x2="680" y2="460"
+              stroke="rgba(83,74,183,0.2)" strokeWidth="0.5"/>
+            <line x1="0" y1="620" x2="680" y2="620"
+              stroke="rgba(93,202,165,0.2)" strokeWidth="0.5"/>
+            <line x1="0" y1="720" x2="680" y2="720"
+              stroke="rgba(93,202,165,0.2)" strokeWidth="0.5"/>
+
+            {/* LANE 1: NUTZER */}
+            <rect x="250" y="30" width="180" height="52" rx="8"
+              fill="rgba(83,74,183,0.08)" stroke="#7F77DD" strokeWidth="1.2"/>
+            <text x="340" y="52" fontFamily="system-ui,sans-serif"
+              fontSize="13" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Idee einreichen
+            </text>
+            <text x="340" y="70" fontFamily="system-ui,sans-serif"
+              fontSize="10" fill="#7F77DD"
+              textAnchor="middle" dominantBaseline="central">Nutzer</text>
+            <line x1="340" y1="82" x2="340" y2="126"
+              stroke="#7F77DD" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+
+            {/* LANE 2: TEAM */}
+            <rect x="130" y="128" width="160" height="52" rx="8"
+              fill="rgba(83,74,183,0.08)" stroke="#534AB7" strokeWidth="1.2"/>
+            <text x="210" y="150" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Interne Analyse
+            </text>
+            <text x="210" y="168" fontFamily="system-ui,sans-serif"
+              fontSize="10" fill="#7F77DD"
+              textAnchor="middle" dominantBaseline="central">
+              Centofai-Team
+            </text>
+            <line x1="290" y1="154" x2="358" y2="154"
+              stroke="#534AB7" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+            <rect x="360" y="128" width="180" height="52" rx="8"
+              fill="rgba(83,74,183,0.08)" stroke="#534AB7" strokeWidth="1.2"/>
+            <text x="450" y="148" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Machbarkeits-
+            </text>
+            <text x="450" y="166" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              prüfung
+            </text>
+            <line x1="450" y1="180" x2="450" y2="246"
+              stroke="#1D9E75" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+
+            {/* LANE 3: EXPERTEN */}
+            <rect x="320" y="248" width="180" height="52" rx="8"
+              fill="rgba(29,158,117,0.08)" stroke="#1D9E75" strokeWidth="1.2"/>
+            <text x="410" y="268" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              Experten-
+            </text>
+            <text x="410" y="286" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              konsultation
+            </text>
+            <line x1="320" y1="274" x2="248" y2="274"
+              stroke="#1D9E75" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+            <rect x="100" y="248" width="146" height="52" rx="8"
+              fill="rgba(29,158,117,0.08)" stroke="#1D9E75" strokeWidth="1.2"/>
+            <text x="173" y="268" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              Lösungsansätze
+            </text>
+            <text x="173" y="286" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              entwickeln
+            </text>
+            <line x1="173" y1="300" x2="173" y2="356"
+              stroke="#AFA9EC" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+
+            {/* LANE 4: TEAM + NUTZER */}
+            <rect x="90" y="358" width="166" height="52" rx="8"
+              fill="rgba(83,74,183,0.08)" stroke="#AFA9EC" strokeWidth="1.2"/>
+            <text x="173" y="378" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Feedback an
+            </text>
+            <text x="173" y="396" fontFamily="system-ui,sans-serif"
+              fontSize="12" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Nutzer
+            </text>
+            <line x1="256" y1="384" x2="294" y2="384"
+              stroke="#AFA9EC" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+            <polygon points="360,358 424,384 360,410 296,384"
+              fill="rgba(83,74,183,0.08)" stroke="#AFA9EC" strokeWidth="1.2"/>
+            <text x="360" y="382" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Vereinba-
+            </text>
+            <text x="360" y="396" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              rung?
+            </text>
+            <text x="432" y="372" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Nein</text>
+            <path d="M424 384 L510 384 L510 274 L502 274"
+              fill="none" stroke="#AFA9EC" strokeWidth="1"
+              strokeDasharray="4 3" markerEnd="url(#wf-arr)"/>
+            <text x="368" y="430" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#EF9F27">Ja</text>
+            <line x1="360" y1="410" x2="360" y2="476"
+              stroke="#EF9F27" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+
+            {/* LANE 5: ALLE BETEILIGTEN */}
+            <rect x="60" y="478" width="160" height="64" rx="8"
+              fill="rgba(186,117,23,0.06)" stroke="#BA7517" strokeWidth="1.2"/>
+            <text x="140" y="500" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              Software-
+            </text>
+            <text x="140" y="516" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              ingenieure
+            </text>
+            <text x="140" y="532" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#BA7517"
+              textAnchor="middle" dominantBaseline="central">
+              + KI-Tools
+            </text>
+            <rect x="256" y="470" width="208" height="78" rx="8"
+              fill="rgba(186,117,23,0.1)" stroke="#EF9F27" strokeWidth="1.5"/>
+            <text x="360" y="498" fontFamily="system-ui,sans-serif"
+              fontSize="13" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              KI-gestützte
+            </text>
+            <text x="360" y="518" fontFamily="system-ui,sans-serif"
+              fontSize="13" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              Entwicklung
+            </text>
+            <text x="360" y="536" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#BA7517"
+              textAnchor="middle" dominantBaseline="central">
+              Agiles Team
+            </text>
+            <rect x="500" y="478" width="150" height="64" rx="8"
+              fill="rgba(186,117,23,0.06)" stroke="#BA7517" strokeWidth="1.2"/>
+            <text x="575" y="500" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              Branchen-
+            </text>
+            <text x="575" y="516" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="600" fill="#FAC775"
+              textAnchor="middle" dominantBaseline="central">
+              experten
+            </text>
+            <text x="575" y="532" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#BA7517"
+              textAnchor="middle" dominantBaseline="central">
+              + Nutzer-Feedback
+            </text>
+            <line x1="220" y1="510" x2="254" y2="510"
+              stroke="#EF9F27" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <line x1="256" y1="520" x2="222" y2="520"
+              stroke="#EF9F27" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <line x1="464" y1="510" x2="498" y2="510"
+              stroke="#EF9F27" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <line x1="500" y1="520" x2="466" y2="520"
+              stroke="#EF9F27" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <line x1="360" y1="548" x2="360" y2="578"
+              stroke="#7F77DD" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+            <polygon points="360,578 408,600 360,622 312,600"
+              fill="rgba(83,74,183,0.08)" stroke="#7F77DD" strokeWidth="1.2"/>
+            <text x="360" y="600" fontFamily="system-ui,sans-serif"
+              fontSize="10" fontWeight="600" fill="#CECBF6"
+              textAnchor="middle" dominantBaseline="central">
+              Freigabe?
+            </text>
+            <text x="416" y="590" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Nein</text>
+            <path d="M408 600 L560 600 L560 509 L502 509"
+              fill="none" stroke="#AFA9EC" strokeWidth="1"
+              strokeDasharray="4 3" markerEnd="url(#wf-arr)"/>
+            <text x="370" y="638" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#5DCAA5">Freigabe</text>
+            <line x1="360" y1="622" x2="360" y2="648"
+              stroke="#5DCAA5" strokeWidth="1.2"
+              markerEnd="url(#wf-arr)"/>
+
+            {/* LANE 6: ERGEBNIS */}
+            <rect x="220" y="650" width="280" height="56" rx="8"
+              fill="rgba(29,158,117,0.08)" stroke="#5DCAA5" strokeWidth="1.5"/>
+            <text x="360" y="672" fontFamily="system-ui,sans-serif"
+              fontSize="15" fontWeight="600" fill="#9FE1CB"
+              textAnchor="middle" dominantBaseline="central">
+              Digitales Produkt
+            </text>
+            <text x="360" y="692" fontFamily="system-ui,sans-serif"
+              fontSize="10" fill="#1D9E75"
+              textAnchor="middle" dominantBaseline="central">
+              Launch &amp; Übergabe an Nutzer
+            </text>
+            <line x1="220" y1="678" x2="170" y2="678"
+              stroke="#5DCAA5" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <line x1="500" y1="678" x2="550" y2="678"
+              stroke="#5DCAA5" strokeWidth="1"
+              markerEnd="url(#wf-arr)"/>
+            <rect x="70" y="658" width="98" height="38" rx="6"
+              fill="rgba(29,158,117,0.06)" stroke="#1D9E75" strokeWidth="1"/>
+            <text x="119" y="672" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="500" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              Web-App
+            </text>
+            <text x="119" y="688" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#0F6E56"
+              textAnchor="middle" dominantBaseline="central">/ SaaS</text>
+            <rect x="550" y="658" width="98" height="38" rx="6"
+              fill="rgba(29,158,117,0.06)" stroke="#1D9E75" strokeWidth="1"/>
+            <text x="599" y="672" fontFamily="system-ui,sans-serif"
+              fontSize="11" fontWeight="500" fill="#5DCAA5"
+              textAnchor="middle" dominantBaseline="central">
+              Mobile-App
+            </text>
+            <text x="599" y="688" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#0F6E56"
+              textAnchor="middle" dominantBaseline="central">/ KI-Tool</text>
+
+            {/* LEGENDE */}
+            <rect x="20" y="740" width="640" height="54" rx="8"
+              fill="rgba(83,74,183,0.06)"
+              stroke="rgba(83,74,183,0.2)" strokeWidth="0.5"/>
+            <text x="40" y="760" fontFamily="system-ui,sans-serif"
+              fontSize="9" fontWeight="600" fill="#AFA9EC"
+              letterSpacing="1">LEGENDE</text>
+            <rect x="40" y="772" width="10" height="10" rx="2"
+              fill="none" stroke="#7F77DD" strokeWidth="1.2"/>
+            <text x="56" y="781" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Nutzer / Team</text>
+            <rect x="180" y="772" width="10" height="10" rx="2"
+              fill="none" stroke="#1D9E75" strokeWidth="1.2"/>
+            <text x="196" y="781" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Experten &amp; Abstimmung</text>
+            <rect x="360" y="772" width="10" height="10" rx="2"
+              fill="none" stroke="#EF9F27" strokeWidth="1.2"/>
+            <text x="376" y="781" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Entwicklung &amp; Prüfung</text>
+            <line x1="496" y1="777" x2="520" y2="777"
+              stroke="#AFA9EC" strokeWidth="1" strokeDasharray="4 3"/>
+            <text x="526" y="781" fontFamily="system-ui,sans-serif"
+              fontSize="9" fill="#AFA9EC">Rückschleife</text>
+          </svg>
+        </div>
+      </div>
+
+      {/* Link zur vollständigen Workflow-Seite */}
+      <div style={{
+        textAlign: 'center', marginTop: '36px',
+        position: 'relative', zIndex: 1,
+      }}>
+        <a href="/mehr-erfahren" style={{
+          display: 'inline-flex', alignItems: 'center', gap: '8px',
+          padding: '11px 24px', borderRadius: '8px',
+          border: '0.5px solid rgba(127,119,221,0.4)',
+          background: 'transparent', color: '#AFA9EC',
+          fontSize: '13px', textDecoration: 'none',
+        }}>
+          Vollständigen Workflow ansehen →
+        </a>
+      </div>
+
+    </section>
+  );
+}
+
 /* ─── Feature Strip ────────────────────────────────────────────── */
 function FeatureStrip() {
   const features = [
@@ -1105,6 +1547,7 @@ export default function App() {
       <Navbar />
       <Hero />
       <StrategySection />
+      <WorkflowSection />
       <FeatureStrip />
       <IdeasSection />
       <ToolsSection />
