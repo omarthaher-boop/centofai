@@ -10,7 +10,7 @@ export default function MehrErfahren() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         style={{
-          padding: '80px 24px 80px',
+          padding: '100px 0 80px',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -35,7 +35,7 @@ export default function MehrErfahren() {
           Unsere Leistungen im Überblick
         </motion.span>
 
-        <div style={{ maxWidth: '760px', width: '100%' }}>
+        <div style={{ maxWidth: '760px', width: '100%', padding: '0 24px' }}>
 
           {/* Titel */}
           <motion.h1
@@ -202,12 +202,14 @@ export default function MehrErfahren() {
                           margin: '16px auto 0' }} />
           </motion.div>
 
+        </div> {/* end text content */}
+
           {/* ═══ WORKFLOW SECTION ═══ */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.9, duration: 0.5 }}
-            style={{ width: '100%', marginTop: '64px' }}
+            style={{ width: '100%', maxWidth: '100%', padding: '0', marginTop: '64px' }}
           >
             {/* Section Header */}
             <div style={{ textAlign: 'center', marginBottom: '40px' }}>
@@ -242,17 +244,20 @@ export default function MehrErfahren() {
             {/* Flowchart Container */}
             <div style={{
               width: '100%',
+              maxWidth: '100%',
               background: 'rgba(10,10,30,0.5)',
-              border: '0.5px solid rgba(127,119,221,0.2)',
-              borderRadius: '16px',
-              padding: '32px 20px',
+              borderTop: '0.5px solid rgba(127,119,221,0.2)',
+              borderBottom: '0.5px solid rgba(127,119,221,0.2)',
+              border: 'none',
+              borderRadius: '0',
+              padding: '40px 32px',
               overflowX: 'auto',
             }}>
               <svg
                 width="100%"
                 viewBox="0 0 860 560"
                 xmlns="http://www.w3.org/2000/svg"
-                style={{ minWidth: '580px', display: 'block' }}
+                style={{ minWidth: '600px', width: '100%', maxWidth: '1400px', display: 'block', margin: '0 auto' }}
               >
                 <defs>
                   <marker id="wf-arr" viewBox="0 0 10 10" refX="8" refY="5"
@@ -511,7 +516,7 @@ export default function MehrErfahren() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.0 }}
-            style={{ textAlign: 'center', marginTop: '40px' }}
+            style={{ textAlign: 'center', marginTop: '40px', padding: '0 24px' }}
           >
             <a href="/kontakt" style={{
               display: 'inline-flex', alignItems: 'center', gap: '10px',
@@ -524,7 +529,6 @@ export default function MehrErfahren() {
             </a>
           </motion.div>
 
-        </div>
       </motion.div>
     </div>
   );

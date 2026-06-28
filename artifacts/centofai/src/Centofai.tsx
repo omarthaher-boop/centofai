@@ -378,7 +378,8 @@ function StrategySection() {
   ];
 
   return (
-    <section className="max-w-3xl mx-auto px-6 py-6">
+    <section style={{ padding: '80px 0', width: '100%' }}>
+      <div style={{ maxWidth: '780px', width: '100%', margin: '0 auto', padding: '0 24px', marginBottom: '64px' }}>
       {/* Button */}
       <div style={{ display: "flex", justifyContent: "center", paddingTop: 36, marginBottom: 36 }}>
         <button
@@ -479,6 +480,7 @@ function StrategySection() {
           <div style={{ width: 48, height: 2, background: "#534AB7", margin: "16px auto 0", borderRadius: 2 }} />
         </div>
       </motion.div>
+      </div>
     </section>
   );
 }
