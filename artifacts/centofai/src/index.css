@@ -1,4 +1,35 @@
 @layer theme, base, clerk, components, utilities;
+
+@keyframes hai-pulse-human {
+  0%,100%{opacity:.15} 50%{opacity:.35}
+}
+@keyframes hai-pulse-ai {
+  0%,100%{opacity:.12} 50%{opacity:.3}
+}
+@keyframes hai-orbit-cw {
+  from{transform:rotate(0deg)} to{transform:rotate(360deg)}
+}
+@keyframes hai-orbit-ccw {
+  from{transform:rotate(0deg)} to{transform:rotate(-360deg)}
+}
+@keyframes hai-blink-purple {
+  0%,100%{fill:#534AB7} 50%{fill:#CECBF6}
+}
+@keyframes hai-blink-teal {
+  0%,100%{fill:#1D9E75} 50%{fill:#9FE1CB}
+}
+@keyframes hai-blink-amber {
+  0%,100%{fill:#BA7517} 50%{fill:#FAC775}
+}
+@keyframes hai-label-glow {
+  0%,100%{opacity:.5} 50%{opacity:.9}
+}
+@keyframes hai-flow-right {
+  to{stroke-dashoffset:-48}
+}
+@keyframes hai-flow-left {
+  to{stroke-dashoffset:48}
+}
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@clerk/themes/shadcn.css";
