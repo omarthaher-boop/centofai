@@ -61,13 +61,13 @@ export default function Kontakt() {
   };
 
   if (submitted) return (
-    <div style={{ minHeight: '100vh', background: '#07071a' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent' }}>
       <Navbar />
     <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5 }}
-      style={{ minHeight: '100vh', background: '#07071a',
+      style={{ minHeight: '100vh', background: 'transparent',
                display: 'flex', flexDirection: 'column',
                alignItems: 'center', justifyContent: 'center',
                padding: '80px 24px', textAlign: 'center' }}
@@ -141,13 +141,13 @@ export default function Kontakt() {
   );
 
   return (
-    <div style={{ minHeight: '100vh', background: '#07071a' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent' }}>
       <Navbar />
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      style={{ minHeight: '100vh', background: '#07071a',
+      style={{ minHeight: '100vh', background: 'transparent',
                display: 'flex', flexDirection: 'column',
                alignItems: 'center', justifyContent: 'center',
                padding: '80px 24px' }}

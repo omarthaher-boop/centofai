@@ -102,16 +102,33 @@
     transition: background-color 0.3s ease, color 0.3s ease;
     position: relative;
   }
-  body::before {
+  html {
+    scroll-behavior: smooth;
+    background-color: #07071a;
+    min-height: 100%;
+  }
+  body {
+    background-color: #07071a;
+  }
+  #root {
+    background-color: #07071a;
+    min-height: 100vh;
+    position: relative;
+  }
+  #root::before {
     content: "";
     position: fixed;
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image: radial-gradient(circle, rgba(175,169,236,0.22) 1px, transparent 1px);
-    background-size: 36px 36px;
+    background-image:
+      linear-gradient(rgba(83,74,183,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(83,74,183,0.06) 1px, transparent 1px),
+      radial-gradient(circle, rgba(175,169,236,0.35) 1px, transparent 1px);
+    background-size: 120px 120px, 120px 120px, 120px 120px;
+    background-position: 0 0, 0 0, 60px 60px;
   }
-  body::after {
+  #root::after {
     content: "";
     position: fixed;
     top: 0;
@@ -121,11 +138,7 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(83,74,183,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 30% at 10% 20%, rgba(29,158,117,0.06) 0%, transparent 60%);
-  }
-  html {
-    scroll-behavior: smooth;
+      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(83,74,183,0.14) 0%, transparent 70%);
   }
 }
 

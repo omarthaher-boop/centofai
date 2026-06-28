@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar';
 
 export default function MehrErfahren() {
   return (
-    <div style={{ minHeight: '100vh', background: '#07071a' }}>
+    <div style={{ minHeight: '100vh', background: 'transparent' }}>
       <Navbar />
       <motion.div
         initial={{ opacity: 0, y: 24 }}
