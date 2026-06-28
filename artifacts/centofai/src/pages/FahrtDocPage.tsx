@@ -7,8 +7,11 @@ import {
   Table,
   MapPin,
   Flag,
-  Cloud,
   Smartphone,
+  Calculator,
+  DollarSign,
+  List,
+  Bluetooth,
   UserCheck,
   Receipt,
   Briefcase,
@@ -24,7 +27,7 @@ import Navbar from "../components/Navbar";
 function setMeta() {
   document.title = "FahrtDoc – Automatische Fahrtendokumentation";
   const desc =
-    "FahrtDoc ist die intelligente Lösung zur einfachen Fahrtendokumentation. Automatische GPS-Erfassung, sichere Cloud-Speicherung und PDF-Export.";
+    "FahrtDoc ist die intelligente Lösung zur einfachen Fahrtendokumentation. Automatische GPS-Erfassung, PDF-Export und Steuersparnisse berechnen.";
   let el = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
   if (!el) {
     el = document.createElement("meta");
@@ -41,7 +44,10 @@ const FEATURES = [
   { icon: Table, label: "Excel-Liste erstellen" },
   { icon: MapPin, label: "GPS-Tracking" },
   { icon: Flag, label: "Stopps speichern" },
-  { icon: Cloud, label: "Cloud-Speicherung" },
+  { icon: Calculator, label: "Steuersparnisse berechnen" },
+  { icon: DollarSign, label: "Kostenübersicht" },
+  { icon: List, label: "Fahrtenliste nach Wunsch" },
+  { icon: Bluetooth, label: "Bluetooth-Verbindung" },
   { icon: Smartphone, label: "Einfache Bedienung" },
 ];
 

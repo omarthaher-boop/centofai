@@ -37,10 +37,10 @@ const FAHRTDOC = {
   title: "FahrtDoc",
   subtitle: "Fahrtendokumentation",
   description:
-    "FahrtDoc ist die intelligente Lösung zur einfachen Fahrtendokumentation. Automatische GPS-Erfassung, sichere Cloud-Speicherung und PDF-Export. Ideal für Privatpersonen und Unternehmen.",
+    "FahrtDoc ist die intelligente Lösung zur einfachen Fahrtendokumentation. Automatische GPS-Erfassung, PDF-Export und Steuersparnisse berechnen. Ideal für Privatpersonen und Unternehmen.",
   logo: "/fahrtdoc-logo.jpeg",
   href: "/products/fahrtdoc",
-  features: ["GPS-Erfassung", "PDF-Export", "Cloud-Speicher", "Excel-Export"],
+  features: ["GPS-Erfassung", "PDF-Export", "Excel-Export", "Steuersparnisse berechnen", "Kostenübersicht", "Fahrtenliste nach Wunsch", "Bluetooth-Verbindung"],
   cta: "Mehr erfahren",
 };
 
