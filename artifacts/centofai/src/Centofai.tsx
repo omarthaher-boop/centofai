@@ -5,7 +5,7 @@ import {
   ArrowRight, ExternalLink, Zap, Brain, Sparkles, TrendingUp,
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Users, Lightbulb, Send, ChevronDown, Package, Heart,
-  MapPin, Code2,
+  MapPin, Code2, Globe, Settings, Smartphone,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useUser } from "@clerk/react";
@@ -1169,43 +1169,184 @@ function WorkflowSection() {
 }
 
 /* ─── Feature Strip ────────────────────────────────────────────── */
-function FeatureStrip() {
-  const features = [
-    { icon: Brain, title: "KI-Analyse", desc: "Ihr Problem wird mithilfe modernster KI-Tools analysiert." },
-    { icon: Users, title: "Expertenberatung", desc: "Fachexpertinnen und -experten begleiten Sie von Anfang bis Ende." },
-    { icon: Code2, title: "Digitale Umsetzung", desc: "Vollständige Programmierung und technische Realisierung Ihrer Lösung." },
+function ServicesSection() {
+  const cards = [
+    {
+      icon: Lightbulb,
+      iconBg: "rgba(83,74,183,0.18)",
+      iconColor: "#7F77DD",
+      border: "0.5px solid #534AB7",
+      tag: "IDEE & KONZEPT",
+      title: "Ideen in digitaler Form entwickeln",
+      desc: "Aus Ihrer Vision wird ein konkretes digitales Produkt — strukturiert, umsetzbar und zukunftssicher.",
+      bullets: ["Konzeptanalyse & Machbarkeit", "Digitale Roadmap", "Prototyp-Entwicklung"],
+      bulletColor: "#534AB7",
+      btnBg: "rgba(83,74,183,0.2)",
+      btnColor: "#CECBF6",
+    },
+    {
+      icon: Globe,
+      iconBg: "rgba(29,158,117,0.18)",
+      iconColor: "#5DCAA5",
+      border: "0.5px solid #1D9E75",
+      tag: "WEB & PRÄSENZ",
+      title: "Webseiten erstellen",
+      desc: "Moderne, schnelle und professionelle Webauftritte — massgeschneidert für Ihr Unternehmen.",
+      bullets: ["Design & Branding", "SEO-optimiert", "Mobile-first"],
+      bulletColor: "#1D9E75",
+      btnBg: "rgba(29,158,117,0.2)",
+      btnColor: "#9FE1CB",
+    },
+    {
+      icon: Settings,
+      iconBg: "rgba(55,138,221,0.18)",
+      iconColor: "#85B7EB",
+      border: "0.5px solid #378ADD",
+      tag: "EFFIZIENZ",
+      title: "Automation Ihres Unternehmens",
+      desc: "Wiederkehrende Prozesse automatisieren — Zeit sparen, Fehler reduzieren, Ressourcen schonen.",
+      bullets: ["Workflow-Analyse", "KI-gestützte Prozesse", "Integration bestehender Tools"],
+      bulletColor: "#378ADD",
+      btnBg: "rgba(55,138,221,0.2)",
+      btnColor: "#B5D4F4",
+    },
+    {
+      icon: Smartphone,
+      iconBg: "rgba(216,90,48,0.18)",
+      iconColor: "#F0997B",
+      border: "0.5px solid #D85A30",
+      tag: "APP-ENTWICKLUNG",
+      title: "App entwickeln für Ihre Idee",
+      desc: "Von der Idee zur fertigen iOS- oder Android-App — technisch solide, nutzerfreundlich und skalierbar.",
+      bullets: ["iOS & Android", "UX/UI Design", "App Store Einreichung"],
+      bulletColor: "#D85A30",
+      btnBg: "rgba(216,90,48,0.2)",
+      btnColor: "#F5C4B3",
+    },
+    {
+      icon: GraduationCap,
+      iconBg: "rgba(212,83,126,0.18)",
+      iconColor: "#ED93B1",
+      border: "0.5px solid #D4537E",
+      tag: "WISSEN & WACHSTUM",
+      title: "KI-Workshops",
+      desc: "Praxisnahe Workshops für Teams und Einzelpersonen — von Prompt Engineering bis zu KI-Workflows.",
+      bullets: ["Prompt Engineering", "Tool-Workshops", "Zertifikat auf Anfrage"],
+      bulletColor: "#D4537E",
+      btnBg: "rgba(212,83,126,0.2)",
+      btnColor: "#F4C0D1",
+    },
+    {
+      icon: Brain,
+      iconBg: "rgba(239,159,39,0.18)",
+      iconColor: "#FAC775",
+      border: "0.5px solid #EF9F27",
+      tag: "MASSGESCHNEIDERT",
+      title: "Weitere KI-Lösungen",
+      desc: "Individuelle KI-Lösungen angepasst an Ihre Bedürfnisse — von Chatbots bis zur Datenanalyse.",
+      bullets: ["Chatbots & Assistenten", "Datenanalyse & Reports", "API-Integration"],
+      bulletColor: "#EF9F27",
+      btnBg: "rgba(239,159,39,0.2)",
+      btnColor: "#FAC775",
+    },
   ];
 
   return (
-    <section className="max-w-7xl mx-auto px-6 py-8 border-t" style={{ borderColor: "rgba(127,119,221,0.12)" }}>
-      <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x" style={{ "--tw-divide-opacity": 1 } as React.CSSProperties}>
-        {features.map((f, i) => {
-          const Icon = f.icon;
+    <section style={{
+      background: "#07071a",
+      backgroundImage: "radial-gradient(circle, rgba(127,119,221,0.18) 1px, transparent 1px)",
+      backgroundSize: "24px 24px",
+      padding: "60px 32px",
+    }}>
+      <style>{`
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+        @media (max-width: 768px) {
+          .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+          .services-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+      <div className="services-grid">
+        {cards.map((c, i) => {
+          const Icon = c.icon;
           return (
             <motion.div
-              key={f.title}
-              initial={{ opacity: 0, y: 12 }}
+              key={c.title}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="flex items-start gap-4 px-6 py-6"
-              style={i > 0 ? { borderLeft: "0.5px solid rgba(127,119,221,0.15)" } : undefined}
+              transition={{ duration: 0.4, delay: i * 0.07 }}
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: c.border,
+                borderRadius: 12,
+                padding: "20px 18px",
+                display: "flex",
+                flexDirection: "column",
+                gap: 12,
+              }}
             >
-              <div
+              {/* Icon */}
+              <div style={{
+                width: 36, height: 36, borderRadius: 8,
+                background: c.iconBg,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                flexShrink: 0,
+              }}>
+                <Icon style={{ width: 18, height: 18, color: c.iconColor }} />
+              </div>
+
+              {/* Tag */}
+              <p style={{ fontSize: 10, letterSpacing: "0.07em", color: "#5F5E8A", margin: 0 }}>
+                {c.tag}
+              </p>
+
+              {/* Title */}
+              <p style={{ fontSize: 16, fontWeight: 500, color: "#EEEDFE", margin: 0, lineHeight: 1.3 }}>
+                {c.title}
+              </p>
+
+              {/* Desc */}
+              <p style={{ fontSize: 13, color: "#AFA9EC", lineHeight: 1.6, margin: 0 }}>
+                {c.desc}
+              </p>
+
+              {/* Bullets */}
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 6 }}>
+                {c.bullets.map((b) => (
+                  <li key={b} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 11, color: "#AFA9EC" }}>
+                    <span style={{ width: 4, height: 4, borderRadius: "50%", background: c.bulletColor, flexShrink: 0 }} />
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Button */}
+              <Link
+                to="/kontakt"
                 style={{
-                  background: "rgba(83,74,183,0.2)",
-                  border: "0.5px solid rgba(127,119,221,0.3)",
+                  marginTop: "auto",
+                  display: "inline-block",
+                  padding: "8px 14px",
                   borderRadius: 8,
-                  padding: 10,
-                  flexShrink: 0,
+                  fontSize: 12,
+                  cursor: "pointer",
+                  border: "none",
+                  background: c.btnBg,
+                  color: c.btnColor,
+                  textDecoration: "none",
+                  textAlign: "center",
                 }}
               >
-                <Icon className="w-5 h-5" style={{ color: "#7F77DD" }} />
-              </div>
-              <div>
-                <p style={{ fontSize: 14, color: "#EEEDFE", fontWeight: 600, marginBottom: 4 }}>{f.title}</p>
-                <p style={{ fontSize: 13, color: "#AFA9EC", lineHeight: 1.6 }}>{f.desc}</p>
-              </div>
+                Beratung anfragen →
+              </Link>
             </motion.div>
           );
         })}
@@ -1744,7 +1885,7 @@ export default function App() {
       <Hero />
       <StrategySection />
       <WorkflowSection />
-      <FeatureStrip />
+      <ServicesSection />
       <IdeasSection />
       <ToolsSection />
       <CoursesSection />
