@@ -435,7 +435,7 @@ function Hero() {
         >
           <HumanAISketch />
           {/* Buttons unter der Animation */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginTop: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginTop: '8px' }}>
             <a
               href="/mehr-erfahren"
               onMouseEnter={() => setMoreHovered(true)}
