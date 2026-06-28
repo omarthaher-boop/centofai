@@ -434,26 +434,60 @@ function Hero() {
           style={{ flex: '0 0 480px', minWidth: '280px', maxWidth: '520px' }}
         >
           <HumanAISketch />
-          {/* Stats Bar */}
-          <div style={{
-            marginTop: "16px",
-            border: "0.5px solid rgba(24,95,165,0.2)",
-            borderRadius: 12,
-            background: "rgba(4,8,15,0.6)",
-            display: "flex",
-          }}>
-            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(24,95,165,0.2)", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#E6F1FB", fontWeight: 600, marginBottom: 2 }}>100%</p>
-              <p style={{ fontSize: 11, color: "#378ADD" }}>Erstgespräch kostenlos</p>
-            </div>
-            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(29,158,117,0.2)", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>KI</p>
-              <p style={{ fontSize: 11, color: "#5DCAA5" }}>gestützte Analyse</p>
-            </div>
-            <div style={{ flex: 1, padding: "16px 20px", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>Individuell</p>
-              <p style={{ fontSize: 11, color: "#5DCAA5" }}>Individuelle Preismodelle</p>
-            </div>
+          {/* Buttons unter der Animation */}
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '14px', flexWrap: 'wrap', marginTop: '20px' }}>
+            <a
+              href="/mehr-erfahren"
+              onMouseEnter={() => setMoreHovered(true)}
+              onMouseLeave={() => setMoreHovered(false)}
+              style={{ display: 'inline-flex', textDecoration: 'none', cursor: 'pointer' }}
+            >
+              <div style={{
+                padding: '4px', borderRadius: '50px',
+                border: `1.5px solid rgba(56,138,221,0.4)`,
+                background: moreHovered ? 'rgba(24,95,165,0.1)' : 'transparent',
+                transition: 'all 0.2s ease', display: 'inline-flex',
+              }}>
+                <div style={{
+                  padding: '13px 28px', borderRadius: '50px', background: 'transparent',
+                  color: moreHovered ? '#E6F1FB' : '#85B7EB', fontFamily: 'inherit',
+                  fontSize: '15px', fontWeight: '500', display: 'flex', alignItems: 'center',
+                  gap: '10px', letterSpacing: '0.02em', whiteSpace: 'nowrap', transition: 'color 0.2s ease',
+                }}>
+                  Mehr erfahren
+                  <span style={{
+                    background: 'rgba(56,138,221,0.2)', color: moreHovered ? '#E6F1FB' : '#85B7EB',
+                    borderRadius: '50%', width: '26px', height: '26px', display: 'flex',
+                    alignItems: 'center', justifyContent: 'center', fontSize: '13px',
+                    fontWeight: '600', flexShrink: 0, transition: 'color 0.2s ease',
+                  }}>→</span>
+                </div>
+              </div>
+            </a>
+            <a
+              href="/kontakt"
+              onMouseEnter={() => setCtaHovered(true)}
+              onMouseLeave={() => setCtaHovered(false)}
+              style={{ display: 'inline-flex', textDecoration: 'none', cursor: 'pointer' }}
+            >
+              <div style={{ padding: '4px', borderRadius: '50px', border: 'none', background: 'transparent', display: 'inline-flex' }}>
+                <div style={{
+                  padding: '14px 32px', borderRadius: '50px',
+                  background: ctaHovered ? '#0C447C' : '#185FA5',
+                  color: '#E6F1FB', fontFamily: 'inherit', fontSize: '16px', fontWeight: '500',
+                  display: 'flex', alignItems: 'center', gap: '12px', letterSpacing: '0.02em',
+                  whiteSpace: 'nowrap', transition: 'background 0.2s ease',
+                }}>
+                  Jetzt kostenlos starten
+                  <span style={{
+                    background: ctaHovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.15)',
+                    color: '#E6F1FB', borderRadius: '50%', width: '28px', height: '28px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: '14px', fontWeight: '600', flexShrink: 0,
+                  }}>→</span>
+                </div>
+              </div>
+            </a>
           </div>
         </motion.div>
 
@@ -505,66 +539,6 @@ function Hero() {
             <div style={{ flex: 1, background: '#185FA5' }} />
             <div style={{ flex: 1, background: '#0C7C5A' }} />
             <div style={{ flex: 1, background: '#1D9E75' }} />
-          </div>
-
-          {/* Buttons — nebeneinander */}
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '14px', flexWrap: 'wrap' }}>
-
-            {/* Mehr erfahren — Sekundär */}
-            <a
-              href="/mehr-erfahren"
-              onMouseEnter={() => setMoreHovered(true)}
-              onMouseLeave={() => setMoreHovered(false)}
-              style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: '8px', textDecoration: 'none', cursor: 'pointer' }}
-            >
-              <div style={{
-                padding: '4px', borderRadius: '50px',
-                border: `1.5px solid rgba(56,138,221,0.4)`,
-                background: moreHovered ? 'rgba(24,95,165,0.1)' : 'transparent',
-                transition: 'all 0.2s ease', display: 'inline-flex',
-              }}>
-                <div style={{
-                  padding: '13px 28px', borderRadius: '50px', background: 'transparent',
-                  color: moreHovered ? '#E6F1FB' : '#85B7EB', fontFamily: 'inherit',
-                  fontSize: '15px', fontWeight: '500', display: 'flex', alignItems: 'center',
-                  gap: '10px', letterSpacing: '0.02em', whiteSpace: 'nowrap', transition: 'color 0.2s ease',
-                }}>
-                  Mehr erfahren
-                  <span style={{
-                    background: 'rgba(56,138,221,0.2)', color: moreHovered ? '#E6F1FB' : '#85B7EB',
-                    borderRadius: '50%', width: '26px', height: '26px', display: 'flex',
-                    alignItems: 'center', justifyContent: 'center', fontSize: '13px',
-                    fontWeight: '600', flexShrink: 0, transition: 'color 0.2s ease',
-                  }}>→</span>
-                </div>
-              </div>
-            </a>
-
-            {/* CTA: Jetzt kostenlos starten — Primär */}
-            <a
-              href="/kontakt"
-              onMouseEnter={() => setCtaHovered(true)}
-              onMouseLeave={() => setCtaHovered(false)}
-              style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px', textDecoration: 'none', cursor: 'pointer' }}
-            >
-              <div style={{ padding: '4px', borderRadius: '50px', border: 'none', background: 'transparent', transition: 'all 0.2s ease', display: 'inline-flex' }}>
-                <div style={{
-                  padding: '14px 32px', borderRadius: '50px',
-                  background: ctaHovered ? '#0C447C' : '#185FA5',
-                  color: '#E6F1FB', fontFamily: 'inherit', fontSize: '16px', fontWeight: '500',
-                  display: 'flex', alignItems: 'center', gap: '12px', letterSpacing: '0.02em',
-                  whiteSpace: 'nowrap', transition: 'background 0.2s ease',
-                }}>
-                  Jetzt kostenlos starten
-                  <span style={{
-                    background: ctaHovered ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.15)',
-                    color: '#E6F1FB', borderRadius: '50%', width: '28px', height: '28px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '14px', fontWeight: '600', flexShrink: 0, transition: 'background 0.2s ease',
-                  }}>→</span>
-                </div>
-              </div>
-            </a>
           </div>
 
           {/* Drei Karten */}
