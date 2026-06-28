@@ -42,6 +42,7 @@ const scrollOrNavigate = (
 
 const scrollNavItems = [
   { name: "Home", id: "home", icon: true },
+  { name: "Unsere Strategie", id: "strategie" },
   { name: "Ideen", id: "ideen" },
   { name: "KI-Tools", id: "ki-tools" },
   { name: "Kurse", id: "kurse" },

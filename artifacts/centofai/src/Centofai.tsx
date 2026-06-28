@@ -496,7 +496,7 @@ function StrategySection() {
   ];
 
   return (
-    <section style={{ padding: '80px 0', width: '100%' }}>
+    <section id="strategie" style={{ padding: '80px 0', width: '100%' }}>
       <div style={{ maxWidth: '780px', width: '100%', margin: '0 auto', padding: '0 24px', marginBottom: '64px' }}>
       {/* Button */}
       <div style={{ display: "flex", justifyContent: "center", paddingTop: 36, marginBottom: 36 }}>
