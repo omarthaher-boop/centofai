@@ -121,24 +121,36 @@
     inset: 0;
     z-index: 0;
     pointer-events: none;
-    background-image:
-      linear-gradient(rgba(83,74,183,0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(83,74,183,0.06) 1px, transparent 1px),
-      radial-gradient(circle, rgba(175,169,236,0.35) 1px, transparent 1px);
-    background-size: 120px 120px, 120px 120px, 120px 120px;
-    background-position: 0 0, 0 0, 60px 60px;
+    background-image: radial-gradient(circle, rgba(127,119,221,0.18) 1px, transparent 1px);
+    background-size: 24px 24px;
   }
-  #root::after {
+  body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60vh;
+    top: -80px;
+    right: -80px;
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    background: #534AB7;
+    opacity: 0.08;
+    filter: blur(72px);
     z-index: 0;
     pointer-events: none;
-    background:
-      radial-gradient(ellipse 70% 55% at 50% -5%, rgba(83,74,183,0.14) 0%, transparent 70%);
+  }
+  body::after {
+    content: "";
+    position: fixed;
+    bottom: -60px;
+    left: -60px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: #5DCAA5;
+    opacity: 0.06;
+    filter: blur(52px);
+    z-index: 0;
+    pointer-events: none;
   }
 }
 
