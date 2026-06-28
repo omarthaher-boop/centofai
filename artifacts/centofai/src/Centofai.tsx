@@ -550,7 +550,7 @@ function StrategySection() {
         <div style={{
           background: "rgba(38,33,92,0.45)",
           border: "0.5px solid rgba(83,74,183,0.3)",
-          borderLeft: "3px solid #534AB7",
+          borderLeft: "3px solid #EF9F27",
           borderRadius: "0 10px 10px 0",
           padding: "20px 24px",
           marginBottom: 32,
