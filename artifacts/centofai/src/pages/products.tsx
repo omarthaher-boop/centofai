@@ -317,12 +317,12 @@ export default function ProductsPage() {
             Schreib uns eine kurze Nachricht mit deiner Idee oder deinem Problem. 
             Wir melden uns innerhalb von 24 Stunden.
           </p>
-          <a
-            href="mailto:hello@centofai.com?subject=Projektanfrage"
+          <Link
+            to="/kontakt"
             className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-xl font-semibold transition shadow-[0_0_25px_rgba(147,51,234,0.25)]"
           >
             Kontakt aufnehmen <ArrowUpRight className="w-4 h-4" />
-          </a>
+          </Link>
         </section>
       </main>
 
