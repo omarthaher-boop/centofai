@@ -418,7 +418,7 @@ function Hero() {
       {/* ── Zweispaltiges Layout ── */}
       <div style={{
         display: 'flex',
-        flexDirection: 'row',
+        flexDirection: 'row-reverse',
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '40px',
