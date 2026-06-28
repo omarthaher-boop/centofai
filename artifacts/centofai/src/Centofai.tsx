@@ -257,6 +257,58 @@ function Hero() {
         {/* Buttons — vertikal, linksbündig */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginTop: '32px' }}>
 
+          {/* Mehr erfahren — Teal-Ring Pill */}
+          <a
+            href="/mehr-erfahren"
+            style={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{
+              padding: '4px',
+              borderRadius: '50px',
+              border: '1.5px solid #1D9E75',
+              background: 'transparent',
+              transition: 'border-color 0.2s',
+              display: 'inline-flex',
+            }}>
+              <div style={{
+                padding: '13px 28px',
+                borderRadius: '50px',
+                background: '#534AB7',
+                color: '#EEEDFE',
+                fontFamily: 'inherit',
+                fontSize: '15px',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
+              }}>
+                Mehr erfahren
+                <span style={{
+                  background: '#1D9E75',
+                  color: '#E1F5EE',
+                  borderRadius: '50%',
+                  width: '26px',
+                  height: '26px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  flexShrink: 0,
+                }}>→</span>
+              </div>
+            </div>
+          </a>
+
           {/* CTA: Jetzt kostenlos starten — Gold-Ring Pill */}
           <a
             href="/kontakt"
@@ -321,58 +373,6 @@ function Hero() {
             }}>
               Human + AI
             </span>
-          </a>
-
-          {/* Mehr erfahren — Teal-Ring Pill */}
-          <a
-            href="/mehr-erfahren"
-            style={{
-              display: 'inline-flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '8px',
-              textDecoration: 'none',
-              cursor: 'pointer',
-            }}
-          >
-            <div style={{
-              padding: '4px',
-              borderRadius: '50px',
-              border: '1.5px solid #1D9E75',
-              background: 'transparent',
-              transition: 'border-color 0.2s',
-              display: 'inline-flex',
-            }}>
-              <div style={{
-                padding: '13px 28px',
-                borderRadius: '50px',
-                background: '#534AB7',
-                color: '#EEEDFE',
-                fontFamily: 'inherit',
-                fontSize: '15px',
-                fontWeight: '500',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '10px',
-                letterSpacing: '0.02em',
-                whiteSpace: 'nowrap',
-              }}>
-                Mehr erfahren
-                <span style={{
-                  background: '#1D9E75',
-                  color: '#E1F5EE',
-                  borderRadius: '50%',
-                  width: '26px',
-                  height: '26px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '13px',
-                  fontWeight: '600',
-                  flexShrink: 0,
-                }}>→</span>
-              </div>
-            </div>
           </a>
 
         </div>
