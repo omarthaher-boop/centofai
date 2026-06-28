@@ -220,133 +220,163 @@ function Hero() {
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       <NodeGraph />
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "48px", flexWrap: "wrap" }}>
-
-        {/* Text + Mehr erfahren */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          style={{ flex: "1 1 340px", minWidth: 0 }}
-        >
-          {/* Eyebrow Badge */}
-          <div
-            className="inline-flex items-center gap-2 mb-6"
-            style={{
-              background: "rgba(38,33,92,0.7)",
-              border: "0.5px solid #534AB7",
-              borderRadius: 20,
-              padding: "5px 14px",
-              fontSize: 11,
-              color: "#CECBF6",
-              letterSpacing: "0.06em",
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
-            KI-gestützte digitale Lösungen
-          </div>
-
-          {/* H1 */}
-          <h1
-            style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}
-          >
-            Ihr Alltag. Ihr Problem.{" "}
-            <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
-          </h1>
-
-          {/* Subtext */}
-          <p style={{ fontSize: 15, color: "#AFA9EC", lineHeight: 1.7, marginBottom: 28 }}>
-            Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
-          </p>
-
-          {/* Mehr erfahren */}
-          <a href="/mehr-erfahren" style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            padding: '14px 24px',
-            borderRadius: '12px',
-            border: '1.5px solid rgba(127,119,221,0.4)',
-            background: 'transparent',
-            color: '#AFA9EC',
-            fontSize: '14px',
-            fontWeight: '500',
-            textDecoration: 'none',
-            cursor: 'pointer',
-          }}>
-            Mehr erfahren
-          </a>
-        </motion.div>
-
-        {/* CTA Button rechts — unter der Netzskizze */}
-        <a
-          href="/kontakt"
-          onMouseEnter={() => setCtaHovered(true)}
-          onMouseLeave={() => setCtaHovered(false)}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        style={{ maxWidth: '540px' }}
+      >
+        {/* Eyebrow Badge */}
+        <div
+          className="inline-flex items-center gap-2 mb-6"
           style={{
-            display: 'inline-flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '10px',
-            textDecoration: 'none',
-            cursor: 'pointer',
-            flexShrink: 0,
-            marginTop: '210px',
+            background: "rgba(38,33,92,0.7)",
+            border: "0.5px solid #534AB7",
+            borderRadius: 20,
+            padding: "5px 14px",
+            fontSize: 11,
+            color: "#CECBF6",
+            letterSpacing: "0.06em",
           }}
         >
-          <div style={{
-            padding: '4px',
-            borderRadius: '50px',
-            border: `1.5px solid ${ctaHovered ? '#EF9F27' : '#BA7517'}`,
-            background: ctaHovered ? 'rgba(186,117,23,0.08)' : 'transparent',
-            transition: 'all 0.2s ease',
-          }}>
+          <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#7F77DD", display: "inline-block", flexShrink: 0 }} />
+          KI-gestützte digitale Lösungen
+        </div>
+
+        {/* H1 */}
+        <h1 style={{ fontSize: 42, fontWeight: 500, lineHeight: 1.2, color: "#EEEDFE", marginBottom: 20 }}>
+          Ihr Alltag. Ihr Problem.{" "}
+          <span style={{ color: "#7F77DD" }}>Unsere Lösung.</span>
+        </h1>
+
+        {/* Subtext */}
+        <p style={{ fontSize: 15, color: "#AFA9EC", lineHeight: 1.7, marginBottom: 0 }}>
+          Ob Studierende, Unternehmerinnen und Unternehmer oder Akademikerinnen — wir analysieren Ihr Anliegen mit modernsten KI-Tools und entwickeln eine maßgeschneiderte digitale Lösung. Das erste Gespräch ist kostenlos.
+        </p>
+
+        {/* Buttons — vertikal, linksbündig */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '14px', marginTop: '32px' }}>
+
+          {/* CTA: Jetzt kostenlos starten — Gold-Ring Pill */}
+          <a
+            href="/kontakt"
+            onMouseEnter={() => setCtaHovered(true)}
+            onMouseLeave={() => setCtaHovered(false)}
+            style={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '10px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
             <div style={{
-              padding: '14px 32px',
+              padding: '4px',
               borderRadius: '50px',
-              background: ctaHovered ? '#0C447C' : '#185FA5',
-              color: '#E6F1FB',
-              fontFamily: 'inherit',
-              fontSize: '16px',
-              fontWeight: '500',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              letterSpacing: '0.02em',
-              whiteSpace: 'nowrap',
-              transition: 'background 0.2s ease',
+              border: `1.5px solid ${ctaHovered ? '#EF9F27' : '#BA7517'}`,
+              background: ctaHovered ? 'rgba(186,117,23,0.08)' : 'transparent',
+              transition: 'all 0.2s ease',
+              display: 'inline-flex',
             }}>
-              Jetzt kostenlos starten
-              <span style={{
-                background: ctaHovered ? '#EF9F27' : '#BA7517',
-                color: '#FAEEDA',
-                borderRadius: '50%',
-                width: '28px',
-                height: '28px',
+              <div style={{
+                padding: '14px 32px',
+                borderRadius: '50px',
+                background: ctaHovered ? '#0C447C' : '#185FA5',
+                color: '#E6F1FB',
+                fontFamily: 'inherit',
+                fontSize: '16px',
+                fontWeight: '500',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: '14px',
-                fontWeight: '600',
-                flexShrink: 0,
+                gap: '12px',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
                 transition: 'background 0.2s ease',
               }}>
-                →
-              </span>
+                Jetzt kostenlos starten
+                <span style={{
+                  background: ctaHovered ? '#EF9F27' : '#BA7517',
+                  color: '#FAEEDA',
+                  borderRadius: '50%',
+                  width: '28px',
+                  height: '28px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '14px',
+                  fontWeight: '600',
+                  flexShrink: 0,
+                  transition: 'background 0.2s ease',
+                }}>→</span>
+              </div>
             </div>
-          </div>
-          <span style={{
-            fontSize: '10px',
-            color: ctaHovered ? 'rgba(239,159,39,0.8)' : 'rgba(186,117,23,0.65)',
-            letterSpacing: '2px',
-            fontFamily: 'inherit',
-            textTransform: 'uppercase',
-            transition: 'color 0.2s ease',
-          }}>
-            Human + AI
-          </span>
-        </a>
-      </div>
+            <span style={{
+              fontSize: '10px',
+              color: ctaHovered ? 'rgba(239,159,39,0.8)' : 'rgba(186,117,23,0.65)',
+              letterSpacing: '2px',
+              fontFamily: 'inherit',
+              textTransform: 'uppercase',
+              transition: 'color 0.2s ease',
+            }}>
+              Human + AI
+            </span>
+          </a>
+
+          {/* Mehr erfahren — Teal-Ring Pill */}
+          <a
+            href="/mehr-erfahren"
+            style={{
+              display: 'inline-flex',
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              gap: '8px',
+              textDecoration: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <div style={{
+              padding: '4px',
+              borderRadius: '50px',
+              border: '1.5px solid #1D9E75',
+              background: 'transparent',
+              transition: 'border-color 0.2s',
+              display: 'inline-flex',
+            }}>
+              <div style={{
+                padding: '13px 28px',
+                borderRadius: '50px',
+                background: '#534AB7',
+                color: '#EEEDFE',
+                fontFamily: 'inherit',
+                fontSize: '15px',
+                fontWeight: '500',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '10px',
+                letterSpacing: '0.02em',
+                whiteSpace: 'nowrap',
+              }}>
+                Mehr erfahren
+                <span style={{
+                  background: '#1D9E75',
+                  color: '#E1F5EE',
+                  borderRadius: '50%',
+                  width: '26px',
+                  height: '26px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '13px',
+                  fontWeight: '600',
+                  flexShrink: 0,
+                }}>→</span>
+              </div>
+            </div>
+          </a>
+
+        </div>
+      </motion.div>
 
       {/* Stats Bar */}
       <div
