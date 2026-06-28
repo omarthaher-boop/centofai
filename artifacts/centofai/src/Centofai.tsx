@@ -414,19 +414,19 @@ function Hero() {
   const [ctaHovered, setCtaHovered] = useState(false);
   const [moreHovered, setMoreHovered] = useState(false);
   return (
-    <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
+    <header id="home" className="max-w-7xl mx-auto px-4 pt-20 pb-16 relative overflow-hidden">
       {/* ── Zweispaltiges Layout ── */}
       <div style={{
         display: 'flex',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        gap: '40px',
+        gap: '32px',
         width: '100%',
         flexWrap: 'wrap',
       }}>
 
-        {/* LINKS: Netzwerk-Skizze */}
+        {/* LINKS: Netzwerk-Skizze + Stats */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -434,6 +434,27 @@ function Hero() {
           style={{ flex: '0 0 480px', minWidth: '280px', maxWidth: '520px' }}
         >
           <HumanAISketch />
+          {/* Stats Bar */}
+          <div style={{
+            marginTop: "16px",
+            border: "0.5px solid rgba(24,95,165,0.2)",
+            borderRadius: 12,
+            background: "rgba(4,8,15,0.6)",
+            display: "flex",
+          }}>
+            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(24,95,165,0.2)", textAlign: "center" }}>
+              <p style={{ fontSize: 20, color: "#E6F1FB", fontWeight: 600, marginBottom: 2 }}>100%</p>
+              <p style={{ fontSize: 11, color: "#378ADD" }}>Erstgespräch kostenlos</p>
+            </div>
+            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(29,158,117,0.2)", textAlign: "center" }}>
+              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>KI</p>
+              <p style={{ fontSize: 11, color: "#5DCAA5" }}>gestützte Analyse</p>
+            </div>
+            <div style={{ flex: 1, padding: "16px 20px", textAlign: "center" }}>
+              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>Individuell</p>
+              <p style={{ fontSize: 11, color: "#5DCAA5" }}>Individuelle Preismodelle</p>
+            </div>
+          </div>
         </motion.div>
 
         {/* RECHTS: Hero-Inhalt */}
@@ -544,29 +565,6 @@ function Hero() {
                 </div>
               </div>
             </a>
-          </div>
-
-          {/* Stats Bar */}
-          <div style={{
-            marginTop: "40px",
-            border: "0.5px solid rgba(24,95,165,0.2)",
-            borderRadius: 12,
-            background: "rgba(4,8,15,0.6)",
-            maxWidth: 520,
-            display: "flex",
-          }}>
-            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(24,95,165,0.2)", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#E6F1FB", fontWeight: 600, marginBottom: 2 }}>100%</p>
-              <p style={{ fontSize: 11, color: "#378ADD" }}>Erstgespräch kostenlos</p>
-            </div>
-            <div style={{ flex: 1, padding: "16px 20px", borderRight: "0.5px solid rgba(29,158,117,0.2)", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>KI</p>
-              <p style={{ fontSize: 11, color: "#5DCAA5" }}>gestützte Analyse</p>
-            </div>
-            <div style={{ flex: 1, padding: "16px 20px", textAlign: "center" }}>
-              <p style={{ fontSize: 20, color: "#9FE1CB", fontWeight: 600, marginBottom: 2 }}>Individuell</p>
-              <p style={{ fontSize: 11, color: "#5DCAA5" }}>Individuelle Preismodelle</p>
-            </div>
           </div>
 
           {/* Drei Karten */}
