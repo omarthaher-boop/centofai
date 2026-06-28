@@ -402,6 +402,18 @@ function StrategySection() {
         </button>
       </div>
 
+      {/* Slogan */}
+      <div style={{ textAlign: "center", marginBottom: 40 }}>
+        <p style={{ fontSize: 28, fontWeight: 500, color: "#EEEDFE", letterSpacing: "0.04em", lineHeight: 1.6 }}>
+          <span style={{ color: "#AFA9EC" }}>Weniger Stress.</span>
+          {" "}
+          <span style={{ color: "#7F77DD" }}>Mehr Klarheit.</span>
+          {" "}
+          <span style={{ color: "#CECBF6" }}>Jeden Tag.</span>
+        </p>
+        <div style={{ width: 48, height: 2, background: "#534AB7", margin: "16px auto 0", borderRadius: 2 }} />
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -468,17 +480,6 @@ function StrategySection() {
           </p>
         </div>
 
-        {/* Slogan */}
-        <div style={{ textAlign: "center", marginTop: 40, padding: "32px 24px" }}>
-          <p style={{ fontSize: 28, fontWeight: 500, color: "#EEEDFE", letterSpacing: "0.04em", lineHeight: 1.6 }}>
-            <span style={{ color: "#AFA9EC" }}>Weniger Stress.</span>
-            {" "}
-            <span style={{ color: "#7F77DD" }}>Mehr Klarheit.</span>
-            {" "}
-            <span style={{ color: "#CECBF6" }}>Jeden Tag.</span>
-          </p>
-          <div style={{ width: 48, height: 2, background: "#534AB7", margin: "16px auto 0", borderRadius: 2 }} />
-        </div>
       </motion.div>
       </div>
     </section>
