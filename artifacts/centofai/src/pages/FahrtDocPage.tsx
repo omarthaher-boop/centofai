@@ -317,10 +317,16 @@ export default function FahrtDocPage() {
                 FahrtDoc ist die moderne und intelligente Lösung zur einfachen Dokumentation von Fahrten. Die App wurde entwickelt, um Fahrten automatisch, übersichtlich und professionell zu erfassen – ideal für Privatpersonen, Selbstständige und Unternehmen.
               </p>
               <p>
-                Mit einem klaren Design ermöglicht FahrtDoc die schnelle Erfassung von Strecken, Kilometern, Fahrtdauer sowie Start- und Zielorten direkt über GPS. Alle Fahrten können jederzeit gefiltert und als PDF- oder CSV-Datei exportiert werden.
+                Mit einem klaren und modernen Design ermöglicht FahrtDoc die schnelle Erfassung von Strecken, Kilometern, Fahrtdauer sowie Start- und Zielorten direkt über GPS. Während aktiver Fahrten werden relevante Daten präzise dokumentiert und übersichtlich im persönlichen Fahrtenbuch gespeichert. Alle Fahrten können jederzeit gefiltert, eingesehen und als PDF- oder CSV-Datei exportiert werden.
               </p>
               <p>
-                Dank Face ID oder Fingerabdruck ist der Zugriff schnell und sicher. Standortdaten werden ausschließlich während aktiver Fahrten verwendet und können jederzeit exportiert oder gelöscht werden.{" "}
+                Dank Face ID oder Fingerabdruck ist der Zugriff schnell und sicher möglich. Die intuitive Benutzeroberfläche sorgt dafür, dass alle wichtigen Informationen sofort sichtbar sind, ohne komplizierte Menüs oder unnötige Funktionen.
+              </p>
+              <p>
+                FahrtDoc kombiniert modernes minimalistisches Design mit leistungsstarker Technologie und bietet eine einfache Möglichkeit, Fahrten effizient zu verwalten, Kilometer nachzuweisen und Fahrten professionell zu dokumentieren.
+              </p>
+              <p>
+                Datenschutz und Kontrolle stehen dabei im Mittelpunkt: Standortdaten werden ausschließlich während aktiver Fahrten verwendet und können jederzeit exportiert oder gelöscht werden.{" "}
                 <span style={{ color: "#BFFF00" }} className="font-semibold">FahrtDoc macht Fahrtendokumentation smarter, schneller und einfacher.</span>
               </p>
             </div>
