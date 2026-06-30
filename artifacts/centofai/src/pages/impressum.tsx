@@ -36,8 +36,8 @@ export default function ImpressumPage() {
             <h2 className="text-base font-bold mb-3 text-white">Kontakt</h2>
             <p className="text-[var(--text-caption)] italic">
               E-Mail:{" "}
-              <a href="mailto:hello@centofai.com" className="text-purple-400 hover:text-purple-300 transition">
-                hello@centofai.com
+              <a href="mailto:info@centof.ai" className="text-purple-400 hover:text-purple-300 transition">
+                info@centof.ai
               </a>
             </p>
           </section>

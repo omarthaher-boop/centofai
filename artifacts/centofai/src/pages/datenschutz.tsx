@@ -29,8 +29,8 @@ export default function DatenschutzPage() {
               [Firmenname oder vollständiger Name]<br />
               [Anschrift]<br />
               E-Mail:{" "}
-              <a href="mailto:hello@centofai.com" className="text-purple-400 hover:text-purple-300 transition">
-                hello@centofai.com
+              <a href="mailto:info@centof.ai" className="text-purple-400 hover:text-purple-300 transition">
+                info@centof.ai
               </a>
             </p>
           </Section>
@@ -88,8 +88,8 @@ export default function DatenschutzPage() {
             <p className="text-[var(--text-caption)]">
               Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
               Datenübertragbarkeit und Widerspruch. Wende dich dazu an:{" "}
-              <a href="mailto:hello@centofai.com" className="text-purple-400 hover:text-purple-300 transition">
-                hello@centofai.com
+              <a href="mailto:info@centof.ai" className="text-purple-400 hover:text-purple-300 transition">
+                info@centof.ai
               </a>
             </p>
           </Section>
