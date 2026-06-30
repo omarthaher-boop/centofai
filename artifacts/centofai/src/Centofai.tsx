@@ -413,6 +413,7 @@ function HumanAISketch() {
 function Hero() {
   const [ctaHovered, setCtaHovered] = useState(false);
   const [moreHovered, setMoreHovered] = useState(false);
+  const [produkteHovered, setProdukteHovered] = useState(false);
   return (
     <header id="home" className="max-w-7xl mx-auto px-6 pt-20 pb-16 relative overflow-hidden">
       {/* ── Zweispaltiges Layout ── */}
@@ -434,6 +435,47 @@ function Hero() {
           style={{ flex: '0 0 480px', minWidth: '280px', maxWidth: '520px' }}
         >
           <HumanAISketch />
+
+          <Link
+            href="/products"
+            onMouseEnter={() => setProdukteHovered(true)}
+            onMouseLeave={() => setProdukteHovered(false)}
+            style={{
+              width: '100%',
+              padding: '10px 10px 10px 32px',
+              borderRadius: 60,
+              border: 'none',
+              fontSize: 17,
+              fontWeight: 500,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              background: '#534AB7',
+              color: '#EEEDFE',
+              filter: produkteHovered ? 'brightness(1.1)' : 'brightness(1)',
+              transition: 'filter 0.15s ease',
+              textDecoration: 'none',
+              marginTop: 24,
+              boxSizing: 'border-box',
+            }}
+          >
+            Unsere Produkte
+            <div style={{
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: '#185FA5',
+              color: '#B5D4F4',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 18,
+              flexShrink: 0,
+            }}>
+              →
+            </div>
+          </Link>
         </motion.div>
 
         {/* RECHTS: Hero-Inhalt */}
