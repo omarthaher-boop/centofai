@@ -33,6 +33,7 @@ import KontaktPage from "./pages/Kontakt";
 import MehrErfahrenPage from "./pages/MehrErfahren";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
+import AnnouncementBanner from "./components/AnnouncementBanner";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -168,6 +169,7 @@ function ClerkProviderWithRoutes() {
     >
       <QueryClientProvider client={queryClient}>
         <ClerkQueryClientCacheInvalidator />
+        <AnnouncementBanner />
         <Switch>
           <Route path="/" component={Centofai} />
           <Route path="/tools/:slug" component={ToolDetail} />
