@@ -26,11 +26,9 @@ export default function ImpressumPage() {
         <div className="space-y-8 text-[var(--text-body)] text-sm leading-relaxed">
           <section className="border border-[var(--border-color)] rounded-2xl p-6 bg-[var(--bg-card)]/40">
             <h2 className="text-base font-bold mb-3 text-white">Anbieter</h2>
-            <p className="text-[var(--text-caption)] italic">
-              [Firmenname oder vollständiger Name des Inhabers]<br />
-              [Straße und Hausnummer]<br />
-              [PLZ und Ort]<br />
-              Deutschland
+            <p className="text-[var(--text-caption)]">
+              Centof.ai<br />
+              Arbon, Schweiz
             </p>
           </section>
 
