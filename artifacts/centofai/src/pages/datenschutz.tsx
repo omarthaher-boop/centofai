@@ -25,9 +25,9 @@ export default function DatenschutzPage() {
 
         <div className="space-y-6 text-sm leading-relaxed">
           <Section title="1. Verantwortlicher">
-            <p className="text-[var(--text-caption)] italic">
-              [Firmenname oder vollständiger Name]<br />
-              [Anschrift]<br />
+            <p className="text-[var(--text-caption)]">
+              PD. Dr. med. univ. Omar Thaher<br />
+              Arbon, Schweiz<br />
               E-Mail:{" "}
               <a href="mailto:info@centof.ai" className="text-purple-400 hover:text-purple-300 transition">
                 info@centof.ai
@@ -103,14 +103,10 @@ export default function DatenschutzPage() {
 
           <Section title="9. Beschwerderecht">
             <p className="text-[var(--text-caption)]">
-              Du hast das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, z. B. beim
-              Landesbeauftragten für Datenschutz und Informationsfreiheit deines Bundeslandes.
+              Du hast das Recht, dich bei der zuständigen Datenschutz-Aufsichtsbehörde zu beschweren, z. B. beim
+              Eidgenössischen Datenschutz- und Öffentlichkeitsbeauftragten (EDÖB) in der Schweiz.
             </p>
           </Section>
-
-          <p className="text-xs text-[var(--text-label)] border-t border-[var(--border-color)] pt-6">
-            Bitte ergänze die mit <em>[...]</em> markierten Felder mit deinen tatsächlichen Angaben, bevor du diese Seite veröffentlichst.
-          </p>
         </div>
       </main>
 
