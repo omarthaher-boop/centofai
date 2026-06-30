@@ -44,9 +44,9 @@ export default function ImpressumPage() {
 
           <section className="border border-[var(--border-color)] rounded-2xl p-6 bg-[var(--bg-card)]/40">
             <h2 className="text-base font-bold mb-3 text-white">Verantwortlich für den Inhalt (§ 18 Abs. 2 MStV)</h2>
-            <p className="text-[var(--text-caption)] italic">
-              [Vollständiger Name]<br />
-              [Anschrift wie oben]
+            <p className="text-[var(--text-caption)]">
+              PD. Dr. med. univ. Omar Thaher<br />
+              Arbon, Schweiz
             </p>
           </section>
 
@@ -67,10 +67,6 @@ export default function ImpressumPage() {
               Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
             </p>
           </section>
-
-          <p className="text-xs text-[var(--text-label)] border-t border-[var(--border-color)] pt-6">
-            Bitte ergänze die mit <em>[...]</em> markierten Felder mit deinen tatsächlichen Angaben, bevor du diese Seite veröffentlichst.
-          </p>
         </div>
       </main>
 
