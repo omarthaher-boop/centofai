@@ -460,7 +460,7 @@ function Hero() {
               boxSizing: 'border-box',
             }}
           >
-            Unsere Produkte
+            Produkte
             <div style={{
               width: 44,
               height: 44,
