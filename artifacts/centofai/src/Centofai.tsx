@@ -863,6 +863,7 @@ function ZielgruppenSection() {
         subtext="Von der Prozessautomatisierung bis zur individuellen Softwarelösung – wir helfen Unternehmerinnen und Unternehmern, digitale Werkzeuge gezielt für ihr Geschäft einzusetzen."
         buttonBg="#378ADD"
         buttonColor="#042C53"
+        href="/wirtschaft"
         iconBg="rgba(55,138,221,0.14)"
         iconBorder="#378ADD"
         iconColor="#85B7EB"
