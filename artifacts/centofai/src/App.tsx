@@ -29,6 +29,7 @@ import AccountPage from "./pages/account";
 import ProductsPage from "./pages/products";
 import FahrtDocPage from "./pages/FahrtDocPage";
 import GesundheitPage from "./pages/Gesundheit";
+import BildungPage from "./pages/Bildung";
 import FahrtDocDatenschutzPage from "./pages/FahrtDocDatenschutz";
 import KontaktPage from "./pages/Kontakt";
 import MehrErfahrenPage from "./pages/MehrErfahren";
@@ -201,6 +202,7 @@ function ClerkProviderWithRoutes() {
           <Route path="/products" component={ProductsPage} />
           <Route path="/products/fahrtdoc" component={FahrtDocPage} />
           <Route path="/gesundheit" component={GesundheitPage} />
+          <Route path="/bildung" component={BildungPage} />
           <Route path="/products/fahrtdoc/datenschutz" component={FahrtDocDatenschutzPage} />
           <Route path="/impressum" component={ImpressumPage} />
           <Route path="/datenschutz" component={DatenschutzPage} />

@@ -846,6 +846,7 @@ function ZielgruppenSection() {
         subtext="Ob Organisation, Recherche, Lehrbetrieb oder Prüfungsvorbereitung – wir entwickeln digitale Lösungen für Studierende, Akademikerinnen und Akademiker sowie universitäre Einrichtungen, die den Alltag einfacher und effizienter gestalten."
         buttonBg="#7F77DD"
         buttonColor="#26215C"
+        href="/bildung"
         iconBg="rgba(127,119,221,0.14)"
         iconBorder="#7F77DD"
         iconColor="#CECBF6"
