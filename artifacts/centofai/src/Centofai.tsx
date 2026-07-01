@@ -673,6 +673,7 @@ function ZielgruppenRow({
   iconBorder,
   iconColor,
   Icon,
+  href,
 }: {
   reverse: boolean;
   badgeText: string;
@@ -687,7 +688,20 @@ function ZielgruppenRow({
   iconBorder: string;
   iconColor: string;
   Icon: React.ComponentType<{ style?: React.CSSProperties }>;
+  href?: string;
 }) {
+  const buttonStyle: React.CSSProperties = {
+    background: buttonBg,
+    color: buttonColor,
+    border: "none",
+    borderRadius: 20,
+    padding: "8px 18px",
+    fontSize: 13,
+    fontWeight: 500,
+    cursor: href ? "pointer" : "default",
+    textDecoration: "none",
+    display: "inline-block",
+  };
   return (
     <div
       className="zielgruppen-row"
@@ -736,21 +750,15 @@ function ZielgruppenRow({
         >
           {subtext}
         </p>
-        <button
-          type="button"
-          style={{
-            background: buttonBg,
-            color: buttonColor,
-            border: "none",
-            borderRadius: 20,
-            padding: "8px 18px",
-            fontSize: 13,
-            fontWeight: 500,
-            cursor: "default",
-          }}
-        >
-          Mehr Informationen
-        </button>
+        {href ? (
+          <Link href={href} style={buttonStyle}>
+            Mehr Informationen
+          </Link>
+        ) : (
+          <button type="button" style={buttonStyle}>
+            Mehr Informationen
+          </button>
+        )}
       </div>
 
       <div className="zielgruppen-icon-col">
@@ -825,6 +833,7 @@ function ZielgruppenSection() {
         iconBorder="#5DCAA5"
         iconColor="#9FE1CB"
         Icon={HeartPulse}
+        href="/gesundheit"
       />
 
       <ZielgruppenRow
