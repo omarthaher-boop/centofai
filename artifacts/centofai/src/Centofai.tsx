@@ -442,16 +442,18 @@ function Hero() {
             onMouseEnter={() => setProdukteHovered(true)}
             onMouseLeave={() => setProdukteHovered(false)}
             style={{
-              width: '100%',
+              width: 'fit-content',
+              flex: '0 0 auto',
               padding: '10px 10px 10px 32px',
               borderRadius: 60,
               border: 'none',
               fontSize: 17,
               fontWeight: 500,
               cursor: 'pointer',
-              display: 'flex',
+              display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'space-between',
+              gap: 20,
               background: '#534AB7',
               color: '#EEEDFE',
               filter: produkteHovered ? 'brightness(1.1)' : 'brightness(1)',
