@@ -688,18 +688,14 @@ function ZielgruppenRow({
 }) {
   return (
     <div
+      className="zielgruppen-row"
       style={{
-        display: "flex",
         flexDirection: reverse ? "row-reverse" : "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 40,
-        flexWrap: "wrap",
         padding: "48px 0",
         borderBottom: "0.5px solid #1a1a2e",
       }}
     >
-      <div style={{ flex: "1", minWidth: 280, textAlign: "left" }}>
+      <div className="zielgruppen-text">
         <div
           className="inline-flex items-center"
           style={{
@@ -755,20 +751,15 @@ function ZielgruppenRow({
         </button>
       </div>
 
-      <div style={{ flex: "0 0 auto" }}>
+      <div className="zielgruppen-icon-col">
         <div
+          className="zielgruppen-icon-box"
           style={{
-            width: 88,
-            height: 88,
-            borderRadius: 12,
             background: iconBg,
             border: `1px solid ${iconBorder}`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
           }}
         >
-          <Icon style={{ width: 36, height: 36, color: iconColor }} />
+          <Icon style={{ width: 64, height: 64, color: iconColor }} />
         </div>
       </div>
     </div>
@@ -777,7 +768,47 @@ function ZielgruppenRow({
 
 function ZielgruppenSection() {
   return (
-    <section className="max-w-6xl mx-auto px-6">
+    <section style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <style>{`
+        .zielgruppen-row {
+          display: flex;
+          align-items: center;
+          gap: 40px;
+        }
+        .zielgruppen-text {
+          flex: 1.1;
+          text-align: left;
+        }
+        .zielgruppen-icon-col {
+          flex: 0.9;
+        }
+        .zielgruppen-icon-box {
+          width: 100%;
+          min-height: 240px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        @media (max-width: 900px) {
+          .zielgruppen-row {
+            flex-direction: column !important;
+          }
+          .zielgruppen-icon-col {
+            width: 100%;
+          }
+          .zielgruppen-icon-box {
+            min-height: 180px;
+          }
+          .zielgruppen-text {
+            text-align: center;
+          }
+          .zielgruppen-text h3,
+          .zielgruppen-text p {
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
       <ZielgruppenRow
         reverse={false}
         badgeText="Für Gesundheitswesen & Praxis"
