@@ -6,6 +6,7 @@ import {
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Users, Lightbulb, Send, ChevronDown, Package, Heart,
   MapPin, Code2, Globe, Settings, Smartphone,
+  HeartPulse, Briefcase,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useUser } from "@clerk/react";
@@ -655,7 +656,220 @@ function Hero() {
   );
 }
 
-/* ─── Strategy Section ─────────────────────────────────────────── */
+/* ─── Zielgruppen Section ──────────────────────────────────────── */
+function ZielgruppenRow({
+  reverse,
+  badgeText,
+  badgeBg,
+  badgeBorder,
+  badgeColor,
+  headline,
+  subtext,
+  buttonBg,
+  buttonColor,
+  iconBg,
+  iconBorder,
+  iconColor,
+  Icon,
+}: {
+  reverse: boolean;
+  badgeText: string;
+  badgeBg: string;
+  badgeBorder: string;
+  badgeColor: string;
+  headline: string;
+  subtext: string;
+  buttonBg: string;
+  buttonColor: string;
+  iconBg: string;
+  iconBorder: string;
+  iconColor: string;
+  Icon: React.ComponentType<{ style?: React.CSSProperties }>;
+}) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: reverse ? "row-reverse" : "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        gap: 40,
+        flexWrap: "wrap",
+        padding: "48px 0",
+        borderBottom: "0.5px solid #1a1a2e",
+      }}
+    >
+      <div style={{ flex: "1", minWidth: 280, textAlign: "left" }}>
+        <div
+          className="inline-flex items-center"
+          style={{
+            background: badgeBg,
+            border: `1px solid ${badgeBorder}`,
+            color: badgeColor,
+            borderRadius: 14,
+            padding: "5px 12px",
+            fontSize: 10,
+            marginBottom: 16,
+            letterSpacing: "0.03em",
+          }}
+        >
+          {badgeText}
+        </div>
+        <h3
+          style={{
+            fontSize: 26,
+            fontWeight: 600,
+            color: "#EEEDFE",
+            lineHeight: 1.3,
+            marginBottom: 14,
+            maxWidth: 480,
+          }}
+        >
+          {headline}
+        </h3>
+        <p
+          style={{
+            fontSize: 14,
+            color: "#AFA9EC",
+            lineHeight: 1.7,
+            marginBottom: 20,
+            maxWidth: 480,
+          }}
+        >
+          {subtext}
+        </p>
+        <button
+          type="button"
+          style={{
+            background: buttonBg,
+            color: buttonColor,
+            border: "none",
+            borderRadius: 20,
+            padding: "8px 18px",
+            fontSize: 13,
+            fontWeight: 500,
+            cursor: "default",
+          }}
+        >
+          Mehr Informationen
+        </button>
+      </div>
+
+      <div style={{ flex: "0 0 auto" }}>
+        <div
+          style={{
+            width: 88,
+            height: 88,
+            borderRadius: 12,
+            background: iconBg,
+            border: `1px solid ${iconBorder}`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon style={{ width: 36, height: 36, color: iconColor }} />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ZielgruppenSection() {
+  return (
+    <section className="max-w-6xl mx-auto px-6">
+      <ZielgruppenRow
+        reverse={false}
+        badgeText="Für Gesundheitswesen & Praxis"
+        badgeBg="rgba(93,202,165,0.22)"
+        badgeBorder="#5DCAA5"
+        badgeColor="#9FE1CB"
+        headline="Mit klinischer Erfahrung zur passenden digitalen Lösung."
+        subtext="Aufgrund unserer klinischen Erfahrung kennen wir die Herausforderungen im Praxis- und Klinikalltag aus erster Hand. Dadurch können wir Ihren Bedarf präzise einschätzen und die passende digitale Lösung dafür entwickeln."
+        buttonBg="#5DCAA5"
+        buttonColor="#04342C"
+        iconBg="rgba(93,202,165,0.14)"
+        iconBorder="#5DCAA5"
+        iconColor="#9FE1CB"
+        Icon={HeartPulse}
+      />
+
+      <ZielgruppenRow
+        reverse={true}
+        badgeText="Für Studierende, Akademiker & Universitäten"
+        badgeBg="rgba(127,119,221,0.22)"
+        badgeBorder="#7F77DD"
+        badgeColor="#CECBF6"
+        headline="Weniger Chaos im Studium. Mehr Fokus aufs Wesentliche."
+        subtext="Ob Organisation, Recherche, Lehrbetrieb oder Prüfungsvorbereitung – wir entwickeln digitale Lösungen für Studierende, Akademikerinnen und Akademiker sowie universitäre Einrichtungen, die den Alltag einfacher und effizienter gestalten."
+        buttonBg="#7F77DD"
+        buttonColor="#26215C"
+        iconBg="rgba(127,119,221,0.14)"
+        iconBorder="#7F77DD"
+        iconColor="#CECBF6"
+        Icon={GraduationCap}
+      />
+
+      <ZielgruppenRow
+        reverse={false}
+        badgeText="Für Unternehmer & Firmeninhaber"
+        badgeBg="rgba(55,138,221,0.22)"
+        badgeBorder="#378ADD"
+        badgeColor="#85B7EB"
+        headline="Mehr Wachstum. Weniger manueller Aufwand."
+        subtext="Von der Prozessautomatisierung bis zur individuellen Softwarelösung – wir helfen Unternehmerinnen und Unternehmern, digitale Werkzeuge gezielt für ihr Geschäft einzusetzen."
+        buttonBg="#378ADD"
+        buttonColor="#042C53"
+        iconBg="rgba(55,138,221,0.14)"
+        iconBorder="#378ADD"
+        iconColor="#85B7EB"
+        Icon={Briefcase}
+      />
+
+      {/* Abschluss-CTA */}
+      <div style={{ textAlign: "center", padding: "40px 0 64px" }}>
+        <p style={{ fontSize: 12, color: "#AFA9EC", marginBottom: 20 }}>
+          Egal in welchem Bereich Sie tätig sind – das erste Gespräch ist immer kostenlos.
+        </p>
+        {/* TODO: Ziel-Route für Kontaktbereich/-formular final festlegen, falls sich /kontakt ändert */}
+        <a
+          href="/kontakt"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 12,
+            padding: "14px 14px 14px 32px",
+            borderRadius: 50,
+            background: "#534AB7",
+            color: "#EEEDFE",
+            fontSize: 16,
+            fontWeight: 500,
+            textDecoration: "none",
+          }}
+        >
+          Kostenlose Beratung sichern
+          <span
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "50%",
+              background: "#185FA5",
+              color: "#B5D4F4",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: 15,
+              flexShrink: 0,
+            }}
+          >
+            →
+          </span>
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function StrategySection() {
   const steps = [
     { n: "1", title: "Problem einsenden", desc: "Senden Sie uns Ihr Anliegen — egal wie groß oder klein. Kein Problem ist zu unbedeutend." },
@@ -1925,6 +2139,7 @@ export default function App() {
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-body)] font-sans antialiased scroll-smooth relative">
       <Navbar />
       <Hero />
+      <ZielgruppenSection />
       <StrategySection />
       <WorkflowSection />
       <ServicesSection />
