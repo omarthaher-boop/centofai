@@ -512,6 +512,12 @@ export default function FahrtDocPage() {
             >
               📄 Datenschutzerklärung
             </Link>
+            <Link
+              to="/products/fahrtdoc/support"
+              className="px-4 py-2 rounded-lg bg-white text-[#0066CC] text-xs font-semibold hover:bg-blue-50 transition-colors"
+            >
+              🆘 Support
+            </Link>
             <span className="px-4 py-2 rounded-lg bg-white/20 text-white text-xs font-semibold">
               🔒 DSGVO-konform
             </span>
