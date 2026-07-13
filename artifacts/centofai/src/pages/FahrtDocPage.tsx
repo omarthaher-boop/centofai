@@ -535,7 +535,7 @@ export default function FahrtDocPage() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-extrabold mb-3">
-            Jetzt kostenlos{" "}
+            Jetzt{" "}
             <span className="text-[#0066CC]">herunterladen</span>
           </h2>
           <p className="text-slate-400 text-base max-w-xl mx-auto">
@@ -563,10 +563,7 @@ export default function FahrtDocPage() {
                 </p>
               </div>
             </a>
-            <a
-              href="#"
-              className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-black border border-white/20 hover:border-white/40 transition group"
-            >
+            <div className="flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border-2 border-dashed border-white/20 opacity-50 cursor-not-allowed select-none">
               <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none">
                 <path d="M3.18 23.76a1.97 1.97 0 0 1-.69-.57L13.06 12.5 3.2.87a1.97 1.97 0 0 1 .66-.55l10.52 6.08L3.18 23.76z" fill="#EA4335" />
                 <path d="M20.3 10.46l-2.98-1.72-3.26 3 3.26 3 3.01-1.74a1.98 1.98 0 0 0 0-3.44z" fill="#FBBC04" />
@@ -575,13 +572,13 @@ export default function FahrtDocPage() {
               </svg>
               <div>
                 <p className="text-[10px] text-slate-400 leading-none mb-0.5">
-                  Jetzt bei
+                  Demnächst bei
                 </p>
                 <p className="text-sm font-bold text-white leading-none">
                   Google Play
                 </p>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* QR Code Placeholder */}
