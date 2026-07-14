@@ -143,9 +143,15 @@ const CATEGORIES = [
       },
       {
         qDe: `Kann ich meine Kosten exportieren?`,
-        aDe: `Ja, du kannst deine Kosteneinträge als PDF exportieren. Ein CSV-Export ist aktuell nur für Fahrten verfügbar, nicht für Kosten.`,
+        aDe: `Ja, du kannst deine Kosteneintr\u00e4ge als PDF exportieren. Ein CSV-Export ist aktuell nur f\u00fcr Fahrten verf\u00fcgbar, nicht f\u00fcr Kosten.`,
         qEn: `Can I export my costs?`,
         aEn: `Yes, you can export your cost entries as a PDF. CSV export is currently only available for trips, not for costs.`,
+      },
+      {
+        qDe: `Was passiert mit meinem Beleg-Foto beim KI-Scan?`,
+        aDe: `Wenn du die automatische Belegerkennung nutzt, wird das Foto einmalig zur Analyse an unseren KI-Anbieter Anthropic \u00fcbermittelt. Es wird dort nicht dauerhaft gespeichert und nach der Analyse verworfen. Das Foto selbst bleibt zus\u00e4tzlich lokal auf deinem Ger\u00e4t gespeichert.`,
+        qEn: `What happens to my receipt photo during the AI scan?`,
+        aEn: `If you use automatic receipt recognition, the photo is sent once to our AI provider Anthropic for analysis. It is not stored there permanently and is discarded after analysis. The photo itself also remains stored locally on your device.`,
       },
     ],
   },
@@ -236,9 +242,9 @@ const CATEGORIES = [
       },
       {
         qDe: `Werden meine Daten an Dritte weitergegeben?`,
-        aDe: `Nein. Deine Fahrt- und Profildaten werden nicht an Dritte verkauft. Für die Adressauflösung wird OpenStreetMap Nominatim genutzt, dabei werden nur GPS-Koordinaten übertragen.`,
+        aDe: `Nein, nicht zu Werbezwecken. F\u00fcr die Adressaufl\u00f6sung nutzen wir OpenStreetMap Nominatim (nur GPS-Koordinaten werden \u00fcbertragen). Nutzt du den optionalen KI-Kassenbeleg-Scan, wird das Foto einmalig zur Analyse an unseren KI-Anbieter Anthropic \u00fcbermittelt und danach nicht gespeichert.`,
         qEn: `Is my data shared with third parties?`,
-        aEn: `No. Your trip and profile data is not sold to third parties. Address resolution uses OpenStreetMap Nominatim, which only transmits GPS coordinates.`,
+        aEn: `No, not for advertising purposes. For address resolution we use OpenStreetMap Nominatim (only GPS coordinates are transmitted). If you use the optional AI receipt scan, the photo is sent once to our AI provider Anthropic for analysis and is not stored afterward.`,
       },
       {
         qDe: `Wie lösche ich mein Konto?`,
@@ -248,9 +254,9 @@ const CATEGORIES = [
       },
       {
         qDe: `Wie lange werden meine Daten gespeichert?`,
-        aDe: `Fahrtdaten werden für einen Zeitraum von 4 Jahren zuzüglich des laufenden Kalenderjahres aufbewahrt, gerechnet ab dem 1. Januar des jeweiligen Jahres \u2014 damit orientieren wir uns an den steuerlichen Aufbewahrungsfristen. Danach vorgesehene Löschungen werden schrittweise umgesetzt.`,
+        aDe: `Wir streben eine Speicherdauer von maximal 5 Jahren zuz\u00fcglich des laufenden Kalenderjahres an, in Anlehnung an g\u00e4ngige steuerliche Aufbewahrungsfristen. Eine automatisierte L\u00f6schung nach Ablauf dieser Frist befindet sich aktuell im Testbetrieb.`,
         qEn: `How long is my data retained?`,
-        aEn: `Trip data is retained for a period of 4 years plus the current calendar year, calculated from January 1 of the respective year \u2014 in line with standard tax retention periods. Deletion after this period is being rolled out progressively.`,
+        aEn: `We aim for a maximum retention period of 5 years plus the current calendar year, in line with standard tax retention periods. Automated deletion after this period is currently being tested.`,
       },
     ],
   },
