@@ -314,20 +314,28 @@ export default function FahrtDocPage() {
 
             <div className="mt-8 text-slate-400 text-sm leading-relaxed space-y-3 max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
               <p>
-                FahrtDoc ist die moderne und intelligente Lösung zur einfachen Dokumentation von Fahrten. Die App wurde entwickelt, um Fahrten automatisch, übersichtlich und professionell zu erfassen – ideal für Privatpersonen, Selbstständige und Unternehmen.
+                FahrtDoc ist die moderne All-in-One-Lösung für intelligente Fahrtendokumentation, professionelle Kostenverwaltung und übersichtliche Steuerdokumentation – entwickelt für Privatpersonen, Selbstständige und Unternehmen in der Schweiz, Deutschland und Österreich.
               </p>
               <p>
-                Mit einem klaren und modernen Design ermöglicht FahrtDoc die schnelle Erfassung von Strecken, Kilometern, Fahrtdauer sowie Start- und Zielorten direkt über GPS. Während aktiver Fahrten werden relevante Daten präzise dokumentiert und übersichtlich im persönlichen Fahrtenbuch gespeichert. Alle Fahrten können jederzeit gefiltert, eingesehen und als PDF- oder CSV-Datei exportiert werden.
+                Vergessen Sie manuelle Aufzeichnungen und unübersichtliche Tabellen. FahrtDoc erfasst Ihre Fahrten vollautomatisch per GPS – präzise, übersichtlich und jederzeit abrufbar. Von der ersten Umdrehung bis zur letzten Kilometerangabe dokumentiert FahrtDoc alles, was Sie für eine rechtssichere und professionelle Fahrtenbuchführung benötigen. Dank der intelligenten Bluetooth-Erkennung erhalten Sie beim Einsteigen sofort eine Erinnerung zur Fahrtaufzeichnung – so geht Ihnen keine einzige Fahrt mehr verloren.
               </p>
               <p>
-                Dank Face ID oder Fingerabdruck ist der Zugriff schnell und sicher möglich. Die intuitive Benutzeroberfläche sorgt dafür, dass alle wichtigen Informationen sofort sichtbar sind, ohne komplizierte Menüs oder unnötige Funktionen.
+                Klassifizieren Sie jede Fahrt bequem als Geschäftlich, Arbeitsweg oder Privat. Die farblich differenzierte Übersicht sorgt für sofortige Klarheit und eine strukturierte Fahrthistorie, die jederzeit filterbar und durchsuchbar ist. Start- und Zielort, Strecke, Fahrtdauer sowie genaue Uhrzeiten werden präzise erfasst und übersichtlich in Ihrem persönlichen Fahrtenbuch gespeichert.
               </p>
               <p>
-                FahrtDoc kombiniert modernes minimalistisches Design mit leistungsstarker Technologie und bietet eine einfache Möglichkeit, Fahrten effizient zu verwalten, Kilometer nachzuweisen und Fahrten professionell zu dokumentieren.
+                Neben der Fahrterfassung bietet FahrtDoc eine vollständige Kostenverwaltung für Ihr Fahrzeug. Erfassen Sie Tankkosten, Wartungsausgaben, Versicherungsbeiträge und weitere Fahrzeugkosten direkt in der App – kategorisiert, übersichtlich und immer griffbereit. Die integrierte Kostenübersicht zeigt auf einen Blick, wie sich Ihre Ausgaben zusammensetzen, und hilft Ihnen, Ihr Budget gezielt im Griff zu behalten.
               </p>
               <p>
-                Datenschutz und Kontrolle stehen dabei im Mittelpunkt: Standortdaten werden ausschließlich während aktiver Fahrten verwendet und können jederzeit exportiert oder gelöscht werden.{" "}
-                <span style={{ color: "#BFFF00" }} className="font-semibold">FahrtDoc macht Fahrtendokumentation smarter, schneller und einfacher.</span>
+                FahrtDoc hilft Ihnen, den steuerlich relevanten Teil jeder geschäftlichen Fahrt und jedes Arbeitswegs übersichtlich zu dokumentieren – orientiert an den gängigen Kilometerpauschalen. So erhalten Sie eine strukturierte Übersicht Ihrer absetzbaren Fahrten und Kosten, die Sie direkt an Ihren Steuerberater weitergeben oder für Ihre eigene Steuererklärung nutzen können.
+              </p>
+              <p>
+                Alle Fahrten und Kosten lassen sich jederzeit als professionelle PDF-Berichte oder CSV-Dateien exportieren – inklusive Kostenzusammenfassung, Kategorieverteilung und ausgewiesenen Steuerabzügen. Der Zugriff auf die App erfolgt wahlweise per Face ID, Fingerabdruck oder klassisch mit Benutzername und Passwort – ganz nach Ihren persönlichen Vorlieben. Ihre Standortdaten werden nur während aktiver Fahrten verwendet, und Ihre Daten gehören Ihnen – jederzeit einsehbar, exportierbar und auf Wunsch vollständig löschbar.
+              </p>
+              <p>
+                Mit einem klaren, modernen Design, farblich codierten Fahrkategorien und einer intuitiven Benutzeroberfläche macht FahrtDoc die Fahrtendokumentation so einfach wie nie zuvor. Keine komplizierten Menüs, keine unnötigen Funktionen – nur das, was Sie wirklich brauchen, um Ihre Fahrten effizient zu verwalten, Kilometer lückenlos nachzuweisen und Kosten professionell zu dokumentieren.
+              </p>
+              <p>
+                <span style={{ color: "#BFFF00" }} className="font-semibold">FahrtDoc – Smarter dokumentieren. Klarer nachweisen. Zeit sparen.</span>
               </p>
             </div>
           </motion.div>
