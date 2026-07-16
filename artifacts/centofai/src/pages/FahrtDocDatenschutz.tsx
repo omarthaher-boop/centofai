@@ -117,6 +117,30 @@ export default function FahrtDocDatenschutzPage() {
                   <li>Fehlerprotokolle zur Qualitätssicherung</li>
                 </ul>
               </SubSection>
+
+              <SubSection title="3.6 Fahrzeugkosten und Belegfotos (KI-Scan)">
+                <p>
+                  Die App bietet eine optionale Funktion zur Erfassung von Fahrzeugkosten,
+                  bei der Kassenbelege per Foto aufgenommen und mittels KI-Texterkennung
+                  (Anbieter: Anthropic, USA) automatisch ausgelesen werden können. Das Foto
+                  wird hierfür zur Verarbeitung an den KI-Dienst übermittelt und anschliessend
+                  nicht weiter gespeichert.
+                </p>
+                <p className="mt-2">
+                  Die Belegfotos selbst werden ausschliesslich lokal auf Ihrem Gerät gespeichert
+                  und nicht auf unseren Servern abgelegt.
+                </p>
+              </SubSection>
+
+              <SubSection title="3.7 Kartendaten (Fahrtroute)">
+                <p>
+                  Wenn Sie die optionale Funktion «Kartensicht speichern» aktivieren, speichert
+                  die App den gefahrenen Streckenverlauf ausschliesslich lokal auf Ihrem Gerät.
+                  Diese Daten werden nicht auf unsere Server oder in die Cloud übertragen. Sie
+                  können gespeicherte Kartenansichten jederzeit einzeln oder gesammelt in den
+                  Einstellungen löschen. Standardmässig ist diese Funktion deaktiviert.
+                </p>
+              </SubSection>
             </Section>
 
             <Section number="4" title="Rechtsgrundlagen der Verarbeitung">
