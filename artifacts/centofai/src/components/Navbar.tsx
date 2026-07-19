@@ -45,7 +45,6 @@ const scrollNavItems = [
   { name: "Unsere Strategie", id: "strategie" },
   { name: "Ideen", id: "ideen" },
   { name: "KI-Tools", id: "ki-tools" },
-  { name: "Kurse", id: "kurse" },
 ];
 
 export default function Navbar() {

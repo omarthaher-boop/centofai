@@ -6,13 +6,12 @@ import {
   CheckCircle2, Bot, BookOpen, Tag, Languages, ArrowUpRight,
   Users, Lightbulb, Send, ChevronDown, Package, Heart,
   MapPin, Code2, Globe, Settings, Smartphone,
-  HeartPulse, Briefcase,
+  HeartPulse,
 } from "lucide-react";
 import { Link } from "wouter";
 import { Show, useUser } from "@clerk/react";
 import Navbar from "./components/Navbar";
 import { tools, toolCategories, toolSlug } from "@workspace/data";
-import { courses, courseCategories } from "@workspace/data";
 import {
   useFavoriteToolNames,
   useToggleFavorite,
@@ -146,7 +145,7 @@ function GlobalSearch() {
           )}
           {results && !loading && (
             <div className="p-3">
-              {results.tools.length === 0 && results.news.length === 0 && results.courses.length === 0 && (
+              {results.tools.length === 0 && results.news.length === 0 && (
                 <div className="p-4 text-center text-[var(--text-label)] text-sm">Keine Ergebnisse für „{query}“</div>
               )}
               {results.tools.length > 0 && (
@@ -160,22 +159,6 @@ function GlobalSearch() {
                       <div>
                         <p className="text-sm font-medium text-[var(--text-body)]">{t.name}</p>
                         <p className="text-xs text-[var(--text-label)] truncate max-w-[260px]">{t.description}</p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              )}
-              {results.courses.length > 0 && (
-                <div>
-                  <p className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider px-2 mb-1">Kurse</p>
-                  {results.courses.slice(0, 3).map((c: any) => (
-                    <a key={c.name} href={c.url} target="_blank" rel="noreferrer" onClick={() => setOpen(false)} className="flex items-center gap-3 px-2 py-2 rounded-lg hover:bg-emerald-500/10 transition">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
-                        <GraduationCap className="w-4 h-4 text-emerald-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-[var(--text-body)]">{c.name}</p>
-                        <p className="text-xs text-[var(--text-label)]">{c.provider}</p>
                       </div>
                     </a>
                   ))}
@@ -502,7 +485,7 @@ function Hero() {
             }}
           >
             <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#378ADD", display: "inline-block", flexShrink: 0 }} />
-            KI-gestützte digitale Lösungen
+            Plattform für KI-gestützte Lösungen
           </div>
 
           {/* H1 */}
@@ -853,22 +836,6 @@ function ZielgruppenSection() {
         Icon={GraduationCap}
       />
 
-      <ZielgruppenRow
-        reverse={false}
-        badgeText="Für Unternehmer & Firmeninhaber"
-        badgeBg="rgba(55,138,221,0.22)"
-        badgeBorder="#378ADD"
-        badgeColor="#85B7EB"
-        headline="Mehr Wachstum. Weniger manueller Aufwand."
-        subtext="Von der Prozessautomatisierung bis zur individuellen Softwarelösung – wir helfen Unternehmerinnen und Unternehmern, digitale Werkzeuge gezielt für ihr Geschäft einzusetzen."
-        buttonBg="#378ADD"
-        buttonColor="#042C53"
-        href="/wirtschaft"
-        iconBg="rgba(55,138,221,0.14)"
-        iconBorder="#378ADD"
-        iconColor="#85B7EB"
-        Icon={Briefcase}
-      />
 
       {/* Abschluss-CTA */}
       <div style={{ textAlign: "center", padding: "40px 0 64px" }}>
@@ -1873,113 +1840,6 @@ function ToolsSection() {
   );
 }
 
-/* ─── Courses Section (Academy) ───────────────────────────────────────────── */
-function CoursesSection() {
-  const [activeFilter, setActiveFilter] = useState("Alle");
-  const [expanded, setExpanded] = useState(false);
-
-  const filtered = useMemo(() => {
-    let result = courses;
-    if (activeFilter === "Kostenlos") result = courses.filter((c) => c.pricing === "Kostenlos");
-    else if (activeFilter === "Deutsch") result = courses.filter((c) => c.language === "Deutsch");
-    else if (activeFilter === "Englisch") result = courses.filter((c) => c.language === "Englisch");
-    else if (activeFilter === "Anfänger") result = courses.filter((c) => c.level === "Anfänger");
-    else if (activeFilter !== "Alle") result = courses.filter((c) => c.category === activeFilter);
-    return expanded ? result : result.slice(0, 4);
-  }, [activeFilter, expanded]);
-
-  const getLevelBadge = (level: string) => {
-    switch (level) {
-      case "Anfänger": return { bg: "bg-indigo-500/10", text: "text-indigo-400", border: "border-indigo-500/20" };
-      case "Fortgeschritten": return { bg: "bg-blue-500/10", text: "text-blue-400", border: "border-blue-500/20" };
-      case "Experte": return { bg: "bg-purple-500/10", text: "text-purple-400", border: "border-purple-500/20" };
-      default: return { bg: "bg-[var(--bg-section-alt)]", text: "text-[var(--text-caption)]", border: "border-[var(--border-color)]" };
-    }
-  };
-
-  return (
-    <section id="kurse" className="max-w-7xl mx-auto px-6 py-20">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <h2 className="text-3xl font-bold flex items-center justify-center gap-2">
-          <GraduationCap className="w-7 h-7 text-purple-400" /> CentofAI Academy
-        </h2>
-        <p className="text-[var(--text-caption)] mt-2">
-          Vom Einsteiger zum Prompt-Engineer. Erweitere deine Skills in unseren Videokursen und exklusiven Live-Workshops.
-        </p>
-      </div>
-
-      {/* Filter */}
-      <div className="flex flex-wrap justify-center gap-2 mb-10">
-        {courseCategories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveFilter(cat)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-              activeFilter === cat
-                ? "bg-purple-600 text-white shadow-lg shadow-purple-500/20"
-                : "bg-[var(--bg-card)] text-[var(--text-caption)] hover:text-white hover:bg-slate-800 border border-[var(--border-color)]"
-            }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
-
-      {/* 2-Spalten Grid */}
-      <div className="grid md:grid-cols-2 gap-8">
-        <AnimatePresence mode="popLayout">
-          {filtered.map((course: any, i: number) => {
-            const badge = getLevelBadge(course.level);
-            return (
-              <motion.div
-                key={course.name + course.provider}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-[var(--bg-card)]/50 border border-[var(--border-color)] p-8 rounded-2xl flex flex-col justify-between hover:border-purple-500/30 transition card-glow"
-              >
-                <div>
-                  <div className="flex justify-between items-center mb-6">
-                    <span className={`px-3 py-1 rounded-lg text-xs font-semibold ${badge.bg} ${badge.text} border ${badge.border}`}>
-                      {course.level}
-                    </span>
-                    <span className="text-[var(--text-label)] text-xs font-medium">{course.language} • {course.category}</span>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3">{course.name}</h3>
-                  <p className="text-[var(--text-caption)] text-sm mb-6 leading-relaxed">{course.description}</p>
-                </div>
-                <div className="flex items-center justify-between pt-4 border-t border-[var(--border-color)]/60">
-                  <span className="text-xl font-bold text-white">{course.pricing === "Kostenlos" ? "Kostenlos" : "Paid"}</span>
-                  <a
-                    href={course.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition"
-                  >
-                    Jetzt starten
-                  </a>
-                </div>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-
-      {/* Mehr/Weniger Toggle */}
-        <div className="flex justify-center mt-10">
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 px-6 py-2.5 text-sm font-medium text-purple-400 border border-purple-500/30 rounded-xl hover:bg-purple-500/10 transition cursor-pointer"
-          >
-            {expanded ? "Weniger anzeigen" : "Mehr anzeigen"}
-            <ChevronDown className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
-          </button>
-        </div>
-    </section>
-  );
-}
-
 /* ─── Ideas Section ─────────────────────────────────────────────────── */
 function IdeasSection() {
   const [formData, setFormData] = useState({ name: "", email: "", idea: "", budget: "", timeline: "" });
@@ -2189,7 +2049,6 @@ export default function App() {
       <ServicesSection />
       <IdeasSection />
       <ToolsSection />
-      <CoursesSection />
       <Footer />
     </div>
   );

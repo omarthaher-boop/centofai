@@ -84,9 +84,9 @@ const PRODUCTS = [
     description: "Praxisnahe Workshops für Teams, die KI effektiv nutzen wollen. Von Prompt Engineering bis zu fortgeschrittenen Workflows.",
     icon: GraduationCap,
     color: "#F59E0B",
-    href: "/#academy",
+    href: "/kontakt",
     features: ["Prompt Engineering", "Tool-Workflows", "Prompt Libraries", "Zertifikate"],
-    cta: "Kurse ansehen",
+    cta: "Kontakt aufnehmen",
   },
   {
     title: "AI News Hub",
