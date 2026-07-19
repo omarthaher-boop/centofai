@@ -526,6 +526,12 @@ export default function FahrtDocPage() {
             >
               🆘 Support
             </Link>
+            <Link
+              to="/products/fahrtdoc/konto-loeschen"
+              className="px-4 py-2 rounded-lg bg-white text-[#0066CC] text-xs font-semibold hover:bg-blue-50 transition-colors text-center"
+            >
+              🗑️ Konto löschen
+            </Link>
             <span className="px-4 py-2 rounded-lg bg-white/20 text-white text-xs font-semibold text-center">
               🔒 DSGVO-konform
             </span>
