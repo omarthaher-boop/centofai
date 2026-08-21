@@ -2,6 +2,7 @@ import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 import CompanySite from "./pages/CompanySite";
 import ProjectStart from "./pages/ProjectStart";
 import WebsiteProjectWizard from "./pages/WebsiteProjectWizard";
+import MobileAppProjectWizard from "./pages/MobileAppProjectWizard";
 import ProjectConfiguratorPlaceholder from "./pages/ProjectConfiguratorPlaceholder";
 import FahrtDocPage from "./pages/FahrtDocPage";
 import FahrtDocSupportPage from "./pages/FahrtDocSupport";
@@ -41,8 +42,8 @@ function Routes() {
       <Route path="/en/start-a-project" component={ProjectStart} />
       <Route path="/de/projekt-starten/website" component={WebsiteProjectWizard} />
       <Route path="/en/start-a-project/website" component={WebsiteProjectWizard} />
-      <Route path="/de/projekt-starten/app" component={ProjectConfiguratorPlaceholder} />
-      <Route path="/en/start-a-project/app" component={ProjectConfiguratorPlaceholder} />
+      <Route path="/de/projekt-starten/app" component={MobileAppProjectWizard} />
+      <Route path="/en/start-a-project/app" component={MobileAppProjectWizard} />
       <Route path="/de/projekt-starten/ki-tool" component={ProjectConfiguratorPlaceholder} />
       <Route path="/en/start-a-project/ai-tool" component={ProjectConfiguratorPlaceholder} />
 
