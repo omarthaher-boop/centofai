@@ -1,17 +1,12 @@
 import express, { type Express } from "express";
 import cors from "cors";
 import { pinoHttp } from "pino-http";
-import { clerkMiddleware } from "@clerk/express";
-import { publishableKeyFromHost } from "@clerk/shared/keys";
-import {
-  CLERK_PROXY_PATH,
-  clerkProxyMiddleware,
-  getClerkProxyHost,
-} from "./middlewares/clerkProxyMiddleware";
 import router from "./routes";
 import { logger } from "./lib/logger";
 
 const app: Express = express();
+
+app.disable("x-powered-by");
 
 app.use(
   pinoHttp({
@@ -25,31 +20,38 @@ app.use(
         };
       },
       res(res) {
-        return {
-          statusCode: res.statusCode,
-        };
+        return { statusCode: res.statusCode };
       },
     },
   }),
 );
 
-app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
-
-app.use(cors({ credentials: true, origin: true }));
-// Project requests may include up to 20 MB of file data encoded as base64.
-// The higher JSON limit only applies to parsing; the project route performs its own
-// strict MIME, per-file and total-size validation before accepting attachments.
-app.use(express.json({ limit: "30mb" }));
-app.use(express.urlencoded({ extended: true, limit: "2mb" }));
+const configuredOrigins = (process.env.CORS_ORIGINS || "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 
 app.use(
-  clerkMiddleware((req) => ({
-    publishableKey: publishableKeyFromHost(
-      getClerkProxyHost(req) ?? "",
-      process.env.CLERK_PUBLISHABLE_KEY,
-    ),
-  })),
+  cors({
+    credentials: true,
+    origin(origin, callback) {
+      if (!origin || configuredOrigins.length === 0 || configuredOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+      callback(new Error("Origin not allowed"));
+    },
+  }),
 );
+
+// Project requests can include base64 encoded attachments. The route itself
+// enforces stricter per-file and total attachment limits.
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "30mb" }));
+
+app.get("/", (_req, res) => {
+  res.json({ service: "centofai-api", status: "ok" });
+});
 
 app.use("/api", router);
 
