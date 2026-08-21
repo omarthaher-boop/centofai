@@ -36,8 +36,11 @@ app.use(
 app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
 
 app.use(cors({ credentials: true, origin: true }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Project requests may include up to 20 MB of file data encoded as base64.
+// The higher JSON limit only applies to parsing; the project route performs its own
+// strict MIME, per-file and total-size validation before accepting attachments.
+app.use(express.json({ limit: "30mb" }));
+app.use(express.urlencoded({ extended: true, limit: "2mb" }));
 
 app.use(
   clerkMiddleware((req) => ({
