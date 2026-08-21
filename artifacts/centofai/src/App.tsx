@@ -3,7 +3,7 @@ import CompanySite from "./pages/CompanySite";
 import ProjectStart from "./pages/ProjectStart";
 import WebsiteProjectWizard from "./pages/WebsiteProjectWizard";
 import MobileAppProjectWizard from "./pages/MobileAppProjectWizard";
-import ProjectConfiguratorPlaceholder from "./pages/ProjectConfiguratorPlaceholder";
+import AIToolProjectWizard from "./pages/AIToolProjectWizard";
 import FahrtDocPage from "./pages/FahrtDocPage";
 import FahrtDocSupportPage from "./pages/FahrtDocSupport";
 import FahrtDocNutzungsbedingungenPage from "./pages/FahrtDocNutzungsbedingungen";
@@ -44,8 +44,8 @@ function Routes() {
       <Route path="/en/start-a-project/website" component={WebsiteProjectWizard} />
       <Route path="/de/projekt-starten/app" component={MobileAppProjectWizard} />
       <Route path="/en/start-a-project/app" component={MobileAppProjectWizard} />
-      <Route path="/de/projekt-starten/ki-tool" component={ProjectConfiguratorPlaceholder} />
-      <Route path="/en/start-a-project/ai-tool" component={ProjectConfiguratorPlaceholder} />
+      <Route path="/de/projekt-starten/ki-tool" component={AIToolProjectWizard} />
+      <Route path="/en/start-a-project/ai-tool" component={AIToolProjectWizard} />
 
       <Route path="/de/produkte/fahrtdoc" component={FahrtDocPage} />
       <Route path="/en/products/fahrtdoc" component={FahrtDocPage} />
