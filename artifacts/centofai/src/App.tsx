@@ -1,9 +1,7 @@
 import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 import CompanySite from "./pages/CompanySite";
 import ProjectStart from "./pages/ProjectStart";
-import WebsiteProjectWizard from "./pages/WebsiteProjectWizard";
-import MobileAppProjectWizard from "./pages/MobileAppProjectWizard";
-import AIToolProjectWizard from "./pages/AIToolProjectWizard";
+import UnifiedProjectConfigurator from "./pages/UnifiedProjectConfigurator";
 import FahrtDocPage from "./pages/FahrtDocPage";
 import FahrtDocSupportPage from "./pages/FahrtDocSupport";
 import FahrtDocNutzungsbedingungenPage from "./pages/FahrtDocNutzungsbedingungen";
@@ -40,12 +38,12 @@ function Routes() {
 
       <Route path="/de/projekt-starten" component={ProjectStart} />
       <Route path="/en/start-a-project" component={ProjectStart} />
-      <Route path="/de/projekt-starten/website" component={WebsiteProjectWizard} />
-      <Route path="/en/start-a-project/website" component={WebsiteProjectWizard} />
-      <Route path="/de/projekt-starten/app" component={MobileAppProjectWizard} />
-      <Route path="/en/start-a-project/app" component={MobileAppProjectWizard} />
-      <Route path="/de/projekt-starten/ki-tool" component={AIToolProjectWizard} />
-      <Route path="/en/start-a-project/ai-tool" component={AIToolProjectWizard} />
+      <Route path="/de/projekt-starten/website"><UnifiedProjectConfigurator type="website" /></Route>
+      <Route path="/en/start-a-project/website"><UnifiedProjectConfigurator type="website" /></Route>
+      <Route path="/de/projekt-starten/app"><UnifiedProjectConfigurator type="app" /></Route>
+      <Route path="/en/start-a-project/app"><UnifiedProjectConfigurator type="app" /></Route>
+      <Route path="/de/projekt-starten/ki-tool"><UnifiedProjectConfigurator type="ai" /></Route>
+      <Route path="/en/start-a-project/ai-tool"><UnifiedProjectConfigurator type="ai" /></Route>
 
       <Route path="/de/produkte/fahrtdoc" component={FahrtDocPage} />
       <Route path="/en/products/fahrtdoc" component={FahrtDocPage} />
