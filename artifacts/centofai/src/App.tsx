@@ -1,5 +1,5 @@
 import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
-import CompanySite from "./pages/CompanySite";
+import Phase7CompanySite from "./pages/Phase7CompanySite";
 import ProjectStart from "./pages/ProjectStart";
 import UnifiedProjectConfigurator from "./pages/UnifiedProjectConfigurator";
 import FahrtDocPage from "./pages/FahrtDocPage";
@@ -19,22 +19,22 @@ function Routes() {
     <Switch>
       <Route path="/"><Redirect to="/de" /></Route>
 
-      <Route path="/de"><CompanySite kind="home" /></Route>
-      <Route path="/en"><CompanySite kind="home" /></Route>
+      <Route path="/de"><Phase7CompanySite kind="home" /></Route>
+      <Route path="/en"><Phase7CompanySite kind="home" /></Route>
 
-      <Route path="/de/leistungen"><CompanySite kind="services" /></Route>
-      <Route path="/en/services"><CompanySite kind="services" /></Route>
-      <Route path="/de/leistungen/websites"><CompanySite kind="websites" /></Route>
-      <Route path="/en/services/websites"><CompanySite kind="websites" /></Route>
-      <Route path="/de/leistungen/mobile-apps"><CompanySite kind="apps" /></Route>
-      <Route path="/en/services/mobile-apps"><CompanySite kind="apps" /></Route>
-      <Route path="/de/leistungen/digitale-tools"><CompanySite kind="tools" /></Route>
-      <Route path="/en/services/digital-tools"><CompanySite kind="tools" /></Route>
+      <Route path="/de/leistungen"><Phase7CompanySite kind="services" /></Route>
+      <Route path="/en/services"><Phase7CompanySite kind="services" /></Route>
+      <Route path="/de/leistungen/websites"><Phase7CompanySite kind="websites" /></Route>
+      <Route path="/en/services/websites"><Phase7CompanySite kind="websites" /></Route>
+      <Route path="/de/leistungen/mobile-apps"><Phase7CompanySite kind="apps" /></Route>
+      <Route path="/en/services/mobile-apps"><Phase7CompanySite kind="apps" /></Route>
+      <Route path="/de/leistungen/digitale-tools"><Phase7CompanySite kind="tools" /></Route>
+      <Route path="/en/services/digital-tools"><Phase7CompanySite kind="tools" /></Route>
 
-      <Route path="/de/arbeitsweise"><CompanySite kind="process" /></Route>
-      <Route path="/en/how-we-work"><CompanySite kind="process" /></Route>
-      <Route path="/de/produkte"><CompanySite kind="products" /></Route>
-      <Route path="/en/products"><CompanySite kind="products" /></Route>
+      <Route path="/de/arbeitsweise"><Phase7CompanySite kind="process" /></Route>
+      <Route path="/en/how-we-work"><Phase7CompanySite kind="process" /></Route>
+      <Route path="/de/produkte"><Phase7CompanySite kind="products" /></Route>
+      <Route path="/en/products"><Phase7CompanySite kind="products" /></Route>
 
       <Route path="/de/projekt-starten" component={ProjectStart} />
       <Route path="/en/start-a-project" component={ProjectStart} />
