@@ -2,9 +2,13 @@ FROM node:24-bookworm-slim AS build
 
 WORKDIR /app
 
-RUN npm install --global pnpm@11.22.0
+# Install pnpm directly and avoid Corepack/Railway shim conflicts.
+RUN npm install --global --force pnpm@11.22.0
 
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml pnpm-config.json tsconfig.base.json ./
+# Copy only files that actually exist at the monorepo root.
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml tsconfig.base.json ./
+COPY .npmrc .npmrc
+COPY .pnpmrc .pnpmrc
 COPY artifacts/api-server/package.json artifacts/api-server/package.json
 COPY lib/db/package.json lib/db/package.json
 COPY lib/api-zod/package.json lib/api-zod/package.json
