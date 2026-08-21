@@ -40,6 +40,10 @@ import MehrErfahrenPage from "./pages/MehrErfahren";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
 import AnnouncementBanner from "./components/AnnouncementBanner";
+import ProjectStart from "./pages/ProjectStart";
+import WebsiteProjectWizard from "./pages/WebsiteProjectWizard";
+import ProjectConfiguratorPlaceholder from "./pages/ProjectConfiguratorPlaceholder";
+import "./pages/project.css";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -47,17 +51,12 @@ const clerkPubKey = publishableKeyFromHost(
 );
 
 const clerkProxyUrl = import.meta.env.VITE_CLERK_PROXY_URL;
-
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
 
 function stripBase(path: string): string {
   return basePath && path.startsWith(basePath)
     ? path.slice(basePath.length) || "/"
     : path;
-}
-
-if (!clerkPubKey) {
-  throw new Error("Missing VITE_CLERK_PUBLISHABLE_KEY in environment");
 }
 
 const clerkAppearance = {
@@ -82,8 +81,7 @@ const clerkAppearance = {
   },
   elements: {
     rootBox: "w-full flex justify-center",
-    cardBox:
-      "bg-[#0f172a] rounded-2xl w-[440px] max-w-full overflow-hidden border border-[#1E293B]",
+    cardBox: "bg-[#0f172a] rounded-2xl w-[440px] max-w-full overflow-hidden border border-[#1E293B]",
     card: "!shadow-none !border-0 !bg-transparent !rounded-none",
     footer: "!shadow-none !border-0 !bg-transparent !rounded-none",
     headerTitle: "text-white",
@@ -98,12 +96,9 @@ const clerkAppearance = {
     alertText: "text-red-300",
     logoBox: "py-4 flex justify-center",
     logoImage: "h-10 w-auto",
-    socialButtonsBlockButton:
-      "bg-[#020617] border border-[#1E293B] hover:bg-[#0f172a]",
-    formButtonPrimary:
-      "bg-purple-600 hover:bg-purple-700 text-white",
-    formFieldInput:
-      "bg-[#020617] border-[#1E293B] text-slate-200",
+    socialButtonsBlockButton: "bg-[#020617] border border-[#1E293B] hover:bg-[#0f172a]",
+    formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white",
+    formFieldInput: "bg-[#020617] border-[#1E293B] text-slate-200",
     footerAction: "border-t border-[#1E293B]",
     dividerLine: "bg-[#1E293B]",
     alert: "bg-red-500/10 border border-red-500/20",
@@ -116,11 +111,7 @@ const clerkAppearance = {
 function SignInPage() {
   return (
     <div className="flex min-h-[100dvh] items-center justify-center bg-[var(--bg-page)] px-4">
-      <SignIn
-        routing="path"
-        path={`${basePath}/sign-in`}
-        signUpUrl={`${basePath}/sign-up`}
-      />
+      <SignIn routing="path" path={`${basePath}/sign-in`} signUpUrl={`${basePath}/sign-up`} />
     </div>
   );
 }
@@ -128,11 +119,7 @@ function SignInPage() {
 function SignUpPage() {
   return (
     <div className="flex min-h-[100dvh] items-center justify-center bg-[var(--bg-page)] px-4">
-      <SignUp
-        routing="path"
-        path={`${basePath}/sign-up`}
-        signInUrl={`${basePath}/sign-in`}
-      />
+      <SignUp routing="path" path={`${basePath}/sign-up`} signInUrl={`${basePath}/sign-in`} />
     </div>
   );
 }
@@ -141,27 +128,38 @@ function ClerkQueryClientCacheInvalidator() {
   const { addListener } = useClerk();
   const qc = useQueryClient();
   const prevUserIdRef = useRef<string | null | undefined>(undefined);
-
   useEffect(() => {
     const unsubscribe = addListener(({ user }) => {
       const userId = user?.id ?? null;
-      if (
-        prevUserIdRef.current !== undefined &&
-        prevUserIdRef.current !== userId
-      ) {
-        qc.clear();
-      }
+      if (prevUserIdRef.current !== undefined && prevUserIdRef.current !== userId) qc.clear();
       prevUserIdRef.current = userId;
     });
     return unsubscribe;
   }, [addListener, qc]);
-
   return null;
+}
+
+function Phase6Routes() {
+  return (
+    <Switch>
+      <Route path="/de/projekt-starten" component={ProjectStart} />
+      <Route path="/en/start-a-project" component={ProjectStart} />
+      <Route path="/de/projekt-starten/website" component={WebsiteProjectWizard} />
+      <Route path="/en/start-a-project/website" component={WebsiteProjectWizard} />
+      <Route path="/de/projekt-starten/app" component={ProjectConfiguratorPlaceholder} />
+      <Route path="/en/start-a-project/app" component={ProjectConfiguratorPlaceholder} />
+      <Route path="/de/projekt-starten/ki-tool" component={ProjectConfiguratorPlaceholder} />
+      <Route path="/en/start-a-project/ai-tool" component={ProjectConfiguratorPlaceholder} />
+      <Route component={ProjectStart} />
+    </Switch>
+  );
 }
 
 function ClerkProviderWithRoutes() {
   const [, setLocation] = useLocation();
-
+  if (!clerkPubKey) {
+    return <div className="min-h-screen bg-slate-950 text-white grid place-items-center p-8">Legacy CentofAi area requires VITE_CLERK_PUBLISHABLE_KEY.</div>;
+  }
   return (
     <ClerkProvider
       publishableKey={clerkPubKey}
@@ -179,30 +177,9 @@ function ClerkProviderWithRoutes() {
         <Switch>
           <Route path="/" component={Centofai} />
           <Route path="/tools/:slug" component={ToolDetail} />
-          <Route path="/favorites">
-            <Show when="signed-in">
-              <FavoritesPage />
-            </Show>
-            <Show when="signed-out">
-              <SignInPage />
-            </Show>
-          </Route>
-          <Route path="/submit-tool">
-            <Show when="signed-in">
-              <SubmitToolPage />
-            </Show>
-            <Show when="signed-out">
-              <SignInPage />
-            </Show>
-          </Route>
-          <Route path="/account">
-            <Show when="signed-in">
-              <AccountPage />
-            </Show>
-            <Show when="signed-out">
-              <SignInPage />
-            </Show>
-          </Route>
+          <Route path="/favorites"><Show when="signed-in"><FavoritesPage /></Show><Show when="signed-out"><SignInPage /></Show></Route>
+          <Route path="/submit-tool"><Show when="signed-in"><SubmitToolPage /></Show><Show when="signed-out"><SignInPage /></Show></Route>
+          <Route path="/account"><Show when="signed-in"><AccountPage /></Show><Show when="signed-out"><SignInPage /></Show></Route>
           <Route path="/products" component={ProductsPage} />
           <Route path="/products/fahrtdoc" component={FahrtDocPage} />
           <Route path="/gesundheit" component={GesundheitPage} />
@@ -226,9 +203,7 @@ function ClerkProviderWithRoutes() {
 }
 
 export default function App() {
-  return (
-    <WouterRouter base={basePath}>
-      <ClerkProviderWithRoutes />
-    </WouterRouter>
-  );
+  const path = stripBase(window.location.pathname);
+  const isPhase6 = path.startsWith("/de/projekt-starten") || path.startsWith("/en/start-a-project");
+  return <WouterRouter base={basePath}>{isPhase6 ? <Phase6Routes /> : <ClerkProviderWithRoutes />}</WouterRouter>;
 }
