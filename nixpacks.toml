@@ -1,11 +1,19 @@
 [phases.setup]
-nixPkgs = ["nodejs_22", "nodePackages.pnpm"]
+nixPkgs = ["nodejs_24", "nodePackages.pnpm"]
 
 [phases.install]
-cmds = ["pnpm install --frozen-lockfile --ignore-scripts"]
+cmds = [
+  "corepack enable",
+  "pnpm config set dangerouslyAllowAllBuilds true",
+  "pnpm install --frozen-lockfile"
+]
 
 [phases.build]
-cmds = ["pnpm --filter @workspace/api-server run build"]
+cmds = [
+  "pnpm --filter @workspace/db exec tsc -p tsconfig.json",
+  "pnpm --filter @workspace/api-server run typecheck",
+  "pnpm --filter @workspace/api-server run build"
+]
 
 [start]
 cmd = "node --enable-source-maps artifacts/api-server/dist/index.mjs"
