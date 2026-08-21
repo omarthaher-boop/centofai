@@ -1,5 +1,5 @@
 import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
-import CompanySite from "./pages/CompanySite";
+import ApprovedCompanySite from "./pages/ApprovedCompanySite";
 import ProjectStart from "./pages/ProjectStart";
 import UnifiedProjectConfigurator from "./pages/UnifiedProjectConfigurator";
 import FahrtDocPage from "./pages/FahrtDocPage";
@@ -18,24 +18,20 @@ function Routes() {
   return (
     <Switch>
       <Route path="/"><Redirect to="/de" /></Route>
-
-      <Route path="/de"><CompanySite kind="home" /></Route>
-      <Route path="/en"><CompanySite kind="home" /></Route>
-
-      <Route path="/de/leistungen"><CompanySite kind="services" /></Route>
-      <Route path="/en/services"><CompanySite kind="services" /></Route>
-      <Route path="/de/leistungen/websites"><CompanySite kind="websites" /></Route>
-      <Route path="/en/services/websites"><CompanySite kind="websites" /></Route>
-      <Route path="/de/leistungen/mobile-apps"><CompanySite kind="apps" /></Route>
-      <Route path="/en/services/mobile-apps"><CompanySite kind="apps" /></Route>
-      <Route path="/de/leistungen/digitale-tools"><CompanySite kind="tools" /></Route>
-      <Route path="/en/services/digital-tools"><CompanySite kind="tools" /></Route>
-
-      <Route path="/de/arbeitsweise"><CompanySite kind="process" /></Route>
-      <Route path="/en/how-we-work"><CompanySite kind="process" /></Route>
-      <Route path="/de/produkte"><CompanySite kind="products" /></Route>
-      <Route path="/en/products"><CompanySite kind="products" /></Route>
-
+      <Route path="/de"><ApprovedCompanySite kind="home" /></Route>
+      <Route path="/en"><ApprovedCompanySite kind="home" /></Route>
+      <Route path="/de/leistungen"><ApprovedCompanySite kind="services" /></Route>
+      <Route path="/en/services"><ApprovedCompanySite kind="services" /></Route>
+      <Route path="/de/leistungen/websites"><ApprovedCompanySite kind="websites" /></Route>
+      <Route path="/en/services/websites"><ApprovedCompanySite kind="websites" /></Route>
+      <Route path="/de/leistungen/mobile-apps"><ApprovedCompanySite kind="apps" /></Route>
+      <Route path="/en/services/mobile-apps"><ApprovedCompanySite kind="apps" /></Route>
+      <Route path="/de/leistungen/digitale-tools"><ApprovedCompanySite kind="tools" /></Route>
+      <Route path="/en/services/digital-tools"><ApprovedCompanySite kind="tools" /></Route>
+      <Route path="/de/arbeitsweise"><ApprovedCompanySite kind="process" /></Route>
+      <Route path="/en/how-we-work"><ApprovedCompanySite kind="process" /></Route>
+      <Route path="/de/produkte"><ApprovedCompanySite kind="products" /></Route>
+      <Route path="/en/products"><ApprovedCompanySite kind="products" /></Route>
       <Route path="/de/projekt-starten" component={ProjectStart} />
       <Route path="/en/start-a-project" component={ProjectStart} />
       <Route path="/de/projekt-starten/website"><UnifiedProjectConfigurator type="website" /></Route>
@@ -44,7 +40,6 @@ function Routes() {
       <Route path="/en/start-a-project/app"><UnifiedProjectConfigurator type="app" /></Route>
       <Route path="/de/projekt-starten/ki-tool"><UnifiedProjectConfigurator type="ai" /></Route>
       <Route path="/en/start-a-project/ai-tool"><UnifiedProjectConfigurator type="ai" /></Route>
-
       <Route path="/de/produkte/fahrtdoc" component={FahrtDocPage} />
       <Route path="/en/products/fahrtdoc" component={FahrtDocPage} />
       <Route path="/products/fahrtdoc" component={FahrtDocPage} />
@@ -52,10 +47,8 @@ function Routes() {
       <Route path="/products/fahrtdoc/support" component={FahrtDocSupportPage} />
       <Route path="/products/fahrtdoc/nutzungsbedingungen" component={FahrtDocNutzungsbedingungenPage} />
       <Route path="/products/fahrtdoc/konto-loeschen" component={FahrtDocKontoLoeschenPage} />
-
       <Route path="/impressum" component={ImpressumPage} />
       <Route path="/datenschutz" component={DatenschutzPage} />
-
       <Route><Redirect to="/de" /></Route>
     </Switch>
   );
