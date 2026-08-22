@@ -1,0 +1,46 @@
+name: CentofAi Phase 6 Check
+
+on:
+  push:
+    branches:
+      - centofai-rebuild-phase6
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  app-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Allow dependency build scripts
+        run: pnpm config set dangerouslyAllowAllBuilds true
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck CentofAi frontend
+        run: pnpm --filter @workspace/centofai run typecheck
+
+      - name: Build CentofAi frontend
+        run: pnpm --filter @workspace/centofai run build
+
+      - name: Build shared DB declarations
+        run: pnpm exec tsc -b lib/db
+
+      - name: Typecheck API server
+        run: pnpm --filter @workspace/api-server run typecheck
+
+      - name: Build API server
+        run: pnpm --filter @workspace/api-server run build

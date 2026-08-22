@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "npm install --global --force pnpm@11.22.0 && pnpm config set dangerouslyAllowAllBuilds true && pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @workspace/centofai run build",
+  "outputDirectory": "artifacts/centofai/dist/public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}

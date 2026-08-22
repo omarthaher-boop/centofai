@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "installCommand": "cd ../.. && corepack enable && pnpm config set dangerouslyAllowAllBuilds true && pnpm install --no-frozen-lockfile",
+  "buildCommand": "cd ../.. && pnpm --filter @workspace/centofai run build",
+  "outputDirectory": "dist/public",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
