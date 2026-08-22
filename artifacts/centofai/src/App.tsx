@@ -1,5 +1,6 @@
 import { Redirect, Route, Router as WouterRouter, Switch } from "wouter";
 import ApprovedCompanySite from "./pages/ApprovedCompanySite";
+import HomepagePreview from "./pages/HomepagePreview";
 import ProjectStart from "./pages/ProjectStart";
 import UnifiedProjectConfigurator from "./pages/UnifiedProjectConfigurator";
 import FahrtDocPage from "./pages/FahrtDocPage";
@@ -18,8 +19,8 @@ function Routes() {
   return (
     <Switch>
       <Route path="/"><Redirect to="/de" /></Route>
-      <Route path="/de"><ApprovedCompanySite kind="home" /></Route>
-      <Route path="/en"><ApprovedCompanySite kind="home" /></Route>
+      <Route path="/de" component={HomepagePreview} />
+      <Route path="/en" component={HomepagePreview} />
       <Route path="/de/leistungen"><ApprovedCompanySite kind="services" /></Route>
       <Route path="/en/services"><ApprovedCompanySite kind="services" /></Route>
       <Route path="/de/leistungen/websites"><ApprovedCompanySite kind="websites" /></Route>
