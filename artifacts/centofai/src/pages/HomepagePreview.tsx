@@ -1,99 +1,131 @@
 import { Link, useLocation } from "wouter";
-import {
-  ArrowRight,
-  Bot,
-  Check,
-  Code2,
-  Gauge,
-  Globe2,
-  Moon,
-  Rocket,
-  ShieldCheck,
-  Smartphone,
-  Sparkles,
-  Sun,
-  Users,
-  WandSparkles,
-  Workflow,
-} from "lucide-react";
+import { ArrowRight, Check, Command, Moon, Smartphone, Sparkles, Sun } from "lucide-react";
 import { useMemo, useState } from "react";
 import "./homepage-preview.css";
 
 type Lang = "de" | "en";
 
-const copy = {
+type Copy = {
+  nav: { home: string; services: string; products: string; process: string; about: string; contact: string; start: string };
+  eyebrow: string; headline: string; subheadline: string; lead: string; discover: string; badges: string[];
+  services: { eyebrow: string; title: string; lead: string; cards: { title: string; body: string; cta: string; href: string; icon: "tools" | "web" | "app" }[] };
+  why: { eyebrow: string; title: string; lead: string; cards: { n: string; title: string; body: string }[] };
+  products: { eyebrow: string; title: string; lead: string; bullets: string[]; cta: string; orbit: { n: string; title: string; body: string }[] };
+  progress: { eyebrow: string; title: string; lead: string; cards: { n: string; title: string; body: string }[] };
+  cta: { eyebrow: string; title: string; lead: string };
+  footerText: string;
+};
+
+const copy: Record<Lang, Copy> = {
   de: {
-    nav: {
-      home: "Home",
-      services: "Leistungen",
-      products: "Produkte",
-      process: "Arbeitsweise",
-      about: "Über uns",
-      contact: "Kontakt",
-      start: "Projekt starten",
-    },
+    nav: { home: "Home", services: "Leistungen", products: "Produkte", process: "Arbeitsweise", about: "Über uns", contact: "Kontakt", start: "Projekt starten" },
     eyebrow: "KI-GESTÜTZTE DIGITALE PRODUKTENTWICKLUNG",
     headline: "Websites, Apps & KI-Tools.",
     subheadline: "Mit KI gebaut. Von Menschen perfektioniert.",
-    lead:
-      "Centof.ai verbindet die Geschwindigkeit moderner KI mit menschlicher Kreativität, Erfahrung und konsequenter Qualitätskontrolle – für digitale Lösungen, die professionell funktionieren.",
+    lead: "Centof.ai verbindet die Geschwindigkeit moderner KI mit menschlicher Kreativität, Erfahrung und konsequenter Qualitätskontrolle – für digitale Lösungen, die professionell funktionieren.",
     discover: "Leistungen entdecken",
     badges: ["KI-beschleunigt", "Menschlich geführt", "Für Web & Mobile"],
-    servicesEyebrow: "WAS WIR ENTWICKELN",
-    servicesTitle: "Digitale Lösungen, passend zu deinem tatsächlichen Bedarf.",
-    servicesLead:
-      "Wir entwickeln nicht nach Schema F. Struktur, Design und Technik werden auf Ziel, Nutzer und Geschäftsmodell abgestimmt.",
-    whyEyebrow: "WARUM CENTOFAI",
-    whyTitle: "KI beschleunigt. Menschen entscheiden.",
-    processEyebrow: "UNSERE ARBEITSWEISE",
-    processTitle: "Von der Idee zum funktionierenden digitalen Produkt.",
-    processLead:
-      "Jeder Schritt bleibt nachvollziehbar: erst verstehen, dann gestalten, entwickeln, prüfen und veröffentlichen.",
-    productsEyebrow: "UNSERE PRODUKTE",
-    productsTitle: "Eigene digitale Produkte von CentofAi.",
-    fahrtdocLead:
-      "FahrtDoc dokumentiert Fahrten klar und zuverlässig – für privat, beruflich und Unternehmen, mit GPS, Übersicht und professionellem Export.",
-    ctaTitle: "Eine Idee im Kopf?",
-    ctaLead: "Lass uns daraus ein funktionierendes digitales Produkt machen.",
-    footerText:
-      "Websites, Apps & KI-Tools. Mit KI gebaut. Von Menschen perfektioniert.",
+    services: {
+      eyebrow: "UNSERE LEISTUNGEN",
+      title: "Was wir für Sie entwickeln",
+      lead: "Wir übersetzen Probleme und Ideen in klare, nutzerfreundliche digitale Produkte – individuell geplant und professionell umgesetzt.",
+      cards: [
+        { title: "Digitale Tools", body: "Individuelle Web-Tools, Automatisierungen und KI-gestützte Lösungen für konkrete Aufgaben und Arbeitsabläufe.", cta: "Digitale Tools ansehen", href: "/de/leistungen/digitale-tools", icon: "tools" },
+        { title: "Professionelle Websites", body: "Moderne, schnelle und responsive Websites mit klarer Nutzerführung, starker Marke und durchdachter Funktion.", cta: "Websites ansehen", href: "/de/leistungen/websites", icon: "web" },
+        { title: "Mobile Apps", body: "Intuitive mobile Anwendungen für iOS und Android – von der ersten Idee bis zum einsatzfähigen Produkt.", cta: "Mobile Apps ansehen", href: "/de/leistungen/mobile-apps", icon: "app" },
+      ],
+    },
+    why: {
+      eyebrow: "WARUM CENTOF.AI",
+      title: "KI liefert Geschwindigkeit. Menschen schaffen Qualität.",
+      lead: "Wir setzen KI gezielt dort ein, wo sie Analyse, Gestaltung und Entwicklung beschleunigt. Entscheidungen, Qualität und Verantwortung bleiben dabei immer menschlich geführt.",
+      cards: [
+        { n: "01", title: "Klare Strategie", body: "Wir beginnen mit dem Problem, der Zielgruppe und einem realistischen Produktziel." },
+        { n: "02", title: "Intelligente Umsetzung", body: "Moderne KI unterstützt Recherche, Konzeption, Entwicklung und Optimierung." },
+        { n: "03", title: "Menschliche Kontrolle", body: "Jeder wichtige Schritt wird geprüft, verfeinert und nachvollziehbar entschieden." },
+        { n: "04", title: "Nachhaltige Produkte", body: "Wir bauen Lösungen, die verständlich, erweiterbar und langfristig nutzbar sind." },
+      ],
+    },
+    products: {
+      eyebrow: "UNSERE PRODUKTE",
+      title: "Digitale Produkte für konkrete Aufgaben.",
+      lead: "Centof.ai entwickelt eigene Apps, Tools und Plattformen, die alltägliche und berufliche Abläufe einfacher, klarer und effizienter machen.",
+      bullets: ["Praxisnah und nutzerfreundlich", "Mit KI entwickelt und menschlich geprüft", "Schrittweise erweiterbar"],
+      cta: "Unsere Produkte entdecken",
+      orbit: [
+        { n: "01", title: "Apps", body: "Mobile Lösungen" },
+        { n: "02", title: "Tools", body: "Intelligente Helfer" },
+        { n: "03", title: "Plattformen", body: "Digitale Systeme" },
+      ],
+    },
+    progress: {
+      eyebrow: "SO ENTSTEHT FORTSCHRITT",
+      title: "Von Ihrer Idee zu einer funktionierenden digitalen Lösung.",
+      lead: "Auf der Startseite zeigen wir den Weg bewusst kompakt. Die vollständigen Arbeitsmodule erhalten später ihre eigene Unterseite.",
+      cards: [
+        { n: "01", title: "Ihr Problem", body: "Wir verstehen Ziel, Nutzer und die Aufgabe, die wirklich gelöst werden soll." },
+        { n: "02", title: "Unsere Lösung", body: "Wir verbinden Produktstrategie, Design, KI und professionelle Entwicklung." },
+        { n: "03", title: "Ihr Fortschritt", body: "Sie erhalten eine getestete Lösung, die genutzt und weiterentwickelt werden kann." },
+      ],
+    },
+    cta: { eyebrow: "LASSEN SIE UNS BEGINNEN", title: "Aus Ihrer Idee kann das nächste hilfreiche digitale Produkt entstehen.", lead: "Beschreiben Sie uns kurz Ihr Vorhaben. Wir melden uns mit einer klaren ersten Einschätzung." },
+    footerText: "Websites, Apps & KI-Tools. Mit KI gebaut. Von Menschen perfektioniert.",
   },
   en: {
-    nav: {
-      home: "Home",
-      services: "Services",
-      products: "Products",
-      process: "How we work",
-      about: "About us",
-      contact: "Contact",
-      start: "Start a project",
-    },
+    nav: { home: "Home", services: "Services", products: "Products", process: "How we work", about: "About us", contact: "Contact", start: "Start a project" },
     eyebrow: "AI-POWERED DIGITAL PRODUCT DEVELOPMENT",
     headline: "Websites, Apps & AI Tools.",
     subheadline: "Built with AI. Perfected by people.",
-    lead:
-      "Centof.ai combines the speed of modern AI with human creativity, experience and rigorous quality control – for digital solutions that work professionally.",
+    lead: "Centof.ai combines the speed of modern AI with human creativity, experience and rigorous quality control – for digital solutions that work professionally.",
     discover: "Explore services",
     badges: ["AI accelerated", "Human guided", "For Web & Mobile"],
-    servicesEyebrow: "WHAT WE BUILD",
-    servicesTitle: "Digital solutions shaped around the actual need.",
-    servicesLead:
-      "We do not build from a generic template. Structure, design and technology are aligned with goals, users and business model.",
-    whyEyebrow: "WHY CENTOFAI",
-    whyTitle: "AI accelerates. People decide.",
-    processEyebrow: "HOW WE WORK",
-    processTitle: "From idea to a working digital product.",
-    processLead:
-      "Every step remains transparent: understand first, then design, build, test and launch.",
-    productsEyebrow: "OUR PRODUCTS",
-    productsTitle: "Digital products by CentofAi.",
-    fahrtdocLead:
-      "FahrtDoc documents trips clearly and reliably – for private, professional and company use, with GPS, overview and professional export.",
-    ctaTitle: "Have an idea?",
-    ctaLead: "Let’s turn it into a digital product that actually works.",
+    services: {
+      eyebrow: "OUR SERVICES",
+      title: "What we build for you",
+      lead: "We translate problems and ideas into clear, user-friendly digital products – individually planned and professionally delivered.",
+      cards: [
+        { title: "Digital Tools", body: "Custom web tools, automations and AI-powered solutions for concrete tasks and workflows.", cta: "Explore digital tools", href: "/en/services/digital-tools", icon: "tools" },
+        { title: "Professional Websites", body: "Modern, fast and responsive websites with clear UX, strong branding and thoughtful functionality.", cta: "Explore websites", href: "/en/services/websites", icon: "web" },
+        { title: "Mobile Apps", body: "Intuitive mobile applications for iOS and Android – from the first idea to a production-ready product.", cta: "Explore mobile apps", href: "/en/services/mobile-apps", icon: "app" },
+      ],
+    },
+    why: {
+      eyebrow: "WHY CENTOF.AI",
+      title: "AI delivers speed. People create quality.",
+      lead: "We use AI where it accelerates analysis, design and development. Decisions, quality and responsibility always remain human-led.",
+      cards: [
+        { n: "01", title: "Clear strategy", body: "We begin with the problem, the target audience and a realistic product goal." },
+        { n: "02", title: "Intelligent execution", body: "Modern AI supports research, concept development, implementation and optimization." },
+        { n: "03", title: "Human control", body: "Every important step is reviewed, refined and decided transparently." },
+        { n: "04", title: "Sustainable products", body: "We build solutions that stay understandable, extensible and useful long-term." },
+      ],
+    },
+    products: {
+      eyebrow: "OUR PRODUCTS",
+      title: "Digital products for concrete tasks.",
+      lead: "Centof.ai develops its own apps, tools and platforms that make everyday and professional workflows simpler, clearer and more efficient.",
+      bullets: ["Practical and user-friendly", "Built with AI and human reviewed", "Designed to expand step by step"],
+      cta: "Explore our products",
+      orbit: [
+        { n: "01", title: "Apps", body: "Mobile solutions" },
+        { n: "02", title: "Tools", body: "Intelligent helpers" },
+        { n: "03", title: "Platforms", body: "Digital systems" },
+      ],
+    },
+    progress: {
+      eyebrow: "HOW PROGRESS HAPPENS",
+      title: "From your idea to a working digital solution.",
+      lead: "On the homepage we keep the journey intentionally compact. The full work modules will have their own dedicated page.",
+      cards: [
+        { n: "01", title: "Your problem", body: "We understand the goal, the users and the task that actually needs to be solved." },
+        { n: "02", title: "Our solution", body: "We combine product strategy, design, AI and professional development." },
+        { n: "03", title: "Your progress", body: "You receive a tested solution that can be used and continuously improved." },
+      ],
+    },
+    cta: { eyebrow: "LET'S GET STARTED", title: "Your idea can become the next genuinely useful digital product.", lead: "Tell us briefly what you have in mind. We’ll respond with a clear initial assessment." },
     footerText: "Websites, Apps & AI Tools. Built with AI. Perfected by people.",
   },
-} as const;
+};
 
 function useTheme() {
   const initial = useMemo(() => {
@@ -110,53 +142,6 @@ function useTheme() {
   return { theme, toggle };
 }
 
-const serviceCards = {
-  de: [
-    [Globe2, "Websites", "Professionelle Websites für Unternehmen, Personen und digitale Produkte.", "/de/leistungen/websites"],
-    [Smartphone, "Mobile Apps", "iOS- und Android-Apps mit klarer Nutzerführung und stabiler technischer Basis.", "/de/leistungen/mobile-apps"],
-    [Bot, "KI-Tools & Automatisierung", "Assistenten, Automatisierungen und individuelle Tools für reale Arbeitsabläufe.", "/de/leistungen/digitale-tools"],
-  ],
-  en: [
-    [Globe2, "Websites", "Professional websites for businesses, people and digital products.", "/en/services/websites"],
-    [Smartphone, "Mobile Apps", "iOS and Android apps with clear UX and a stable technical foundation.", "/en/services/mobile-apps"],
-    [Bot, "AI Tools & Automation", "Assistants, automations and custom tools for real workflows.", "/en/services/digital-tools"],
-  ],
-} as const;
-
-const whyItems = {
-  de: [
-    [Sparkles, "Klare Strategie", "Ziele, Nutzer und Anforderungen werden vor der Umsetzung sauber definiert."],
-    [WandSparkles, "Professionelles Design", "Modernes Design mit klarer Informationsarchitektur und starker Nutzerführung."],
-    [Code2, "KI-gestützte Entwicklung", "KI beschleunigt Entwicklung und Iteration, ohne die Qualitätskontrolle zu ersetzen."],
-    [Users, "Menschliche Qualitätskontrolle", "Entscheidungen, Prüfung und Freigabe bleiben bewusst in menschlicher Hand."],
-  ],
-  en: [
-    [Sparkles, "Clear strategy", "Goals, users and requirements are defined clearly before implementation."],
-    [WandSparkles, "Professional design", "Modern design with clear information architecture and strong user guidance."],
-    [Code2, "AI-assisted development", "AI accelerates development and iteration without replacing quality control."],
-    [Users, "Human quality control", "Decisions, review and approval remain deliberately human."],
-  ],
-} as const;
-
-const processItems = {
-  de: [
-    ["01", Sparkles, "Idee & Analyse", "Problem, Zielgruppe und gewünschtes Ergebnis verstehen."],
-    ["02", Workflow, "Konzept", "Seiten, Funktionen und technische Struktur festlegen."],
-    ["03", WandSparkles, "Design", "Visuelle Sprache und Nutzerführung ausarbeiten."],
-    ["04", Code2, "Entwicklung", "Frontend, Backend und Integrationen kontrolliert umsetzen."],
-    ["05", ShieldCheck, "Prüfung", "Funktion, Sicherheit, Responsivität und Qualität testen."],
-    ["06", Rocket, "Launch", "Veröffentlichen, überwachen und gezielt weiterentwickeln."],
-  ],
-  en: [
-    ["01", Sparkles, "Idea & analysis", "Understand the problem, audience and desired outcome."],
-    ["02", Workflow, "Concept", "Define pages, features and technical structure."],
-    ["03", WandSparkles, "Design", "Develop visual language and user guidance."],
-    ["04", Code2, "Development", "Build frontend, backend and integrations in a controlled way."],
-    ["05", ShieldCheck, "Review", "Test functionality, security, responsiveness and quality."],
-    ["06", Rocket, "Launch", "Publish, monitor and continue improving deliberately."],
-  ],
-} as const;
-
 function Brand() {
   return (
     <span className="hp-brand" aria-label="CentofAi">
@@ -164,6 +149,12 @@ function Brand() {
       <span className="hp-brand-word">Centof<span>Ai</span></span>
     </span>
   );
+}
+
+function ServiceIcon({ kind }: { kind: "tools" | "web" | "app" }) {
+  if (kind === "tools") return <Sparkles size={28} />;
+  if (kind === "web") return <Command size={28} />;
+  return <Smartphone size={28} />;
 }
 
 export default function HomepagePreview() {
@@ -189,7 +180,7 @@ export default function HomepagePreview() {
           <Link href={routes.services}>{t.nav.services}</Link>
           <Link href={routes.products}>{t.nav.products}</Link>
           <Link href={routes.process}>{t.nav.process}</Link>
-          <a href="#about">{t.nav.about}</a>
+          <a href="#why">{t.nav.about}</a>
           <a href="#contact">{t.nav.contact}</a>
         </nav>
         <div className="hp-actions">
@@ -210,79 +201,77 @@ export default function HomepagePreview() {
               <Link href={routes.start} className="hp-primary">{t.nav.start}<ArrowRight size={17}/></Link>
               <Link href={routes.services} className="hp-secondary">{t.discover}<ArrowRight size={17}/></Link>
             </div>
-            <div className="hp-trust-row">
-              {t.badges.map((badge) => <span key={badge}><Check size={13}/>{badge}</span>)}
-            </div>
+            <div className="hp-trust-row">{t.badges.map((badge) => <span key={badge}><Check size={13}/>{badge}</span>)}</div>
           </div>
-          <div className="hp-hero-visual">
-            <img src="/centofai-hero.png" alt="CentofAi – Human Clarity · AI Power" />
+          <div className="hp-hero-visual"><img src="/centofai-hero.png" alt="CentofAi – Human Clarity · AI Power" /></div>
+        </section>
+
+        <section className="shot-services hp-shot-section" id="services">
+          <div className="shot-heading centered">
+            <div className="shot-kicker">{t.services.eyebrow}</div>
+            <h2>{t.services.title}</h2>
+            <p>{t.services.lead}</p>
+          </div>
+          <div className="shot-service-grid">
+            {t.services.cards.map((card, index) => (
+              <Link href={card.href} className="shot-service-card" key={card.title}>
+                <div className={`shot-service-icon icon-${card.icon}`}><ServiceIcon kind={card.icon}/></div>
+                <div className="shot-service-number">0{index + 1}</div>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <div className="shot-card-link"><span>{card.cta}</span><i><ArrowRight size={16}/></i></div>
+              </Link>
+            ))}
           </div>
         </section>
 
-        <section className="hp-section hp-services" id="services">
-          <div className="hp-section-heading">
-            <div className="hp-kicker">{t.servicesEyebrow}</div>
-            <h2>{t.servicesTitle}</h2>
-            <p>{t.servicesLead}</p>
+        <section className="shot-why-wrap hp-shot-section" id="why">
+          <div className="shot-why-copy">
+            <div className="shot-kicker">{t.why.eyebrow}</div>
+            <h2>{t.why.title}</h2>
+            <p>{t.why.lead}</p>
           </div>
-          <div className="hp-service-grid">
-            {serviceCards[lang].map(([Icon, title, text, href]) => {
-              const C = Icon;
-              return <Link href={href} className="hp-service-card" key={title}><span className="hp-icon"><C size={25}/></span><h3>{title}</h3><p>{text}</p><span className="hp-more">{lang === "de" ? "Mehr erfahren" : "Learn more"}<ArrowRight size={15}/></span></Link>;
-            })}
+          <div className="shot-why-grid">
+            {t.why.cards.map((card) => <article key={card.n}><span>{card.n}</span><h3>{card.title}</h3><p>{card.body}</p></article>)}
           </div>
         </section>
 
-        <section className="hp-section hp-why" id="about">
-          <div className="hp-section-heading centered compact">
-            <div className="hp-kicker">{t.whyEyebrow}</div>
-            <h2>{t.whyTitle}</h2>
+        <section className="shot-products hp-shot-section">
+          <div className="shot-products-copy">
+            <div className="shot-kicker">{t.products.eyebrow}</div>
+            <h2>{t.products.title}</h2>
+            <p>{t.products.lead}</p>
+            <ul>{t.products.bullets.map((item) => <li key={item}><Check size={15}/>{item}</li>)}</ul>
+            <Link href={routes.products} className="shot-products-cta">{t.products.cta}<ArrowRight size={17}/></Link>
           </div>
-          <div className="hp-why-grid">
-            {whyItems[lang].map(([Icon, title, text]) => {
-              const C = Icon;
-              return <article key={title}><span className="hp-icon plain"><C size={27}/></span><h3>{title}</h3><p>{text}</p></article>;
-            })}
+          <div className="shot-products-visual">
+            <div className="orbit orbit-one"></div><div className="orbit orbit-two"></div>
+            <div className="product-core"><span className="core-mark">CA<span>i</span></span><strong>CentofAi</strong><small>PRODUKTWELT</small></div>
+            {t.products.orbit.map((card, i) => <div key={card.n} className={`orbit-card orbit-card-${i + 1}`}><span>{card.n}</span><h3>{card.title}</h3><p>{card.body}</p></div>)}
           </div>
         </section>
 
-        <section className="hp-section hp-process">
-          <div className="hp-section-heading centered">
-            <div className="hp-kicker">{t.processEyebrow}</div>
-            <h2>{t.processTitle}</h2>
-            <p>{t.processLead}</p>
+        <section className="shot-progress hp-shot-section">
+          <div className="shot-heading centered progress-heading">
+            <div className="shot-kicker">{t.progress.eyebrow}</div>
+            <h2>{t.progress.title}</h2>
+            <p>{t.progress.lead}</p>
           </div>
-          <div className="hp-process-line">
-            {processItems[lang].map(([number, Icon, title, text]) => {
-              const C = Icon;
-              return <article key={number}><span className="hp-step-icon"><C size={21}/></span><strong>{number}</strong><h3>{title}</h3><p>{text}</p></article>;
-            })}
+          <div className="shot-progress-grid">
+            {t.progress.cards.map((card, i) => <div className="progress-wrap" key={card.n}><article><span>{card.n}</span><h3>{card.title}</h3><p>{card.body}</p></article>{i < t.progress.cards.length - 1 && <i className="progress-arrow"><ArrowRight size={20}/></i>}</div>)}
           </div>
-          <div className="hp-center-action"><Link href={routes.process} className="hp-secondary">{lang === "de" ? "Arbeitsweise ansehen" : "See how we work"}<ArrowRight size={16}/></Link></div>
         </section>
 
-        <section className="hp-section hp-products">
-          <div className="hp-section-heading centered compact">
-            <div className="hp-kicker">{t.productsEyebrow}</div>
-            <h2>{t.productsTitle}</h2>
-          </div>
-          <Link href={lang === "de" ? "/de/produkte/fahrtdoc" : "/en/products/fahrtdoc"} className="hp-product-card">
-            <div className="hp-product-shot"><img src="/fahrtdoc-screen-1.png" alt="FahrtDoc" /></div>
-            <div className="hp-product-copy"><small>CENTOF.AI PRODUCT</small><div className="hp-fd-mark">F</div><h3>FahrtDoc</h3><p>{t.fahrtdocLead}</p><div className="hp-product-tags"><span>iOS</span><span>Android</span><span>GPS</span><span>PDF</span></div><span className="hp-more">{lang === "de" ? "FahrtDoc entdecken" : "Explore FahrtDoc"}<ArrowRight size={16}/></span></div>
-            <div className="hp-product-metric"><Gauge size={32}/><strong>{lang === "de" ? "Einfach fahren." : "Just drive."}</strong><span>{lang === "de" ? "Clever erfassen." : "Track smart."}</span></div>
-          </Link>
-        </section>
-
-        <section className="hp-cta" id="contact">
-          <div><span className="hp-cta-icon"><Rocket size={26}/></span><div><h2>{t.ctaTitle}</h2><p>{t.ctaLead}</p></div></div>
-          <Link href={routes.start} className="hp-cta-button">{t.nav.start}<ArrowRight size={17}/></Link>
+        <section className="shot-cta hp-shot-section" id="contact">
+          <div><div className="shot-kicker light">{t.cta.eyebrow}</div><h2>{t.cta.title}</h2><p>{t.cta.lead}</p></div>
+          <Link href={routes.start} className="shot-cta-button">{t.nav.start}<ArrowRight size={17}/></Link>
         </section>
       </main>
 
       <footer className="hp-footer">
         <div className="hp-footer-brand"><Brand/><p>{t.footerText}</p></div>
         <div><h4>{t.nav.services}</h4><Link href={lang === "de" ? "/de/leistungen/websites" : "/en/services/websites"}>Websites</Link><Link href={lang === "de" ? "/de/leistungen/mobile-apps" : "/en/services/mobile-apps"}>Mobile Apps</Link><Link href={lang === "de" ? "/de/leistungen/digitale-tools" : "/en/services/digital-tools"}>{lang === "de" ? "KI-Tools" : "AI Tools"}</Link></div>
-        <div><h4>{t.nav.products}</h4><Link href={lang === "de" ? "/de/produkte/fahrtdoc" : "/en/products/fahrtdoc"}>FahrtDoc</Link><Link href={routes.products}>{lang === "de" ? "Alle Produkte" : "All products"}</Link></div>
+        <div><h4>{t.nav.products}</h4><Link href={routes.products}>{lang === "de" ? "Alle Produkte" : "All products"}</Link><Link href={lang === "de" ? "/de/produkte/fahrtdoc" : "/en/products/fahrtdoc"}>FahrtDoc</Link></div>
         <div><h4>{t.nav.process}</h4><Link href={routes.process}>{lang === "de" ? "Unser Prozess" : "Our process"}</Link><Link href={routes.start}>{t.nav.start}</Link></div>
         <div><h4>{lang === "de" ? "Rechtliches" : "Legal"}</h4><Link href="/datenschutz">{lang === "de" ? "Datenschutz" : "Privacy"}</Link><Link href="/impressum">{lang === "de" ? "Impressum" : "Legal notice"}</Link></div>
       </footer>
