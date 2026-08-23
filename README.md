@@ -12,6 +12,7 @@ Die zentrale Plattform für Künstliche Intelligenz. News, Tools, Kurse und Work
 - **KI-Tools-Verzeichnis** – Übersicht von 100+ Tools in 17 Kategorien, mit Suchfunktion
 - **Kurse & Workshops** – 15+ Kurse zu KI, Automatisierung und Digitalisierung
 - **Projekt-Vorschläge** – Besucher können Ideen einreichen (gespeichert in DB + E-Mail-Benachrichtigung)
+- **Intelligenter Website-Chatbot** – KI-gestützte Projektberatung für Websites, Apps und Automatisierungen
 - **Newsletter** – E-Mail-Anmeldung
 - **Light/Dark Mode** – Umschaltbarer Theme-Toggle
 - **Responsive Design** – Optimiert für Desktop, Tablet und Mobile
@@ -26,6 +27,7 @@ Die zentrale Plattform für Künstliche Intelligenz. News, Tools, Kurse und Work
 | Backend | Express 5, TypeScript, Drizzle ORM |
 | Datenbank | PostgreSQL |
 | E-Mail | Nodemailer (SMTP via Infomaniak) |
+| KI-Chatbot | OpenAI Responses API |
 | Build | Vite (Frontend), esbuild (Backend) |
 | Monorepo | pnpm workspaces |
 
@@ -78,10 +80,7 @@ pnpm --filter @workspace/centofai run dev
 ### Build
 
 ```bash
-# Typecheck über alle Pakete
 pnpm run typecheck
-
-# Production Build
 pnpm --filter @workspace/centofai run build
 pnpm --filter @workspace/api-server run build
 ```
@@ -100,6 +99,10 @@ Das Backend benötigt folgende Umgebungsvariablen:
 | `SMTP_USER` | E-Mail-Adresse | `info@centofai.com` |
 | `SMTP_PASS` | E-Mail-Passwort | `dein-passwort` |
 | `SESSION_SECRET` | Session-Verschlüsselung | (automatisch in Replit) |
+| `OPENAI_API_KEY` | Serverseitiger OpenAI API-Key für den Website-Chatbot | `sk-...` |
+| `OPENAI_CHAT_MODEL` | Optionales Chatbot-Modell | `gpt-5-mini` |
+
+`OPENAI_API_KEY` darf ausschließlich als geschützte Server-Umgebungsvariable gesetzt werden und niemals als `VITE_*`-Variable oder im Frontend-Code.
 
 ---
 
@@ -109,6 +112,7 @@ Das Backend benötigt folgende Umgebungsvariablen:
 |---------|----------|--------------|
 | GET | `/api/healthz` | Health Check |
 | POST | `/api/proposals` | Projekt-Vorschlag einreichen |
+| POST | `/api/chat` | Intelligenter Website-Chatbot |
 
 ---
 

@@ -40,6 +40,7 @@ import MehrErfahrenPage from "./pages/MehrErfahren";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
 import AnnouncementBanner from "./components/AnnouncementBanner";
+import IntelligentChatbot from "./components/IntelligentChatbot";
 
 const clerkPubKey = publishableKeyFromHost(
   window.location.hostname,
@@ -220,6 +221,7 @@ function ClerkProviderWithRoutes() {
           <Route path="/sign-up/*?" component={SignUpPage} />
           <Route component={NotFound} />
         </Switch>
+        <IntelligentChatbot />
       </QueryClientProvider>
     </ClerkProvider>
   );
