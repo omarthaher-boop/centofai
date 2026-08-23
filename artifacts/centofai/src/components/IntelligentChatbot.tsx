@@ -26,7 +26,7 @@ export default function IntelligentChatbot() {
     project: "Projekt starten →",
     projectHref: "/de/projekt-starten",
     quick: ["Ich möchte eine Website erstellen", "Ich möchte eine App entwickeln", "Ich brauche eine KI-Automatisierung"],
-    unavailable: "Der KI-Assistent ist momentan nicht erreichbar. Bitte versuchen Sie es erneut.",
+    unavailable: "Der KI-Assistent konnte gerade keine Verbindung herstellen. Bitte versuchen Sie es in einem Moment erneut.",
   } : {
     title: "Centof.ai Assistant",
     status: "AI-powered project guidance",
@@ -37,7 +37,7 @@ export default function IntelligentChatbot() {
     project: "Start a project →",
     projectHref: "/en/start-a-project",
     quick: ["I want to build a website", "I want to develop an app", "I need an AI automation"],
-    unavailable: "The AI assistant is currently unavailable. Please try again.",
+    unavailable: "The AI assistant could not connect right now. Please try again in a moment.",
   }, [lang]);
 
   const [open, setOpen] = useState(false);
@@ -76,7 +76,7 @@ export default function IntelligentChatbot() {
       const response = await fetch(`${apiBase()}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include",
+        credentials: "omit",
         body: JSON.stringify({
           messages: nextMessages.slice(-12).map(({ role, content }) => ({ role, content })),
         }),
@@ -84,11 +84,11 @@ export default function IntelligentChatbot() {
       const data = (await response.json().catch(() => ({}))) as { reply?: string; error?: string };
       if (!response.ok || !data.reply) throw new Error(data.error || copy.unavailable);
       setMessages((current) => [...current, { id: makeId(), role: "assistant", content: data.reply as string }]);
-    } catch (error) {
+    } catch {
       setMessages((current) => [...current, {
         id: makeId(),
         role: "assistant",
-        content: error instanceof Error ? error.message : copy.unavailable,
+        content: copy.unavailable,
       }]);
     } finally {
       setLoading(false);
