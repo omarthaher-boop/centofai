@@ -8,6 +8,7 @@ import accountRouter from "./account";
 import searchRouter from "./search";
 import newsletterRouter from "./newsletter";
 import contactRouter from "./contact";
+import chatRouter from "./chat";
 
 const router: IRouter = Router();
 
@@ -20,5 +21,6 @@ router.use(accountRouter);
 router.use(searchRouter);
 router.use(newsletterRouter);
 router.use(contactRouter);
+router.use(chatRouter);
 
 export default router;
