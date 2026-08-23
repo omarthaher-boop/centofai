@@ -9,6 +9,7 @@ import FahrtDocKontoLoeschenPage from "./pages/FahrtDocKontoLoeschen";
 import FahrtDocDatenschutzPage from "./pages/FahrtDocDatenschutz";
 import ImpressumPage from "./pages/impressum";
 import DatenschutzPage from "./pages/datenschutz";
+import IntelligentChatbot from "./components/IntelligentChatbot";
 import "./pages/project.css";
 import "./pages/company.css";
 
@@ -55,5 +56,10 @@ function Routes() {
 }
 
 export default function App() {
-  return <WouterRouter base={basePath}><Routes /></WouterRouter>;
+  return (
+    <WouterRouter base={basePath}>
+      <Routes />
+      <IntelligentChatbot />
+    </WouterRouter>
+  );
 }
